@@ -566,7 +566,6 @@ body {
     flex-direction: column;
     gap: 40px;
     max-width: 302px;
-
 }
 
 .footer-subtitle {
@@ -578,10 +577,17 @@ body {
 .footer-line {
     display: flex;
     gap: 20px;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .footer-icon {
-    width: 40px;
+    width: 42px;
+    height: 32px;
+}
+
+.location-icon {
+    width: 22px;
     height: 32px;
 }
 

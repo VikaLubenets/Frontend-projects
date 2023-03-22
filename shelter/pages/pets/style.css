@@ -1,3 +1,5 @@
+/* Add fonts start*/
+
 @font-face {
     font-family: 'Arial';
     src: url('/vikalubenets-JSFE2023Q1/shelter/assets/fonts/arial/woff2/Arial-BoldMT.woff2') format('woff2'),
@@ -114,3 +116,251 @@
     font-display: swap;
 }
 
+/* Add fonts end*/
+
+/* General styles start*/
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+   width: 1280px;
+}
+
+/* General styles end*/
+
+/* Header styles start*/
+
+.header {
+    width: 1200px;
+    height: 60px;
+    margin-top: 30px;
+    margin-left: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 184px;
+    height: 60px;
+}
+
+.logo-title {
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 35px;
+    color: #545454;;
+    display: inline-block;
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+}
+
+.logo-subtitle {
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15px;
+    color: #292929;
+    letter-spacing: 0.1em;
+}
+
+.nav {
+    width: 443x;
+    height: 27px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.nav-item {
+    display: inline-block;
+    margin-right: 35px;
+}
+
+.nav-link {
+    font-family: 'Arial';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 24px;
+    color: #545454;
+    text-decoration: none;
+}
+
+.nav-item:last-child {
+    margin: 0;
+}
+
+/* Header styles end*/
+
+/* Pets styles start*/
+
+.pets {
+    height: 1342px;
+    display: flex;
+    justify-content: center;
+}
+
+.pets__content {
+    width: 1200px;
+    height: 1162px;
+    margin-bottom: 100px;
+    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title {
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 45px;
+    text-align: center;
+    letter-spacing: 0.06em;
+    color: #545454;
+    display: inline-block;
+    width: 400px;
+    margin-bottom: 45px;
+}
+
+.cards-container {
+    width: 1200px;
+    height: 930px; 
+    display: flex; 
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.card {
+    width: 270px;
+    height: 435px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.pets-photo {
+    width: 270px;
+    height: 270px;
+    border-radius: 9px 9px 0px 0px;
+}
+
+.pets-title {
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.06em;
+    color: #545454;
+    text-align: center;
+}
+
+.button__learn-more {
+    width: 187px;
+    height: 52px;
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 22px;
+    letter-spacing: 0.06em;
+    color: #292929;
+    border: 2px solid #F1CDB3;
+    border-radius: 100px;
+}
+
+
+.navigation {
+    width: 340px;
+    height: 52px;
+}
+
+/* Pets styles end*/
+
+/* Footer styles start*/
+.footer {
+    height: 350px;
+    background: url(noise_lines_transparent@2X.png), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.footer__content {
+    display: flex;
+    width: 1200px;
+    height: 310px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-block {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 302px;
+}
+
+.subtitle {
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 45px;
+    letter-spacing: 0.06em;
+}
+
+.footer-subtitle {
+    color: #FFFFFF;
+    display: inline-block;
+    width: 278px;
+}
+
+.footer-line {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.footer-icon {
+    width: 42px;
+    height: 32px;
+}
+
+.location-icon {
+    width: 22px;
+    height: 32px;
+}
+
+.footer-text {
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.06em;
+    color: #F1CDB3;
+}
+
+/* Footer styles end*/
