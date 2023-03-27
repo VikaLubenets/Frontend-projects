@@ -212,13 +212,15 @@ a {
     line-height: 24px;
     color: #545454;
     text-decoration: none;
+    display: inline-block;
+    padding: 2px;
 }
 
 .nav-item:last-child {
     margin: 0;
 }
 
-.nav-link:active{
+.active-link:active{
     color: #FAFAFA;
     border-bottom: 3px solid #F1CDB3;
 }
@@ -255,6 +257,7 @@ a {
     display: flex;
     align-items: center;
     flex-direction: column;
+    gap: 60px;
 }
 
 .title {
@@ -268,16 +271,14 @@ a {
     color: #545454;
     display: inline-block;
     width: 400px;
-    margin-bottom: 45px;
 }
 
 .cards-container {
     width: 1200px;
     height: 930px; 
     display: flex; 
-    flex-wrap: wrap;
     gap: 40px;
-    margin-bottom: 45px;
+    flex-wrap: wrap;
 }
 
 .card {
@@ -290,6 +291,8 @@ a {
     gap: 30px;
     margin-bottom: 30px;
     cursor: pointer;
+    background: #FAFAFA;
+    border-radius: 9px;
 }
 
 .card:hover{
@@ -334,6 +337,7 @@ a {
     line-height: 22px;
     letter-spacing: 0.06em;
     color: #292929;
+    background-color: transparent;
     border: 2px solid #F1CDB3;
     border-radius: 100px;
 }
@@ -387,6 +391,7 @@ a {
     justify-content: center;
     align-items: center;
     gap: 160px;
+    margin-top: 40px;
 }
 
 .footer-block {
