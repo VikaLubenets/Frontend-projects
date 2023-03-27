@@ -10,142 +10,146 @@
 </head>
 <body>
 
-    <header class="header">
+    <header>
+        <div class="header__content">
+            <div class="logo">
+                <a href="#!">
+                    <p class="logo-title">Cozy House</p>
+                    <p class="logo-subtitle">Shelter for pets in Boston</p>
+                </a>
+            </div>
 
-        <div class="logo">
-            <a href="#!">
-                <p class="logo-title">Cozy House</p>
-                <p class="logo-subtitle">Shelter for pets in Boston</p>
-            </a>
+            <nav class="nav">
+                <ul>
+                    <li class="nav-item"><a class="nav-link default-link">About the shelter</a></li>
+                    <li class="nav-item"><a class="nav-link active-link" href="/vikalubenets-JSFE2023Q1/shelter/pages/pets/index.html">Our pets</a></li>
+                    <li class="nav-item"><a class="nav-link active-link" href="#help">Help the shelter</a></li>
+                    <li class="nav-item"><a class="nav-link active-link" href="#footer">Contacts</a></li>
+                </ul>
+            </nav>
         </div>
-
-        <nav class="nav">
-            <ul>
-                <li class="nav-item"><a class="nav-link" href="#!">About the shelter</a></li>
-                <li class="nav-item"><a class="nav-link" href="/vikalubenets-JSFE2023Q1/shelter/pages/pets/index.html">Our pets</a></li>
-                <li class="nav-item"><a class="nav-link" href="#help">Help the shelter</a></li>
-                <li class="nav-item"><a class="nav-link" href="#footer">Contacts</a></li>
-            </ul>
-        </nav>
-
     </header>
 
     <main>
 
-        <section class="starts-screen">
-            <div class="starts-screen__content">
-                <div class="starts-screen__column-left">
-                    <h1 class="title">Not only people need a house</h1>
-                    <p class="text">We offer to give a chance to a little and nice puppy with an extremely wide and open heart. He or she will love you more than anybody else in the world, you will see!</p>
-                    <a href="#pets"><button class="button">Make a friend</button></a>
-                </div>
-                <img src="/vikalubenets-JSFE2023Q1/shelter/assets/images/start-screen-puppy.png" alt="puppy"> 
-            </div>
-        </section>
-
-        <section class="about">
-            <div class="about__content">
-                <img src="/vikalubenets-JSFE2023Q1/shelter/assets/images/about-pets.png" alt="pets photo">
-                <div class="about_column-right">
-                    <h2 class="subtitle">About the shelter “Cozy&nbspHouse”</h2>
-                    <p class="paragraph">Currently we have 121 dogs and 342 cats on our hands and statistics show that only 20% of them will find a family. The others will continue to live with us and will be waiting for a lucky chance to become dearly loved.</p>
-                    <p class="paragraph">We feed our wards with the best food and make sure that they do not get sick, feel comfortable (including psychologically) and well. We are supported by 87 volunteers and 28 employees of various skill levels. About 12% of the animals are taken by the shelter staff. Taking care of the animals, they become attached to the pets and would hardly ever leave them alone.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="pets" id="pets">
-
-            <div class="pets__content">
-                <h2 class="subtitle pet-subtitle">Our friends who are&nbsplooking for a house</h2>
-                <div class="slider">
-                    <div class="arrow"></div>
-                    <div class="card">
-                        <img class="pets-photo" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/katrine.png" alt="Katrine's photo">
-                        <p class="pets-title">Katrine</p>
-                        <button class="button__learn-more">Learn more</button>
+            <section class="starts-screen" id="first-screen">
+                <div class="starts-screen__content">
+                    <div class="starts-screen__column-left">
+                        <h1 class="title">Not only people need a house</h1>
+                        <p class="text">We offer to give a chance to a little and nice puppy with an extremely wide and open heart. He or she will love you more than anybody else in the world, you will see!</p>
+                        <a href="#pets"><button class="button">Make a friend</button></a>
                     </div>
-                    <div class="card">
-                        <img class="pets-photo" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/jennifer.png" alt="Jennifer's photo">
-                        <p class="pets-title">Jennifer</p>
-                        <button class="button__learn-more">Learn more</button>
+                    <img src="/vikalubenets-JSFE2023Q1/shelter/assets/images/start-screen-puppy.png" alt="puppy"> 
+                </div>
+            </section>
+
+            <section class="about" id="about">
+                <div class="about__content">
+                    <img src="/vikalubenets-JSFE2023Q1/shelter/assets/images/about-pets.png" alt="pets photo">
+                    <div class="about_column-right">
+                        <h2 class="subtitle">About the shelter “Cozy&nbspHouse”</h2>
+                        <p class="paragraph">Currently we have 121 dogs and 342 cats on our hands and statistics show that only 20% of them will find a family. The others will continue to live with us and will be waiting for a lucky chance to become dearly loved.</p>
+                        <p class="paragraph">We feed our wards with the best food and make sure that they do not get sick, feel comfortable (including psychologically) and well. We are supported by 87 volunteers and 28 employees of various skill levels. About 12% of the animals are taken by the shelter staff. Taking care of the animals, they become attached to the pets and would hardly ever leave them alone.</p>
                     </div>
-                    <div class="card">
-                        <img class="pets-photo" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/woody.png" alt="Woody's photo">
-                        <p class="pets-title">Woody</p>
-                        <button class="button__learn-more">Learn more</button>
+                </div>
+            </section>
+
+            <section class="pets" id="pets">
+
+                <div class="pets__content">
+                    <h2 class="subtitle pet-subtitle">Our friends who are&nbsplooking for a house</h2>
+                    <div class="slider">
+                        <div class="arrow">
+                            <img src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/button_arrow_left.png" alt="arrow-icon">
+                        </div>
+                        <div class="card">
+                            <img class="pets-photo" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/katrine.png" alt="Katrine's photo">
+                            <p class="pets-title">Katrine</p>
+                            <button class="button__learn-more">Learn more</button>
+                        </div>
+                        <div class="card">
+                            <img class="pets-photo" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/jennifer.png" alt="Jennifer's photo">
+                            <p class="pets-title">Jennifer</p>
+                            <button class="button__learn-more">Learn more</button>
+                        </div>
+                        <div class="card">
+                            <img class="pets-photo" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/woody.png" alt="Woody's photo">
+                            <p class="pets-title">Woody</p>
+                            <button class="button__learn-more">Learn more</button>
+                        </div>
+                        <div class="arrow">
+                            <img src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/button_arrow_right.png" alt="arrow-right">
+                        </div>
                     </div>
-                    <div class="arrow"></div>
+                    <a href="/vikalubenets-JSFE2023Q1/shelter/pages/pets/index.html"><button class="button">Get to know the rest</button></a>
                 </div>
-                <a href="/vikalubenets-JSFE2023Q1/shelter/pages/pets/index.html"><button class="button">Get to know the rest</button></a>
-            </div>
 
-        </section>
+            </section>
 
-        <section class="help" id="help">
-            <div class="help__content">
-                <h2 class="subtitle help-subtitle">How you can help our&nbspshelter</h2>
-            </div>
+            <section class="help" id="help">
+                <div class="help__content">
+                    <h2 class="subtitle help-subtitle">How you can help our&nbspshelter</h2>
+                
 
-            <div class="help__first-row">
-                <div class="list-item">
-                    <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon1.svg" alt="icon">
-                    <p class="item-text">Pet&nbspfood</p>
-                </div>
-                <div class="list-item">
-                    <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon2.svg" alt="icon">
-                    <p class="item-text">Transportation</p>
-                </div>
-                <div class="list-item">
-                    <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon3.svg" alt="icon">
-                    <p class="item-text">Toys</p>
-                </div>
-                <div class="list-item">
-                    <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon4.svg" alt="icon">
-                    <p class="item-text">Bowls&nbspand&nbspcups</p>
-                </div>
-                <div class="list-item">
-                    <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon5.svg" alt="icon">
-                    <p class="item-text">Shampoos</p>
-                </div>
-            </div>
-
-            <div class="help__second-row">
-                <div class="list-item">
-                    <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon6.svg" alt="icon">
-                    <p class="item-text">Vitamins</p>
-                </div>
-                <div class="list-item">
-                    <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon7.svg" alt="icon">
-                    <p class="item-text">Medicines</p>
-                </div>
-                <div class="list-item">
-                    <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon8.png" alt="icon">
-                    <p class="item-text">Collars / leashes</p>
-                </div>
-                <div class="list-item">
-                    <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon9.svg" alt="icon">
-                    <p class="item-text">Sleeping areas</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="donation">
-            <div class="donation__content">
-                <img class="donation-photo" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/donation-dog.png" alt="dog photo">
-                <div class="donation__column-right">
-                    <h2 class="subtitle donation-subtitle">You can also make a donation</h2>
-                    <h3 class="sub-subtitle">Name of the bank / Type of bank account</h3>
-                    <div class="donation__credit-card">
-                        <img class="credit-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/credit-card.svg">
-                        <a href="#!"><p class="number">8380 2880 8028 8791 7435</p></a>
+                    <div class="help__first-row">
+                        <div class="list-item">
+                            <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon1.svg" alt="icon">
+                            <p class="item-text">Pet&nbspfood</p>
+                        </div>
+                        <div class="list-item">
+                            <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon2.svg" alt="icon">
+                            <p class="item-text">Transportation</p>
+                        </div>
+                        <div class="list-item">
+                            <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon3.svg" alt="icon">
+                            <p class="item-text">Toys</p>
+                        </div>
+                        <div class="list-item">
+                            <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon4.svg" alt="icon">
+                            <p class="item-text">Bowls&nbspand&nbspcups</p>
+                        </div>
+                        <div class="list-item">
+                            <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon5.svg" alt="icon">
+                            <p class="item-text">Shampoos</p>
+                        </div>
                     </div>
-                    <p class="legal-text">Legal information and lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a ipsum at libero sagittis dignissim sed ac diam. Praesent ultrices maximus tortor et vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+
+                    <div class="help__second-row">
+                        <div class="list-item">
+                            <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon6.svg" alt="icon">
+                            <p class="item-text">Vitamins</p>
+                        </div>
+                        <div class="list-item">
+                            <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon7.svg" alt="icon">
+                            <p class="item-text">Medicines</p>
+                        </div>
+                        <div class="list-item">
+                            <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon8.png" alt="icon">
+                            <p class="item-text">Collars / leashes</p>
+                        </div>
+                        <div class="list-item">
+                            <img class="item-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/icon9.svg" alt="icon">
+                            <p class="item-text">Sleeping areas</p>
+                        </div>
                 </div>
-            </div>
+            </section>
 
-        </section>
+            <section class="donation">
+                <div class="donation__content">
+                    <img class="donation-photo" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/donation-dog.png" alt="dog photo">
+                    <div class="donation__column-right">
+                        <h2 class="subtitle donation-subtitle">You can also make a donation</h2>
+                        <h3 class="sub-subtitle">Name of the bank / Type of bank account</h3>
+                        <div class="donation__credit-card">
+                            <img class="credit-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/credit-card.svg">
+                            <a href="#!"><p class="number">8380 2880 8028 8791 7435</p></a>
+                        </div>
+                        <p class="legal-text">Legal information and lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a ipsum at libero sagittis dignissim sed ac diam. Praesent ultrices maximus tortor et vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                    </div>
+                </div>
 
+            </section>
+    
     </main>
 
     <footer class="footer" id="footer">
