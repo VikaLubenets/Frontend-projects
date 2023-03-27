@@ -127,11 +127,19 @@
 }
 
 html {
-  box-sizing: border-box;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scroll-behavior: smooth;
 }
 
 body {
-   width: 1280px;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
 }
 
 /* General styles end*/
@@ -142,10 +150,15 @@ body {
     width: 1200px;
     height: 60px;
     margin-top: 30px;
-    margin-left: 40px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #FFFFFF;
+    background-repeat: repeat;
+    background-size: 100vw;
 }
 
 .logo {
@@ -205,6 +218,22 @@ body {
     margin: 0;
 }
 
+.nav-link:active{
+    color: #FAFAFA;
+    border-bottom: 3px solid #F1CDB3;
+}
+
+.active-link:hover{
+    color: #292929;
+    transition: .1s;
+}
+
+.default-link {
+    color: #545454;
+    border-bottom: 3px solid #F1CDB3;
+    cursor: none;
+}
+
 /* Header styles end*/
 
 /* Pets styles start*/
@@ -213,6 +242,9 @@ body {
     height: 1342px;
     display: flex;
     justify-content: center;
+    background-color: #F6F6F6;
+    background-repeat: repeat;
+    background-size: 100vw;
 }
 
 .pets__content {
@@ -245,6 +277,7 @@ body {
     display: flex; 
     flex-wrap: wrap;
     gap: 40px;
+    margin-bottom: 45px;
 }
 
 .card {
@@ -256,6 +289,22 @@ body {
     flex-direction: column;
     gap: 30px;
     margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.card:hover{
+    box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+    transition: .2s;
+}
+
+.card:hover > .button__learn-more { 
+    background: #FDDCC4;
+    transition: .5s;
+} 
+
+.card:hover:active > .button__learn-more{
+    background: #F1CDB3;
+    opacity: 0.7;
 }
 
 .pets-photo {
@@ -293,6 +342,29 @@ body {
 .navigation {
     width: 340px;
     height: 52px;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-icon {
+    height: 52px;
+    width: 52px;
+    border-radius: 100px;
+}
+
+.active {
+    cursor: pointer;
+}
+
+.active:active {
+    background: #F1CDB3;
+    opacity: 0.7;
+    transition: .1s;
+}
+
+.active:hover {
+    background: #FDDCC4;
+    transition: .2s;
 }
 
 /* Pets styles end*/
@@ -304,14 +376,17 @@ body {
     display: flex;
     align-items: flex-end;
     justify-content: center;
+    background-repeat: repeat;
+    background-size: 100vw;
 }
 
 .footer__content {
     display: flex;
     width: 1200px;
     height: 310px;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    gap: 160px;
 }
 
 .footer-block {
