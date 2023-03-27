@@ -134,6 +134,10 @@ body {
    width: 1280px;
 }
 
+a {
+    text-decoration: none;
+}
+
 /* General styles end*/
 
 /* Header styles start*/
@@ -276,6 +280,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #FFFFFF;
 }
 
 .about__content {
@@ -322,6 +327,7 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 80px;
+    background: #F6F6F6;
 }
 
 .pets__content {
@@ -395,6 +401,7 @@ body {
 
 .help {
     height: 611px;
+    background: #FFFFFF;
 }
 
 .help__content {
@@ -467,6 +474,7 @@ body {
     height: 462px;
     display: flex;
     justify-content: center;
+    background: #F6F6F6;
 }
 
 .donation__content {
