@@ -160,6 +160,7 @@ a {
     justify-content: space-between;
     align-items: center;
     position: absolute;
+    margin-top: 30px;
 }
 
 .logo {
@@ -214,9 +215,11 @@ a {
     line-height: 24px;
     color: #CDCDCD;
     text-decoration: none;
+    display: inline-block;
+    padding: 2px;
 }
 
-.nav-link:active{
+.active-link:active{
     color: #FAFAFA;
     border-bottom: 3px solid #F1CDB3;
 }
@@ -290,7 +293,6 @@ a {
 }
 
 .button {
-    width: 207px;
     height: 52px;
     background: #F1CDB3;
     border-radius: 100px;
@@ -304,6 +306,14 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.starts-screen .button {
+    width: 207px;
+}
+
+.pets .button {
+    width: 261px;
 }
 
 .button:hover {
@@ -373,6 +383,7 @@ a {
     height: 877px;
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 80px;
     background-color: #F6F6F6;
     background-repeat: repeat;
@@ -383,6 +394,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 60px;
 }
 
 .pet-subtitle {
@@ -395,7 +407,6 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 60px 0px;
     width: 1200px;
 }
 
@@ -409,6 +420,7 @@ a {
     gap: 30px;
     margin-right: 90px;
     cursor: pointer;
+    background-color: #FAFAFA;
 }
 
 .card:hover{
@@ -500,6 +512,8 @@ a {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-top: 80px;
+    padding-bottom: 100px;
 }
 
 .help-subtitle {
@@ -535,7 +549,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    gap: 30px;
 }
 
 .item-text {
@@ -554,7 +568,6 @@ a {
 .item-icon {
     width: 60px;
     height: 60px;
-    margin-bottom: 42px;
 }
 
 /* Help styles end*/
@@ -575,7 +588,8 @@ a {
     height: 282px;
     display: flex;
     justify-content: space-between;
-    margin-top: 91px;
+    align-items: center;
+    margin-top: 80px;
 }
 
 .donation-photo {
@@ -663,6 +677,7 @@ a {
     justify-content: center;
     align-items: center;
     gap: 160px;
+    margin-top: 40px;
 }
 
 .footer-block {
@@ -670,6 +685,7 @@ a {
     flex-direction: column;
     gap: 40px;
     max-width: 302px;
+  
 }
 
 .footer-subtitle {
