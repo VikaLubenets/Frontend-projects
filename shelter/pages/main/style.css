@@ -481,6 +481,7 @@ a {
     line-height: 22px;
     letter-spacing: 0.06em;
     color: #292929;
+    background-color: transparent;
     border: 2px solid #F1CDB3;
     border-radius: 100px;
 }
