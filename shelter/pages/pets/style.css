@@ -136,29 +136,33 @@ html {
 
 body {
     width: 100%;
+    overflow-x: hidden;
 }
 
 a {
     text-decoration: none;
 }
 
+.wrapper {
+    margin: 0 auto;
+}
+
 /* General styles end*/
 
 /* Header styles start*/
 
-.header {
-    width: 1200px;
-    height: 60px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    margin-left: auto;
-    margin-right: auto;
+.header{
+    height: 120px;
+    display: flex;
+    align-items: center;
+}
+
+.header .wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #FFFFFF;
-    background-repeat: repeat;
-    background-size: 100vw;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .logo {
@@ -166,8 +170,8 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 184px;
-    height: 60px;
+    min-width: 184px;
+    max-height: 60px;
 }
 
 .logo-title {
@@ -194,9 +198,9 @@ a {
 
 .nav {
     width: 443x;
-    height: 27px;
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 .nav-item {
@@ -227,7 +231,7 @@ a {
 
 .active-link:hover{
     color: #292929;
-    transition: .1s;
+    transition: .3s;
 }
 
 .default-link {
@@ -236,26 +240,43 @@ a {
     cursor: none;
 }
 
+.burger-menu {
+    width: 30px;
+    height: 22px;
+    display: none;
+}
+
+.burger-line{
+    width: 100%;
+    background-color: #000000;
+    height: 2px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.burger-line:last-child{
+    margin-bottom: 0px;
+}
+
 /* Header styles end*/
 
 /* Pets styles start*/
 
 .pets {
-    height: 1342px;
     display: flex;
     justify-content: center;
     background-color: #F6F6F6;
     background-repeat: repeat;
     background-size: 100vw;
+    width: 100%;
 }
 
 .pets__content {
-    width: 1200px;
-    height: 1162px;
     margin-bottom: 100px;
     margin-top: 80px;
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
     gap: 60px;
 }
@@ -274,10 +295,9 @@ a {
 }
 
 .cards-container {
-    width: 1200px;
-    height: 930px; 
+    width: 100%;
     display: flex; 
-    gap: 40px;
+    gap: 30px 40px;
     flex-wrap: wrap;
 }
 
@@ -289,7 +309,6 @@ a {
     justify-content: center;
     flex-direction: column;
     gap: 30px;
-    margin-bottom: 30px;
     cursor: pointer;
     background: #FAFAFA;
     border-radius: 9px;
@@ -297,7 +316,7 @@ a {
 
 .card:hover{
     box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
-    transition: .2s;
+    transition: .3s;
 }
 
 .card:hover > .button__learn-more { 
@@ -375,30 +394,25 @@ a {
 
 /* Footer styles start*/
 .footer {
-    height: 350px;
     background: url(noise_lines_transparent@2X.png), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
     background-repeat: repeat;
-    background-size: 100vw;
+    background-size: 100%;
 }
 
 .footer__content {
     display: flex;
-    width: 1200px;
-    height: 310px;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 160px;
-    margin-top: 40px;
+    padding-top: 40px;
+    flex-wrap: wrap;
+    margin: 0 40px;
 }
 
 .footer-block {
     display: flex;
     flex-direction: column;
-    gap: 40px;
-    max-width: 302px;
+    gap: 35px;
+    width: 300px;
 }
 
 .subtitle {
@@ -442,5 +456,159 @@ a {
     letter-spacing: 0.06em;
     color: #F1CDB3;
 }
-
 /* Footer styles end*/
+
+/* Media desctop starts*/
+
+@media only screen and (min-width: 1280px){
+    .wrapper {
+        width: 1200px;
+    }
+}
+
+/*Media desctop ends*/
+
+
+/* Media tablet starts*/
+
+@media only screen and (max-width: 1279px) {
+    .wrapper {
+        width: 93%;
+        overflow-x: hidden;
+    }
+    
+    .header {
+        margin: 0px 0px;
+    }
+
+    .nav {
+        margin-left: 3.8rem;
+    }
+
+    .header .wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .pets__content {
+        width: 100%;
+        gap: 30px;
+        margin: 60px auto 70px auto;
+    }
+
+    .cards-container{
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        max-width: 580px;
+        height: 1365px;
+        margin-bottom: 40px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card-disabled{
+        display: none;
+    }
+
+    .card {
+        margin: 0;
+    }
+
+    .navigation{
+        margin: 0 auto;
+    }
+
+    .footer{
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer__content{
+        flex-wrap: wrap;
+        gap: 60px;
+        margin: 0 auto;
+        padding-top: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+
+}
+
+/* Media tablet ends*/
+
+/* Media mobile starts*/
+@media only screen and (max-width: 767px) {
+    .wrapper {
+        width: 93.75%;
+    }
+
+    .header{
+        margin: 30px 20px;
+  
+    }
+
+    .nav{
+        display: none;
+    }
+
+    .burger-menu{
+        display: block;
+    }
+
+    .title{
+        font-size: 25px;
+        line-height: 32px;
+        text-align: center;
+        letter-spacing: 0.06em;
+        color: #545454;
+    }
+
+    .pets__content {
+        width: 94%;
+        gap: 30px;
+        margin: 0px auto;
+    }
+
+    .cards-container{
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr;
+        grid-gap: 40px 30px;
+        margin-bottom: 0px;
+    }
+
+    .card{
+        margin: 0 auto;
+    }
+
+    .no-card{
+        display: none;
+    }
+    
+    .navigation{
+        margin: 42px auto 42px auto;
+        gap: 10px;
+    }
+
+    .footer{
+        align-items: flex-start;
+    }
+
+    .footer__content{
+        flex-wrap: wrap;
+        gap: 40px;
+        margin: 0 auto;
+        margin-top: 30px;
+        height: 234pz;
+    }
+
+    .puppy-photo{
+        width: 260px;
+        height: 269px;
+    }
+
+}
+
+/* Media mobile ends*/
