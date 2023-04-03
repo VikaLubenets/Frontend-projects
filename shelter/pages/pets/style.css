@@ -474,6 +474,7 @@ a {
 @media only screen and (max-width: 1279px) {
     .wrapper {
         width: 93%;
+        overflow-x: hidden;
     }
     
     .header {
