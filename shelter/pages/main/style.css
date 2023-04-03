@@ -759,11 +759,12 @@ a {
     }
 
     .header__content {
-        margin: 0 4%;
+        margin: 0;
     }
 
     .nav {
-        margin-left: 8.1rem;
+        margin-left: 0px;
+        justify-content: space-between;
     }
 
     .starts-screen__content {
@@ -894,7 +895,7 @@ a {
 
 /* Media mobile starts*/
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     
     .nav{
         display: none;
@@ -1092,7 +1093,7 @@ a {
     }
 
     .donation__credit-card{
-        width: 281px;
+        width: 282px;
         height: 43px;
         border-radius: 9px;
         align-items: center;
