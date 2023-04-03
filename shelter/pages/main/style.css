@@ -1072,10 +1072,10 @@ a {
 
     .donation__content{
         flex-direction: column-reverse;
-        max-width: 300px;
         gap: 42px;
-        justify-content: space-between;
-        margin: 0px auto 42px auto; 
+        justify-content: center;
+        align-items: center;
+        margin: 42px 0 42px 0; 
     }
 
     .donation-subtitle{
@@ -1084,10 +1084,11 @@ a {
         text-align: center;
         letter-spacing: 0.06em;
         color: #545454;
+        text-align: center;
     }
 
     .sub-subtitle{
-        font-size: 15px;
+        font-size: 14px;
         line-height: 24px;
         color: #545454;
     }
@@ -1122,7 +1123,7 @@ a {
     }
 
     .donation__column-right {
-        margin: 42px auto 0 auto;
+        margin: 0px auto 0 auto;
         max-width: 290px;
     }
 
