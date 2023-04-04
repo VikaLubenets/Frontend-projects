@@ -306,7 +306,7 @@ a {
     height: 435px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
     gap: 30px;
     cursor: pointer;
@@ -359,6 +359,7 @@ a {
     background-color: transparent;
     border: 2px solid #F1CDB3;
     border-radius: 100px;
+    margin-bottom: 30px;
 }
 
 
@@ -367,6 +368,7 @@ a {
     height: 52px;
     display: flex;
     gap: 20px;
+    justify-content: center;
 }
 
 .nav-icon {
@@ -588,7 +590,7 @@ a {
     }
     
     .navigation{
-        margin: 42px auto 42px auto;
+        margin: 42px auto;
         gap: 10px;
     }
 

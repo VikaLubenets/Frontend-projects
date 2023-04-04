@@ -928,7 +928,7 @@ a {
         color: #FFFFFF;
         text-align: center;
         display: block;
-        max-width: 300px;
+        width: 93.75%;
     }
 
     .text{
@@ -938,7 +938,7 @@ a {
         text-align: center;
         color: #CDCDCD;
         display: block;
-        max-width: 300px;
+        width: 93.75%;
     }
     
     .first-image{
