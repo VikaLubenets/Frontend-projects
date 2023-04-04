@@ -864,6 +864,8 @@ a {
         max-width: 505px;
         height: auto;
         margin: 80px auto 100px auto;
+        align-items: center;
+        justify-content: center;
 
     }
 
@@ -1076,7 +1078,8 @@ a {
         gap: 42px;
         justify-content: center;
         align-items: center;
-        margin: 42px 0 42px 0; 
+        margin: 42px auto; 
+        width: 94%;
     }
 
     .donation-subtitle{
@@ -1121,6 +1124,7 @@ a {
         line-height: 18px;
         text-align: justify;
         color: #B2B2B2;
+        width: 100%;
     }
 
     .donation__column-right {
