@@ -569,6 +569,7 @@ a {
         width: 94%;
         gap: 30px;
         margin: 0px auto;
+        padding-top: 42px;
     }
 
     .cards-container{
