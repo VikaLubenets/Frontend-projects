@@ -590,8 +590,9 @@ a {
     }
     
     .navigation{
-        margin: 42px auto;
+        margin: 42px 0;
         gap: 10px;
+        width: 300px;
     }
 
     .footer{
