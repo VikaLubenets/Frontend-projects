@@ -150,6 +150,7 @@ a {
 
 .wrapper {
     margin: 0 auto;
+   overflow-x: hidden;
 }
 
 /* General styles end*/
@@ -169,6 +170,16 @@ a {
     align-items: center;
     padding-top: 30px;
     padding-bottom: 30px;
+}
+
+.cover{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
 }
 
 .logo {
@@ -230,6 +241,8 @@ a {
     width: 30px;
     height: 22px;
     display: none;
+    border: none;
+    background: transparent;
 }
 
 .burger-line{
@@ -237,7 +250,7 @@ a {
     background-color: #F1CDB3;
     height: 2px;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .burger-line:last-child{
@@ -899,14 +912,63 @@ a {
 /* Media mobile starts*/
 
 @media only screen and (max-width: 767px) {
-    
+
     .nav{
-        display: none;
+        display: flex;
+        width: 320px;
+        height: 823px;
+        position: absolute;
+        right: -320px;
+        top: 0;
+        background: #292929;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        visibility: hidden;
+        transition: all 0.5s ease-out;
+    }
+
+    .nav-link{
+        display: block;
+        font-family: 'Arial';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 32px;
+        line-height: 51px;
+        color: #CDCDCD;
+        text-align: center;
+    }
+
+    .nav-item {
+        display: block;
+        max-width: 246px;
+        margin: 0 auto;
     }
 
     .burger-menu{
         display: block;
         margin-left: 6.6rem;
+        width: 30px;
+        height: 30px;
+        transition: all 0.5s;
+        position: relative;
+    }
+
+    .header__content.open .burger-menu{
+        transform: rotate(-90deg);
+        margin-bottom: 0;
+        z-index: 1;
+    }
+
+    .header__content.open .nav{
+        transform: translateX(-100%);
+        visibility: visible;
+        z-index: 1;
+    }
+
+    .header__content.open .cover{
+        display: block;
     }
 
     .starts-screen__content {

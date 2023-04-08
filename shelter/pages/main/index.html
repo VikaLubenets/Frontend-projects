@@ -8,6 +8,7 @@
     <title>Shelter</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/favicon.png">
+    <script defer src="script.js"></script>
 </head>
 
 <body>
@@ -21,20 +22,21 @@
                         <p class="logo-subtitle">Shelter for pets in Boston</p>
                     </a>
                 </div>
-                <nav class="nav">
-                    <ul class="nav">
+                <nav>
+                    <ul class="nav" id="nav">
                         <li class="nav-item"><a class="nav-link default-link">About the shelter</a></li>
                         <li class="nav-item"><a class="nav-link active-link"
                                 href="/vikalubenets-JSFE2023Q1/shelter/pages/pets/index.html">Our pets</a></li>
                         <li class="nav-item"><a class="nav-link active-link" href="#help">Help the shelter</a></li>
                         <li class="nav-item"><a class="nav-link active-link" href="#footer">Contacts</a></li>
                     </ul>
+                    <button class="burger-menu" id="burger">
+                        <span class="burger-line"></span>
+                        <span class="burger-line"></span>
+                        <span class="burger-line"></span>
+                    </button>
                 </nav>
-                <div class="burger-menu">
-                    <span class="burger-line"></span>
-                    <span class="burger-line"></span>
-                    <span class="burger-line"></span>
-                </div>
+                <div class="cover"></div>
             </div>
         </div>
 
@@ -268,7 +270,7 @@
             </div>
         </div>
     </footer>
-    <script src="script.js"></script>
+
 </body>
 
 </html>
