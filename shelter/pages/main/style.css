@@ -153,13 +153,16 @@ a {
    overflow-x: hidden;
 }
 
+.body-wrapper{
+    overflow: hidden;
+}
+
 /* General styles end*/
 
 /* Header styles start*/
 
 
 .header{
-    height: 120px;
     display: flex;
     align-items: center;
 }
@@ -439,7 +442,22 @@ a {
     align-items: center;
     justify-content: center;
     width: 100%;
+    gap: 53px;
+}
+
+.cards-wrapper{
+    width: 990px;
+    overflow: hidden;
+    position: relative;
+}
+
+.carausel{
+    display: flex;
     gap: 90px;
+    position: relative;
+    justify-content: flex-start;
+    width: 100%;
+    left: -1080px;
 }
 
 .card {
@@ -468,21 +486,12 @@ a {
     border-radius: 100px;
     width: 52px;
     height: 52px; 
-    margin-left: -37px;  
-}
-
-.arrow:first-child {
-    margin-right: -37px;
-    margin-left: 0;
-}
-
-.card:nth-last-child(-n + 2) {
-    margin-right: 0;
 }
 
 .arrow:hover {
     background: #FDDCC4;
     transition: .5s;
+    cursor: pointer;
 }
 
 .pets-photo {
@@ -533,6 +542,37 @@ a {
 }
 
 /* Pets styles end*/
+
+/* Slider animation starts*/
+
+@keyframes move-right {
+    from {
+        left: -1080px;
+    }
+    to {
+        left: -2160px;
+    }
+}
+
+.transition-right {
+    animation: move-right 3s;
+}
+
+@keyframes move-left {
+    from {
+        left: -1080px;
+    }
+    to {
+        left: 0px;
+    }
+}
+
+.transition-left {
+    animation: move-left 3s;
+}
+
+
+/* Slider animation ends*/
 
 /* Help styles start*/
 
@@ -824,18 +864,30 @@ a {
         margin-top: 8rem;
     }
 
-    .slider {
-        width: 92%;
-        gap: 40px;
+    .slider{
+        gap: 12px;
     }
 
-    .arrow {
-        margin-left: -28px;  
+    .cards-wrapper{
+        width: 580px;
+    }
+
+    .carausel{
+        display: flex;
+    }
+
+    .cards-wrapper {
+        width: 580px;
+        gap: 40px;
+        overflow: hidden;
     }
     
-    .arrow:first-child {
-        margin-right: -28px;
-        margin-left: 0;
+    .carausel{
+        display: flex;
+        gap: 40px;
+        position: relative;
+        width: 100%;
+        left: -620px;
     }
 
     .card:nth-last-child(-n + 3){
@@ -913,6 +965,10 @@ a {
 
 @media only screen and (max-width: 767px) {
 
+    .body-wrapper{
+        position: relative;
+    }
+
     .nav{
         display: flex;
         width: 320px;
@@ -956,7 +1012,7 @@ a {
     }
 
     .header__content.open .burger-menu{
-        transform: rotate(-90deg);
+        transform: rotate(90deg);
         margin-bottom: 0;
         z-index: 1;
     }
@@ -1063,12 +1119,16 @@ a {
         flex-direction: column;
     }
 
-    .card:nth-last-child(-n + 2){
-        display: none;
+    .cards-wrapper{
+        width: 270px;
     }
 
-    .card:nth-last-child(-n + 4){
-        display: none;
+    .carausel{
+        display: flex;
+        gap: 40px;
+        position: relative;
+        width: 100%;
+        left: -350px;
     }
 
     .arrow {
@@ -1085,6 +1145,17 @@ a {
         text-align: center;
         letter-spacing: 0.06em;
         color: #545454;
+    }
+    
+    .cards-wrapper{
+        width: 270px;
+        overflow: hidden;
+    }
+
+    .carausel{
+        display: flex;
+        flex-direction: row;
+        gap: 90px;
     }
 
     .arrows{
