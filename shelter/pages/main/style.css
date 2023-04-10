@@ -465,7 +465,7 @@ a {
     height: 435px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
     gap: 30px;
     cursor: pointer;
@@ -727,7 +727,7 @@ a {
 
 /* Footer styles start*/
 .footer {
-    background: url(noise_lines_transparent@2X.png), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20;
+    background: radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20;
     background-repeat: repeat;
     background-size: 100%;
 }
@@ -1027,6 +1027,8 @@ a {
 
     .carousel{
         display: flex;
+        left: -620px;
+        gap: 40px;
     }
 
     .cards-wrapper {
@@ -1035,13 +1037,6 @@ a {
         overflow: hidden;
     }
     
-    .carausel{
-        display: flex;
-        gap: 40px;
-        position: relative;
-        width: 100%;
-        left: -620px;
-    }
 
     /* Slider animation starts*/
 
@@ -1291,7 +1286,7 @@ a {
         gap: 40px;
         position: relative;
         width: 100%;
-        left: -350px;
+        left: -310px;
     }
 
     .arrow {
