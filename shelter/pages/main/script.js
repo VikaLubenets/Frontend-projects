@@ -30,18 +30,104 @@ fetch('../../assets/pets.json') // добавила данные из pets.json
     changeToBackward();
     backward();
     changeToBackward();
-    generateModal ();
+    
+    
+  const popupClose = (evt) => {
+    evt.preventDefault()
+    darkScreen.style.display = 'none'
+    popup.classList.remove('popup--active')
+    document.body.style.overflowY = 'visible'
+  }
 
-    let petsNum = {
-      Jennifer: cards[0],
-      Sophia: cards[1],
-      Woody: cards[2],
-      Scarlett: cards[3],
-      Katrine: cards[4],
-      Timmy: cards[5],
-      Freddie: cards[6],
-      Charly: cards[7],
+  window.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      popupClose(evt)
     }
+  });
+
+document.addEventListener("click", (e) => {
+  if (e.target.parentNode.classList.contains(".card")) {
+    const petId = e.target.parentNode.getAttribute('id')
+    const pet = json.find(el => el.id)
+    generateModal(pet);
+    modal__cover.classList.add("open");
+  } else {
+    if (
+      e.target.classList[1] === "open" ||
+      e.target.classList[0] === "modal__button"
+    ) {
+      modal__cover.classList.remove("open");
+    }
+  }
+});
+
+function generateModal (pet) {
+ 
+  const modal = document.createElement('section');
+  modal.classList.add('modal');
+  modal__cover.appendChild(modal);
+
+  const modal__image = document.createElement('img');
+  modal__image.classList.add('modal__image');
+  modal__image.src = pet.img;
+  modal.appendChild(modal__image);
+
+  const modal__content = document.createElement('div');
+  modal__content.classList.add('modal__content');
+  modal.appendChild(modal__content);
+
+  const modal__name = document.createElement('h3');
+  modal__name.classList.add('modal__name');
+  modal__name.textContent = pet.name;
+  modal__content.appendChild(modal__name);
+
+  const modal__type = document.createElement('p');
+  modal__type.classList.add('modal__type-breed');
+  modal__type.textContent = pet.type + " " + pet.breed;
+  modal__content.appendChild(modal__type);
+  
+  const modal__description = document.createElement('p');
+  modal__description.classList.add('modal__description');
+  modal__description.textContent = pet.description;
+  modal__content.appendChild(modal__description);
+
+  const modal__list = document.createElement('ul');
+  modal__list.classList.add('modal__list');
+  modal__content.appendChild(modal__list);
+
+  const age = document.createElement('li');
+  age.classList.add('modal__item');
+  age.textContent = `Age: ${pet.age}`
+  modal__list.appendChild(age);
+
+  const inoculations = document.createElement('li');
+  inoculations.classList.add('modal__item');
+  inoculations.textContent = `Inoculations: ${pet.inoculations}`
+  modal__list.appendChild(inoculations);
+
+  const diseases = document.createElement('li');
+  diseases.classList.add('modal__item');
+  diseases.textContent = `Diseases: ${pet.diseases}`
+  modal__list.appendChild(diseases);
+
+  const parasites = document.createElement('li');
+  parasites.classList.add('modal__item');
+  parasites.textContent = `Parasites: ${pet.parasites}`
+  modal__list.appendChild(parasites);
+
+  const button = document.createElement('button');
+  button.classList.add('modal__button');
+  modal__content.appendChild(button);
+
+  const icon = document.createElement('img');
+  icon.classList.add('modal__icon');
+  icon.src = "../../assets/images/icon_close.svg";
+  button.appendChild(icon);
+
+}
+
+
+    
   });
 
 
@@ -240,8 +326,8 @@ function createCard(pet) {
 
 // slider
 
-// const BTN_RIGHT = document.querySelectorAll('.next-button');
-// const BTN_LEFT = document.querySelectorAll('.prev-button');
+const BTN_RIGHT = document.querySelectorAll('.next-button');
+const BTN_LEFT = document.querySelectorAll('.prev-button');
 
 // // обрабатываем клик на кнопке "влево"
 // function onBackwardButtonClick() {
@@ -293,41 +379,41 @@ function createCard(pet) {
 // });
 
 // //left slider button desctop and tablet 
-// const moveLeft = function () {
-//   CAROUSEL.classList.add("transition-left");
-//   BTN_LEFT.forEach(button => button.removeEventListener('click', moveLeft));
-//   BTN_RIGHT.forEach(button => button.removeEventListener('click', moveRight));
-// }
+const moveLeft = function () {
+  CAROUSEL.classList.add("transition-left");
+  BTN_LEFT.forEach(button => button.removeEventListener('click', moveLeft));
+  BTN_RIGHT.forEach(button => button.removeEventListener('click', moveRight));
+}
 
-// BTN_LEFT.forEach(button => button.addEventListener('click', moveLeft));
+BTN_LEFT.forEach(button => button.addEventListener('click', moveLeft));
 
 // //right slider button desctop and tablet
 
-// const moveRight = function () {
-//   CAROUSEL.classList.add("transition-right");
-//   BTN_RIGHT.forEach(button => button.removeEventListener('click', moveRight));
-//   BTN_LEFT.forEach(button => button.removeEventListener('click', moveLeft));
-// }
+const moveRight = function () {
+  CAROUSEL.classList.add("transition-right");
+  BTN_RIGHT.forEach(button => button.removeEventListener('click', moveRight));
+  BTN_LEFT.forEach(button => button.removeEventListener('click', moveLeft));
+}
 
-// BTN_RIGHT.forEach(button => button.addEventListener('click', moveRight));
+BTN_RIGHT.forEach(button => button.addEventListener('click', moveRight));
 
-// CAROUSEL.addEventListener("animationend", function (animationEvent) {
-//     let changedSlides;
-//     if (animationEvent.animationName === 'move-left') {
-//         CAROUSEL.classList.remove("transition-left");
-//         changedSlides = ITEM_LEFT;
-//         ITEM_ACTIVE.forEach((item, index) => {
-//           item.innerHTML = ITEM_LEFT[index].innerHTML;
-//         });
-//       } else if (animationEvent.animationName === 'move-right') {
-//         CAROUSEL.classList.remove("transition-right");
-//         changedSlides = ITEM_RIGHT;
-//         ITEM_ACTIVE.forEach((item, index) => {
-//           item.innerHTML = ITEM_RIGHT[index].innerHTML;
-//         });
-//     }
+CAROUSEL.addEventListener("animationend", function (animationEvent) {
+    let changedSlides;
+    if (animationEvent.animationName === 'move-left') {
+        CAROUSEL.classList.remove("transition-left");
+        changedSlides = ITEM_LEFT;
+        ITEM_ACTIVE.forEach((item, index) => {
+          item.innerHTML = ITEM_LEFT[index].innerHTML;
+        });
+      } else if (animationEvent.animationName === 'move-right') {
+        CAROUSEL.classList.remove("transition-right");
+        changedSlides = ITEM_RIGHT;
+        ITEM_ACTIVE.forEach((item, index) => {
+          item.innerHTML = ITEM_RIGHT[index].innerHTML;
+        });
+    }
 
-// });
+});
 
 
 /* slider ends */
@@ -338,93 +424,5 @@ const modal__cover = document.querySelector('.modal__cover');
 const closeButton = document.querySelector('.modal__button');
 const openButton = document.querySelector('.card');
 
-openButton.addEventListener('click', () => {
-    generateModal(pet);
-    modal__cover.classList.add('open');
-  });
-
-closeButton.addEventListener('click', () => {
-  modal__cover.classList.remove('open');
-});
-
-window.addEventListener('click', (event) => {
-  if (event.target === modal) {
-    modal__cover.classList.remove('open');
-  }
-});
-
-document.addEventListener("click", (e) => {
-  if(e.target.closest(".card") !== null){
-    generateModal(e.target.closest(".card"));
-    modal__cover.classList.add('open');
-  } else {
-    modal__cover.classList.remove('open');
-  }
-});
-
-function generateModal (id) {
-  
-  const modal = document.createElement('section');
-  modal.classList.add('modal');
-  modal__cover.appendChild(modal);
-
-  const modal__image = document.createElement('img');
-  modal__image.classList.add('modal__image');
-  modal__image.src = petsNum[id].img;
-  modal.appendChild(modal__image);
-
-  const modal__content = document.createElement('div');
-  modal__content.classList.add('modal__content');
-  modal.appendChild(modal__content);
-
-  const modal__name = document.createElement('h3');
-  modal__name.classList.add('modal__name');
-  modal__name.textContent = pet.name;
-  modal__content.appendChild(modal__name);
-
-  const modal__type = document.createElement('p');
-  modal__type.classList.add('modal__type-breed');
-  modal__type.textContent = pet.type + " " + pet.breed;
-  modal__content.appendChild(modal__type);
-  
-  const modal__description = document.createElement('p');
-  modal__description.classList.add('modal__description');
-  modal__description.textContent = pet.description;
-  modal__content.appendChild(modal__description);
-
-  const modal__list = document.createElement('ul');
-  modal__list.classList.add('modal__list');
-  modal__content.appendChild(modal__list);
-
-  const age = document.createElement('li');
-  age.classList.add('modal__item');
-  age.textContent = `Age: ${pet.age}`
-  modal__list.appendChild(age);
-
-  const inoculations = document.createElement('li');
-  inoculations.classList.add('modal__item');
-  inoculations.textContent = `Inoculations: ${pet.inoculations}`
-  modal__list.appendChild(inoculations);
-
-  const diseases = document.createElement('li');
-  diseases.classList.add('modal__item');
-  diseases.textContent = `Diseases: ${pet.diseases}`
-  modal__list.appendChild(diseases);
-
-  const parasites = document.createElement('li');
-  parasites.classList.add('modal__item');
-  parasites.textContent = `Parasites: ${pet.parasites}`
-  modal__list.appendChild(parasites);
-
-  const button = document.createElement('button');
-  button.classList.add('modal__button');
-  modal__content.appendChild(button);
-
-  const icon = document.createElement('img');
-  icon.classList.add('modal__icon');
-  icon.src = "../../assets/images/icon_close.svg";
-  button.appendChild(icon);
-
-}
 
 /* modal ends */
