@@ -1038,12 +1038,9 @@ a {
     }
     
 
-    /* Slider animation starts*/
+/* Slider animation starts*/
 
 
-.transition-left {
-    animation: move-left 3s;
-}
 
 
 /* Slider animation ends*/

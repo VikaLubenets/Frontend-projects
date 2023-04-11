@@ -32,10 +32,11 @@ cover.addEventListener('click', closeBurger);
 
 /* burger menu end */
 
+/* modal start */
+
 const CAROUSEL = document.querySelector('.carousel');
-
-/* slider start */
-
+let orderedList = []; // общий массив для прошлых, текущих и следующих карточек в зависимости от генерации
+let resultArr = []; // массив для передачи в функцию генерации html карусели
 let cards = []; // массив со всеми доступными карточками
 let pastCards = []; // массив для прошлых карточек
 let currCards = []; // массив для активных карточек (текущих)
@@ -43,11 +44,9 @@ let nextCards = []; // массив для следующего слайда
 
 fetch('../../assets/pets.json') // добавила данные из pets.json
   .then(response => response.json())
-  .then(data => {
-    // Добавление всех карточек в массив allCards
-    data.forEach(pet => cards.push(pet));
+  .then(data => { data.forEach(pet => cards.push(pet))
+    
     init();
-    cards = data;
 
     const modal__cover = document.querySelector('.modal__cover');
     const openButton = document.querySelectorAll('.card');
@@ -85,9 +84,14 @@ fetch('../../assets/pets.json') // добавила данные из pets.json
     
   });
 
+/* modal ends */
+
+/* slider start */
+
+
 // инициализация
 
-const init = () => {
+function init () {
   // генерируем массив nextCards
   while (nextCards.length < 3) {
     let randomCard = Math.floor(Math.random() * 8);
@@ -124,17 +128,12 @@ const init = () => {
     }
   } 
 
-  cards.forEach(pet => {
-    const card = createCard(pet);
-    CAROUSEL.appendChild(card);
-  });
-
-  return {
-    pastCards: pastCards,
-    currCards: currCards,
-    nextCards: nextCards,
-  };
+  orderedList = [...pastCards, ...currCards, ...nextCards];
+  
+  return orderedList;
 };
+
+init();
 
 // Прокрутка вправо
 
@@ -159,11 +158,9 @@ function forward(){
   }
 
   // возвращаем объект с массивами
-  return {
-    pastCards: pastCards,
-    currCards: currCards,
-    nextCards: nextCards,
-  };
+  orderedList = [...pastCards, ...currCards, ...nextCards];
+  
+  return orderedList;
 
 }
 
@@ -185,11 +182,9 @@ function changeToBackward() {
     }
   }
 
-  return {
-    nextCards: nextCards,
-    currCards: currCards,
-    pastCards: pastCards
-  };
+  orderedList = [...pastCards, ...currCards, ...nextCards];
+  
+  return orderedList;
 }
 
 //влево
@@ -215,11 +210,9 @@ function backward(){
   }
 
   // возвращаем объект с массивами
-  return {
-    pastCards: pastCards,
-    currCards: currCards,
-    nextCards: nextCards,
-  };
+  orderedList = [...pastCards, ...currCards, ...nextCards];
+  
+  return orderedList;
 }
 
 // смена направления вправо
@@ -240,135 +233,157 @@ function changeToForward(){
     }
   }
 
-  return {
-    nextCards: nextCards,
-    currCards: currCards,
-    pastCards: pastCards
-  };
+  orderedList = [...pastCards, ...currCards, ...nextCards];
+  
+  return orderedList;
 
 }
+
 
 // Генерация html
 let ITEM_LEFT = document.querySelector('.left-cards');
 let ITEM_RIGHT = document.querySelector('.right-cards');
 let ITEM_ACTIVE = document.querySelector('.active-cards');
-let currentIndex = 0;
 
-cards = [...pastCards, ...currCards, ...pastCards];
+//  function createCarousel(orderedList) {
+//   CAROUSEL.innerHTML += createCard(ordeperedList);
+// }
 
-function createCard(pet) {
-  const card = document.createElement('div');
-  card.classList.add('card');
-  card.setAttribute('id', pet.id);
 
-  const image = document.createElement('img');
-  image.src = pet.img;
-  image.classList.add('pets-photo');
-  card.appendChild(image);
-
-  const name = document.createElement('p');
-  name.textContent = pet.name;
-  name.classList.add('pets-title');
-  card.appendChild(name);
-
-  const button = document.createElement('button');
-  button.textContent = 'Learn more';
-  button.classList.add('button__learn-more')
-  card.appendChild(button)
+function createCard(orderedList) {
   
-  return card;
-  }
+  let newArr = [
+    {
+      "id": "0",
+      "name": "Jennifer",
+      "img": "../../assets/images/jennifer.png",
+    },
+    {
+      "id": "1",
+      "name": "Sophia",
+      "img": "../../assets/images/sophia.png",
+    },
+    {
+      "id": "2",
+      "name": "Woody",
+      "img": "../../assets/images/woody.png",
+    },
+    {
+      "id": "3",
+      "name": "Scarlett",
+      "img": "../../assets/images/scarlett.png",
+    },
+    {
+      "id": "4",
+      "name": "Katrine",
+      "img": "../../assets/images/katrine.png",
+    },
+    {
+      "id": "5",
+      "name": "Timmy",
+      "img": "../../assets/images/timmy.png",
+    },
+    {
+      "id": "6",
+      "name": "Freddie",
+      "img": "../../assets/images/freddie.png",
+    },
+    {
+      "id": "7",
+      "name": "Charly",
+      "img": "../../assets/images/charly.png",
+    }
+  ]
+
+  resultArr = orderedList.map(index => newArr[index]);
+
+  CAROUSEL.innerHTML = "";
+
+    resultArr.forEach((cardData) => {
+      const card = document.createElement('div');
+      card.classList.add('card');
+      card.setAttribute('id', cardData.id);
+      CAROUSEL.appendChild(card);
+  
+      const image = document.createElement('img');
+      image.src = cardData.img;
+      image.classList.add('pets-photo');
+      card.appendChild(image);
+  
+      const name = document.createElement('p');
+      name.textContent = cardData.name;
+      name.classList.add('pets-title');
+      card.appendChild(name);
+  
+      const button = document.createElement('button');
+      button.textContent = 'Learn more';
+      button.classList.add('button__learn-more')
+      card.appendChild(button);
+    });
+
+    return CAROUSEL.innerHTML;
+};
+
+createCard(orderedList);
+
 
 // slider
 
 const BTN_RIGHT = document.querySelectorAll('.next-button');
 const BTN_LEFT = document.querySelectorAll('.prev-button');
+let BTN_RIGHT_lastClick = 0;
+let BTN_LEFT_lastClick = 0;
 
-// // обрабатываем клик на кнопке "влево"
-// function onBackwardButtonClick() {
-//   backward();
-//   const { pastCards, currCards, nextCards } = backward();
-//   updateSlider(pastCards, currCards, nextCards);
+// обрабатываем клик на кнопке "влево"
+
+BTN_LEFT.forEach(button => button.addEventListener('click', function(){
+  backward();
+  createCard(orderedList);
+}));
+
+BTN_RIGHT.forEach(button => button.addEventListener('click', function(){
+  forward();
+  createCard(orderedList);
+}));
+
+
+//left slider button desctop and tablet 
+
+// let moveLeft = function () {
+//   CAROUSEL.classList.add("transition-left");
+//   BTN_LEFT.forEach(button => button.removeEventListener('click', moveLeft));
+//   BTN_RIGHT.forEach(button => button.removeEventListener('click', moveRight));
 // }
 
-// // обрабатываем клик на кнопке "вправо"
-// function onForwardButtonClick() {
-//   forward()
-//   const { pastCards, currCards, nextCards } = forward();
-//   updateSlider(pastCards, currCards, nextCards);
+// BTN_LEFT.forEach(button => button.addEventListener('click', moveLeft));
+
+// // //right slider button desctop and tablet
+
+// const moveRight = function () {
+//   CAROUSEL.classList.add("transition-right");
+//   BTN_RIGHT.forEach(button => button.removeEventListener('click', moveRight));
+//   BTN_LEFT.forEach(button => button.removeEventListener('click', moveLeft));
 // }
 
-// // отображаем текущие карточки в слайдере и вызываем функцию changeToBackward() или changeToForward()
-// function updateSlider(pastCards, currCards, nextCards) {
-//   const sliderHtml = `
-//     <div class="card left-cards">${pastCards[0]}</div>
-//     <div class="card left-cards">${pastCards[1]}</div>
-//     <div class="card left-cards">${pastCards[2]}</div>
-//     <div class="card active-cards">${currCards[0]}</div>
-//     <div class="card active-cards">${currCards[1]}</div>
-//     <div class="card active-cards">${currCards[2]}</div>
-//     <div class="card right-cards">${nextCards[0]}</div>
-//     <div class="card right-cards">${nextCards[1]}</div>
-//     <div class="card right-cards">${nextCards[2]}</div>
-//   `;
-//   slider.innerHTML = sliderHtml;
-// }
+// BTN_RIGHT.forEach(button => button.addEventListener('click', moveRight));
 
-// function generateCarousel() {
-//   const pastCardsHtml = pastCards.map(cardIndex => `<div class="card">${cardIndex}</div>`).join('');
-//   const currCardsHtml = currCards.map(cardIndex => `<div class="card">${cardIndex}</div>`).join('');
-//   const nextCardsHtml = nextCards.map(cardIndex => `<div class="card">${cardIndex}</div>`).join('');
-  
-//   const sliderContainer = slider.querySelector('.carousel');
-//   sliderContainer.innerHTML = pastCardsHtml + currCardsHtml + nextCardsHtml;
-// }
+// CAROUSEL.addEventListener("animationend", function (animationEvent) {
+//     let changedSlides;
+//     if (animationEvent.animationName === 'move-left') {
+//         CAROUSEL.classList.remove("transition-left");
+//         changedSlides = ITEM_LEFT;
+//         ITEM_ACTIVE.forEach((item, index) => {
+//           item.innerHTML = ITEM_LEFT[index].innerHTML;
+//         });
+//       } else if (animationEvent.animationName === 'move-right') {
+//         CAROUSEL.classList.remove("transition-right");
+//         changedSlides = ITEM_RIGHT;
+//         ITEM_ACTIVE.forEach((item, index) => {
+//           item.innerHTML = ITEM_RIGHT[index].innerHTML;
+//         });
+//     }
 
-// prevBtn.addEventListener('click', () => {
-//   changeToBackward();
-//   generateSliderCards();
 // });
-
-// nextBtn.addEventListener('click', () => {
-//   changeToForward();
-//   generateSliderCards();
-// });
-
-// //left slider button desctop and tablet 
-const moveLeft = function () {
-  CAROUSEL.classList.add("transition-left");
-  BTN_LEFT.forEach(button => button.removeEventListener('click', moveLeft));
-  BTN_RIGHT.forEach(button => button.removeEventListener('click', moveRight));
-}
-
-BTN_LEFT.forEach(button => button.addEventListener('click', moveLeft));
-
-// //right slider button desctop and tablet
-
-const moveRight = function () {
-  CAROUSEL.classList.add("transition-right");
-  BTN_RIGHT.forEach(button => button.removeEventListener('click', moveRight));
-  BTN_LEFT.forEach(button => button.removeEventListener('click', moveLeft));
-}
-
-BTN_RIGHT.forEach(button => button.addEventListener('click', moveRight));
-
-CAROUSEL.addEventListener("animationend", function (animationEvent) {
-    let changedSlides;
-    if (animationEvent.animationName === 'move-left') {
-        CAROUSEL.classList.remove("transition-left");
-        changedSlides = ITEM_LEFT;
-        ITEM_ACTIVE.forEach((item, index) => {
-          item.innerHTML = ITEM_LEFT[index].innerHTML;
-        });
-      } else if (animationEvent.animationName === 'move-right') {
-        CAROUSEL.classList.remove("transition-right");
-        changedSlides = ITEM_RIGHT;
-        ITEM_ACTIVE.forEach((item, index) => {
-          item.innerHTML = ITEM_RIGHT[index].innerHTML;
-        });
-    }
-
-});
 
 
 /* slider ends */
