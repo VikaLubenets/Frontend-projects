@@ -728,7 +728,7 @@ a {
     .nav{
         display: flex;
         width: 320px;
-        height: 823px;
+        height: 100vh;
         position: absolute;
         right: -320px;
         top: 0;
