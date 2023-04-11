@@ -448,6 +448,7 @@ a {
     width: 990px;
     overflow: hidden;
     position: relative;
+    justify-content: center;
 }
 
 .carousel{
@@ -456,7 +457,8 @@ a {
     position: relative;
     justify-content: flex-start;
     width: 100%;
-    left: -1080px;
+    left: 0px;
+
 }
 
 .card {
