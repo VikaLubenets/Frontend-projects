@@ -473,6 +473,159 @@ a {
 }
 /* Footer styles end*/
 
+/* Modal styles start*/
+
+.modal__cover{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background-color: rgba(0,0,0,0.5);
+    left: 0;
+    top: 0;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .3s ease;
+}
+
+.modal__cover.open{
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal{
+    display: flex;
+    max-width: 900px;
+    box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+    background: #FAFAFA;
+    border-radius: 9px;
+    gap: 29px;
+    position: fixed;
+    z-index: 2;
+    margin-top: 52px;
+    margin-right: 52px;
+}
+
+.modal__image{
+    border-radius: 9px 0px 0px 9px;
+    width: 500px;
+    height: 500px;
+}
+
+.modal__content{
+    width: 351px;
+    height: 362px;
+    margin: 50px 20px 88px 0;
+}
+
+.modal__name{
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 45px;
+    letter-spacing: 0.06em;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.modal__type-breed{
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.06em;
+    color: #000000;
+    margin-bottom: 40px;
+}
+
+.modal__description{
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 17px;
+    letter-spacing: 0.06em;
+    color: #000000;
+    margin-bottom: 40px;
+}
+
+.modal__list{
+    width: 154px;
+    height: 102px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal__cover > ul li::before {
+    content: "\2022";
+    color: #F1CDB3;
+    font-weight: bold; 
+    display: inline-block;
+    width: 4px;
+    margin-right: 1rem;
+  }
+
+.modal__item{
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 17px;
+    letter-spacing: 0.06em;
+    color: #000000;
+}
+
+.modal__text{
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 17px;
+    letter-spacing: 0.06em;
+    color: #000000;
+}
+
+.modal__button {
+    width: 52px;
+    height: 52px;
+    border: 2px solid #F1CDB3;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    top: -52px;
+    right: -42px;
+    background: transparent;
+}
+
+.modal__button:hover{
+    background: #FDDCC4;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.modal__button:active{
+    background: #F1CDB3;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.modal__icon{
+    color: #292929;
+}
+
+/* Modal styles end*/
+
 /* Media desctop starts*/
 
 @media only screen and (min-width: 1280px){
