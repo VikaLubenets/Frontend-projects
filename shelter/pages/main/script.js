@@ -26,29 +26,28 @@ fetch('../../assets/pets.json') // добавила данные из pets.json
     // Добавление всех карточек в массив allCards
     data.forEach(pet => cards.push(pet));
     init();
-    
-    const modal__cover = document.querySelector('.modal__cover');
-    const closeButton = document.querySelector('.modal__button');
-    const openButton = document.querySelectorAll('.card');
+    cards = data;
 
-    const petId = {
-      'card-pet1': cards[0],
-      'card-pet2': cards[1],
-      'card-pet3': cards[2],
-      'card-pet4': cards[3],
-      'card-pet5': cards[4],
-      'card-pet6': cards[5],
-      'card-pet7': cards[6],
-      'card-pet8': cards[7],
+    const ID = {
+      Jennifer: cards[0],
+      Sophia: cards[1],
+      Woody: cards[2],
+      Scarlett: cards[3],
+      Katrine: cards[4],
+      Timmy: cards[5],
+      Freddie: cards[6],
+      Charly: cards[7],
     };
     
-    async function generateModal (id) {
-      const pet = petId[id];
-      console.log(pet);
+    const modal__cover = document.querySelector('.modal__cover');
+    const openButton = document.querySelectorAll('.card');
+    
+    function generateModal (id) {
+      const pet = cards.find(pet => pet.id === id);
       modal__cover.classList.add('open');
       document.querySelector('.modal__image').setAttribute('src', pet.img);
       document.querySelector('.modal__name').textContent = pet.name;
-      document.querySelector('.modal__type-breed').textContent = `${pet.type} - ${pet.breed}`;
+      document.querySelector('.modal__type-breed').textContent = `${pet.type} ${pet.breed}`;
       document.querySelector('.modal__description').textContent = pet.description;
       document.querySelector('.modal__text.age').textContent = pet.age;
       document.querySelector('.modal__text.innoculations').textContent = pet.inoculations;
@@ -57,8 +56,8 @@ fetch('../../assets/pets.json') // добавила данные из pets.json
     }
     
     openButton.forEach(button => {
-      button.addEventListener('click', () => {
-        const id = button.closest('.card').id;
+      button.addEventListener('click', (e) => {
+        const id = e.target.closest(".card").id;
         generateModal(id);
       });
     });
@@ -247,6 +246,7 @@ cards = [...pastCards, ...currCards, ...pastCards];
 function createCard(pet) {
   const card = document.createElement('div');
   card.classList.add('card');
+  card.setAttribute('id', pet.id);
 
   const image = document.createElement('img');
   image.src = pet.img;
