@@ -4,9 +4,15 @@ let menuBtn = document.querySelector('.burger-menu');
 let main = document.querySelector('body');
 let navigation = document.querySelector('.nav');
 let header = document.querySelector('.header__content');
+const body = document.querySelector('body');
 
 menuBtn.addEventListener('click', function () {
     header.classList.toggle('open');
+    if (header.classList.contains('open')) {
+      body.style.overflow = 'hidden';
+      } else {
+      body.style.overflow = 'initial';
+      }
 })
 
 /* burger menu end */

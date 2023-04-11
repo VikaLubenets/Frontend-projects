@@ -141,7 +141,6 @@ body {
    background: url(../assets/images/background/bg2x.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20;
    background-size: 100%;
    background-repeat: repeat;
-   overflow-x: hidden;
 }
 
 a {
