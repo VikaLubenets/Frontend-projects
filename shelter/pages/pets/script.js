@@ -6,7 +6,11 @@ let header = document.querySelector('.header');
 
 menuBtn.addEventListener('click', function(){
 	header.classList.toggle('open');
-	
+	if (header.classList.contains('open')) {
+		body.style.overflow = 'hidden';
+	  } else {
+		body.style.overflow = 'initial';
+	  }
 })
 
 
