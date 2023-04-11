@@ -331,8 +331,8 @@ createCard(orderedList);
 
 const BTN_RIGHT = document.querySelectorAll('.next-button');
 const BTN_LEFT = document.querySelectorAll('.prev-button');
-let BTN_RIGHT_lastClick = 0;
-let BTN_LEFT_lastClick = 0;
+let BTN_RIGHT_clickCounter = 0;
+let BTN_LEFT_clickCounter = 0;
 
 // обрабатываем клик на кнопке "влево"
 
@@ -342,9 +342,20 @@ BTN_LEFT.forEach(button => button.addEventListener('click', function(){
 }));
 
 BTN_RIGHT.forEach(button => button.addEventListener('click', function(){
-  forward();
-  createCard(orderedList);
+  if (BTN_LEFT_clickCounter === 1) {
+    // вызываем функцию со старыми значениями карточек
+    changeToBackward()
+    createCard(orderedList);
+    // сбрасываем значение счетчика
+    BTN_LEFT_clickCounter = 0;
+  } else {
+    forward();
+    createCard(orderedList);
+  }
+  BTN_RIGHT_clickCounter++;
 }));
+
+
 
 
 //left slider button desctop and tablet 
