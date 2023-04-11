@@ -41,6 +41,7 @@ fetch('../../assets/pets.json') // добавила данные из pets.json
     
     const modal__cover = document.querySelector('.modal__cover');
     const openButton = document.querySelectorAll('.card');
+    const body = document.querySelector('body');
     
     function generateModal (id) {
       const pet = cards.find(pet => pet.id === id);
@@ -59,12 +60,14 @@ fetch('../../assets/pets.json') // добавила данные из pets.json
       button.addEventListener('click', (e) => {
         const id = e.target.closest(".card").id;
         generateModal(id);
+        body.style.overflow = 'hidden' 
       });
     });
     
     const closeModal = (e) => {
       if (e.target === modal__cover || e.target.classList.contains('modal__button')) {
         modal__cover.classList.remove('open');
+        body.style.overflow = 'initial'; 
       }
     };
     

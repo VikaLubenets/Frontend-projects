@@ -1,11 +1,12 @@
 /* burger menu start */
 
 let menuBtn = document.querySelector('.burger-menu');
-
+const body = document.querySelector('body');
 let header = document.querySelector('.header');
 
 menuBtn.addEventListener('click', function(){
 	header.classList.toggle('open');
+	
 })
 
 
@@ -16,6 +17,7 @@ let cards = [];
 const modal__cover = document.querySelector('.modal__cover');
 const closeButton = document.querySelector('.modal__button');
 const openButton = document.querySelectorAll('.card');
+
 
 async function fetchPets() {
   const response = await fetch('../../assets/pets.json');
@@ -44,12 +46,14 @@ openButton.forEach(button => {
   button.addEventListener('click', () => {
     const id = button.closest('.card').id.split('-')[1];
     generateModal(id);
+	body.style.overflow = 'hidden' 
   });
 });
 
 const closeModal = (e) => {
   if (e.target === modal__cover || e.target.classList.contains('modal__button')) {
     modal__cover.classList.remove('open');
+	body.style.overflow = 'initial'; 
   }
 };
 
