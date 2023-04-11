@@ -5,6 +5,7 @@ let main = document.querySelector('body');
 let navigation = document.querySelector('.nav');
 let header = document.querySelector('.header__content');
 const body = document.querySelector('body');
+const cover = document.querySelector('.cover');
 
 menuBtn.addEventListener('click', function () {
     header.classList.toggle('open');
@@ -14,6 +15,20 @@ menuBtn.addEventListener('click', function () {
       body.style.overflow = 'initial';
       }
 })
+
+const closeBurger = (e) => {
+  if (e.target === cover) {
+    header.classList.toggle('open');
+    if (header.classList.contains('open')) {
+      body.style.overflow = 'hidden';
+      } else {
+      body.style.overflow = 'initial';
+      }
+  }
+};
+
+cover.addEventListener('click', closeBurger);
+
 
 /* burger menu end */
 
@@ -34,17 +49,6 @@ fetch('../../assets/pets.json') // добавила данные из pets.json
     init();
     cards = data;
 
-    const ID = {
-      Jennifer: cards[0],
-      Sophia: cards[1],
-      Woody: cards[2],
-      Scarlett: cards[3],
-      Katrine: cards[4],
-      Timmy: cards[5],
-      Freddie: cards[6],
-      Charly: cards[7],
-    };
-    
     const modal__cover = document.querySelector('.modal__cover');
     const openButton = document.querySelectorAll('.card');
     const body = document.querySelector('body');

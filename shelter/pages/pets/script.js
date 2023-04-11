@@ -3,6 +3,7 @@
 let menuBtn = document.querySelector('.burger-menu');
 const body = document.querySelector('body');
 let header = document.querySelector('.header');
+const cover = document.querySelector('.cover');
 
 menuBtn.addEventListener('click', function(){
 	header.classList.toggle('open');
@@ -12,6 +13,19 @@ menuBtn.addEventListener('click', function(){
 		body.style.overflow = 'initial';
 	  }
 })
+
+const closeBurger = (e) => {
+	if (e.target === cover) {
+	  header.classList.toggle('open');
+	  if (header.classList.contains('open')) {
+		body.style.overflow = 'hidden';
+		} else {
+		body.style.overflow = 'initial';
+		}
+	}
+  };
+  
+  cover.addEventListener('click', closeBurger);
 
 
 /* burger menu end */
