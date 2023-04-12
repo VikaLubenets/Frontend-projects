@@ -47,6 +47,10 @@ fetch('../../assets/pets.json') // добавила данные из pets.json
   .then(data => { data.forEach(pet => cards.push(pet))
     
     init();
+    forward();
+    backward();
+    changeToBackward();
+    changeToForward();
 
     const modal__cover = document.querySelector('.modal__cover');
     const openButton = document.querySelectorAll('.card');

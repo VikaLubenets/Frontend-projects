@@ -41,7 +41,8 @@ async function fetchPets() {
   const response = await fetch('../../assets/pets.json');
   const data = await response.json();
   // Добавление всех карточек в массив cards
-  cards = data;
+  data.forEach(pet => cards.push(pet));
+  return cards;
 }
 
 async function generateModal (id) {
@@ -77,3 +78,209 @@ const closeModal = (e) => {
 
 modal__cover.addEventListener('click', closeModal);
 /* modal start */
+
+/* Pagination starts */
+let next_btn = document.querySelector('.next');
+let double_next_btn = document.querySelector('.double-next');
+let prev_btn = document.querySelector('.prev');
+let double_prev_btn = document.querySelector('.double-prev');
+let allCards = [];
+let cardsContainer = document.querySelector('.cards-container');
+let numPage = document.querySelector('.num-page.num')
+
+async function main(){
+
+	const cards = await fetchPets();
+
+	let petsData = [];
+
+	function createArr() {
+		let arr = [];
+		for(let i = 0; i < 6; i++){
+			let tempArr = [];
+			while (tempArr.length < 8) {
+				let randomCard = Math.floor(Math.random() * 8);
+				if (!tempArr.includes(randomCard)) {
+					tempArr.push(randomCard);
+				}
+			}
+			arr = arr.concat(tempArr)
+		}
+
+		let newArr = cards.map(card => ({
+			"id": card.id,
+			"name": card.name,
+			"img": card.img,
+		  }));
+			
+		let resultArr = arr.map(index => newArr[index]);
+		return resultArr;
+		}
+
+	let flattenedArray = createArr().reduce((acc, curr) => {
+		return acc.concat(curr);
+	  }, []);
+	
+	petsData = flattenedArray;
+	
+	let currentPage = 1;
+	let cardsNum = 0;
+	cardsContainer.innerHTML = '';
+
+	console.log(petsData)
+
+	if (window.matchMedia("(max-width: 767px)").matches) {
+		cardsNum = 3;
+	  } else if (window.matchMedia("(max-width: 1279px)").matches) {
+		cardsNum = 6;
+	  } else {
+		cardsNum = 8;
+	  }
+
+		function displayList(arrData, cardsPage, page) {
+			let start = cardsPage * (page - 1);
+			let end = start + cardsPage;
+			const paginatedData = arrData.slice(start, end);
+
+			paginatedData.forEach((el) => {
+				const card = document.createElement('div');
+				card.classList.add('card');
+				card.setAttribute('id', el.id);
+				cardsContainer.appendChild(card);
+			
+				const image = document.createElement('img');
+				image.src = el.img;
+				image.classList.add('pets-photo');
+				card.appendChild(image);
+			
+				const name = document.createElement('p');
+				name.textContent = el.name;
+				name.classList.add('pets-title');
+				card.appendChild(name);
+			
+				const button = document.createElement('button');
+				button.textContent = 'Learn more';
+				button.classList.add('button__learn-more')
+				card.appendChild(button);
+			})
+		};
+
+		displayList(petsData, cardsNum, currentPage);
+
+		next_btn.addEventListener('click', function(){
+			
+			if (currentPage < 6) {
+				cardsContainer.innerHTML = '';
+				currentPage = currentPage + 1;
+				numPage.textContent = currentPage;
+				displayList(petsData, cardsNum, currentPage);
+			
+				if(currentPage > 1 && currentPage < 6){
+					prev_btn.classList.add('active');
+					double_prev_btn.classList.add('active');
+					prev_btn.classList.remove('inactive');
+					double_prev_btn.classList.remove('inactive');
+					next_btn.classList.add('active');
+					double_next_btn.classList.add('active');
+					next_btn.classList.remove('inactive');
+					double_next_btn.classList.remove('inactive');
+				} else if (currentPage === 1) {
+					prev_btn.classList.add('inactive');
+					double_prev_btn.classList.add('inactive');
+					prev_btn.classList.remove('active');
+					double_prev_btn.classList.remove('active');
+					next_btn.classList.add('active');
+					double_next_btn.classList.add('active');
+					next_btn.classList.remove('inactive');
+					double_next_btn.classList.remove('inactive');
+				} else {
+					prev_btn.classList.add('active');
+					double_prev_btn.classList.add('active');
+					prev_btn.classList.remove('inactive');
+					double_prev_btn.classList.remove('inactive');
+					next_btn.classList.add('inactive');
+					double_next_btn.classList.add('inactive');
+					next_btn.classList.remove('active');
+					double_next_btn.classList.remove('active');
+				}
+			}
+		});
+			prev_btn.addEventListener('click', function(){
+				if (currentPage > 1) {
+					cardsContainer.innerHTML = '';
+					currentPage -= 1;
+					numPage.textContent = currentPage;
+					displayList(petsData, cardsNum, currentPage);
+				if(currentPage > 1 && currentPage < 6){
+					prev_btn.classList.add('active');
+					double_prev_btn.classList.add('active');
+					prev_btn.classList.remove('inactive');
+					double_prev_btn.classList.remove('inactive');
+					next_btn.classList.add('active');
+					double_next_btn.classList.add('active');
+					next_btn.classList.remove('inactive');
+					double_next_btn.classList.remove('inactive');
+				} else if (currentPage === 1) {
+					prev_btn.classList.add('inactive');
+					double_prev_btn.classList.add('inactive');
+					prev_btn.classList.remove('active');
+					double_prev_btn.classList.remove('active');
+					next_btn.classList.add('active');
+					double_next_btn.classList.add('active');
+					next_btn.classList.remove('inactive');
+					double_next_btn.classList.remove('inactive');
+				} else {
+					prev_btn.classList.add('active');
+					double_prev_btn.classList.add('active');
+					prev_btn.classList.remove('inactive');
+					double_prev_btn.classList.remove('inactive');
+					next_btn.classList.add('inactive');
+					double_next_btn.classList.add('inactive');
+					next_btn.classList.remove('active');
+					double_next_btn.classList.remove('active');
+				}
+				}
+			});
+
+			double_next_btn.addEventListener('click', function(){
+				if (currentPage > 0 && currentPage < 7) {
+					cardsContainer.innerHTML = '';
+					currentPage = 6;
+					numPage.textContent = currentPage;
+					displayList(petsData, cardsNum, currentPage);
+
+					prev_btn.classList.add('active');
+					double_prev_btn.classList.add('active');
+					prev_btn.classList.remove('inactive');
+					double_prev_btn.classList.remove('inactive');
+					next_btn.classList.add('inactive');
+					double_next_btn.classList.add('inactive');
+					next_btn.classList.remove('active');
+					double_next_btn.classList.remove('active');
+				}
+			});
+
+			double_prev_btn.addEventListener('click', function(){
+				if (currentPage > 1 && currentPage < 7) {
+				cardsContainer.innerHTML = '';
+				currentPage = 1;
+				numPage.textContent = currentPage;
+				displayList(petsData, cardsNum, currentPage);}
+
+				prev_btn.classList.add('inactive');
+				double_prev_btn.classList.add('inactive');
+				prev_btn.classList.remove('active');
+				double_prev_btn.classList.remove('active');
+				next_btn.classList.add('active');
+				double_next_btn.classList.add('active');
+				next_btn.classList.remove('inactive');
+				double_next_btn.classList.remove('inactive');
+				
+			});
+
+}
+
+main();
+
+
+/* Pagination ends */

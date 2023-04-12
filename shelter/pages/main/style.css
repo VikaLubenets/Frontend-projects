@@ -458,7 +458,6 @@ a {
     justify-content: flex-start;
     width: 100%;
     left: 0px;
-
 }
 
 .card {
@@ -473,6 +472,26 @@ a {
     background-color: #FAFAFA;
 }
 
+@keyframes animation {
+    0% { 
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.25;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    75%{
+        opacity: 0.75;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
 .card:hover{
     box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
     transition: .3s;
