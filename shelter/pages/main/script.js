@@ -323,6 +323,11 @@ function createCard(orderedList) {
       button.textContent = 'Learn more';
       button.classList.add('button__learn-more')
       card.appendChild(button);
+
+      card.addEventListener('click', () => {
+				generateModal(el.id);
+				body.style.overflow = 'hidden';
+			  });
     });
 
     return CAROUSEL.innerHTML;

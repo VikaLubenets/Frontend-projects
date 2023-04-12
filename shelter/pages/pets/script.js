@@ -35,6 +35,13 @@ let cards = [];
 const modal__cover = document.querySelector('.modal__cover');
 const closeButton = document.querySelector('.modal__button');
 const openButton = document.querySelectorAll('.card');
+let next_btn = document.querySelector('.next');
+let double_next_btn = document.querySelector('.double-next');
+let prev_btn = document.querySelector('.prev');
+let double_prev_btn = document.querySelector('.double-prev');
+let allCards = [];
+let cardsContainer = document.querySelector('.cards-container');
+let numPage = document.querySelector('.num-page.num')
 
 
 async function fetchPets() {
@@ -61,13 +68,16 @@ async function generateModal(id) {
 	document.querySelector('.modal__text.parasites').textContent = pet.parasites;
 }
 
-openButton.forEach(button => {
-	button.addEventListener('click', () => {
-		const id = button.closest('.card').id.split('-')[1];
-		generateModal(id);
-		body.style.overflow = 'hidden'
+
+	cardsContainer.addEventListener('click', (event) => {
+		const tagret = event.target;
+		if (target.classList.contains('.button__learn-more')) {
+			const id = target.closest('.card').id;
+			generateModal(id);
+			body.style.overflow = 'hidden';
+		  }
 	});
-});
+
 
 const closeModal = (e) => {
 	if (e.target === modal__cover || e.target.classList.contains('modal__button')) {
@@ -80,13 +90,7 @@ modal__cover.addEventListener('click', closeModal);
 /* modal start */
 
 /* Pagination starts */
-let next_btn = document.querySelector('.next');
-let double_next_btn = document.querySelector('.double-next');
-let prev_btn = document.querySelector('.prev');
-let double_prev_btn = document.querySelector('.double-prev');
-let allCards = [];
-let cardsContainer = document.querySelector('.cards-container');
-let numPage = document.querySelector('.num-page.num')
+
 
 async function main() {
 
@@ -157,6 +161,11 @@ async function main() {
 			name.textContent = el.name;
 			name.classList.add('pets-title');
 			card.appendChild(name);
+
+			card.addEventListener('click', () => {
+				generateModal(el.id);
+				body.style.overflow = 'hidden';
+			  });
 
 			const button = document.createElement('button');
 			button.textContent = 'Learn more';
