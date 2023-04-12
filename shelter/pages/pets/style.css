@@ -312,6 +312,7 @@ a {
     display: flex; 
     gap: 30px 40px;
     flex-wrap: wrap;
+    overflow: hidden;
 }
 
 .card {
