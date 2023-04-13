@@ -1133,6 +1133,111 @@ a {
         justify-content: center;
     }
 
+    .modal{
+        display: flex;
+        max-width: 630px;
+        gap: 11px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .modal__image{
+        width: 350px;
+        height: 350px;
+    }
+    
+    .modal__content{
+        width: 260px;
+        margin: 10px 9px 37px 0;
+    }
+    
+    .modal__name{
+        font-family: 'Georgia';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 35px;
+        line-height: 45px;
+        letter-spacing: 0.06em;
+        color: #000000;
+        margin-bottom: 10px;
+    }
+    
+    .modal__type-breed{
+        font-family: 'Georgia';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 23px;
+        letter-spacing: 0.06em;
+        color: #000000;
+        margin-bottom: 20px;
+    }
+    
+    .modal__description{
+        font-family: 'Georgia';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 15px;
+        letter-spacing: 0.06em;
+        color: #000000;
+        margin-bottom: 20px;
+    }
+    
+    .modal__list{
+        width: 154px;
+        height: 102px;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .modal__cover > ul li::before {
+        content: "\2022";
+        color: #F1CDB3;
+        font-weight: bold; 
+        display: inline-block;
+        width: 4px;
+        margin-right: 1rem;
+      }
+    
+    .modal__item{
+        font-family: 'Georgia';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 17px;
+        letter-spacing: 0.06em;
+        color: #000000;
+    }
+    
+    .modal__text{
+        font-family: 'Georgia';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 17px;
+        letter-spacing: 0.06em;
+        color: #000000;
+    }
+    
+    .modal__button {
+        width: 52px;
+        height: 52px;
+        border: 2px solid #F1CDB3;
+        border-radius: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 52px;
+        height: 52px;
+        top: -52px;
+        right: -42px;
+        background: transparent;
+    }
+
 }
 
 /* Media tablet ends*/
@@ -1462,6 +1567,39 @@ a {
     .puppy-photo{
         width: 260px;
         height: 269px;
+    }
+
+    .modal{
+        display: flex;
+        min-width: 240px;
+        gap: 0px;
+        height: auto;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        margin-top: 0px;
+        margin-right: 0px;
+        margin: 10px;
+    }
+    
+    .modal__image{
+        display: none;
+    }
+    
+    .modal__content{
+        max-width: 260px;
+        margin: 10px;
+    }
+    
+    .modal__name{
+        text-align: center;
+    }
+    
+    .modal__type-breed{
+        text-align: center;
+    }
+    
+    .modal__description{
+        text-align: justify;
     }
    
 }
