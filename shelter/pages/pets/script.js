@@ -179,13 +179,13 @@ async function main() {
 
 	next_btn.addEventListener('click', function () {
 
-		if (currentPage < 6) {
+		if (currentPage < (48 / cardsNum)) {
 			cardsContainer.innerHTML = '';
 			currentPage = currentPage + 1;
 			numPage.textContent = currentPage;
 			displayList(petsData, cardsNum, currentPage);
 
-			if (currentPage > 1 && currentPage < 6) {
+			if (currentPage > 1 && currentPage < (48 / cardsNum)) {
 				prev_btn.classList.add('active');
 				double_prev_btn.classList.add('active');
 				prev_btn.classList.remove('inactive');
@@ -221,7 +221,7 @@ async function main() {
 			currentPage -= 1;
 			numPage.textContent = currentPage;
 			displayList(petsData, cardsNum, currentPage);
-			if (currentPage > 1 && currentPage < 6) {
+			if (currentPage > 1 && (48 / cardsNum)) {
 				prev_btn.classList.add('active');
 				double_prev_btn.classList.add('active');
 				prev_btn.classList.remove('inactive');
@@ -253,9 +253,14 @@ async function main() {
 	});
 
 	double_next_btn.addEventListener('click', function () {
-		if (currentPage > 0 && currentPage < 7) {
-			cardsContainer.innerHTML = '';
+		if (window.matchMedia("(max-width: 767px)").matches) {
+			currentPage = 16;
+		} else if (window.matchMedia("(max-width: 1279px)").matches) {
+			currentPage = 8;
+		} else {
 			currentPage = 6;
+		}
+			cardsContainer.innerHTML = '';
 			numPage.textContent = currentPage;
 			displayList(petsData, cardsNum, currentPage);
 
@@ -267,17 +272,21 @@ async function main() {
 			double_next_btn.classList.add('inactive');
 			next_btn.classList.remove('active');
 			double_next_btn.classList.remove('active');
-		}
+		
 	});
 
 	double_prev_btn.addEventListener('click', function () {
-		if (currentPage > 1 && currentPage < 7) {
-			cardsContainer.innerHTML = '';
+		if (window.matchMedia("(max-width: 767px)").matches) {
 			currentPage = 1;
-			numPage.textContent = currentPage;
-			displayList(petsData, cardsNum, currentPage);
+		} else if (window.matchMedia("(max-width: 1279px)").matches) {
+			currentPage = 1;
+		} else {
+			currentPage = 1;
 		}
-
+		cardsContainer.innerHTML = '';
+		numPage.textContent = currentPage;
+		displayList(petsData, cardsNum, currentPage);
+		
 		prev_btn.classList.add('inactive');
 		double_prev_btn.classList.add('inactive');
 		prev_btn.classList.remove('active');
