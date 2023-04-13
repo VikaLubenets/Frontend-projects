@@ -325,7 +325,7 @@ function createCard(orderedList) {
       card.appendChild(button);
 
       card.addEventListener('click', () => {
-				generateModal(el.id);
+				generateModal(cardData.id);
 				body.style.overflow = 'hidden';
 			  });
     });
