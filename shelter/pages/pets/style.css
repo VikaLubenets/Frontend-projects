@@ -974,12 +974,14 @@ a {
 
     .modal{
         display: flex;
-        max-width: 240px;
+        min-width: 240px;
         gap: 0px;
         height: auto;
-        overflow-y: auto;
+        overflow-y: hidden;
+        overflow-x: hidden;
         margin-top: 0px;
         margin-right: 0px;
+        margin: 10px;
     }
     
     .modal__image{
