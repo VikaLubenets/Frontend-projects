@@ -69,8 +69,8 @@ async function generateModal(id) {
 }
 
 
-	cardsContainer.addEventListener('click', (event) => {
-		const tagret = event.target;
+	cardsContainer.addEventListener('pointerdown', (event) => {
+		const target = event.target;
 		if (target.classList.contains('.button__learn-more')) {
 			const id = target.closest('.card').id;
 			generateModal(id);
@@ -86,7 +86,8 @@ const closeModal = (e) => {
 	}
 };
 
-modal__cover.addEventListener('click', closeModal);
+modal__cover.addEventListener('pointerdown', closeModal);
+closeButton.addEventListener('pointerdown', closeModal);
 /* modal start */
 
 /* Pagination starts */
@@ -162,7 +163,7 @@ async function main() {
 			name.classList.add('pets-title');
 			card.appendChild(name);
 
-			card.addEventListener('click', () => {
+			card.addEventListener('pointerdown', () => {
 				generateModal(el.id);
 				body.style.overflow = 'hidden';
 			  });
