@@ -11,115 +11,59 @@
 </head>
 
 <body>
-
-    <header class="header">
-        <div class="wrapper">
-            <div class="logo">
-                <a href="/vikalubenets-JSFE2023Q1/shelter/pages/main/index.html">
-                    <p class="logo-title">Cozy House</p>
-                    <p class="logo-subtitle">Shelter for pets in Boston</p>
-                </a>
-            </div>
-
-            <nav class="nav">
-                <ul>
-                    <li class="nav-item"><a class="nav-link active-link"
-                            href="/vikalubenets-JSFE2023Q1/shelter/pages/main/index.html">About the shelter</a></li>
-                    <li class="nav-item"><a class="nav-link default-link" href="#!">Our pets</a></li>
-                    <li class="nav-item"><a class="nav-link active-link"
-                            href="/vikalubenets-JSFE2023Q1/shelter/pages/main/index.html#help">Help the shelter</a></li>
-                    <li class="nav-item"><a class="nav-link active-link" href="#footer">Contacts</a></li>
-                </ul>
-            </nav>
-            <div class="burger-menu">
-                <span class="burger-line"></span>
-                <span class="burger-line"></span>
-                <span class="burger-line"></span>
-            </div>
-        </div>
-    </header>
-
-    <main>
-
-        <section class="pets">
+    <div class="wrapper__body">
+        <header class="header">
             <div class="wrapper">
-                <div class="pets__content">
-                    <h2 class="title">Our friends who are&nbsp;looking&nbsp;for&nbsp;a house</h2>
-
-                    <div class="cards-container">
-
-                        <div class="card">
-                            <img class="pets-photo" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/katrine.png"
-                                alt="Katrine's photo">
-                            <p class="pets-title">Katrine</p>
-                            <button class="button__learn-more">Learn more</button>
-                        </div>
-                        <div class="card">
-                            <img class="pets-photo" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/jennifer.png"
-                                alt="Jennifer's photo">
-                            <p class="pets-title">Jennifer</p>
-                            <button class="button__learn-more">Learn more</button>
-                        </div>
-                        <div class="card">
-                            <img class="pets-photo" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/pets/woody.png"
-                                alt="Woody's photo">
-                            <p class="pets-title">Woody</p>
-                            <button class="button__learn-more">Learn more</button>
-                        </div>
-                        <div class="card no-card">
-                            <img class="pets-photo" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/sophia.png"
-                                alt="Sophia's photo">
-                            <p class="pets-title">Sophia</p>
-                            <button class="button__learn-more">Learn more</button>
-                        </div>
-                        <div class="card no-card">
-                            <img class="pets-photo" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/pets/timmy.png"
-                                alt="Timmy's photo">
-                            <p class="pets-title">Timmy</p>
-                            <button class="button__learn-more">Learn more</button>
-                        </div>
-                        <div class="card no-card">
-                            <img class="pets-photo" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/pets/charly.png"
-                                alt="Charly's photo">
-                            <p class="pets-title">Charly</p>
-                            <button class="button__learn-more">Learn more</button>
-                        </div>
-                        <div class="card card-disabled">
-                            <img class="pets-photo"
-                                src="/vikalubenets-JSFE2023Q1/shelter/assets/images/pets/scarlett.png"
-                                alt="Scarlett's photo">
-                            <p class="pets-title">Scarlett</p>
-                            <button class="button__learn-more">Learn more</button>
-                        </div>
-                        <div class="card card-disabled">
-                            <img class="pets-photo"
-                                src="/vikalubenets-JSFE2023Q1/shelter/assets/images/pets/freddie.png"
-                                alt="Freddie's photo">
-                            <p class="pets-title">Freddie</p>
-                            <button class="button__learn-more">Learn more</button>
-                        </div>
-
-
-                    </div>
-                    <div class="navigation">
-                        <img class="nav-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/nav-icon-1.png"
-                            alt="icon">
-                        <img class="nav-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/nav-icon-2.png"
-                            alt="icon">
-                        <img class="nav-icon" src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/nav-icon-3.png"
-                            alt="icon">
-                        <img class="nav-icon active"
-                            src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/nav-icon-4.png" alt="icon">
-                        <img class="nav-icon active"
-                            src="/vikalubenets-JSFE2023Q1/shelter/assets/images/icons/nav-icon-5.png" alt="icon">
-                    </div>
-
+                <div class="logo">
+                    <a href="/vikalubenets-JSFE2023Q1/shelter/pages/main/index.html">
+                        <p class="logo-title">Cozy House</p>
+                        <p class="logo-subtitle">Shelter for pets in Boston</p>
+                    </a>
                 </div>
+
+                <nav>
+                    <ul class="nav">
+                        <li class="nav-item"><a class="nav-link active-link"
+                                href="/vikalubenets-JSFE2023Q1/shelter/pages/main/index.html">About the shelter</a></li>
+                        <li class="nav-item"><a class="nav-link default-link" href="#!">Our pets</a></li>
+                        <li class="nav-item"><a class="nav-link active-link"
+                                href="/vikalubenets-JSFE2023Q1/shelter/pages/main/index.html#help">Help the shelter</a></li>
+                        <li class="nav-item"><a class="nav-link active-link" href="#footer">Contacts</a></li>
+                    </ul>
+                    <button class="burger-menu" id="burger">
+                        <span class="burger-line"></span>
+                        <span class="burger-line"></span>
+                        <span class="burger-line"></span>
+                    </button>
+                </nav>
+                <div class="cover"></div>
             </div>
-        </section>
+            
+        </header>
 
-    </main>
+        <main>
 
+            <section class="pets">
+                <div class="wrapper">
+                    <div class="pets__content">
+                        <h2 class="title">Our friends who are&nbsp;looking&nbsp;for&nbsp;a house</h2>
+
+                        <div class="cards-container">
+                        </div>
+                        <div class="navigation">
+                            <div class="num-page double-prev inactive">&#60;&#60;</div>
+                            <div class="num-page prev inactive">&#60;</div>
+                            <div class="num-page num">1</div>
+                            <div class="num-page next active">&#62;</div>
+                            <div class="num-page double-next active">&#62;&#62;</div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
     <footer class="footer" id="footer">
         <div class="wrapper">
             <div class="footer__content">
@@ -176,7 +120,26 @@
             </div>
         </div>
     </footer>
-    <script src="index.js"></script>
+    <div class="modal__cover">
+        <section class="modal">
+            <img class="modal__image" src="" alt="pet">
+            <div class="modal__content">
+              <h3 class="modal__name"></h3>
+              <p class="modal__type-breed"></p>
+              <p class="modal__description"></p>
+              <ul class="modal__list">
+                <li class="modal__item">Age:<span class="modal__text age"></span></li>
+                <li class="modal__item">Inoculations:<span class="modal__text innoculations"></span></li>
+                <li class="modal__item">Diseases:<span class="modal__text diseases"></span></li>
+                <li class="modal__item">Parasites:<span class="modal__text parasites"></span></li>
+              </ul>
+        
+              <button class="modal__button" type="button"><img class="modal__icon" src="../../assets/images/icon_close.svg" alt="close"></button>
+            </div>
+          </section>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 
 </html>

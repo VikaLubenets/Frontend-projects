@@ -145,6 +145,7 @@ a {
 
 .wrapper {
     margin: 0 auto;
+    overflow-x: hidden;
 }
 
 /* General styles end*/
@@ -163,6 +164,16 @@ a {
     align-items: center;
     padding-top: 30px;
     padding-bottom: 30px;
+}
+
+.cover{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
 }
 
 .logo {
@@ -243,7 +254,9 @@ a {
 .burger-menu {
     width: 30px;
     height: 22px;
-    display: none;
+    border: none;
+    background: transparent;
+   display: none;
 }
 
 .burger-line{
@@ -299,6 +312,7 @@ a {
     display: flex; 
     gap: 30px 40px;
     flex-wrap: wrap;
+    overflow: hidden;
 }
 
 .card {
@@ -306,7 +320,7 @@ a {
     height: 435px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
     gap: 30px;
     cursor: pointer;
@@ -359,6 +373,7 @@ a {
     background-color: transparent;
     border: 2px solid #F1CDB3;
     border-radius: 100px;
+    margin-bottom: 30px;
 }
 
 
@@ -367,6 +382,7 @@ a {
     height: 52px;
     display: flex;
     gap: 20px;
+    justify-content: center;
 }
 
 .nav-icon {
@@ -375,8 +391,34 @@ a {
     border-radius: 100px;
 }
 
+.num-page{
+    width: 52px;
+    height: 52px;
+    display: inline-block;
+    border-radius: 50%;
+    border: none;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+}
+
+.num-page.num{
+    background-color: #F1CDB3;
+}
+
 .active {
     cursor: pointer;
+    background-color: white;
+    border: 2px solid #F1CDB3;;
+}
+
+.inactive{
+    border: 2px solid #CDCDCD;
+    color: #CDCDCD;
 }
 
 .active:active {
@@ -458,6 +500,159 @@ a {
 }
 /* Footer styles end*/
 
+/* Modal styles start*/
+
+.modal__cover{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background-color: rgba(0,0,0,0.5);
+    left: 0;
+    top: 0;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .3s ease;
+}
+
+.modal__cover.open{
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal{
+    display: flex;
+    max-width: 900px;
+    box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+    background: #FAFAFA;
+    border-radius: 9px;
+    gap: 29px;
+    position: fixed;
+    z-index: 2;
+    margin-top: 52px;
+    margin-right: 52px;
+}
+
+.modal__image{
+    border-radius: 9px 0px 0px 9px;
+    width: 500px;
+    height: 500px;
+}
+
+.modal__content{
+    width: 351px;
+    height: 362px;
+    margin: 50px 20px 88px 0;
+}
+
+.modal__name{
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 45px;
+    letter-spacing: 0.06em;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.modal__type-breed{
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.06em;
+    color: #000000;
+    margin-bottom: 40px;
+}
+
+.modal__description{
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 17px;
+    letter-spacing: 0.06em;
+    color: #000000;
+    margin-bottom: 40px;
+}
+
+.modal__list{
+    width: 154px;
+    height: 102px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal__cover > ul li::before {
+    content: "\2022";
+    color: #F1CDB3;
+    font-weight: bold; 
+    display: inline-block;
+    width: 4px;
+    margin-right: 1rem;
+  }
+
+.modal__item{
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 17px;
+    letter-spacing: 0.06em;
+    color: #000000;
+}
+
+.modal__text{
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 17px;
+    letter-spacing: 0.06em;
+    color: #000000;
+}
+
+.modal__button {
+    width: 52px;
+    height: 52px;
+    border: 2px solid #F1CDB3;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    top: -52px;
+    right: -42px;
+    background: transparent;
+}
+
+.modal__button:hover{
+    background: #FDDCC4;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.modal__button:active{
+    background: #F1CDB3;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.modal__icon{
+    color: #292929;
+}
+
+/* Modal styles end*/
+
 /* Media desctop starts*/
 
 @media only screen and (min-width: 1280px){
@@ -474,6 +669,11 @@ a {
 @media only screen and (max-width: 1279px) {
     .wrapper {
         width: 93%;
+        overflow-x: hidden;
+    }
+
+    .wrapper__body{
+        position: relative;
         overflow-x: hidden;
     }
     
@@ -534,26 +734,187 @@ a {
         justify-content: center;
     }
 
+.modal{
+    display: flex;
+    max-width: 630px;
+    gap: 11px;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal__image{
+    width: 350px;
+    height: 350px;
+}
+
+.modal__content{
+    width: 260px;
+    margin: 10px 9px 37px 0;
+}
+
+.modal__name{
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 45px;
+    letter-spacing: 0.06em;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.modal__type-breed{
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.06em;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.modal__description{
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: 0.06em;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.modal__list{
+    width: 154px;
+    height: 102px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.modal__cover > ul li::before {
+    content: "\2022";
+    color: #F1CDB3;
+    font-weight: bold; 
+    display: inline-block;
+    width: 4px;
+    margin-right: 1rem;
+  }
+
+.modal__item{
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 17px;
+    letter-spacing: 0.06em;
+    color: #000000;
+}
+
+.modal__text{
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 17px;
+    letter-spacing: 0.06em;
+    color: #000000;
+}
+
+.modal__button {
+    width: 52px;
+    height: 52px;
+    border: 2px solid #F1CDB3;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    top: -52px;
+    right: -42px;
+    background: transparent;
+}
 }
 
 /* Media tablet ends*/
 
 /* Media mobile starts*/
 @media only screen and (max-width: 767px) {
+    
     .wrapper {
         width: 93.75%;
+        overflow-x: hidden;
     }
 
     .header{
-        margin: 30px 20px;
-  
+        margin: 0px 20px;  
+        overflow-x: hidden;
     }
 
+
     .nav{
-        display: none;
+        display: flex;
+        width: 320px;
+        height: 100vh;
+        position: absolute;
+        right: -320px;
+        top: 0;
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        visibility: hidden;
+        transition: all 0.5s ease-out;
+    }
+
+    .nav-link{
+        display: block;
+        font-family: 'Arial';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 32px;
+        line-height: 51px;
+        color: #545454;
+        text-align: center;
+    }
+
+    .nav-item {
+        display: block;
+        max-width: 246px;
+        margin: 0 auto;
     }
 
     .burger-menu{
+        display: block;
+        margin-left: 50px;
+        width: 30px;
+        height: 30px;
+        transition: all 0.5s;
+        position: relative;
+    }
+
+    .header.open .burger-line{
+        background-color: black;
+    }
+
+    .header.open .burger-menu{
+        transform: rotate(-90deg);
+        margin-bottom: 0;
+        z-index: 1;
+    }
+
+    .header.open .nav{
+        transform: translateX(-100%);
+        visibility: visible;
+        z-index: 1;
+    }
+
+    .header.open .cover{
         display: block;
     }
 
@@ -569,6 +930,7 @@ a {
         width: 94%;
         gap: 30px;
         margin: 0px auto;
+        padding-top: 42px;
     }
 
     .cards-container{
@@ -588,8 +950,9 @@ a {
     }
     
     .navigation{
-        margin: 42px auto 42px auto;
+        margin: 42px 0;
         gap: 10px;
+        width: 300px;
     }
 
     .footer{
@@ -608,6 +971,40 @@ a {
         width: 260px;
         height: 269px;
     }
+
+    .modal{
+        display: flex;
+        min-width: 240px;
+        gap: 0px;
+        height: auto;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        margin-top: 0px;
+        margin-right: 0px;
+        margin: 10px;
+    }
+    
+    .modal__image{
+        display: none;
+    }
+    
+    .modal__content{
+        max-width: 260px;
+        margin: 10px;
+    }
+    
+    .modal__name{
+        text-align: center;
+    }
+    
+    .modal__type-breed{
+        text-align: center;
+    }
+    
+    .modal__description{
+        text-align: justify;
+    }
+    
 
 }
 
