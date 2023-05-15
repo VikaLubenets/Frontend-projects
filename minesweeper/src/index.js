@@ -17,6 +17,8 @@ GAME_CONTAINER.appendChild(GAME_FIELD);
 let cells_number = 10;
 let mins_number = 6;
 
+GAME_FIELD.style.setProperty('--size', cells_number)
+
 function createField (cells, mins) {
 
     let field = [];
