@@ -27,7 +27,7 @@ body {
 }
 
 .game-menu {
-    width: 90%;
+    width: 80%;
     height: 20%;
     border: 1px solid black;
     background-color: rgb(161, 160, 160);
@@ -37,27 +37,38 @@ body {
 }
 
 .game-field {
-    width: 90%;
+    width: 80%;
     height: 70%;
     border: 1px solid black;
     background-color: rgb(161, 160, 160);
     font-size: 20px;
-    color: black;
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 0vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .game-field__item {
     border: 1px solid black;
     cursor: pointer;
+    width: 10%;
+    height: 10%;
+    background-color: gray;
 }
 
-.item_opened {
+.game-field__item:hover{
+    opacity: 0.6;
+}
 
+
+.item_opened {
+    background-color: none;
 }
 
 .item_flagged{
+    background-color: yellow;
+}
 
+.item_mine{
+    background-color: red;
 }
