@@ -19,7 +19,7 @@ let mines_number = 10;
 
 GAME_FIELD.style.setProperty('--size', cells_number)
 
-function createField (cells) {
+function createFieldArr (cells) {
 
     let field = [];
 
@@ -43,12 +43,17 @@ function createField (cells) {
 
 }
 
-let field = createField(cells_number);
-field.forEach(row =>{
-    row.forEach(item => {
-        GAME_FIELD.appendChild(item.cell);
+let generateField = () => {
+    let field = createFieldArr(cells_number);
+    field.forEach(row =>{
+        row.forEach(item => {
+            GAME_FIELD.appendChild(item.cell);
+        })
     })
-})
+}
+
+generateField();
+
 
 // generate mines positions 
 
@@ -90,13 +95,51 @@ const generateMinesOnField = () => {
     })
 }
 
+const flagOnCell = () => {
+    //Flagged cells are unopened cells marked by 
+    //the player to indicate a potential mine location; 
+    //some implementations make flagged cells inoperable 
+    //to reduce the risk of uncovering a suspected mine.
+};
+
+const getNumberOfMines = () => {
+    
+};
+
+const gameOver = () => {
+    let text = document.createElement('div');
+    text.textContent = 'Game is over! Try again';
+    text.classList.add('text');
+    BODY.appendChild(text);
+};
+
+const openCell = (e) => {
+
+    if(item.mine === true){
+        gameOver();
+    }
+
+
+
+    //A player selects a cell to open it.
+    //If a player opens a mined cell, the game ends in a loss.
+    //Otherwise, the opened cell displays either a number, 
+    //indicating the number of mines diagonally and/or adjacent to it, 
+    //or a blank tile (or "0"), 
+    //and all adjacent non-mined cells will automatically be opened. 
+};
+
+// click on cell
+
 field.forEach(row =>{
     row.forEach(item => {
        item.cell.addEventListener('contextmenu', e => {
         e.preventDefault();
+        e.flagOnCell();
        })
        item.cell.addEventListener('click', e => {
-        
+        e.openCell(item);
+        generateMinesOnField();
        })
     })
 })

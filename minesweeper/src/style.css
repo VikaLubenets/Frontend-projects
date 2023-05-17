@@ -79,3 +79,12 @@ body {
 .item_number{
     background-color: blue;
 }
+
+.text {
+    width: 70%;
+    height: 30%;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    border-radius: 7px;
+}
