@@ -102,7 +102,23 @@ const flagOnCell = () => {
     //to reduce the risk of uncovering a suspected mine.
 };
 
-const getNumberOfMines = () => {
+const getNumberOfMines = (field, row, line) => {
+    let count = 0;
+
+    for(let i = row - 1; i <= row + 1; i++){
+        for(let j = line - 1; j <= line + 1; j++){
+            if(i >= 0 && j >= 0 && i < field.length && j < field.length){
+                if(field[i][j].mine){
+                    count++;
+                }
+            }
+        }
+    }
+
+    return count;
+};
+
+const showMines = (field) = {
     
 };
 
@@ -111,12 +127,21 @@ const gameOver = () => {
     text.textContent = 'Game is over! Try again';
     text.classList.add('text');
     BODY.appendChild(text);
+    showMines(field);
 };
 
-const openCell = (e) => {
+const openCell = (item) => {
 
-    if(item.mine === true){
+    if(item.mine){
         gameOver();
+    } else {
+
+        let numberOfMines = getNumberOfMines(field, item.i, item.j);
+        item.cell.classList.add('item_opened');
+        if(numberOfMines > 0){
+            item.cell.textContent = numberOfMines;
+        }
+
     }
 
 
