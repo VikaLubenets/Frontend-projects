@@ -43,8 +43,9 @@ function createFieldArr (cells) {
 
 }
 
+let field = createFieldArr(cells_number);
+
 let generateField = () => {
-    let field = createFieldArr(cells_number);
     field.forEach(row =>{
         row.forEach(item => {
             GAME_FIELD.appendChild(item.cell);
@@ -78,12 +79,11 @@ function createMinesPosition(cells, mines){
 
 let game_cell = document.querySelectorAll('.game-field__item');
 let cell_opened = document.querySelectorAll('.item_opened');
-let cell_mine = document.querySelectorAll('..item_mine');
-let cell_number = document.querySelectorAll('.item_number');
+let cell_mine = document.querySelectorAll('.item_mine');
 let cell_flagged = document.querySelectorAll('.item_flagged');
 
 const generateMinesOnField = () => {
-    let positions = createMinesPosition(cells_number, mines_number);
+    let positions = createMinesPosition(cells_number - 1, mines_number);
     field.forEach(row =>{
         row.forEach(item => {
             positions.forEach(position =>{
@@ -95,11 +95,12 @@ const generateMinesOnField = () => {
     })
 }
 
-const flagOnCell = () => {
-    //Flagged cells are unopened cells marked by 
-    //the player to indicate a potential mine location; 
-    //some implementations make flagged cells inoperable 
-    //to reduce the risk of uncovering a suspected mine.
+const flagOnCell = (item) => {
+    if (!item.cell.classList.contains('item_flagged')) {
+        item.cell.classList.add('item_flagged');
+      } else {
+        item.cell.classList.remove('item_flagged');
+      }
 };
 
 const getNumberOfMines = (field, row, line) => {
@@ -118,8 +119,14 @@ const getNumberOfMines = (field, row, line) => {
     return count;
 };
 
-const showMines = (field) = {
-    
+const showMines = (field) => {
+    field.forEach(row => {
+      row.forEach(item => {
+        if (item.mine) {
+          item.cell.classList.add('item_mine');
+        }
+      });
+    });
 };
 
 const gameOver = () => {
@@ -143,15 +150,6 @@ const openCell = (item) => {
         }
 
     }
-
-
-
-    //A player selects a cell to open it.
-    //If a player opens a mined cell, the game ends in a loss.
-    //Otherwise, the opened cell displays either a number, 
-    //indicating the number of mines diagonally and/or adjacent to it, 
-    //or a blank tile (or "0"), 
-    //and all adjacent non-mined cells will automatically be opened. 
 };
 
 // click on cell
@@ -160,7 +158,7 @@ field.forEach(row =>{
     row.forEach(item => {
        item.cell.addEventListener('contextmenu', e => {
         e.preventDefault();
-        e.flagOnCell();
+        flagOnCell(item);
        })
        item.cell.addEventListener('click', e => {
         e.openCell(item);
