@@ -11,13 +11,12 @@ body {
     align-items: center;
     width: 100vw;
     height: 100vh;
+    background-color: #545775;
 }
 
 .game-container {
-    width: 70vw;
+    width: 80vw;
     height: 80vh;
-    background-color: dimgray;
-    border: 1px solid black;
     border-radius: 5px;
     display: flex;
     justify-content: center;
@@ -27,26 +26,23 @@ body {
 }
 
 .game-menu {
-    width: 80%;
+    width: 70vw;
     height: 15%;
-    border: 1px solid black;
-    background-color: rgb(161, 160, 160);
     display: flex;
-    font-size: 20px;
-    color: black;
     margin-top: 10px;
     justify-content: center;
     align-items: center;
     gap: 5%;
+    font-size: 20px;
+    text-align: center;
+    color: #DBCFB0;
 }
 
 .game-field {
-    width: 80%;
+    width: 98%;
     height: 80%;
-    border: 1px solid black;
-    background-color: rgb(161, 160, 160);
     font-size: 20px;
-    font-family: Verdana, Tahoma, sans-serif;
+    font-family: 'Inter';
     display: grid;
     grid-template-columns: repeat(var(--size), minmax(0, 20px));
     grid-template-rows: repeat(var(--size), minmax(0, 20px));
@@ -60,84 +56,171 @@ body {
 .game-field__item {
     border: 1px solid black;
     cursor: pointer;
-    background-color: rgb(87, 87, 87);
+    background-color: #489FB5;
     text-align: center;
+    border-radius: 4px;
 }
 
 .game-field__item:hover{
-    opacity: 0.6;
+    opacity: 0.7;
 }
 
 .item_opened {
-    background-color: gray;
-    color: white;
+    background-color: #A9CEF4;
+    color: #545775;
+    font-weight: bold;
     font-size: 15px;
     font-family: Verdana, Tahoma, sans-serif;
 }
 
 .item_flagged{
-    background-color: yellow;
+    background-image: url(../assets/icons/flag_field.svg);
+    background-size: cover;
 }
 
 .item_mine{
-    background-color: red;
+    background-image: url(../assets/icons/mine_field.svg);
+    background-size: cover;
 }
 
-.text {
-    width: 70%;
+.text-win,
+.text{
+    background: #DBCFB0;
+    border: 2px solid #545775;
+    border-radius: 5px;
+    width: 40%;
     height: 30%;
-    background-color: rgba(0,0,0,0.7);
-    color: white;
-    font-weight: bold;
-    border-radius: 7px;
     position: fixed;
     z-index: 2;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 31px;
+    color: #545775;
 }
 
-.text-win{
-    color: yellow;
-    width: 70%;
-    height: 30%;
-    background-color: rgba(0,0,0,0.7);
-    font-weight: bold;
-    border-radius: 7px;
-    position: fixed;
-    z-index: 2;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-.game-clicks{
-    background-color: black;
-    color: yellow;
+.menu-item-1,
+.menu-item-2,
+.menu-item-3,
+.menu-item-4
+{
     width: 20%;
-    height: 90%;
-    font-size: 20px;
-    text-align: center;
+    height: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
-.game-timer{
-    background-color: black;
-    color: yellow;
-    width: 30%;
-    height: 90%;
-    font-size: 20px;
-    text-align: center;
-    padding: 5px;
+.game-click_image
+{
+    background-image: url(../assets/icons/click.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    width:100%;
+    height: 100%;
+
 }
 
-.flags-container{
+.game-time_image{
+    background-image: url(../assets/icons/timer.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    width:100%;
+    height: 100%;
+}
+
+.game-mine_image{
+    background-image: url(../assets/icons/mine.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    width:100%;
+    height: 100%;
+}
+
+.game-flags_image{
+    background-image: url(../assets/icons/flag.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    width:100%;
+    height: 100%;
+}
+
+.button {
+    width: 20%;
+    max-width: 200px;
+    height: 10%;
+    max-height: 100px;
+    border: 1px solid black;
+    border-radius: 6px;
     background-color: black;
     color: yellow;
-    width: 30%;
-    height: 90%;
-    font-size: 20px;
     text-align: center;
-    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.button:hover{
+    opacity: 0.7;
+}
+
+.button:active{
+    color: white;
+    opacity: 1;
+}
+
+.input-container{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 70vw;
+}
+
+.level-input-container,
+.mines-input-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.label{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 41px;
+    color: #DBCFB0;
+    margin-right: 10px;
+}
+
+.mine-input,
+.level-input {
+    width: 55%;
+    background: #D9D9D9;
+}
+
+.input-value{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #DBCFB0;
+    display: inline-block;
+
 }
