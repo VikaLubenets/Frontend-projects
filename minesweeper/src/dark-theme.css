@@ -10,13 +10,12 @@ body {
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 100vh;
     background-color: #545775;
 }
 
 .game-container {
     width: 80vw;
-    height: 80vh;
+    height: 95vh;
     border-radius: 5px;
     display: flex;
     justify-content: center;
@@ -40,7 +39,7 @@ body {
 
 .game-field {
     width: 98%;
-    height: 80%;
+    height: 90%;
     font-size: 20px;
     font-family: 'Inter';
     display: grid;
@@ -254,4 +253,36 @@ input[type="range"]::-webkit-slider-thumb {
     max-height: 15%;
     cursor: pointer;
     background-size: contain;
+}
+
+.item_opened-1{
+    color: blue;
+}
+
+.item_opened-2{
+    color: green;
+}
+
+.item_opened-3{
+    color: red;
+}
+
+.item_opened-4{
+    color: pink;
+}
+
+.item_opened-5{
+    color: darkblue;
+}
+
+.item_opened-6{
+    color: darkgoldenrod;
+}
+
+.item_opened-7{
+    color: darkmagenta;
+}
+
+.item_opened-8{
+    color: darkred;
 }

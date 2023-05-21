@@ -216,6 +216,16 @@ const showMines = (field) => {
       row.forEach(item => {
         if (item.mine) {
           item.cell.classList.add('item_mine');
+          item.cell.classList.remove(
+            'item_opened-1',
+            'item_opened-2',
+            'item_opened-3',
+            'item_opened-4',
+            'item_opened-5',
+            'item_opened-6',
+            'item_opened-7',
+            'item_opened-8'
+          );
         }
       });
     });
@@ -287,6 +297,7 @@ const openCell = (item) => {
       } else {
         let numberOfMines = getNumberOfMines(field, item.i, item.j);
         item.cell.classList.add('item_opened');
+        item.cell.classList.add(`item_opened-${numberOfMines}`); 
         item.opened = true;
         if (numberOfMines === 0) {
            openBlanckCells(item);
