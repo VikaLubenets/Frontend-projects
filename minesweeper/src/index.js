@@ -60,15 +60,17 @@ generateField();
 
 const getRandomPosition = (num) => Math.floor(Math.random() * num);
 
-function createMinesPosition(cells, mines){
+function createMinesPosition(cells, mines, firstClickItem){
     let positions = [];
     while (positions.length <= mines - 1) {
         let position = {
             row: getRandomPosition(cells),
             col: getRandomPosition(cells),
         }
-        if (!positions.some(pos => pos.row === position.row && pos.col === position.col)) {
-            positions.push(position);
+        if (!positions.includes(position)) {
+            if(firstClickItem.row !== position.row && firstClickItem.col !== position.col){
+                positions.push(position);
+            }
         }
     }
 
@@ -92,9 +94,9 @@ let updateGameTime = () => {
     TIMER.textContent = game_time + "\n seconds";
 };
 
-const generateMinesOnField = () => {
+const generateMinesOnField = (firstClickItem) => {
     game_start_time = new Date().getTime();
-    let positions = createMinesPosition(cells_number, mines_number);
+    let positions = createMinesPosition(cells_number, mines_number, firstClickItem);
     field.forEach(row =>{
         row.forEach(item => {
             positions.forEach(position =>{
@@ -111,7 +113,8 @@ const flagOnCell = (item) => {
         item.cell.classList.add('item_flagged');
         flags_used++;
         remaining_flags = mines_number - flags_used;
-        FLAGS.textContent = remaining_flags + "\n flags remain";
+        FLAGS.textContent = remaining_flags + "\n mines remain";
+        USED_FLAGS.textContent = flags_used + "\n flags used";
         if (item.mine) {
             flagged_right++;
             console.log(flagged_right);
@@ -120,7 +123,8 @@ const flagOnCell = (item) => {
         item.cell.classList.remove('item_flagged');
         flags_used--;
         remaining_flags = mines_number - flags_used;
-        FLAGS.textContent = remaining_flags + "\n flags remain";
+        FLAGS.textContent = remaining_flags + "\n mines remain";
+        USED_FLAGS.textContent = flags_used + "\n flags used";
         if(item.mine){
             flagged_right--;
         }
@@ -211,7 +215,7 @@ const openBlanckCells = (item) => {
 const openCell = (item) => {
 
     if (!firstClick) {
-        generateMinesOnField();
+        generateMinesOnField(item);
         firstClick = true;
     }
 
@@ -245,12 +249,13 @@ field.forEach(row =>{
         TIMER.textContent = game_time + "\n seconds";
        })
        item.cell.addEventListener('click', e => {
-        game_clicks++;
-        GAME_CLICKS.textContent = game_clicks + "\n clicks";
-        openCell(item);
-        updateGameTime();
-        TIMER.textContent = game_time + "\n seconds";
-
+        if(!item.cell.classList.contains('item_flagged')){
+            game_clicks++;
+            GAME_CLICKS.textContent = game_clicks + "\n clicks";
+            openCell(item);
+            updateGameTime();
+            TIMER.textContent = game_time + "\n seconds";
+        }
        })
     })
 })
@@ -272,7 +277,12 @@ TIMER.textContent = game_time + "\n seconds";
 const FLAGS = document.createElement('div');
 FLAGS.classList.add('flags-container');
 GAME_MENU.appendChild(FLAGS);
-FLAGS.textContent = remaining_flags + "\n flags remain";
+FLAGS.textContent = remaining_flags + "\n mines remain";
+
+const USED_FLAGS = document.createElement('div');
+USED_FLAGS.classList.add('flags-container');
+GAME_MENU.appendChild(USED_FLAGS);
+USED_FLAGS.textContent = flags_used + "\n flags used";
 
 
 
