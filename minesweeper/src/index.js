@@ -174,6 +174,23 @@ let gameWin = () => {
     updateGameTime();
 };
 
+let checkWinCondition = () => {
+    let closedCells = 0;
+
+    field.forEach(row => {
+        row.forEach(item => {
+          if (!item.cell.classList.contains('item_opened') && !item.mine) {
+            closedCells++;
+          }
+        });
+      });
+    
+      if (closedCells === 0) {
+        gameWin();
+      }
+
+};
+
 const openBlanckCells = (item) => {
 
     let {i , j} = item;
@@ -212,6 +229,8 @@ const openCell = (item) => {
 
     updateGameTime();
     TIMER.textContent = game_time + "\n seconds";
+
+    checkWinCondition();
 
 };
 
