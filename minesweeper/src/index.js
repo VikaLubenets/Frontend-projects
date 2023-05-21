@@ -139,18 +139,19 @@ let firstClick = false;
 let flagged_right = 0;
 let flags_used = 0;
 let remaining_flags = 0;
-let game_time = 0;
 let game_clicks = 0;
-let game_start_time;
+let time = 0;
+let minutes = 0;
+let seconds = 0;
 
 let updateGameTime = () => {
-    const currentTime = new Date().getTime();
-    game_time = Math.floor((currentTime - game_start_time) / 1000);
-    TIMER.textContent = game_time + "\n secs";
+    time++;
+    minutes = Math.floor(time / 60);
+    seconds = time % 60;
+    TIMER.innerHTML = `${minutes}:${seconds}`;
 };
 
 const generateMinesOnField = (firstClickItem) => {
-    game_start_time = new Date().getTime();
     let positions = createMinesPosition(cells_number, mines_number, firstClickItem);
     field.forEach(row =>{
         row.forEach(item => {
@@ -161,6 +162,7 @@ const generateMinesOnField = (firstClickItem) => {
             })
         })
     })
+    setInterval(updateGameTime, 1000);
     return positions;
 }
 
@@ -224,16 +226,14 @@ const gameOver = () => {
     text.classList.add('text');
     BODY.appendChild(text);
     showMines(field);
-    updateGameTime();
     playLoseSound();
 };
 
 let gameWin = () => {
     let textWin = document.createElement('div');
-    textWin.textContent = `Hooray! You found all mines in ${game_time} seconds and ${game_clicks} moves!`;
+    textWin.textContent = `Hooray! You found all mines in ${minutes} minutes and ${seconds} seconds and ${game_clicks} moves!`;
     textWin.classList.add('text-win');
     BODY.appendChild(textWin);
-    updateGameTime();
     playWinSound();
 };
 
@@ -291,9 +291,6 @@ const openCell = (item) => {
         }
       }
 
-    updateGameTime();
-    TIMER.textContent = game_time + "\n secs";
-
     checkWinCondition();
 
 };
@@ -314,8 +311,6 @@ let generateField = () => {
            item.cell.addEventListener('contextmenu', e => {
             e.preventDefault();
             flagOnCell(item);
-            updateGameTime();
-            TIMER.textContent = game_time + "\n secs";
            })
            item.cell.addEventListener('click', e => {
             playClickSound();
@@ -323,8 +318,6 @@ let generateField = () => {
                 game_clicks++;
                 GAME_CLICKS.textContent = game_clicks;
                 openCell(item);
-                updateGameTime();
-                TIMER.textContent = game_time + "\n secs";
             }
            })
         })
@@ -362,7 +355,7 @@ ITEM_MENU_2.appendChild(GAME_TIME_IMAGE);
 const TIMER = document.createElement('div');
 TIMER.classList.add('game-timer');
 ITEM_MENU_2.appendChild(TIMER);
-TIMER.textContent = game_time + "\n secs";
+TIMER.innerHTML = "00:00"
 
 // remaining mines
 
