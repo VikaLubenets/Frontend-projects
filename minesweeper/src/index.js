@@ -111,40 +111,6 @@ function createFieldArr(cells) {
 
 let field;
 
-let generateField = () => {
-    GAME_FIELD.innerHTML = "";
-    GAME_FIELD.style.setProperty('--size', cells_number);
-    field = createFieldArr(cells_number);
-    field.forEach(row => {
-        row.forEach(item => {
-            GAME_FIELD.appendChild(item.cell);
-        });
-    });
-    field.forEach(row =>{
-        row.forEach(item => {
-           item.cell.addEventListener('contextmenu', e => {
-            e.preventDefault();
-            flagOnCell(item);
-            updateGameTime();
-            TIMER.textContent = game_time + "\n secs";
-           })
-           item.cell.addEventListener('click', e => {
-            if(!item.cell.classList.contains('item_flagged')){
-                game_clicks++;
-                GAME_CLICKS.textContent = game_clicks;
-                openCell(item);
-                updateGameTime();
-                TIMER.textContent = game_time + "\n secs";
-            }
-           })
-        })
-    })
-    
-    return field;
-};
-
-generateField();
-
 // generate mines positions 
 
 const getRandomPosition = (num) => Math.floor(Math.random() * num);
@@ -259,6 +225,7 @@ const gameOver = () => {
     BODY.appendChild(text);
     showMines(field);
     updateGameTime();
+    playLoseSound();
 };
 
 let gameWin = () => {
@@ -267,6 +234,7 @@ let gameWin = () => {
     textWin.classList.add('text-win');
     BODY.appendChild(textWin);
     updateGameTime();
+    playWinSound();
 };
 
 let checkWinCondition = () => {
@@ -332,9 +300,42 @@ const openCell = (item) => {
 
 // click on cell
 
-// create game clicks and timer
+let generateField = () => {
+    GAME_FIELD.innerHTML = "";
+    GAME_FIELD.style.setProperty('--size', cells_number);
+    field = createFieldArr(cells_number);
+    field.forEach(row => {
+        row.forEach(item => {
+            GAME_FIELD.appendChild(item.cell);
+        });
+    });
+    field.forEach(row =>{
+        row.forEach(item => {
+           item.cell.addEventListener('contextmenu', e => {
+            e.preventDefault();
+            flagOnCell(item);
+            updateGameTime();
+            TIMER.textContent = game_time + "\n secs";
+           })
+           item.cell.addEventListener('click', e => {
+            playClickSound();
+            if(!item.cell.classList.contains('item_flagged')){
+                game_clicks++;
+                GAME_CLICKS.textContent = game_clicks;
+                openCell(item);
+                updateGameTime();
+                TIMER.textContent = game_time + "\n secs";
+            }
+           })
+        })
+    })
+    
+    return field;
+};
 
+generateField();
 
+// create game menu
 //clicks
 const ITEM_MENU_1 = document.createElement('div');
 ITEM_MENU_1.classList.add('menu-item-1');
@@ -436,4 +437,26 @@ USED_FLAGS.textContent = flags_used;
 
 // RESTART_BUTTON.addEventListener('click', init);
 
+// sound accompaniment (on/off) when clicking on cell and at the end of the game
+
+const clickSound = new Audio();
+clickSound.src = '../assets/sounds/click.wav';
+
+const loseSound = new Audio();
+loseSound.src = '../assets/sounds/lose.wav';
+
+const winSound = new Audio();
+winSound.src = '../assets/sounds/win.wav'
+
+let playClickSound = () => {
+    clickSound.play();
+}
+
+let playLoseSound = () => {
+    loseSound.play();
+}
+
+let playWinSound = () => {
+    winSound.play();
+}
 
