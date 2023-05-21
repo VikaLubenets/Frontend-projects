@@ -75,12 +75,12 @@ body {
 
 .item_flagged{
     background-image: url(../assets/icons/flag_field.svg);
-    background-size: cover;
+    background-size: contain;
 }
 
 .item_mine{
     background-image: url(../assets/icons/mine_field.svg);
-    background-size: cover;
+    background-size: contain;
 }
 
 .text-win,
@@ -214,9 +214,25 @@ body {
 
 .mine-input,
 .level-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 15px;
+    height: 10px;
     width: 50%;
-    background: #545775;
+    background: #787DAC;
 }
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background-color: #787DAC; 
+    border: none;
+    border-radius: 50%; 
+    cursor: pointer; 
+  }
 
 .input-value{
     font-family: 'Inter';

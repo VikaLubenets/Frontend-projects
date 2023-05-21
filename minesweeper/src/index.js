@@ -45,6 +45,7 @@ GAME_CONTAINER.insertBefore(inputContainer, GAME_MENU);
 minesInput.addEventListener('input', function() {
     minesValue.textContent = this.value;
     mines_number = parseInt(this.value);
+    firstClick = false;
     generateField();
 });
 
@@ -76,14 +77,13 @@ inputContainer.appendChild(levelInputContainer);
 levelInput.addEventListener('input', function() {
     levelValue.textContent = this.value;
     cells_number = parseInt(this.value);
+    firstClick = false;
     generateField();
 });
 
 let cells_number = parseInt(levelInput.value);
 let mines_number = parseInt(minesInput.value);
 // create cells in the game-field
-
-GAME_FIELD.style.setProperty('--size', cells_number);
 
 function createFieldArr(cells) {
     let field = [];
@@ -143,6 +143,7 @@ let game_clicks = 0;
 let time = 0;
 let minutes = 0;
 let seconds = 0;
+let gameInterval;
 
 let updateGameTime = () => {
     time++;
@@ -162,9 +163,9 @@ const generateMinesOnField = (firstClickItem) => {
             })
         })
     })
-    setInterval(updateGameTime, 1000);
     return positions;
 }
+
 
 const flagOnCell = (item) => {
     if (!item.cell.classList.contains('item_flagged')) {
@@ -238,20 +239,18 @@ let gameWin = () => {
 };
 
 let checkWinCondition = () => {
-    let closedCells = 0;
+    let closedCells = (cells_number * cells_number) - mines_number;
 
     field.forEach(row => {
         row.forEach(item => {
-          if (!item.cell.classList.contains('item_opened') && !item.mine) {
-            closedCells++;
+          if (item.cell.classList.contains('item_opened') && !item.mine) {
+            closedCells--;
           }
         });
       });
-    
       if (closedCells === 0) {
         gameWin();
       }
-
 };
 
 const openBlanckCells = (item) => {
@@ -271,11 +270,16 @@ const openBlanckCells = (item) => {
 
 }
 
+function stopGameInterval() {
+    clearInterval(gameInterval);
+}
+
 const openCell = (item) => {
 
     if (!firstClick) {
         generateMinesOnField(item);
         firstClick = true;
+        gameInterval = setInterval(updateGameTime, 1000);
     }
 
     if (item.mine) {
@@ -301,28 +305,28 @@ let generateField = () => {
     GAME_FIELD.innerHTML = "";
     GAME_FIELD.style.setProperty('--size', cells_number);
     field = createFieldArr(cells_number);
+    stopGameInterval();
+    time = 0;
+    minutes = 0;
+    seconds = 0;
     field.forEach(row => {
         row.forEach(item => {
-            GAME_FIELD.appendChild(item.cell);
-        });
-    });
-    field.forEach(row =>{
-        row.forEach(item => {
-           item.cell.addEventListener('contextmenu', e => {
+        GAME_FIELD.appendChild(item.cell);
+        item.cell.addEventListener('contextmenu', e => {
             e.preventDefault();
             flagOnCell(item);
-           })
-           item.cell.addEventListener('click', e => {
+        });
+        item.cell.addEventListener('click', e => {
             playClickSound();
-            if(!item.cell.classList.contains('item_flagged')){
-                game_clicks++;
-                GAME_CLICKS.textContent = game_clicks;
-                openCell(item);
+            if (!item.cell.classList.contains('item_flagged')) {
+            game_clicks++;
+            GAME_CLICKS.textContent = game_clicks;
+            openCell(item);
             }
-           })
-        })
-    })
-    
+        });
+        });
+    });
+
     return field;
 };
 
