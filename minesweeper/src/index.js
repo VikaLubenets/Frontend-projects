@@ -22,7 +22,7 @@ minesInputContainer.classList.add('mines-input-container');
 
 const minesInputLabel = document.createElement('label');
 minesInputLabel.classList.add('label');
-minesInputLabel.textContent = 'Mines:';
+minesInputLabel.textContent = 'Mines total:';
 
 const minesInput = document.createElement('input');
 minesInput.type = 'range';
@@ -460,3 +460,20 @@ let playWinSound = () => {
     winSound.play();
 }
 
+//change themes
+
+let darkTheme = document.getElementById('theme-style');
+
+const theme_button = document.createElement('div');
+theme_button.classList.add('theme-button');
+GAME_CONTAINER.insertBefore(theme_button, inputContainer);
+
+function toggleTheme () {
+    if (darkTheme.getAttribute('href') === 'dark-theme.css') {
+        darkTheme.setAttribute('href', 'light-theme.css');
+      } else {
+        darkTheme.setAttribute('href', 'dark-theme.css');
+      }
+}
+
+theme_button.addEventListener('click', toggleTheme);

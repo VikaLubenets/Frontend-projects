@@ -11,7 +11,7 @@ body {
     align-items: center;
     width: 100vw;
     height: 100vh;
-    background-color: #545775;
+    background-color: #DBCFB0;
 }
 
 .game-container {
@@ -35,7 +35,7 @@ body {
     gap: 5%;
     font-size: 20px;
     text-align: center;
-    color: #DBCFB0;
+    color: #545775;
 }
 
 .game-field {
@@ -44,8 +44,8 @@ body {
     font-size: 20px;
     font-family: 'Inter';
     display: grid;
-    grid-template-columns: repeat(var(--size), minmax(0, 20px));
-    grid-template-rows: repeat(var(--size), minmax(0, 20px));
+    grid-template-columns: repeat(var(--size), minmax(0, 22px));
+    grid-template-rows: repeat(var(--size), minmax(0, 22px));
     gap: 2px;
     margin: 10px;
     padding: 10px;
@@ -122,36 +122,40 @@ body {
 
 .game-click_image
 {
-    background-image: url(../assets/icons/click.svg);
+    background-image: url(../assets/icons/click-svgrepo-com\ 1.svg);
     background-repeat: no-repeat;
     background-position: center;
-    width:100%;
+    width:40px;
     height: 100%;
+    background-size: contain;
 
 }
 
 .game-time_image{
-    background-image: url(../assets/icons/timer.svg);
+    background-image: url(../assets/icons/clock-svgrepo-com\ 1.svg);
     background-repeat: no-repeat;
     background-position: center;
-    width:100%;
+    width:40px;
     height: 100%;
+    background-size: contain;
 }
 
 .game-mine_image{
-    background-image: url(../assets/icons/mine.svg);
+    background-image: url(../assets/icons/gnome-mines-svgrepo-com\ 1.svg);
     background-repeat: no-repeat;
     background-position: center;
-    width:100%;
+    width: 40px;
     height: 100%;
+    background-size: contain;
 }
 
 .game-flags_image{
-    background-image: url(../assets/icons/flag.svg);
+    background-image: url(../assets/icons/flag-svgrepo-com\ \(1\)\ 1.svg);
     background-repeat: no-repeat;
     background-position: center;
-    width:100%;
+    width: 40px;
     height: 100%;
+    background-size: contain;
 }
 
 .button {
@@ -204,14 +208,14 @@ body {
     font-weight: 400;
     font-size: 34px;
     line-height: 41px;
-    color: #DBCFB0;
+    color: #545775;
     margin-right: 10px;
 }
 
 .mine-input,
 .level-input {
-    width: 55%;
-    background: #D9D9D9;
+    width: 50%;
+    background: #545775;
 }
 
 .input-value{
@@ -220,7 +224,18 @@ body {
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
-    color: #DBCFB0;
+    color: #545775;
     display: inline-block;
 
+}
+
+.theme-button{
+    background-image: url(../assets/icons/dark-mode-night-moon-svgrepo-com\ 1.svg);
+    background-repeat: no-repeat;
+    background-position: right;
+    width:90%;
+    height: 10%;
+    max-height: 15%;
+    cursor: pointer;
+    background-size: contain;
 }
