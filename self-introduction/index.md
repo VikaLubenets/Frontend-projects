@@ -2,10 +2,6 @@
 
 [Link to the video](https://youtu.be/ORIHxrbUlT0)
 
-<figure class="video_container">
-  <iframe src="https://youtu.be/ORIHxrbUlT0" frameborder="0" allowfullscreen="true"> </iframe>
-</figure>
-
 Hello everyone and welcome to my first self-introduction video. 
 
 My name is Victoria, I'm 25 years old, and originally I'm from Russia, from a very small town called Azov near Rostov-on-Don. 
