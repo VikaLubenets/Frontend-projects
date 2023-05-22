@@ -44,8 +44,8 @@ body {
     font-size: 20px;
     font-family: 'Inter';
     display: grid;
-    grid-template-columns: repeat(var(--size), minmax(0, 22px));
-    grid-template-rows: repeat(var(--size), minmax(0, 22px));
+    grid-template-columns: repeat(var(--size), minmax(0, 20px));
+    grid-template-rows: repeat(var(--size), minmax(0, 20px));
     gap: 2px;
     margin: 10px;
     padding: 10px;
