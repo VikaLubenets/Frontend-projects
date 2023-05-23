@@ -100,6 +100,7 @@ function createFieldArr(cells) {
                 mine: false,
                 opened: false,
                 flagged: false,
+                clickHandler: null,
             };
             row.push(item);
         }
@@ -123,7 +124,7 @@ function createMinesPosition(cells, mines, firstClickItem){
             col: getRandomPosition(cells),
         }
         if (!positions.includes(position)) {
-            if(firstClickItem.row !== position.row && firstClickItem.col !== position.col){
+            if (!(firstClickItem.row === position.row && firstClickItem.col === position.col)){
                 positions.push(position);
             }
         }
@@ -238,6 +239,11 @@ const gameOver = () => {
     BODY.appendChild(text);
     showMines(field);
     playLoseSound();
+    field.forEach(row => {
+        row.forEach(item => {
+          item.cell.removeEventListener('click', item.clickHandler);
+        });
+      });
 };
 
 let gameWin = () => {
@@ -320,24 +326,26 @@ let generateField = () => {
     time = 0;
     minutes = 0;
     seconds = 0;
-    field.forEach(row => {
-        row.forEach(item => {
-        GAME_FIELD.appendChild(item.cell);
-        item.cell.addEventListener('contextmenu', e => {
-            e.preventDefault();
-            flagOnCell(item);
-        });
-        item.cell.addEventListener('click', e => {
+    let clickHandler = (item) => {
+        return (e) => {
             playClickSound();
             if (!item.cell.classList.contains('item_flagged')) {
-            game_clicks++;
-            GAME_CLICKS.textContent = game_clicks;
-            openCell(item);
+                game_clicks++;
+                GAME_CLICKS.textContent = game_clicks;
+                openCell(item);
             }
-        });
+        };
+    };
+    field.forEach((row) => {
+        row.forEach((item) => {
+            GAME_FIELD.appendChild(item.cell);
+            item.cell.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                flagOnCell(item);
+            });
+            item.cell.addEventListener('click', clickHandler(item));
         });
     });
-
     return field;
 };
 
