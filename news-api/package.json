@@ -1,5 +1,5 @@
 {
-    "name": "NewsJS",
+    "name": "news-api",
     "version": "1.0.0",
     "description": "",
     "main": "webpack.base.config.js",
@@ -29,7 +29,7 @@
         "style-loader": "^2.0.0",
         "webpack": "^5.37.1",
         "webpack-cli": "^4.5.0",
-        "webpack-dev-server": "^3.11.2",
+        "webpack-dev-server": "^4.15.0",
         "webpack-merge": "^5.7.3"
     }
 }
