@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export interface Source {
     id: string;
     name: string;
@@ -20,4 +21,30 @@ export interface NewsItem {
     title: string;
     url: string;
     urlToImage: string;
+}
+
+export interface GetNews {
+    status: string;
+    totalResults: number;
+    articles: NewsItem[];
+}
+
+export interface GetSource {
+    status: 'string';
+    sources: Source[];
+}
+
+export interface NewsInterface {
+    draw(data: NewsItem[]): void;
+}
+
+export interface SourceInterface {
+    draw(data: Source[]): void;
+}
+
+export interface AppViewInterface {
+    news: NewsInterface;
+    sources: SourceInterface;
+    drawNews(data: GetNews): void;
+    drawSources(data: GetSource): void;
 }
