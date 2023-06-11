@@ -49,11 +49,9 @@ export interface AppViewInterface {
     drawSources(data: GetSource): void;
 }
 
-export type Data = GetNews | GetSource;
-
 export type LoaderOptions = { [prop: string]: string };
 
-export type callbackFn = (data: unknown) => void;
+export type callbackFn<T> = (data: T) => void;
 
 export type OptionsType = {
     [prop: string]: string;
@@ -67,13 +65,19 @@ export interface GetRespObject {
 export interface LoaderInterface {
     baseLink: string;
     options: LoaderOptions;
-    getResponse: (object: GetRespObject, callback: callbackFn) => void;
+    getResponse: <T>(object: GetRespObject, callback: callbackFn<T>) => void;
     errorHandler(res: Response): Response;
     makeUrl(options: LoaderOptions, endpoint: string): string;
-    load(method: string, endpoint: string, callback: callbackFn, options: LoaderOptions): void;
+    load<T>(method: string, endpoint: string, callback: callbackFn<T>, options: LoaderOptions): void;
 }
 
 export interface AppControllerInterface {
-    getSources(callback: callbackFn): void;
-    getNews(e: Event, callback: callbackFn): void;
+    getSources<T>(callback?: callbackFn<T>): void;
+    getNews<T>(e: Event, callback?: callbackFn<T>): void;
+}
+
+export interface AppInterface {
+    controller: AppControllerInterface;
+    view: AppViewInterface;
+    start(): void;
 }

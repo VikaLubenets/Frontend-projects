@@ -10,9 +10,9 @@ class Loader implements LoaderInterface {
         this.options = options;
     }
 
-    getResponse(
+    getResponse<T>(
         { endpoint, options = {} }: GetRespObject,
-        callback: callbackFn = () => {
+        callback: callbackFn<T> = () => {
             console.error('No callback for GET response');
         }
     ): void {
@@ -41,7 +41,7 @@ class Loader implements LoaderInterface {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: callbackFn, options: LoaderOptions = {}): void {
+    load<T>(method: string, endpoint: string, callback: callbackFn<T>, options: LoaderOptions = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
