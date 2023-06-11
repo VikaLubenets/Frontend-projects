@@ -1,47 +1,33 @@
-import { LoaderOptions, GetRespObject, callbackFn, LoaderInterface } from '../../types/types';
-
-class Loader implements LoaderInterface {
-    baseLink: string;
-
-    options: LoaderOptions;
-
-    constructor(baseLink: string, options: LoaderOptions = {}) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class Loader {
+    constructor(baseLink, options = {}) {
         this.baseLink = baseLink;
         this.options = options;
     }
-
-    getResponse(
-        { endpoint, options = {} }: GetRespObject,
-        callback: callbackFn = () => {
-            console.error('No callback for GET response');
-        }
-    ): void {
+    getResponse({ endpoint, options = {} }, callback = () => {
+        console.error('No callback for GET response');
+    }) {
         this.load('GET', endpoint, callback, options);
     }
-
-    errorHandler(res: Response): Response {
+    errorHandler(res) {
         if (!res.ok) {
             if (res.status === 401 || res.status === 404) {
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             }
             throw Error(res.statusText);
         }
-
         return res;
     }
-
-    makeUrl(options: LoaderOptions, endpoint: string): string {
+    makeUrl(options, endpoint) {
         const urlOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
-
         Object.keys(urlOptions).forEach((key) => {
             url += `${key}=${urlOptions[key]}&`;
         });
-
         return url.slice(0, -1);
     }
-
-    load(method: string, endpoint: string, callback: callbackFn, options: LoaderOptions = {}): void {
+    load(method, endpoint, callback, options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
@@ -49,5 +35,4 @@ class Loader implements LoaderInterface {
             .catch((err) => console.error(err));
     }
 }
-
-export default Loader;
+exports.default = Loader;

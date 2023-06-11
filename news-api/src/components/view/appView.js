@@ -4,12 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppView = void 0;
-const news_ts_1 = __importDefault(require("./news/news.ts"));
-const sources_ts_1 = __importDefault(require("./sources/sources.ts"));
+const news_1 = __importDefault(require("./news/news"));
+const sources_1 = __importDefault(require("./sources/sources"));
 class AppView {
     constructor() {
-        this.news = new news_ts_1.default();
-        this.sources = new sources_ts_1.default();
+        this.news = new news_1.default();
+        this.sources = new sources_1.default();
     }
     drawNews(data) {
         const values = data?.articles ? data?.articles : [];
