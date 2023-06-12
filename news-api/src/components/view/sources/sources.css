@@ -35,3 +35,40 @@
     font-weight: 400;
     white-space: nowrap;
 }
+
+.alphabet {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    flex-wrap: wrap;
+  }
+  
+  .alphabet button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    background: none;
+    border: 2px solid #30c5ff;
+    font: inherit;
+    line-height: 0.6em;
+    margin: 0.2em;
+    padding: 0.5em 1em;
+    color: #70d6ff;
+    transition: 0.25s;
+    cursor: pointer;
+    border-radius: 15px;
+  }
+
+  .alphabet button:hover,
+  .alphabet button:focus{
+    border-color: black;
+    color: black;
+    box-shadow: 0 0.5em 0.5em -0.4em black;
+    transform: translateY(-0.25em);
+    background-color: white;
+  }
+  
+  .source__item.hidden {
+    display: none;
+  }
