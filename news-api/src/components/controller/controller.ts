@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import AppLoader from './appLoader';
 import { AppControllerInterface, callbackFn } from '../../types/types';
 

@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
 import { AppInterface, AppControllerInterface, AppViewInterface, GetNews, GetSource } from '../../types/types';

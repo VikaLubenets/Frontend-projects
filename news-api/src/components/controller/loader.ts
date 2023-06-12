@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import { LoaderOptions, GetRespObject, callbackFn, LoaderInterface } from '../../types/types';
 
 class Loader implements LoaderInterface {

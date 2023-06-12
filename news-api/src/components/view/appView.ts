@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import News from './news/news';
 import Sources from './sources/sources';
 import { GetNews, GetSource, AppViewInterface, NewsInterface, SourceInterface } from '../../types/types';

@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import { NewsItem } from '../../../types/types';
 import './news.css';
 import noImagePlaceholder from './news_placeholder.png';

@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import './sources.css';
 import { Source } from '../../../types/types';
 

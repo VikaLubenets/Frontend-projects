@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import Loader from './loader';
 
 class AppLoader extends Loader {
