@@ -28,6 +28,7 @@
         "eslint-import-resolver-typescript": "^3.5.5",
         "eslint-plugin-import": "^2.27.5",
         "eslint-plugin-prettier": "^3.4.0",
+        "file-loader": "^6.2.0",
         "html-webpack-plugin": "^5.2.0",
         "prettier": "2.2.1",
         "style-loader": "^2.0.0",

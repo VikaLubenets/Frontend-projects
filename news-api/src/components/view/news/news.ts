@@ -4,11 +4,10 @@ import './news.css';
 class News {
     draw(data: NewsItem[]): void {
         const news: NewsItem[] = data.length >= 10 ? data.filter((_item: NewsItem, idx: number) => idx < 10) : data;
-        const sortedNews: NewsItem[] = news.sort((a: NewsItem, b: NewsItem) => a.title.localeCompare(b.title));
         const fragment: DocumentFragment = document.createDocumentFragment();
         const newsItemTemp = document.querySelector('#newsItemTemp') as HTMLTemplateElement;
 
-        sortedNews.forEach((item: NewsItem, idx: number): void => {
+        news.forEach((item: NewsItem, idx: number): void => {
             const newsClone = newsItemTemp.content.cloneNode(true) as HTMLElement;
 
             if (idx % 2) (newsClone.querySelector('.news__item') as HTMLElement).classList.add('alt');
