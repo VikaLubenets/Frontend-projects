@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "strict": true,
+        "noImplicitAny": true,
+        "target": "ES2020",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": true,
+        "baseUrl": "./src",
+    },
+
+    "include": [
+        "src/**/*.ts"
+    ],
+}
