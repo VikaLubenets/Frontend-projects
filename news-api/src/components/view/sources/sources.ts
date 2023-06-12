@@ -1,5 +1,5 @@
-/* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 import './sources.css';
 import { Source } from '../../../types/types';
 
@@ -35,45 +35,48 @@ class Sources {
                 sourcesContainer.appendChild(item);
             });
 
-            this.setupAlphabetFilter(sources);
+            this.doAlphabeticalContainer(sources);
         }
     }
 
-    private setupAlphabetFilter(sources: Source[]): void {
-        const alphabetContainer = document.createElement('div') as HTMLDivElement;
-        alphabetContainer.classList.add('alphabet');
+    private doAlphabeticalContainer(sources: Source[]): void {
+        const lettersContainer = document.createElement('div') as HTMLDivElement;
+        lettersContainer.classList.add('alphabet');
 
-        const alphabetLetters = new Set<string>();
+        const letters = new Set<string>();
         sources.forEach((source: Source) => {
             const firstLetter = source.name.charAt(0).toUpperCase();
-            alphabetLetters.add(firstLetter);
+            letters.add(firstLetter);
         });
 
-        Array.from(alphabetLetters).forEach((letter: string) => {
+        Array.from(letters).forEach((letter: string) => {
             const button = document.createElement('button') as HTMLButtonElement;
             button.textContent = letter;
-            button.addEventListener('click', () => this.filterSourcesByLetter(letter));
-            alphabetContainer.appendChild(button);
+            button.addEventListener('click', () => this.filterSources(letter));
+            lettersContainer.appendChild(button);
         });
 
         const sourcesContainer = document.querySelector('.alphabet-container') as HTMLElement;
         if (sourcesContainer) {
-            sourcesContainer.insertBefore(alphabetContainer, sourcesContainer.firstChild);
+            sourcesContainer.insertBefore(lettersContainer, sourcesContainer.firstChild);
         }
     }
 
-    private filterSourcesByLetter(letter: string): void {
+    private filterSources(letter: string): void {
         const sourceItems = document.querySelectorAll('.source__item') as NodeListOf<HTMLElement>;
-        sourceItems.forEach((item: HTMLElement) => {
-            const itemName: string = item.querySelector('.source__item-name')?.textContent || '';
-            const firstLetter: string = itemName.charAt(0).toUpperCase();
 
-            if (firstLetter === letter) {
-                item.classList.remove('hidden');
-            } else {
-                item.classList.add('hidden');
-            }
-        });
+        if (sourceItems) {
+            sourceItems.forEach((item: HTMLElement) => {
+                const itemName: string = item.querySelector('.source__item-name')?.textContent || '';
+                const firstLetter: string = itemName.charAt(0).toUpperCase();
+
+                if (firstLetter === letter) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
     }
 }
 
