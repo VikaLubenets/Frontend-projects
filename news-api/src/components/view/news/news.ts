@@ -48,7 +48,7 @@ class News {
                     descriptionContent.textContent = item.description;
                 }
 
-                const readMore = newsClone.querySelector('.news__read-more a') as HTMLParagraphElement;
+                const readMore = newsClone.querySelector('.news__read-more a') as HTMLAnchorElement;
                 if (readMore) {
                     readMore.setAttribute('href', item.url);
                 }
