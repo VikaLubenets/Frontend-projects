@@ -1,5 +1,6 @@
 import { NewsItem } from '../../../types/types';
 import './news.css';
+import noImagePlaceholder from './news_placeholder.png';
 
 class News {
     draw(data: NewsItem[]): void {
@@ -13,7 +14,7 @@ class News {
             if (idx % 2) (newsClone.querySelector('.news__item') as HTMLElement).classList.add('alt');
 
             (newsClone.querySelector('.news__meta-photo') as HTMLElement).style.backgroundImage = `url(${
-                item.urlToImage || './asset/news_placeholder.jpg'
+                item.urlToImage || noImagePlaceholder
             })`;
             (newsClone.querySelector('.news__meta-author') as HTMLElement).textContent =
                 item.author || item.source.name;

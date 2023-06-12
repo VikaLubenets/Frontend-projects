@@ -81,3 +81,9 @@ footer .copyright:before {
     background-color: white;
     border-radius: 15px;
 }
+
+@media screen and (max-width: 500px) {
+    .header-logo{
+        display: none;
+    }
+}
