@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+// ------------for sources.ts file------------
 export interface Source {
     id: string;
     name: string;
@@ -8,6 +9,8 @@ export interface Source {
     language: string;
     country: string;
 }
+
+// ------------for news.ts file------------
 
 type ObjectSource = Pick<Source, 'id' | 'name'>;
 
@@ -22,6 +25,8 @@ export interface NewsItem {
     url: string;
     urlToImage: string;
 }
+
+// ------------for appView.ts file------------
 
 export interface GetNews {
     status: string;
@@ -49,6 +54,8 @@ export interface AppViewInterface {
     drawSources(data: GetSource): void;
 }
 
+// ------------for loader.ts file------------
+
 export type LoaderOptions = { [prop: string]: string };
 
 export type callbackFn<T> = (data: T) => void;
@@ -71,13 +78,21 @@ export interface LoaderInterface {
     load<T>(method: string, endpoint: string, callback: callbackFn<T>, options: LoaderOptions): void;
 }
 
+// eslint-disable-next-line no-shadow
+export enum ErrorStatusEnum {
+    Unauthorized = 401,
+    NotFound = 404,
+}
+
+// ------------for controller.ts file------------
+
 export interface AppControllerInterface {
     getSources<T>(callback?: callbackFn<T>): void;
     getNews<T>(e: Event, callback?: callbackFn<T>): void;
 }
 
+// ------------for app.ts file------------
+
 export interface AppInterface {
-    controller: AppControllerInterface;
-    view: AppViewInterface;
     start(): void;
 }

@@ -4,8 +4,8 @@ import Loader from './loader';
 
 class AppLoader extends Loader {
     constructor() {
-        super('https://rss-news-api.onrender.com/', {
-            apiKey: '98627e49b8bf465fa64623b6b7c4733d', // получите свой ключ https://newsapi.org/
+        super('https://news-proxy.spanb4.shop/', {
+            apiKey: '2a69021b08ef4dfe9c4d772e4d3f6bd1', // получите свой ключ https://newsapi.org/
         });
     }
 }

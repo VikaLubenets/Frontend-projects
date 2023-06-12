@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
-import { LoaderOptions, GetRespObject, callbackFn, LoaderInterface } from '../../types/types';
+import { LoaderOptions, GetRespObject, callbackFn, LoaderInterface, ErrorStatusEnum } from '../../types/types';
 
 class Loader implements LoaderInterface {
     baseLink: string;
@@ -23,7 +23,7 @@ class Loader implements LoaderInterface {
 
     errorHandler(res: Response): Response {
         if (!res.ok) {
-            if (res.status === 401 || res.status === 404) {
+            if (res.status === ErrorStatusEnum.Unauthorized || res.status === ErrorStatusEnum.NotFound) {
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             }
             throw Error(res.statusText);
@@ -46,9 +46,9 @@ class Loader implements LoaderInterface {
     load<T>(method: string, endpoint: string, callback: callbackFn<T>, options: LoaderOptions = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
-            .then((res) => res.json())
-            .then((data) => callback(data))
-            .catch((err) => console.error(err));
+            .then((res: Response) => res.json())
+            .then((data: T) => callback(data))
+            .catch((err: Error) => console.error(err));
     }
 }
 
