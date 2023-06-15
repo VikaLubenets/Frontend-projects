@@ -1,0 +1,40 @@
+.editor{
+    width: 80vw;
+    height: 50vh;
+    background-color: gray;
+    border: 2px solid black;
+}
+
+.section-header{
+    width: 98%;
+    height: 15%;
+    background-color: rgb(181, 180, 180);
+}
+
+.editor__field{
+    width: 100%;
+    height: 85%;
+    background: white;
+}
+
+.editor__line-number{
+    width: 15%;
+    height: 100%;
+    color: black;
+}
+
+.editor__input-row{
+    width: 85%;
+    height: 5%;
+}
+
+.editor__input{
+    width: 85%;
+    height: 100%;
+}
+
+.editor__button{
+    width: 15%;
+    color: black;
+    background-color: gray;
+}
