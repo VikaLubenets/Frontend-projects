@@ -7,6 +7,7 @@ export class Editor {
         const editorContainer = document.querySelector('.editor') as HTMLElement;
 
         if(editorContainer){
+            editorContainer.innerHTML = '';
             const headerContainer = document.createElement('div') as HTMLDivElement;
             if(headerContainer){
                 headerContainer.classList.add('.section-header');
@@ -61,8 +62,9 @@ export class Editor {
                 editorDescription.textContent = 'add some text here';
                 editorContainer.append(editorDescription);
             }
-
         }
+
+        fragment.append(editorContainer);
     }
 
 }

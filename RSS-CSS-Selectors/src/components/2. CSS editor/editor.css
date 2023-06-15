@@ -1,5 +1,5 @@
 .editor{
-    width: 80vw;
+    width: 40vw;
     height: 50vh;
     background-color: gray;
     border: 2px solid black;
@@ -9,6 +9,7 @@
     width: 98%;
     height: 15%;
     background-color: rgb(181, 180, 180);
+    font-size: 20px;
 }
 
 .editor__field{
