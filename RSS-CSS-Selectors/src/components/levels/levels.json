@@ -1,0 +1,15 @@
+[
+    {
+        "levelNumber": "1",
+        "selector": "tag",
+        "taskDescription": "some text here",
+        "example": "some example here",
+        "htmlField": "some text here",
+        "help": "some advice here",
+        "correctAnswers": "some answers here"
+    },
+    {
+
+    }
+
+]
