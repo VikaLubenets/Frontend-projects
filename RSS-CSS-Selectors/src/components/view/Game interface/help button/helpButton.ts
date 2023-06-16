@@ -9,7 +9,7 @@ export class HelpButton {
       this.advice = adviceHelpButton;
     }
   
-    draw(data: string[]) {
+    public draw(data: string[]) {
       const button = document.createElement('div') as HTMLDivElement;
       if (button) {
         button.classList.add('help-button'); 
@@ -25,7 +25,7 @@ export class HelpButton {
       }
     }
   
-    openAdvice(e: Event) {
+    private openAdvice(e: Event) {
       const button: HTMLDivElement | null = document.querySelector('.help-button');
       const description: HTMLDivElement | null = document.querySelector('.help-text.hidden');
   

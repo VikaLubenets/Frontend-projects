@@ -3,14 +3,11 @@
         "levelNumber": "1",
         "selector": "tag",
         "taskDescription": "some text here",
-        "example": "some example here",
+        "examples": "some example here",
         "htmlField": "some text here",
+        "status": "uncompleted",
         "correctAnswers": "some answers here",
         "nameHelpButton": "add some text",
         "adviceHelpButton": "add some advice here"
-    },
-    {
-
     }
-
 ]

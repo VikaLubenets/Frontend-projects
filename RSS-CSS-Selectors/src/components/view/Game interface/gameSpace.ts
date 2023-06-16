@@ -16,7 +16,7 @@ export class GameSpace {
                 gameContainer.append(gameHeader);
             }
 
-            const helpButton = document.querySelector('help-button') as HTMLDivElement;
+            const helpButton = document.querySelector('.help-button') as HTMLDivElement;
             if (helpButton) {
                 gameContainer.append(helpButton);
             }
