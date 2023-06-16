@@ -1,14 +1,6 @@
 import './helpButton.css'
 
 export class HelpButton {
-  name: string
-  advice: string
-
-  constructor (nameHelpButton: string, adviceHelpButton: string) {
-    this.name = nameHelpButton
-    this.advice = adviceHelpButton
-  }
-
   public draw (name: string, advice: string): void {
     const button = document.createElement('div')
     button.classList.add('help-button')
@@ -17,7 +9,8 @@ export class HelpButton {
 
     const description = document.createElement('div')
 
-    description.classList.add('help-text hidden')
+    description.classList.add('help-text')
+    description.classList.add('hidden')
     description.textContent = advice
     button.append(description)
   }
@@ -26,7 +19,7 @@ export class HelpButton {
     const button: HTMLDivElement | null = document.querySelector('.help-button')
     const description: HTMLDivElement | null = document.querySelector('.help-text.hidden')
 
-    if ((button != null) && (description != null)) {
+    if ((button !== null) && (description !== null)) {
       if (e.target === button) {
         description.classList.remove('hidden')
       } else {

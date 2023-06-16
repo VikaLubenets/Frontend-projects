@@ -1,6 +1,6 @@
 [
     {
-        "levelNumber": "1",
+        "levelNumber": "Current level 1",
         "selector": "tag",
         "taskDescription": "some text here",
         "examples": "some example here",
@@ -11,6 +11,6 @@
         "adviceHelpButton": "add some advice here",
         "editorDescription": "add text here",
         "gameHeader": "add text here",
-        "imgURL": "./image-placeholder.png"
+        "imgURL": "./assets/image-placeholder.png"
     }
 ]

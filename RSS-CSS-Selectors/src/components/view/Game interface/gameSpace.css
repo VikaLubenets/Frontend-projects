@@ -1,7 +1,7 @@
 .game-wrapper{
     background-color: black;
-    width: 80vw;
-    height: 40vh;
+    width: 70vw;
+    height: 30vh;
     display: flex;
     flex-direction: column;
     gap: 10px;

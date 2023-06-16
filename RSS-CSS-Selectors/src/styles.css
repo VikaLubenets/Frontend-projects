@@ -1,0 +1,18 @@
+.main{
+    display: flex;
+}
+
+.left-column{
+    display: flex;
+    flex-direction: column;
+}
+
+.css-html-container{
+    display: flex;
+    width: 70vw;
+}
+
+.right-column{
+    width: 27vw;
+    background-color: gray;
+}

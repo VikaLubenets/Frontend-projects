@@ -1,42 +1,31 @@
 import './levels.css'
 
 export class Levels {
-  level: string
-  status: string
-  description: string
-  examples: string
-
-  constructor (levelNumber: string, status: string, taskDescription: string, examples: string) {
-    this.level = levelNumber
-    this.status = status
-    this.description = taskDescription
-    this.examples = examples
-  }
-
-  draw (): void {
+  draw (level: string, status: string, taskDescription: string, examples: string): void {
     const fragment: DocumentFragment = document.createDocumentFragment()
-    const levelContainer: HTMLDivElement | null = document.querySelector('.levels-wrapper')
+    const levelWrapper: HTMLDivElement | null = document.querySelector('.levels-wrapper')
 
-    if (levelContainer != null) {
-      levelContainer.innerHTML = ''
+    if (levelWrapper != null) {
       const levelHeader = document.createElement('div')
 
       levelHeader.classList.add('level-header')
-      levelContainer.append(levelHeader)
+      levelWrapper.append(levelHeader)
 
       const levelNumber = document.createElement('div')
 
       levelNumber.classList.add('level-number')
-      levelNumber.textContent = this.level
+      levelNumber.textContent = level
       levelHeader.append(levelNumber)
 
       const levelStatus = document.createElement('div')
 
       levelHeader.append(levelStatus)
-      if (this.status === 'completed') {
-        levelStatus.classList.add('level-status completed')
+      if (status === 'completed') {
+        levelStatus.classList.add('level-status')
+        levelStatus.classList.add('completed')
       } else {
-        levelStatus.classList.add('level-status uncompleted')
+        levelStatus.classList.add('level-status')
+        levelStatus.classList.add('uncompleted')
       }
 
       const buttonsContainer = document.createElement('div')
@@ -67,17 +56,22 @@ export class Levels {
 
       const levelDescriptrion = document.createElement('div')
 
-      levelContainer.append(levelDescriptrion)
+      levelWrapper.append(levelDescriptrion)
       levelDescriptrion.classList.add('level-description')
-      levelDescriptrion.textContent = this.description
+      levelDescriptrion.textContent = taskDescription
 
       const levelExample = document.createElement('div')
 
-      levelContainer.append(levelExample)
+      levelWrapper.append(levelExample)
       levelExample.classList.add('level-example')
-      levelExample.textContent = this.examples
+      levelExample.textContent = examples
 
-      fragment.append(levelContainer)
+      fragment.append(levelWrapper)
+    }
+
+    const levelContainer: HTMLElement | null = document.querySelector('.levels-container')
+    if (levelContainer !== null) {
+      levelContainer.append(fragment)
     }
   }
 }
