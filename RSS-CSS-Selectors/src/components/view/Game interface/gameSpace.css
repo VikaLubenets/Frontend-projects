@@ -1,0 +1,21 @@
+.game-wrapper{
+    background-color: black;
+    width: 80vw;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.geme-header{
+    font-size: 30px;
+    color: white;
+    font-family: Verdana, sans-serif;
+}
+
+.game-image{
+    max-width: 80%;
+    max-height: 70%;
+}
