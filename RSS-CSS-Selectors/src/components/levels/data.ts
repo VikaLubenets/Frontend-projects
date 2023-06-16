@@ -1,7 +1,7 @@
-import { DataItem } from 'types/types';
-import jsonData from './levels.json';
+import { type DataItem } from 'types/types'
+import jsonData from './levels.json'
 
-const dataArray: DataItem[] = jsonData.map((item) => {
+const data: DataItem[] = jsonData.map((item) => {
   return {
     levelNumber: item.levelNumber,
     selector: item.selector,
@@ -12,7 +12,10 @@ const dataArray: DataItem[] = jsonData.map((item) => {
     correctAnswers: item.correctAnswers,
     nameHelpButton: item.nameHelpButton,
     adviceHelpButton: item.adviceHelpButton,
-  };
-});
+    editorDescription: item.editorDescription,
+    gameHeader: item.gameHeader,
+    imgURL: item.imgURL
+  }
+})
 
-export default dataArray;
+export default data

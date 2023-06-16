@@ -36,7 +36,7 @@
 }
 
 .level-status.completed{
-    background: (url(./comleted.png));
+    background: (url(./completed.png));
     background-size: contain;
     background-repeat: no-repeat;
 }

@@ -9,13 +9,16 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module'
+    sourceType: 'module',
+    project: './tsconfig.json'
   },
   rules: {
-    '@typescript-eslint/no-explicit-any': 2
+    '@typescript-eslint/no-explicit-any': 2,
+    '@typescript-eslint/no-var-requires': 'off'
   },
   plugins: [
     '@typescript-eslint'
 
-  ]
+  ],
+  ignorePatterns: [".eslintrc.js"]
 }

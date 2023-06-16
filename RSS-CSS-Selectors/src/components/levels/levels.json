@@ -8,6 +8,9 @@
         "status": "uncompleted",
         "correctAnswers": "some answers here",
         "nameHelpButton": "add some text",
-        "adviceHelpButton": "add some advice here"
+        "adviceHelpButton": "add some advice here",
+        "editorDescription": "add text here",
+        "gameHeader": "add text here",
+        "imgURL": "./image-placeholder.png"
     }
 ]

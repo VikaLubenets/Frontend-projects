@@ -1,8 +1,8 @@
-import path from 'path'
-import { merge } from 'webpack-merge'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import { CleanWebpackPlugin } from 'clean-webpack-plugin'
-import ESLintPlugin from 'eslint-webpack-plugin'
+const path = require('path');
+const { merge } = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const baseConfig = {
   entry: path.resolve(__dirname, './src/index'),

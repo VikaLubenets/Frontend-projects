@@ -1,36 +1,27 @@
-import './gameSpace.css';
+import './gameSpace.css'
 
 export class GameSpace {
+  draw (header: string, imgURL: string): void {
+    const fragment: DocumentFragment = document.createDocumentFragment()
+    const gameContainer: HTMLDivElement | null = document.querySelector('.game-wrapper')
 
-    draw():void {
+    if (gameContainer !== null) {
+      gameContainer.innerHTML = ''
 
-        const fragment: DocumentFragment = document.createDocumentFragment();
-        const gameContainer = document.querySelector('.game-wrapper') as HTMLDivElement;
+      const gameHeader = document.createElement('div')
+      gameHeader.classList.add('game-header')
+      gameHeader.textContent = header
+      gameContainer.append(gameHeader)
 
-        if(gameContainer){
+      const helpButton = document.querySelector('.help-button') as HTMLDivElement
+      gameContainer.append(helpButton)
 
-            const gameHeader = document.createElement('div') as HTMLDivElement;
-            if (gameHeader) {
-                gameHeader.classList.add('geme-header');
-                gameHeader.textContent = 'add some variable here from json';
-                gameContainer.append(gameHeader);
-            }
+      const gameImage = document.createElement('img')
+      gameImage.classList.add('game-image')
+      gameImage.setAttribute('src', imgURL)
+      gameContainer.append(gameImage)
 
-            const helpButton = document.querySelector('.help-button') as HTMLDivElement;
-            if (helpButton) {
-                gameContainer.append(helpButton);
-            }
-
-            const gameImage = document.createElement('img') as HTMLImageElement;
-            if (gameImage) {
-                gameImage.classList.add('game-image');
-                gameImage.setAttribute("src", "./image-placeholder.png");
-            }
-
-        }
-
-        fragment.append(gameContainer);
-
+      fragment.append(gameContainer)
     }
-
+  }
 }
