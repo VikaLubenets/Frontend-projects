@@ -10,7 +10,7 @@
         "nameHelpButton": "add some text",
         "adviceHelpButton": "add some advice here",
         "editorDescription": "add text here",
-        "gameHeader": "add text here",
-        "imgURL": "./assets/image-placeholder.png"
+        "gameHeader": "CSS Selectors Game starts",
+        "imgURL": "image-placeholder.png"
     }
 ]

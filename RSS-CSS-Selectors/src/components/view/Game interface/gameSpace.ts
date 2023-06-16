@@ -16,7 +16,7 @@ export class GameSpace {
 
       const gameImage = document.createElement('img')
       gameImage.classList.add('game-image')
-      gameImage.setAttribute('src', imgURL)
+      gameImage.setAttribute('src', `./assets/${imgURL}`)
       gameWrapper.append(gameImage)
 
       fragment.append(gameWrapper)
