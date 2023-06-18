@@ -1,10 +1,8 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import AppLoader from './appLoader';
-import { AppControllerInterface, callbackFn } from '../../types/types';
+import { AppControllerInterface, CallbackFn } from '../../types/types';
 
 class AppController extends AppLoader implements AppControllerInterface {
-    public getSources<T>(callback: callbackFn<T>): void {
+    public getSources<T>(callback: CallbackFn<T>): void {
         super.getResponse(
             {
                 endpoint: 'sources',
@@ -13,7 +11,7 @@ class AppController extends AppLoader implements AppControllerInterface {
         );
     }
 
-    public getNews<T>(e: Event, callback: callbackFn<T>): void {
+    public getNews<T>(e: Event, callback: CallbackFn<T>): void {
         let target = e.target as HTMLElement;
         const newsContainer = e.currentTarget as HTMLElement;
 

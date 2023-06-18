@@ -1,15 +1,13 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
 import './sources.css';
 import { Source } from '../../../types/types';
 
 class Sources {
     public draw(sources: Source[]): void {
-        const fragment: DocumentFragment = document.createDocumentFragment();
+        const fragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
 
         if (sourceItemTemp) {
-            sources.forEach((item: Source): void => {
+            sources.forEach((item): void => {
                 const sourceClone = sourceItemTemp.content.cloneNode(true) as HTMLElement;
 
                 const itemName = sourceClone.querySelector('.source__item-name') as HTMLElement;
@@ -30,7 +28,7 @@ class Sources {
                 sourcesContainer.innerHTML = '';
             }
 
-            fragment.querySelectorAll('.source__item').forEach((item: Element): void => {
+            fragment.querySelectorAll('.source__item').forEach((item): void => {
                 item.classList.add('hidden');
                 sourcesContainer.appendChild(item);
             });
@@ -40,17 +38,17 @@ class Sources {
     }
 
     private doAlphabeticalContainer(sources: Source[]): void {
-        const lettersContainer = document.createElement('div') as HTMLDivElement;
+        const lettersContainer = document.createElement('div');
         lettersContainer.classList.add('alphabet');
 
         const letters = new Set<string>();
-        sources.forEach((source: Source) => {
+        sources.forEach((source) => {
             const firstLetter = source.name.charAt(0).toUpperCase();
             letters.add(firstLetter);
         });
 
-        Array.from(letters).forEach((letter: string) => {
-            const button = document.createElement('button') as HTMLButtonElement;
+        Array.from(letters).forEach((letter) => {
+            const button = document.createElement('button');
             button.textContent = letter;
             button.addEventListener('click', () => this.filterSources(letter));
             lettersContainer.appendChild(button);
@@ -66,9 +64,9 @@ class Sources {
         const sourceItems = document.querySelectorAll('.source__item') as NodeListOf<HTMLElement>;
 
         if (sourceItems) {
-            sourceItems.forEach((item: HTMLElement) => {
-                const itemName: string = item.querySelector('.source__item-name')?.textContent || '';
-                const firstLetter: string = itemName.charAt(0).toUpperCase();
+            sourceItems.forEach((item) => {
+                const itemName = item.querySelector('.source__item-name')?.textContent || '';
+                const firstLetter = itemName.charAt(0).toUpperCase();
 
                 if (firstLetter === letter) {
                     item.classList.remove('hidden');

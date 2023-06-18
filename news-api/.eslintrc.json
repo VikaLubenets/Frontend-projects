@@ -5,6 +5,8 @@
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "airbnb-base",
+        "airbnb-typescript",
+        "airbnb-typescript/base",
         "plugin:prettier/recommended",
         "prettier"
     ],
@@ -24,7 +26,10 @@
         "class-methods-use-this": "off",
         "@typescript-eslint/no-explicit-any": 2,
         "@typescript-eslint/no-empty-function": "off",
-        "prettier/prettier": "error"
+        "prettier/prettier": "error",
+        "no-unused-vars": "off", 
+        "@typescript-eslint/no-unused-vars": "error",
+        "react/jsx-filename-extension": "off"
     },
     "root": true,
     "ignorePatterns": ["webpack.config.js"]

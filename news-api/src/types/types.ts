@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-// ------------for sources.ts file------------
 export interface Source {
     id: string;
     name: string;
@@ -9,8 +7,6 @@ export interface Source {
     language: string;
     country: string;
 }
-
-// ------------for news.ts file------------
 
 type ObjectSource = Pick<Source, 'id' | 'name'>;
 
@@ -26,8 +22,6 @@ export interface NewsItem {
     urlToImage: string;
 }
 
-// ------------for appView.ts file------------
-
 export interface GetNews {
     status: string;
     totalResults: number;
@@ -35,7 +29,7 @@ export interface GetNews {
 }
 
 export interface GetSource {
-    status: 'string';
+    status: string;
     sources: Source[];
 }
 
@@ -54,11 +48,9 @@ export interface AppViewInterface {
     drawSources(data: GetSource): void;
 }
 
-// ------------for loader.ts file------------
-
 export type LoaderOptions = { [prop: string]: string };
 
-export type callbackFn<T> = (data: T) => void;
+export type CallbackFn<T> = (data: T) => void;
 
 export type OptionsType = {
     [prop: string]: string;
@@ -72,26 +64,21 @@ export interface GetRespObject {
 export interface LoaderInterface {
     baseLink: string;
     options: LoaderOptions;
-    getResponse: <T>(object: GetRespObject, callback: callbackFn<T>) => void;
+    getResponse: <T>(object: GetRespObject, callback: CallbackFn<T>) => void;
     errorHandler(res: Response): Response;
     makeUrl(options: LoaderOptions, endpoint: string): string;
-    load<T>(method: string, endpoint: string, callback: callbackFn<T>, options: LoaderOptions): void;
+    load<T>(method: string, endpoint: string, callback: CallbackFn<T>, options: LoaderOptions): void;
 }
 
-// eslint-disable-next-line no-shadow
 export enum ErrorStatusEnum {
     Unauthorized = 401,
     NotFound = 404,
 }
 
-// ------------for controller.ts file------------
-
 export interface AppControllerInterface {
-    getSources<T>(callback?: callbackFn<T>): void;
-    getNews<T>(e: Event, callback?: callbackFn<T>): void;
+    getSources<T>(callback?: CallbackFn<T>): void;
+    getNews<T>(e: Event, callback?: CallbackFn<T>): void;
 }
-
-// ------------for app.ts file------------
 
 export interface AppInterface {
     start(): void;

@@ -1,17 +1,15 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import { NewsItem } from '../../../types/types';
 import './news.css';
 import noImagePlaceholder from './news_placeholder.png';
 
 class News {
     public draw(data: NewsItem[]): void {
-        const news: NewsItem[] = data.length >= 10 ? data.filter((_item: NewsItem, idx: number) => idx < 10) : data;
-        const fragment: DocumentFragment = document.createDocumentFragment();
+        const news = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
+        const fragment = document.createDocumentFragment();
         const newsItemTemp = document.querySelector('#newsItemTemp') as HTMLTemplateElement;
 
         if (newsItemTemp) {
-            news.forEach((item: NewsItem, idx: number): void => {
+            news.forEach((item, idx): void => {
                 const newsClone = newsItemTemp.content.cloneNode(true) as HTMLElement;
 
                 if (idx % 2) (newsClone.querySelector('.news__item') as HTMLDivElement)?.classList.add('alt');
