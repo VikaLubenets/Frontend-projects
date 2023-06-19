@@ -1,18 +1,17 @@
-{
+module.exports = {
     "plugins": ["prettier", "import", "@typescript-eslint"],
     "parser": "@typescript-eslint/parser",
     "extends": [
+        "airbnb-base",
+        "airbnb-typescript/base",
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
-        "airbnb-base",
-        "airbnb-typescript",
-        "airbnb-typescript/base",
         "plugin:prettier/recommended",
         "prettier"
     ],
     "parserOptions": {
-        "project": "./tsconfig.json",
-        "tsconfigRootDir": "./",
+        "project": path.join(__dirname, "tsconfig.json"),
+        "tsconfigRootDir": __dirname,
         "sourceType": "module"
     },
     "env": {
@@ -21,15 +20,14 @@
         "node": true
     },
     "rules": {
-        "no-debugger": "off",
-        "no-console": 0,
-        "class-methods-use-this": "off",
         "@typescript-eslint/no-explicit-any": 2,
         "@typescript-eslint/no-empty-function": "off",
-        "prettier/prettier": "error",
-        "no-unused-vars": "off", 
         "@typescript-eslint/no-unused-vars": "error",
-        "react/jsx-filename-extension": "off"
+        "prettier/prettier": "error",
+        "class-methods-use-this": "off",
+        "no-unused-vars": "off", 
+        "no-debugger": "off",
+        "no-console": 0,
     },
     "root": true,
     "ignorePatterns": ["webpack.config.js"]

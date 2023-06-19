@@ -4,7 +4,8 @@ import noImagePlaceholder from './news_placeholder.png';
 
 class News {
     public draw(data: NewsItem[]): void {
-        const news = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
+        const maxNewsShownOnPage = 10;
+        const news = data.length >= maxNewsShownOnPage ? data.filter((_item, idx) => idx < maxNewsShownOnPage) : data;
         const fragment = document.createDocumentFragment();
         const newsItemTemp = document.querySelector('#newsItemTemp') as HTMLTemplateElement;
 
