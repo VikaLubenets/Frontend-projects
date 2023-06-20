@@ -1,5 +1,5 @@
 import { type DataItem } from 'types/types'
-import jsonData from './levels.json'
+import jsonData from './levels/levels.json'
 
 const data: DataItem[] = jsonData.map((item) => {
   return {

@@ -15,7 +15,7 @@ export class CSSEditor {
       lineNumber.classList.add('editor__line-number')
       editorWrapper.append(lineNumber)
       const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-      numbers.forEach((number, index) => {
+      numbers.forEach((number) => {
         const line = document.createElement('span')
         line.textContent = number.toString()
         lineNumber.append(line)

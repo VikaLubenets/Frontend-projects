@@ -1,12 +1,12 @@
 import { CSSEditor } from './CSS editor/CSSEditor'
 import { HTMLViewer } from './HTML Viewer/htmlViewer'
-import data from '../levels/data'
+import data from '../data/dataProvider'
 import { GameSpace } from './Game interface/gameSpace'
 import { HelpButton } from './Game interface/help button/helpButton'
 import { Levels } from './Levels/levels'
 
 export class AppViewer {
-  private currentLevel: number
+  currentLevel: number
 
   constructor () {
     this.currentLevel = 1
