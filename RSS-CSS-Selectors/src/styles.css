@@ -37,4 +37,5 @@ body {
 .right-column{
     width: 27vw;
     background-color: gray;
+    overflow-x: hidden;
 }

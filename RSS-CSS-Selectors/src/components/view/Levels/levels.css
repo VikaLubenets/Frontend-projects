@@ -9,6 +9,7 @@
     align-items: center;
     font-size: 20px;
     font-family: Verdana, sans-serif;
+    position: relative;
 }
 
 .level-header{
@@ -34,17 +35,17 @@
     height: 100%;
 }
 
-.level-status.uncompleted{
-    background: (url(./uncompleted.png));
+.level-status.uncompleted {
+    background-image: url(./uncompleted.png);
     background-size: contain;
     background-repeat: no-repeat;
-}
-
-.level-status.completed{
-    background: (url(./completed.png));
+  }
+  
+  .level-status.completed {
+    background-image: url(./completed.png);
     background-size: contain;
     background-repeat: no-repeat;
-}
+  }
 
 .buttons-container{
     width: 20%;
@@ -73,6 +74,7 @@
     align-items:flex-start;
     flex-direction: column;
     cursor: pointer;
+    z-index: 2;
 }
 
 .burger-line {
@@ -98,4 +100,46 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.cover{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+}
+
+.level-header.open + .cover {
+    display: block;
+}
+
+.level-block {
+    display: flex;
+    width: 27vw;
+    height: 100%;
+    position: absolute;
+    right: -27vw;
+    top: 0;
+    background: #131212;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    visibility: hidden;
+    transition: all 0.5s ease-out;
+  }
+  
+  .level-header.open .level-block {
+    visibility: visible;
+    transform: translateX(-100%);
+    z-index: 1;
+  }
+
+.level-block__number{
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
 }

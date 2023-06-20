@@ -29,6 +29,7 @@ export class AppViewer {
       currentLevelData.status,
       currentLevelData.taskDescription,
       currentLevelData.examples)
+    levelField.addEventsListeners()
   }
 
   public switchLevel (levelNumber: number): void {
