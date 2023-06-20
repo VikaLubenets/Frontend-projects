@@ -1,3 +1,5 @@
+import path from 'path'
+
 module.exports = {
   parser: '@typescript-eslint/parser',
   env: {
@@ -9,8 +11,9 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: './tsconfig.json'
+    tsconfigRootDir: __dirname,
+    sourceType: "module",
+    project: path.join(__dirname, "tsconfig.json"),
   },
   rules: {
     '@typescript-eslint/no-explicit-any': 2,
