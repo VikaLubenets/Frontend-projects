@@ -31,7 +31,7 @@ export class CSSEditorController {
   }
 
   private checkCondition (input: string): void {
-    if (input === this.winCondition) {
+    if (input.trim() === this.winCondition) {
       // Выполнение действий при правильном ответе
       console.log('you did it right!')
     } else {

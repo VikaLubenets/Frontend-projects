@@ -31,6 +31,7 @@ export class CSSEditor {
 
       const inputItem = document.createElement('input')
       inputItem.classList.add('editor__input')
+      inputItem.placeholder = 'Type selector here'
       inputRow.append(inputItem)
 
       const submitButton = document.createElement('div')
@@ -40,7 +41,7 @@ export class CSSEditor {
 
       const editorDescription = document.createElement('div')
       editorDescription.classList.add('editor__description')
-      editorDescription.textContent = `${editorDescriptionContent !== '' ? editorDescriptionContent : ''}`
+      editorDescription.innerHTML = `${editorDescriptionContent !== '' ? editorDescriptionContent.replace(/\n/g, '<br>') : ''}`
       editorField.append(editorDescription)
 
       fragment.append(editorWrapper)

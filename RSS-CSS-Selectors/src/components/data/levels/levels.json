@@ -2,14 +2,14 @@
     {
         "levelNumber": "Current level 1",
         "selector": "tag",
-        "taskDescription": "some text here",
+        "taskDescription": "You need to choose all paragraph selectors using tag selector",
         "examples": "some example here",
-        "htmlField": "some text here",
+        "htmlField": "<div class='html-field'>\n    <p> It's the first paragraph </p>\n    <p> It's the second paragraph </p>\n    <p> It's the third paragraph </p>\n </div>",
         "status": "uncompleted",
-        "correctAnswers": "some answers here",
+        "correctAnswers": "p",
         "nameHelpButton": "add some text",
         "adviceHelpButton": "add some advice here",
-        "editorDescription": "add text here",
+        "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game starts",
         "imgURL": "image-placeholder.png"
     }

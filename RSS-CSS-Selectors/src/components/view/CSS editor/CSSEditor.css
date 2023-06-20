@@ -1,6 +1,6 @@
 .editor {
     width: 35vw;
-    height: 55vh;
+    height: 50vh;
     background-color: gray;
     border: 2px solid black;
     display: grid;
@@ -29,6 +29,7 @@
     align-items: center;
     grid-row: 2;
     font-size: 14px;
+    padding-top: 5px;
   }
   
   .editor__field {
@@ -36,6 +37,9 @@
     display: flex;
     flex-direction: column;
     grid-row: 2;
+    font-size: 14px;
+    font-style: italic;
+    padding-top: 5px;
   }
 
 .editor__input-row{
@@ -60,6 +64,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-style: normal;
 }
 
 .editor__description{

@@ -1,6 +1,6 @@
 .html-viewer{
     width: 35vw;
-    height: 55vh;
+    height: 50vh;
     background-color: gray;
     border: 2px solid black;
     display: grid;
@@ -15,7 +15,8 @@
     flex-direction: column;
     grid-row: 2;
     color: white;
-    padding: 10px;
+    white-space: pre-wrap;
+    padding-top: 5px;
 }
 
 .html-viewer__line-number{
@@ -26,4 +27,5 @@
     align-items: center;
     grid-row: 2;
     font-size: 14px;
+    padding-top: 5px;
 }

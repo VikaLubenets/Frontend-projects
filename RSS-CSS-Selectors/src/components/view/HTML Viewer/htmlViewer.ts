@@ -23,10 +23,10 @@ export class HTMLViewer {
         lineNumber.append(line)
       })
 
-      const htmlField = document.createElement('div')
-
+      const htmlField = document.createElement('pre')
       htmlField.classList.add('html-viewer__field')
-      htmlField.textContent = htmlFieldContent
+      const textNode = document.createTextNode(htmlFieldContent)
+      htmlField.appendChild(textNode)
       htmlWrapper.append(htmlField)
 
       fragment.append(htmlWrapper)

@@ -1,5 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.header {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
 .main{
     display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 97vw;
+    height: 90vh;
 }
 
 .left-column{
