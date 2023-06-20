@@ -2,12 +2,18 @@ import data from '../../data/dataProvider'
 
 export class CSSEditorController {
   private readonly winCondition: string
+  private readonly levelNumber: number
 
   constructor (levelNumber: number) {
-    this.winCondition = data[levelNumber].correctAnswers
+    this.winCondition = data[levelNumber - 1].correctAnswers
+    this.levelNumber = levelNumber
   }
 
-  private addEventsListeners (): void {
+  public initialize (): void {
+    this.addEventListeners()
+  }
+
+  private addEventListeners (): void {
     const inputItem: HTMLInputElement | null = document.querySelector('.editor__input')
     const submitButton: HTMLDivElement | null = document.querySelector('.editor__button')
 
@@ -27,8 +33,10 @@ export class CSSEditorController {
   private checkCondition (input: string): void {
     if (input === this.winCondition) {
       // Выполнение действий при правильном ответе
+      console.log('you did it right!')
     } else {
       // Выполнение действий при неправильном ответе
+      console.log('you did it wrong!')
     }
   }
 }
