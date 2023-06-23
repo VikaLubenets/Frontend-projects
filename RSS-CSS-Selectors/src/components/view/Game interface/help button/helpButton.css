@@ -1,7 +1,7 @@
 .help-button{
     border-radius: 15px;
-    background-color: white;
-    color: black;
+    background-color: #FF3CAC;
+    color: white;
     font-size: 14px;
     font-family: Verdana, sans-serif;
     display: flex;
@@ -9,12 +9,19 @@
     align-items: center;
     cursor: pointer;
     padding: 5px 10px;
+    flex-direction: column;
+    gap: 0px;
 }
 
 .help-button:hover,
 .help-button:focus {
     background-color: gray;
     color: white;
+}
+
+.help-text{
+    text-align: center;
+    margin: 0 auto;
 }
 
 .hidden{

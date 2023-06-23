@@ -8,7 +8,7 @@
         "status": "uncompleted",
         "correctAnswers": "p",
         "nameHelpButton": "Help",
-        "adviceHelpButton": "add some advice here",
+        "adviceHelpButton": "\n add some advice here",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game starts",
         "imgURL": "space.jpg"
