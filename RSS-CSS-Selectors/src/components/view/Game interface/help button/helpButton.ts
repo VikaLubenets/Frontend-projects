@@ -13,6 +13,11 @@ export class HelpButton {
     description.classList.add('hidden')
     description.textContent = advice
     button.append(description)
+
+    const gameWrapper: HTMLElement | null = document.querySelector('.game-wrapper')
+    if (gameWrapper !== null) {
+      gameWrapper.append(button)
+    }
   }
 
   private openAdvice (e: Event): void {

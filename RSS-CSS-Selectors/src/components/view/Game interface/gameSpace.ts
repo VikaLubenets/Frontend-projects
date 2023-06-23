@@ -1,22 +1,15 @@
 import './gameSpace.css'
+import image from './space.png'
 
 export class GameSpace {
-  draw (header: string, imgURL: string): void {
+  draw (): void {
     const fragment: DocumentFragment = document.createDocumentFragment()
     const gameWrapper: HTMLDivElement | null = document.querySelector('.game-wrapper')
 
     if (gameWrapper !== null) {
-      const gameHeader = document.createElement('div')
-      gameHeader.classList.add('game-header')
-      gameHeader.textContent = header
-      gameWrapper.append(gameHeader)
-
-      const helpButton = document.querySelector('.help-button') as HTMLDivElement
-      gameWrapper.append(helpButton)
-
       const gameImage = document.createElement('img')
       gameImage.classList.add('game-image')
-      gameImage.setAttribute('src', `./assets/${imgURL}`)
+      gameImage.style.backgroundImage = `url(${image})`
       gameWrapper.append(gameImage)
 
       fragment.append(gameWrapper)

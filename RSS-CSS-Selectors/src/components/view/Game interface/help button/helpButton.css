@@ -1,6 +1,4 @@
 .help-button{
-    width: 30px;
-    height: 20px;
     border-radius: 15px;
     background-color: white;
     color: black;
@@ -10,11 +8,13 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    padding: 5px 10px;
 }
 
 .help-button:hover,
 .help-button:focus {
     background-color: gray;
+    color: white;
 }
 
 .hidden{
