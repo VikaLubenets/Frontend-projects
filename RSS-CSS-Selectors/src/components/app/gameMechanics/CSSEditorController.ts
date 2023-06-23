@@ -3,10 +3,12 @@ import data from '../../data/dataProvider'
 export class CSSEditorController {
   private readonly winCondition: string
   private readonly levelNumber: number
+  private readonly isWin: () => void
 
-  constructor (levelNumber: number) {
+  constructor (levelNumber: number, isWin: () => void) {
     this.winCondition = data[levelNumber - 1].correctAnswers
-    this.levelNumber = levelNumber
+    this.levelNumber = 1
+    this.isWin = isWin
   }
 
   public initialize (): void {
@@ -32,11 +34,21 @@ export class CSSEditorController {
 
   private checkCondition (input: string): void {
     if (input.trim() === this.winCondition) {
-      // Выполнение действий при правильном ответе
+      this.isWin()
       console.log('you did it right!')
     } else {
-      // Выполнение действий при неправильном ответе
+      const editorWrapper: HTMLDivElement | null = document.querySelector('.editor')
+      if (editorWrapper != null) {
+        editorWrapper.classList.add('losing-animation')
+        editorWrapper.addEventListener('animationend', this.deleteAnimation)
+      }
       console.log('you did it wrong!')
     }
+  }
+
+  private readonly deleteAnimation = (event: AnimationEvent): void => {
+    const editorWrapper = event.target as HTMLDivElement
+    editorWrapper.classList.remove('losing-animation')
+    editorWrapper.removeEventListener('animationend', this.deleteAnimation)
   }
 }

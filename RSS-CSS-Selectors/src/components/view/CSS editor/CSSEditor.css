@@ -74,4 +74,19 @@
 .editor__description{
     height: 50%;
     width: 100%;
+    color: gray;
+}
+
+@keyframes losing-animation {
+  0% { transform: translateX(0) }
+  25% { transform: translateX(3px) }
+  50% { transform: translateX(-3px) }
+  75% { transform: translateX(3px) }
+  100% { transform: translateX(0) }
+ }
+
+ .losing-animation{
+  animation-name: losing-animation;
+  animation-duration: 1s;
+  animation-timing-function: ease;
 }
