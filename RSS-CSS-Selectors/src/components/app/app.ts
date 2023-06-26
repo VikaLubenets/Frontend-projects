@@ -13,16 +13,28 @@ class App {
   }
 
   public start (): void {
-    this.view.switchLevel(this.levelNumber)
+    this.view.switchLevel(this.levelNumber, this.nextLevelAfterClick.bind(this))
     this.controller = new CSSEditorController(this.levelNumber, this.nextLevel.bind(this))
     this.controller.initialize()
   }
 
   private nextLevel (): void {
     this.levelNumber++
-    this.view.switchLevel(this.levelNumber)
+    this.view.switchLevel(this.levelNumber, this.nextLevelAfterClick.bind(this))
     if (this.controller !== null) {
       this.controller = new CSSEditorController(this.levelNumber, this.nextLevel.bind(this))
+      this.controller.initialize()
+    }
+  }
+
+  nextLevelAfterClick = (levelNumber: number): void => {
+    this.levelNumber = levelNumber
+    this.view.switchLevel(this.levelNumber, this.nextLevelAfterClick.bind(this))
+    if (this.controller !== null) {
+      this.controller = new CSSEditorController(
+        this.levelNumber,
+        this.nextLevel.bind(this)
+      )
       this.controller.initialize()
     }
   }

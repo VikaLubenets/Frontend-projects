@@ -12,7 +12,7 @@ export class AppViewer {
     this.currentLevel = 1
   }
 
-  private render (level: number): void {
+  private render (level: number, method: (level: number) => void): void {
     const currentLevelData = data[level - 1]
     const helpButton = new HelpButton()
     const editor = new CSSEditor()
@@ -25,11 +25,14 @@ export class AppViewer {
     helpButton.draw(currentLevelData.nameHelpButton, currentLevelData.adviceHelpButton)
 
     const levelField = new Levels()
-    levelField.draw(currentLevelData.levelNumber,
+    levelField.draw(
+      currentLevelData.levelNumber,
       currentLevelData.status,
       currentLevelData.taskDescription,
-      currentLevelData.examples)
+      currentLevelData.examples
+    )
     levelField.addEventsListeners()
+    this.levelNumberAddEventListeners(method)
   }
 
   private clearGameContainer (): void {
@@ -55,11 +58,23 @@ export class AppViewer {
     }
   }
 
-  public switchLevel (levelNumber: number): void {
+  private levelNumberAddEventListeners (method: (level: number) => void): void {
+    const levelNumbers = document.querySelectorAll('.level-block__number')
+    levelNumbers.forEach((levelNumber) => {
+      levelNumber.addEventListener('click', () => {
+        const clickedLevel = parseInt(levelNumber.textContent as string)
+        if (!isNaN(clickedLevel)) {
+          method(clickedLevel)
+        }
+      })
+    })
+  }
+
+  public switchLevel (levelNumber: number, method: (level: number) => void): void {
     if (levelNumber >= 1 && levelNumber <= data.length) {
       this.currentLevel = levelNumber
       this.clearGameContainer()
-      this.render(levelNumber)
+      this.render(levelNumber, method)
     } else {
       console.error('There is no such level.')
     }
