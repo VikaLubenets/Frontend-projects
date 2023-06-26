@@ -14,15 +14,17 @@ class App {
 
   public start (): void {
     this.view.switchLevel(this.levelNumber)
-    this.controller = new CSSEditorController(this.levelNumber, this.isViktory)
+    this.controller = new CSSEditorController(this.levelNumber, this.nextLevel.bind(this))
     this.controller.initialize()
   }
 
-  private isViktory (): void {
+  private nextLevel (): void {
     this.levelNumber++
     this.view.switchLevel(this.levelNumber)
-    this.controller = new CSSEditorController(this.levelNumber, this.isViktory)
-    this.controller.initialize()
+    if (this.controller !== null) {
+      this.controller = new CSSEditorController(this.levelNumber, this.nextLevel.bind(this))
+      this.controller.initialize()
+    }
   }
 }
 

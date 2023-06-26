@@ -32,9 +32,33 @@ export class AppViewer {
     levelField.addEventsListeners()
   }
 
+  private clearGameContainer (): void {
+    const editorWrapper: HTMLDivElement | null = document.querySelector('.editor')
+    const htmlViewerWrapper: HTMLDivElement | null = document.querySelector('.html-viewer')
+    const levelsWrapper: HTMLDivElement | null = document.querySelector('.levels-wrapper')
+    const gameWrapper: HTMLDivElement | null = document.querySelector('.game-wrapper')
+
+    if (editorWrapper !== null) {
+      editorWrapper.innerHTML = ''
+    }
+
+    if (htmlViewerWrapper !== null) {
+      htmlViewerWrapper.innerHTML = ''
+    }
+
+    if (levelsWrapper !== null) {
+      levelsWrapper.innerHTML = ''
+    }
+
+    if (gameWrapper !== null) {
+      gameWrapper.innerHTML = ''
+    }
+  }
+
   public switchLevel (levelNumber: number): void {
     if (levelNumber >= 1 && levelNumber <= data.length) {
       this.currentLevel = levelNumber
+      this.clearGameContainer()
       this.render(levelNumber)
     } else {
       console.error('There is no such level.')

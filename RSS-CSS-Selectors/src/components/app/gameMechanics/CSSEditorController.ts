@@ -5,10 +5,10 @@ export class CSSEditorController {
   private readonly levelNumber: number
   private readonly isWin: () => void
 
-  constructor (levelNumber: number, isWin: () => void) {
+  constructor (levelNumber: number, nextLevel: () => void) {
     this.winCondition = data[levelNumber - 1].correctAnswers
-    this.levelNumber = 1
-    this.isWin = isWin
+    this.levelNumber = levelNumber
+    this.isWin = nextLevel
   }
 
   public initialize (): void {
