@@ -27,7 +27,7 @@ class App {
     }
   }
 
-  nextLevelAfterClick = (levelNumber: number): void => {
+  private readonly nextLevelAfterClick = (levelNumber: number): void => {
     this.levelNumber = levelNumber
     this.view.switchLevel(this.levelNumber, this.nextLevelAfterClick.bind(this))
     if (this.controller !== null) {

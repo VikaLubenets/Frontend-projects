@@ -114,4 +114,16 @@ export class Levels {
       cover.addEventListener('click', closeBurger)
     }
   }
+
+  levelNumberAddEventListeners (method: (level: number) => void): void {
+    const levelNumbers = document.querySelectorAll('.level-block__number')
+    levelNumbers.forEach((levelNumber) => {
+      levelNumber.addEventListener('click', () => {
+        const clickedLevel = parseInt(levelNumber.textContent as string)
+        if (!isNaN(clickedLevel)) {
+          method(clickedLevel)
+        }
+      })
+    })
+  }
 }

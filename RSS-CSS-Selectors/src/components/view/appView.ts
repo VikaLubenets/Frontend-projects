@@ -32,7 +32,7 @@ export class AppViewer {
       currentLevelData.examples
     )
     levelField.addEventsListeners()
-    this.levelNumberAddEventListeners(method)
+    levelField.levelNumberAddEventListeners(method)
   }
 
   private clearGameContainer (): void {
@@ -56,18 +56,6 @@ export class AppViewer {
     if (gameWrapper !== null) {
       gameWrapper.innerHTML = ''
     }
-  }
-
-  private levelNumberAddEventListeners (method: (level: number) => void): void {
-    const levelNumbers = document.querySelectorAll('.level-block__number')
-    levelNumbers.forEach((levelNumber) => {
-      levelNumber.addEventListener('click', () => {
-        const clickedLevel = parseInt(levelNumber.textContent as string)
-        if (!isNaN(clickedLevel)) {
-          method(clickedLevel)
-        }
-      })
-    })
   }
 
   public switchLevel (levelNumber: number, method: (level: number) => void): void {
