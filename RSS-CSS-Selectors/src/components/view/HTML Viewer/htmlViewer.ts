@@ -25,8 +25,8 @@ export class HTMLViewer {
 
       const htmlField = document.createElement('pre')
       htmlField.classList.add('html-viewer__field')
-      const textNode = document.createTextNode(htmlFieldContent)
-      htmlField.appendChild(textNode)
+      const encodedContent = htmlFieldContent.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      htmlField.innerHTML = encodedContent
       htmlWrapper.append(htmlField)
 
       fragment.append(htmlWrapper)

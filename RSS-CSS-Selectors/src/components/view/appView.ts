@@ -21,7 +21,7 @@ export class AppViewer {
 
     editor.draw(currentLevelData.editorDescription)
     htmlViewer.draw(currentLevelData.htmlField)
-    gameSpace.draw()
+    gameSpace.draw(currentLevelData.htmlField)
     helpButton.draw(currentLevelData.nameHelpButton, currentLevelData.adviceHelpButton)
 
     const levelField = new Levels()
