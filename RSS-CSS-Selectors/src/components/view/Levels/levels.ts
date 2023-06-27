@@ -67,8 +67,10 @@ export class Levels {
       levelHeader.append(levelBlock)
       for (let i = 0; i < data.length; i++) {
         const numberLevel = document.createElement('div')
+        const levelId = `level-${i + 1}`
         numberLevel.classList.add('level-block__number')
         numberLevel.textContent = [i + 1].toString()
+        numberLevel.id = levelId
         levelBlock.appendChild(numberLevel)
       }
 
@@ -123,7 +125,24 @@ export class Levels {
         if (!isNaN(clickedLevel)) {
           method(clickedLevel)
         }
+        this.updateLevelStyles(clickedLevel)
       })
+    })
+  }
+
+  updateLevelStyles (clickedLevel: number): void {
+    const levelNumbers = document.querySelectorAll('.level-block__number')
+    levelNumbers.forEach((levelNumber) => {
+      const level = parseInt(levelNumber.textContent as string)
+      if (level === clickedLevel) {
+        levelNumber.classList.add('active')
+      } else {
+        levelNumber.classList.remove('active')
+      }
+
+      if (data[clickedLevel - 1].status === 'completed') {
+        levelNumber.classList.add('completed')
+      }
     })
   }
 }

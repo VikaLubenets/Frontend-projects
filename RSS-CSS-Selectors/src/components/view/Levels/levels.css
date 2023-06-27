@@ -43,12 +43,14 @@
     background-repeat: no-repeat;
     width: 30px;
     height: 30px;
+    background-position: 50% 50%;
   }
   
   .level-status.completed {
     background-image: url(./completed.png);
     background-size: contain;
     background-repeat: no-repeat;
+    background-position: 50% 50%;
   }
 
 .buttons-container{
@@ -146,13 +148,35 @@
     color: white;
     font-size: 15px;
     cursor: pointer;
+    height: 17px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(./uncompleted.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 40% 40%;
+}
+
+#level-1 .completed{
+    background-image: url(./completed.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 40% 40%;
 }
 
 .level-block__number:hover{
     color: blue;
     font-size: 17px;
+    background-color: rgba(160, 160, 160, 0.5);
 }
 
-.level-block__number:focus{
+.level-block__number:focus,
+.level-block__number:active{
+    background-color: rgba(160, 160, 160, 0.5);
+}
+
+.level-block__number.active {
     background-color: rgba(160, 160, 160, 0.5);
 }

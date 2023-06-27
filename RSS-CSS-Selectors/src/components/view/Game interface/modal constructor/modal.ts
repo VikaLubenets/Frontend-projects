@@ -1,6 +1,6 @@
-import './helpModal.css'
+import './modal.css'
 
-export class HelpModal {
+export class ModalConstructor {
   private modalCover: HTMLElement | null
   private closeButton: HTMLButtonElement | null
   private modalContent: HTMLElement | null
@@ -11,7 +11,7 @@ export class HelpModal {
     this.modalContent = null
   }
 
-  public draw (advice: string): void {
+  public draw (content: string): void {
     const fragment = document.createDocumentFragment()
     const modalTemp: HTMLTemplateElement | null = document.querySelector('.modal-template')
 
@@ -25,7 +25,7 @@ export class HelpModal {
       if (this.modalCover !== null && this.closeButton !== null && this.modalContent !== null) {
         this.modalCover.classList.add('open')
         this.addEventsListeners()
-        this.modalContent.textContent = advice
+        this.modalContent.textContent = content
         this.modalContent.append(this.closeButton)
 
         fragment.append(modalClone)

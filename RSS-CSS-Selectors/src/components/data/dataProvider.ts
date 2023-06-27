@@ -1,7 +1,8 @@
 import { type DataItem } from 'types/types'
-import jsonData from './levels/levels.json'
+import defaultData from './levels/levels.json'
+import { LocalStorageData } from './storage/localStorageData'
 
-const data: DataItem[] = jsonData.map((item) => {
+const dataArr: DataItem[] = defaultData.map((item) => {
   return {
     levelNumber: item.levelNumber,
     selector: item.selector,
@@ -18,4 +19,17 @@ const data: DataItem[] = jsonData.map((item) => {
   }
 })
 
-export default data
+const localStorageData = new LocalStorageData()
+dataArr.forEach((item) => {
+  localStorageData.set(item)
+})
+
+const storedData: DataItem[] = []
+dataArr.forEach((item) => {
+  const storedItem = localStorageData.get(item.levelNumber)
+  if (storedItem !== null) {
+    storedData.push(storedItem)
+  }
+})
+
+export default storedData

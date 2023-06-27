@@ -1,3 +1,4 @@
+import { ModalConstructor } from '../../view/Game interface/modal constructor/modal'
 import data from '../../data/dataProvider'
 
 export class CSSEditorController {
@@ -34,16 +35,46 @@ export class CSSEditorController {
 
   private checkCondition (input: string): void {
     if (input.trim() === this.winCondition) {
-      this.isWin()
-      console.log('you did it right!')
+      this.setCompletedStatus()
+      if (this.isGameCompleted()) {
+        this.showModal()
+      } else if (this.isLastLevelCompleted() &&
+      this.levelNumber === data.length) {
+        const notCompletedLevels = data
+          .filter((item) => item.status !== 'completed')
+          .map((item) => item.levelNumber)
+          .toString()
+        const modal = new ModalConstructor()
+        modal.draw(`The following levels are not completed: ${notCompletedLevels}`)
+      } else {
+        this.isWin()
+      }
     } else {
       const editorWrapper: HTMLDivElement | null = document.querySelector('.editor')
       if (editorWrapper != null) {
         editorWrapper.classList.add('losing-animation')
         editorWrapper.addEventListener('animationend', this.deleteAnimation)
       }
-      console.log('you did it wrong!')
     }
+  }
+
+  private setCompletedStatus (): void {
+    const item = data[this.levelNumber - 1]
+    item.status = 'completed'
+  }
+
+  private isGameCompleted (): boolean {
+    return data.every((item) => item.status === 'completed')
+  }
+
+  private isLastLevelCompleted (): boolean {
+    const lastLevelNumber = data.length
+    return data[lastLevelNumber - 1].status === 'completed'
+  }
+
+  private showModal (): void {
+    const modal = new ModalConstructor()
+    modal.draw('Congratulations! You have completed all levels.')
   }
 
   private readonly deleteAnimation = (event: AnimationEvent): void => {

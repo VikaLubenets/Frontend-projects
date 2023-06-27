@@ -1,5 +1,5 @@
 import './helpButton.css'
-import { HelpModal } from '../help modal/helpModal'
+import { ModalConstructor } from '../modal constructor/modal'
 
 export class HelpButton {
   public draw (name: string, advice: string): void {
@@ -19,7 +19,7 @@ export class HelpButton {
 
     if (button !== null) {
       if (e.target === button) {
-        const helpModal = new HelpModal()
+        const helpModal = new ModalConstructor()
         helpModal.draw(advice)
       }
     }

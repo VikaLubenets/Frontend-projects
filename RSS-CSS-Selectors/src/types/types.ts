@@ -1,5 +1,3 @@
-// --------------for data.ts file---------------
-
 export interface DataItem {
   levelNumber: string
   selector: string
