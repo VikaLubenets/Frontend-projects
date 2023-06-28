@@ -42,6 +42,7 @@ export class Controller {
     if (input.trim() === this.winCondition) {
       this.emitter.emit('levelCompleted', this.levelNumber)
     } else {
+      console.log('wrong answer')
       const editorWrapper: HTMLDivElement | null = document.querySelector('.editor')
       if (editorWrapper != null) {
         editorWrapper.classList.add('losing-animation')

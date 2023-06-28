@@ -159,7 +159,21 @@
     background-position: 40% 40%;
 }
 
-#level-1 .completed{
+#level-1.completed,
+#level-2.completed,
+#level-3.completed,
+#level-4.completed,
+#level-5.completed,
+#level-6.completed,
+#level-7.completed,
+#level-8.completed,
+#level-9.completed,
+#level-10.completed,
+#level-11.completed,
+#level-12.completed,
+#level-13.completed,
+#level-14.completed,
+#level-15.completed{
     background-image: url(./images/completed.png);
     background-size: contain;
     background-repeat: no-repeat;

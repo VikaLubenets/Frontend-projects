@@ -84,6 +84,8 @@ export class Levels implements ILevels {
         levelBlock.appendChild(numberLevel)
       }
 
+      this.addCompletedClass()
+
       fragment.append(levelWrapper)
     }
 
@@ -148,10 +150,25 @@ export class Levels implements ILevels {
       } else {
         levelNumber.classList.remove('active')
       }
+    })
+  }
 
-      if (Levels.data[clickedLevel - 1].status === 'completed') {
-        levelNumber.classList.add('completed')
+  private addCompletedClass (): void {
+    const completedLevels: number[] = []
+    Levels.data.forEach(item => {
+      if (item.status === 'completed') {
+        completedLevels.push(parseInt(item.levelNumber.slice(13), 10))
       }
     })
+
+    if (completedLevels.length > 0) {
+      const levelNumbers = document.querySelectorAll('.level-block__number')
+      levelNumbers.forEach((levelNumber) => {
+        const level = parseInt(levelNumber.textContent as string)
+        if (completedLevels.includes(level)) {
+          levelNumber.classList.add('completed')
+        }
+      })
+    }
   }
 }

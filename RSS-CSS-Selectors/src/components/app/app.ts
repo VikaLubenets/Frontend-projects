@@ -8,7 +8,7 @@ import { ModalConstructor } from '../view/Game interface/modal constructor/modal
 class App {
   private readonly view: AppViewer
   private levelNumber: number
-  private readonly controller: Controller
+  private controller: Controller
   private data: DataItem[]
   private readonly emitter: EventEmitter
   private readonly dataProvider: DataProvider
@@ -33,18 +33,24 @@ class App {
   }
 
   private readonly nextLevelAfterWin = (): void => {
+    console.log('слушатель сработал')
     this.dataProvider.set(this.levelNumber, 'status', 'completed')
-    this.data = DataProvider.getInstance().get()
+    this.data = this.dataProvider.get()
+    console.log(this.data)
     if (this.levelNumber <= this.data.length) {
+      this.view.updateLevelStatusView(this.levelNumber)
       this.levelNumber++
       this.view.drawLevel(this.levelNumber)
+      this.controller = new Controller(this.levelNumber, this.data, this.emitter)
+      this.controller.initialize()
     }
   }
 
   private readonly levelAfterClick = (levelNumber: number): void => {
-    this.data = DataProvider.getInstance().get()
     this.levelNumber = levelNumber
     this.view.drawLevel(this.levelNumber)
+    this.controller = new Controller(this.levelNumber, this.data, this.emitter)
+    this.controller.initialize()
   }
 
   private showWinModal (): void {

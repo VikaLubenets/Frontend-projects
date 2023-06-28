@@ -72,4 +72,14 @@ export class AppViewer implements IAppViewer {
       console.error('There is no such level.')
     }
   }
+
+  public updateLevelStatusView (level: number): void {
+    const levelNumbers = document.querySelectorAll('.level-block__number')
+    levelNumbers.forEach((levelNumber) => {
+      const levelBlock = parseInt(levelNumber.textContent as string)
+      if (level === levelBlock) {
+        levelNumber.classList.add('completed')
+      }
+    })
+  }
 }
