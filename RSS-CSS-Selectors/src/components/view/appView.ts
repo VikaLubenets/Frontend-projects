@@ -1,19 +1,23 @@
 import { CSSEditor } from './CSS editor/CSSEditor'
 import { HTMLViewer } from './HTML Viewer/htmlViewer'
-import data from '../data/dataProvider'
 import { GameSpace } from './Game interface/gameSpace'
 import { HelpButton } from './Game interface/help button/helpButton'
 import { Levels } from './Levels/levels'
+import type { DataItem, IObserver, ISubgect } from '../../types/types'
 
-export class AppViewer {
+export class AppViewer implements ISubgect {
   currentLevel: number
+  data: DataItem[]
 
-  constructor () {
+  private readonly observers = new Array<IObserver>()
+
+  constructor (data: DataItem[]) {
     this.currentLevel = 1
+    this.data = data
   }
 
   private render (level: number, method: (level: number) => void): void {
-    const currentLevelData = data[level - 1]
+    const currentLevelData = this.data[level - 1]
     const helpButton = new HelpButton()
     const editor = new CSSEditor()
     const htmlViewer = new HTMLViewer()
@@ -59,12 +63,25 @@ export class AppViewer {
   }
 
   public switchLevel (levelNumber: number, method: (level: number) => void): void {
-    if (levelNumber >= 1 && levelNumber <= data.length) {
+    if (levelNumber >= 1 && levelNumber <= this.data.length) {
       this.currentLevel = levelNumber
       this.clearGameContainer()
       this.render(levelNumber, method)
     } else {
       console.error('There is no such level.')
     }
+  }
+
+  subscribe (observer: IObserver): void {
+    this.observers.push(observer)
+  }
+
+  unsubscribe (observer: IObserver): void {
+    const index = this.observers.indexOf(observer)
+    this.observers.slice(index, 1)
+  }
+
+  notify (): void {
+    this.observers.forEach(observer => { observer.update('') })
   }
 }

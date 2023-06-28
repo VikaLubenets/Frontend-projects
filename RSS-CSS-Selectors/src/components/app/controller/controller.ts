@@ -1,15 +1,17 @@
 import { ModalConstructor } from '../../view/Game interface/modal constructor/modal'
-import data from '../../data/dataProvider'
+import type { DataItem } from '../../../types/types'
 
-export class CSSEditorController {
+export class Controller {
   private readonly winCondition: string
   private readonly levelNumber: number
   private readonly isWin: () => void
+  private readonly data: DataItem[]
 
-  constructor (levelNumber: number, nextLevel: () => void) {
+  constructor (levelNumber: number, nextLevel: () => void, data: DataItem[]) {
     this.winCondition = data[levelNumber - 1].correctAnswers
     this.levelNumber = levelNumber
     this.isWin = nextLevel
+    this.data = data
   }
 
   public initialize (): void {
@@ -39,8 +41,8 @@ export class CSSEditorController {
       if (this.isGameCompleted()) {
         this.showModal()
       } else if (this.isLastLevelCompleted() &&
-      this.levelNumber === data.length) {
-        const notCompletedLevels = data
+      this.levelNumber === this.data.length) {
+        const notCompletedLevels = this.data
           .filter((item) => item.status !== 'completed')
           .map((item) => item.levelNumber)
           .toString()
@@ -59,17 +61,17 @@ export class CSSEditorController {
   }
 
   private setCompletedStatus (): void {
-    const item = data[this.levelNumber - 1]
+    const item = this.data[this.levelNumber - 1]
     item.status = 'completed'
   }
 
   private isGameCompleted (): boolean {
-    return data.every((item) => item.status === 'completed')
+    return this.data.every((item) => item.status === 'completed')
   }
 
   private isLastLevelCompleted (): boolean {
-    const lastLevelNumber = data.length
-    return data[lastLevelNumber - 1].status === 'completed'
+    const lastLevelNumber = this.data.length
+    return this.data[lastLevelNumber - 1].status === 'completed'
   }
 
   private showModal (): void {

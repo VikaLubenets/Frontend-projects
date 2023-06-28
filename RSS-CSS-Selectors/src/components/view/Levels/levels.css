@@ -1,7 +1,7 @@
 .levels-wrapper{
     background-color: rgba(0,0,0,0.5);
     width: 27vw;
-    height: 90vh;
+    height: 85vh;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -38,7 +38,7 @@
 }
 
 .level-status.uncompleted {
-    background-image: url(./uncompleted.png);
+    background-image: url(./images/uncompleted.png);
     background-size: contain;
     background-repeat: no-repeat;
     width: 30px;
@@ -47,7 +47,7 @@
   }
   
   .level-status.completed {
-    background-image: url(./completed.png);
+    background-image: url(./images/completed.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -59,14 +59,14 @@
 }
 
 .left-button{
-    background:url(./leftArrow.png);
+    background:url(./images/leftArrow.png);
     background-size: contain;
     background-repeat: repeat;
     cursor: pointer;
 }
 
 .right-button{
-    background:url(./rightArrow.png);
+    background:url(./images/rightArrow.png);
     background-size: contain;
     background-repeat: repeat;
     cursor: pointer;
@@ -153,14 +153,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(./uncompleted.png);
+    background-image: url(./images/uncompleted.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 40% 40%;
 }
 
 #level-1 .completed{
-    background-image: url(./completed.png);
+    background-image: url(./images/completed.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 40% 40%;

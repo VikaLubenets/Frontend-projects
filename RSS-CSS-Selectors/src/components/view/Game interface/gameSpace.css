@@ -1,6 +1,6 @@
 .game-wrapper{
     width: 70vw;
-    height: 40vh;
+    height: 35vh;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -21,6 +21,10 @@
    gap: 10px;
    align-content: center;
    flex-wrap: wrap;
+   background-image: url(./images/space.png);
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center;
 }
 
 .inner-container{
@@ -35,7 +39,7 @@ planet{
     background-image: url(./images/planet.png);
     background-size: contain;
     background-repeat: no-repeat;
-    height: 15vh;
+    height: 10vh;
     width: 10vw;
     background-position: center;
     animation: spin 15s linear infinite;
@@ -47,7 +51,7 @@ star{
     background-image: url(./images/star.png);
     background-size: contain;
     background-repeat: no-repeat;
-    height: 15vh;
+    height: 10vh;
     width: 10vw;
     background-position: center;
     animation: spin 15s linear infinite;
@@ -59,7 +63,7 @@ comet{
     background-image: url(./images/comet.png);
     background-size: contain;
     background-repeat: no-repeat;
-    height: 15vh;
+    height: 10vh;
     width: 10vw;
     background-position: center;
     animation: spin 15s linear infinite;

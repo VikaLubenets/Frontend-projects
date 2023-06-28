@@ -1,7 +1,9 @@
+// import DataProvider from '../../data/dataProvider'
 import './levels.css'
-import data from '../../data/dataProvider'
 
 export class Levels {
+  private static readonly levelsQuantaty = 15
+
   draw (level: string, status: string, taskDescription: string, examples: string): void {
     const fragment: DocumentFragment = document.createDocumentFragment()
     const levelWrapper: HTMLDivElement | null = document.querySelector('.levels-wrapper')
@@ -65,7 +67,7 @@ export class Levels {
       levelBlock.classList.add('level-block')
       levelBlock.textContent = 'Choose level'
       levelHeader.append(levelBlock)
-      for (let i = 0; i < data.length; i++) {
+      for (let i = 0; i < Levels.levelsQuantaty; i++) {
         const numberLevel = document.createElement('div')
         const levelId = `level-${i + 1}`
         numberLevel.classList.add('level-block__number')
@@ -140,9 +142,9 @@ export class Levels {
         levelNumber.classList.remove('active')
       }
 
-      if (data[clickedLevel - 1].status === 'completed') {
-        levelNumber.classList.add('completed')
-      }
+      // if (Levels.data[clickedLevel - 1].status === 'completed') {
+      //   levelNumber.classList.add('completed')
+      // }
     })
   }
 }

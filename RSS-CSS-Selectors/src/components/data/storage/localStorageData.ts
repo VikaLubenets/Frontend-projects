@@ -1,18 +1,30 @@
-import { type DataItem } from 'types/types'
+import type { SerializableValue } from '../../../types/types'
 
-export class LocalStorageData {
-  set (data: DataItem): void {
-    const key = data.levelNumber
-    const value = JSON.stringify(data)
-    localStorage.setItem(key, value)
+export default function factory (namespace: string): LocalStorageFactory {
+  return new LocalStorageFactory(namespace)
+}
+
+export class LocalStorageFactory {
+  readonly namespace: string
+
+  constructor (namespace: string) {
+    this.namespace = namespace
   }
 
-  get (key: string): DataItem | null {
-    const value = localStorage.getItem(key)
-    if (value !== null) {
-      return JSON.parse(value) as DataItem
-    } else {
-      return null
-    }
+  #getKey (key: string): string {
+    return `[[${this.namespace}]]-${key}`
+  }
+
+  set (name: string, value: SerializableValue): void {
+    localStorage.setItem(this.#getKey(name), JSON.stringify(value))
+  }
+
+  get<T extends SerializableValue>(name: string): T | null {
+    const item = localStorage.getItem(this.#getKey(name))
+    return item !== null ? JSON.parse(item) : null
+  }
+
+  remove (name: string): void {
+    localStorage.removeItem(this.#getKey(name))
   }
 }

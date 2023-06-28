@@ -1,5 +1,4 @@
 import './gameSpace.css'
-import image from './space.png'
 
 export class GameSpace {
   draw (htmlFieldContent: string): void {
@@ -9,7 +8,6 @@ export class GameSpace {
     if (gameWrapper !== null) {
       const gameImage = document.createElement('div')
       gameImage.classList.add('game-image')
-      gameImage.style.backgroundImage = `url(${image})`
       gameImage.innerHTML = `${htmlFieldContent}`
       gameWrapper.append(gameImage)
 
