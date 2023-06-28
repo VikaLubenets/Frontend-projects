@@ -1,17 +1,18 @@
 import { ModalConstructor } from '../../view/Game interface/modal constructor/modal'
 import type { DataItem } from '../../../types/types'
+import type { EventEmitter } from 'events'
 
 export class Controller {
   private readonly winCondition: string
   private readonly levelNumber: number
-  private readonly isWin: () => void
   private readonly data: DataItem[]
+  emitter: EventEmitter
 
-  constructor (levelNumber: number, nextLevel: () => void, data: DataItem[]) {
+  constructor (levelNumber: number, data: DataItem[], emitter: EventEmitter) {
     this.winCondition = data[levelNumber - 1].correctAnswers
     this.levelNumber = levelNumber
-    this.isWin = nextLevel
     this.data = data
+    this.emitter = emitter
   }
 
   public initialize (): void {
@@ -25,11 +26,13 @@ export class Controller {
     if (submitButton !== null && inputItem !== null) {
       submitButton.addEventListener('click', () => {
         this.checkCondition(inputItem.value)
+        this.isSpecialCase()
       })
 
       inputItem.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           this.checkCondition(inputItem.value)
+          this.isSpecialCase()
         }
       })
     }
@@ -37,20 +40,7 @@ export class Controller {
 
   private checkCondition (input: string): void {
     if (input.trim() === this.winCondition) {
-      this.setCompletedStatus()
-      if (this.isGameCompleted()) {
-        this.showModal()
-      } else if (this.isLastLevelCompleted() &&
-      this.levelNumber === this.data.length) {
-        const notCompletedLevels = this.data
-          .filter((item) => item.status !== 'completed')
-          .map((item) => item.levelNumber)
-          .toString()
-        const modal = new ModalConstructor()
-        modal.draw(`The following levels are not completed: ${notCompletedLevels}`)
-      } else {
-        this.isWin()
-      }
+      this.emitter.emit('levelCompleted', this.levelNumber)
     } else {
       const editorWrapper: HTMLDivElement | null = document.querySelector('.editor')
       if (editorWrapper != null) {
@@ -60,9 +50,20 @@ export class Controller {
     }
   }
 
-  private setCompletedStatus (): void {
-    const item = this.data[this.levelNumber - 1]
-    item.status = 'completed'
+  private isSpecialCase (): void {
+    if (this.isGameCompleted()) {
+      this.emitter.emit('GameCompleted')
+    } else if (
+      this.isLastLevelCompleted() &&
+      this.levelNumber === this.data.length
+    ) {
+      const notCompletedLevels = this.data
+        .filter((item) => item.status !== 'completed')
+        .map((item) => item.levelNumber)
+        .toString()
+      const modal = new ModalConstructor()
+      modal.draw(`The following levels are not completed: ${notCompletedLevels}`)
+    }
   }
 
   private isGameCompleted (): boolean {
@@ -72,11 +73,6 @@ export class Controller {
   private isLastLevelCompleted (): boolean {
     const lastLevelNumber = this.data.length
     return this.data[lastLevelNumber - 1].status === 'completed'
-  }
-
-  private showModal (): void {
-    const modal = new ModalConstructor()
-    modal.draw('Congratulations! You have completed all levels.')
   }
 
   private readonly deleteAnimation = (event: AnimationEvent): void => {

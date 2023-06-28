@@ -1,48 +1,44 @@
-import { type DataItem } from 'types/types'
+import type { DataItem } from 'types/types'
 import data from './levels/levels.json'
 import lsFactory, { type LocalStorageFactory } from './storage/localStorageData'
 
 export default class DataProvider {
-  private readonly defaultData: DataItem[]
-  private storedData: DataItem[]
   private readonly lsFactory: LocalStorageFactory
   private static readonly instance = new DataProvider()
 
   private constructor () {
-    this.defaultData = data.map((item) => {
-      return {
-        levelNumber: item.levelNumber,
-        selector: item.selector,
-        taskDescription: item.taskDescription,
-        examples: item.examples,
-        htmlField: item.htmlField,
-        status: item.status,
-        correctAnswers: item.correctAnswers,
-        nameHelpButton: item.nameHelpButton,
-        adviceHelpButton: item.adviceHelpButton,
-        editorDescription: item.editorDescription,
-        gameHeader: item.gameHeader,
-        imgURL: item.imgURL
-      }
-    })
-
-    this.storedData = []
-    this.lsFactory = lsFactory('level')
+    this.lsFactory = lsFactory()
   }
 
   private initialize (): void {
-    this.defaultData.forEach((item) => {
-      const { levelNumber, ...dataToStore } = item
-      dataToStore.levelNumber = levelNumber
-      this.lsFactory.set(levelNumber, dataToStore)
-    })
+    const defaultData: DataItem[] = data.map((item) => ({ ...item }))
 
-    this.defaultData.forEach((item) => {
-      const storedItem: DataItem | null = this.lsFactory.get<DataItem>(item.levelNumber)
-      if (storedItem !== null) {
-        this.storedData.push(storedItem)
+    defaultData.forEach((item) => {
+      this.lsFactory.set(item.levelNumber, item)
+    })
+  }
+
+  private updateData (item: DataItem): void {
+    this.lsFactory.set(item.levelNumber, item)
+  }
+
+  get (): DataItem[] {
+    const storedData: DataItem[] = []
+
+    Object.keys(localStorage).forEach((key) => {
+      const item = this.lsFactory.get<DataItem>(key)
+      if (item !== null) {
+        storedData.push(item)
       }
     })
+
+    storedData.sort((a, b) => {
+      const first = parseInt(a.levelNumber.slice(13), 10)
+      const second = parseInt(b.levelNumber.slice(13), 10)
+      return first - second
+    })
+
+    return storedData
   }
 
   static getInstance (): DataProvider {
@@ -50,25 +46,24 @@ export default class DataProvider {
     return this.instance
   }
 
-  get (): DataItem[] {
-    return this.storedData
+  getKV (level: number, key: keyof DataItem): DataItem[keyof DataItem] | null {
+    const storedData: DataItem[] = this.get()
+    const levelData = storedData.find(item => parseInt(item.levelNumber.slice(13), 10) === level)
+    if (levelData != null) {
+      return levelData[key] ?? null
+    }
+    return null
   }
 
-  set (data: DataItem[]): void {
-    this.storedData = data
-    this.saveData()
-  }
-
-  remove (): void {
-    this.storedData = []
-    this.saveData()
-  }
-
-  private saveData (): void {
-    this.storedData.forEach((item) => {
-      const { levelNumber, ...dataToStore } = item
-      dataToStore.levelNumber = levelNumber
-      this.lsFactory.set(levelNumber, dataToStore)
-    })
+  set (level: number, key: keyof DataItem, value: string): void {
+    const storedData: DataItem[] = this.get()
+    const levelDataIndex = storedData.findIndex(item => parseInt(item.levelNumber.slice(13), 10) === level)
+    if (levelDataIndex !== -1) {
+      const updatedItem: DataItem = {
+        ...storedData[levelDataIndex],
+        [key]: value
+      }
+      this.updateData(updatedItem)
+    }
   }
 }

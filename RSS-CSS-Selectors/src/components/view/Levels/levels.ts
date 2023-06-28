@@ -1,8 +1,16 @@
-// import DataProvider from '../../data/dataProvider'
+import type { ILevels } from '../../../types/types'
+import DataProvider from '../../data/dataProvider'
+import type { EventEmitter } from 'events'
 import './levels.css'
 
-export class Levels {
+export class Levels implements ILevels {
   private static readonly levelsQuantaty = 15
+  private static readonly data = DataProvider.getInstance().get()
+  private readonly emitter: EventEmitter
+
+  constructor (emitter: EventEmitter) {
+    this.emitter = emitter
+  }
 
   draw (level: string, status: string, taskDescription: string, examples: string): void {
     const fragment: DocumentFragment = document.createDocumentFragment()
@@ -97,7 +105,6 @@ export class Levels {
         body !== null) {
       burgerMenu.addEventListener('click', (e) => {
         header.classList.toggle('open')
-        console.log('event is added')
         if (header.classList.contains('open')) {
           body.style.overflow = 'hidden'
         } else {
@@ -119,20 +126,20 @@ export class Levels {
     }
   }
 
-  levelNumberAddEventListeners (method: (level: number) => void): void {
+  levelNumberAddEventListeners (): void {
     const levelNumbers = document.querySelectorAll('.level-block__number')
     levelNumbers.forEach((levelNumber) => {
       levelNumber.addEventListener('click', () => {
         const clickedLevel = parseInt(levelNumber.textContent as string)
         if (!isNaN(clickedLevel)) {
-          method(clickedLevel)
+          this.emitter.emit('levelClicked', clickedLevel)
         }
         this.updateLevelStyles(clickedLevel)
       })
     })
   }
 
-  updateLevelStyles (clickedLevel: number): void {
+  private updateLevelStyles (clickedLevel: number): void {
     const levelNumbers = document.querySelectorAll('.level-block__number')
     levelNumbers.forEach((levelNumber) => {
       const level = parseInt(levelNumber.textContent as string)
@@ -142,9 +149,9 @@ export class Levels {
         levelNumber.classList.remove('active')
       }
 
-      // if (Levels.data[clickedLevel - 1].status === 'completed') {
-      //   levelNumber.classList.add('completed')
-      // }
+      if (Levels.data[clickedLevel - 1].status === 'completed') {
+        levelNumber.classList.add('completed')
+      }
     })
   }
 }

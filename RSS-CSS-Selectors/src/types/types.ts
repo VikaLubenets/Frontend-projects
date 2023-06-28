@@ -37,3 +37,27 @@ export interface ISubgect {
   unsubscribe: (observer: IObserver) => void
   notify: () => void
 }
+
+export interface IAppViewer {
+  currentLevel: number
+  data: DataItem[]
+  drawLevel: (levelNumber: number) => void
+}
+
+export interface ILevels {
+  draw: (level: string, status: string, taskDescription: string, examples: string) => void
+  addEventsListeners: () => void
+  levelNumberAddEventListeners: (method: (level: number) => void) => void
+}
+
+export interface IHTMLViewer {
+  draw: (htmlFieldContent: string) => void
+}
+
+export interface IGameSpace {
+  draw: (htmlFieldContent: string) => void
+}
+
+export interface ICSSEditor {
+  draw: (editorDescriptionContent: string) => void
+}

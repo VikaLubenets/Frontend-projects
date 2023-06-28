@@ -1,6 +1,7 @@
 import './htmlViewer.css'
+import type { IHTMLViewer } from '../../../types/types'
 
-export class HTMLViewer {
+export class HTMLViewer implements IHTMLViewer {
   draw (htmlFieldContent: string): void {
     const fragment: DocumentFragment = document.createDocumentFragment()
     const htmlWrapper: HTMLDivElement | null = document.querySelector('.html-viewer')

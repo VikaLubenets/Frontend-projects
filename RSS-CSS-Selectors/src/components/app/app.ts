@@ -2,41 +2,54 @@ import type { DataItem } from '../../types/types'
 import DataProvider from '../data/dataProvider'
 import { AppViewer } from '../view/appView'
 import { Controller } from './controller/controller'
+import { EventEmitter } from 'events'
+import { ModalConstructor } from '../view/Game interface/modal constructor/modal'
 
 class App {
   private readonly view: AppViewer
   private levelNumber: number
-  private controller: Controller
-  private readonly data: DataItem[]
+  private readonly controller: Controller
+  private data: DataItem[]
+  private readonly emitter: EventEmitter
+  private readonly dataProvider: DataProvider
 
   constructor () {
+    this.emitter = new EventEmitter()
     this.data = DataProvider.getInstance().get()
-    this.view = new AppViewer(this.data)
+    this.dataProvider = DataProvider.getInstance()
+    this.view = new AppViewer(this.data, this.emitter)
     this.levelNumber = 1
-    this.controller = new Controller(this.levelNumber, this.nextLevel.bind(this), this.data)
+    this.controller = new Controller(this.levelNumber, this.data, this.emitter)
   }
 
   public start (): void {
-    this.view.switchLevel(this.levelNumber, this.nextLevelAfterClick.bind(this))
+    this.view.drawLevel(this.levelNumber)
     this.controller.initialize()
+    this.emitter.on('levelCompleted', this.nextLevelAfterWin.bind(this))
+    this.emitter.on('GameCompleted', this.showWinModal.bind(this))
+    this.emitter.on('levelClicked', (clickedLevel) => {
+      this.levelAfterClick(clickedLevel)
+    })
   }
 
-  private nextLevel (): void {
-    this.levelNumber++
-    this.view.switchLevel(this.levelNumber, this.nextLevelAfterClick.bind(this))
-  }
-
-  private readonly nextLevelAfterClick = (levelNumber: number): void => {
-    this.levelNumber = levelNumber
-    this.view.switchLevel(this.levelNumber, this.nextLevelAfterClick.bind(this))
-    if (this.controller !== null) {
-      this.controller = new Controller(
-        this.levelNumber,
-        this.nextLevel.bind(this),
-        this.data
-      )
-      this.controller.initialize()
+  private readonly nextLevelAfterWin = (): void => {
+    this.dataProvider.set(this.levelNumber, 'status', 'completed')
+    this.data = DataProvider.getInstance().get()
+    if (this.levelNumber <= this.data.length) {
+      this.levelNumber++
+      this.view.drawLevel(this.levelNumber)
     }
+  }
+
+  private readonly levelAfterClick = (levelNumber: number): void => {
+    this.data = DataProvider.getInstance().get()
+    this.levelNumber = levelNumber
+    this.view.drawLevel(this.levelNumber)
+  }
+
+  private showWinModal (): void {
+    const modal = new ModalConstructor()
+    modal.draw('Congratulations! You have completed all levels.')
   }
 }
 

@@ -1,6 +1,7 @@
 import './CSSEditor.css'
+import type { ICSSEditor } from '../../../types/types'
 
-export class CSSEditor {
+export class CSSEditor implements ICSSEditor {
   draw (editorDescriptionContent: string): void {
     const fragment: DocumentFragment = document.createDocumentFragment()
     const editorWrapper: HTMLDivElement | null = document.querySelector('.editor')

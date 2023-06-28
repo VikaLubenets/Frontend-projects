@@ -160,7 +160,7 @@
         "examples": "'element1,element2' selects all <element1> elements and all <element2> elements.",
         "htmlField":  "<star></star>\n<planet></planet>\n<comet></comet>\n<star></star>\n<planet></planet>\n<star></star>\n<comet></comet>",
         "status": "uncompleted",
-        "correctAnswers": "stars, planets",
+        "correctAnswers": "star, planet",
         "nameHelpButton": "Open advice",
         "adviceHelpButton": "Use a comma to select multiple different elements and their tag names",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",

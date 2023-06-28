@@ -3,20 +3,21 @@ import { HTMLViewer } from './HTML Viewer/htmlViewer'
 import { GameSpace } from './Game interface/gameSpace'
 import { HelpButton } from './Game interface/help button/helpButton'
 import { Levels } from './Levels/levels'
-import type { DataItem, IObserver, ISubgect } from '../../types/types'
+import type { DataItem, IAppViewer } from '../../types/types'
+import type { EventEmitter } from 'events'
 
-export class AppViewer implements ISubgect {
+export class AppViewer implements IAppViewer {
   currentLevel: number
   data: DataItem[]
+  emitter: EventEmitter
 
-  private readonly observers = new Array<IObserver>()
-
-  constructor (data: DataItem[]) {
+  constructor (data: DataItem[], emitter: EventEmitter) {
     this.currentLevel = 1
     this.data = data
+    this.emitter = emitter
   }
 
-  private render (level: number, method: (level: number) => void): void {
+  private render (level: number): void {
     const currentLevelData = this.data[level - 1]
     const helpButton = new HelpButton()
     const editor = new CSSEditor()
@@ -28,7 +29,7 @@ export class AppViewer implements ISubgect {
     gameSpace.draw(currentLevelData.htmlField)
     helpButton.draw(currentLevelData.nameHelpButton, currentLevelData.adviceHelpButton)
 
-    const levelField = new Levels()
+    const levelField = new Levels(this.emitter)
     levelField.draw(
       currentLevelData.levelNumber,
       currentLevelData.status,
@@ -36,7 +37,7 @@ export class AppViewer implements ISubgect {
       currentLevelData.examples
     )
     levelField.addEventsListeners()
-    levelField.levelNumberAddEventListeners(method)
+    levelField.levelNumberAddEventListeners()
   }
 
   private clearGameContainer (): void {
@@ -62,26 +63,13 @@ export class AppViewer implements ISubgect {
     }
   }
 
-  public switchLevel (levelNumber: number, method: (level: number) => void): void {
+  public drawLevel (levelNumber: number): void {
     if (levelNumber >= 1 && levelNumber <= this.data.length) {
       this.currentLevel = levelNumber
       this.clearGameContainer()
-      this.render(levelNumber, method)
+      this.render(levelNumber)
     } else {
       console.error('There is no such level.')
     }
-  }
-
-  subscribe (observer: IObserver): void {
-    this.observers.push(observer)
-  }
-
-  unsubscribe (observer: IObserver): void {
-    const index = this.observers.indexOf(observer)
-    this.observers.slice(index, 1)
-  }
-
-  notify (): void {
-    this.observers.forEach(observer => { observer.update('') })
   }
 }
