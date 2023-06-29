@@ -1,10 +1,10 @@
-import type { SerializableValue } from '../../../types/types'
+import type { SerializableValue, ILSFactory } from '../../../types/types'
 
 export default function factory (): LocalStorageFactory {
   return new LocalStorageFactory()
 }
 
-export class LocalStorageFactory {
+export class LocalStorageFactory implements ILSFactory {
   set (name: string, value: SerializableValue): void {
     localStorage.setItem(name, JSON.stringify(value))
   }

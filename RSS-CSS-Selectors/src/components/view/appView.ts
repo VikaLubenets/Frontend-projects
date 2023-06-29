@@ -29,7 +29,7 @@ export class AppViewer implements IAppViewer {
     gameSpace.draw(currentLevelData.htmlField)
     helpButton.draw(currentLevelData.nameHelpButton, currentLevelData.adviceHelpButton)
 
-    const levelField = new Levels(this.emitter)
+    const levelField = new Levels(this.emitter, this.data)
     levelField.draw(
       currentLevelData.levelNumber,
       currentLevelData.status,
@@ -73,13 +73,25 @@ export class AppViewer implements IAppViewer {
     }
   }
 
-  public updateLevelStatusView (level: number): void {
-    const levelNumbers = document.querySelectorAll('.level-block__number')
-    levelNumbers.forEach((levelNumber) => {
-      const levelBlock = parseInt(levelNumber.textContent as string)
-      if (level === levelBlock) {
-        levelNumber.classList.add('completed')
+  public updateLevelStatusView (data: DataItem[]): void {
+    const completedLevels: number[] = []
+    data.forEach(item => {
+      if (item.status === 'completed') {
+        completedLevels.push(parseInt(item.levelNumber.slice(13), 10))
       }
     })
+    console.log(completedLevels)
+    if (completedLevels.length > 0) {
+      const levelNumbers = document.querySelectorAll('.level-block__number')
+      console.log(levelNumbers)
+      levelNumbers.forEach((levelNumber) => {
+        const level = parseInt(levelNumber.textContent as string)
+        console.log(level)
+        if (completedLevels.includes(level)) {
+          levelNumber.classList.add('completed')
+          console.log('includes')
+        }
+      })
+    }
   }
 }

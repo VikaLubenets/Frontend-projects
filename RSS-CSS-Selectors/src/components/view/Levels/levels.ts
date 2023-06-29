@@ -1,15 +1,15 @@
-import type { ILevels } from '../../../types/types'
-import DataProvider from '../../data/dataProvider'
+import type { DataItem, ILevels } from '../../../types/types'
 import type { EventEmitter } from 'events'
 import './levels.css'
 
 export class Levels implements ILevels {
   private static readonly levelsQuantaty = 15
-  private static readonly data = DataProvider.getInstance().get()
+  private readonly data: DataItem[]
   private readonly emitter: EventEmitter
 
-  constructor (emitter: EventEmitter) {
+  constructor (emitter: EventEmitter, data: DataItem[]) {
     this.emitter = emitter
+    this.data = data
   }
 
   draw (level: string, status: string, taskDescription: string, examples: string): void {
@@ -71,6 +71,11 @@ export class Levels implements ILevels {
       levelExample.classList.add('level-example')
       levelExample.textContent = examples
 
+      const resetBtn = document.createElement('div')
+      levelWrapper.append(resetBtn)
+      resetBtn.classList.add('reset-button')
+      resetBtn.textContent = 'Reset Game'
+
       const levelBlock = document.createElement('div')
       levelBlock.classList.add('level-block')
       levelBlock.textContent = 'Choose level'
@@ -83,8 +88,6 @@ export class Levels implements ILevels {
         numberLevel.id = levelId
         levelBlock.appendChild(numberLevel)
       }
-
-      this.addCompletedClass()
 
       fragment.append(levelWrapper)
     }
@@ -126,6 +129,11 @@ export class Levels implements ILevels {
       }
       cover.addEventListener('click', closeBurger)
     }
+
+    const resetBtn: HTMLDivElement | null = document.querySelector('.reset-button')
+    if (resetBtn !== null) {
+      resetBtn.addEventListener('click', () => this.emitter.emit('resetClicked'))
+    }
   }
 
   levelNumberAddEventListeners (): void {
@@ -151,24 +159,5 @@ export class Levels implements ILevels {
         levelNumber.classList.remove('active')
       }
     })
-  }
-
-  private addCompletedClass (): void {
-    const completedLevels: number[] = []
-    Levels.data.forEach(item => {
-      if (item.status === 'completed') {
-        completedLevels.push(parseInt(item.levelNumber.slice(13), 10))
-      }
-    })
-
-    if (completedLevels.length > 0) {
-      const levelNumbers = document.querySelectorAll('.level-block__number')
-      levelNumbers.forEach((levelNumber) => {
-        const level = parseInt(levelNumber.textContent as string)
-        if (completedLevels.includes(level)) {
-          levelNumber.classList.add('completed')
-        }
-      })
-    }
   }
 }

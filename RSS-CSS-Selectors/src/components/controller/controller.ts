@@ -1,22 +1,26 @@
-import { ModalConstructor } from '../../view/Game interface/modal constructor/modal'
-import type { DataItem } from '../../../types/types'
+import { ModalConstructor } from '../view/Game interface/modal constructor/modal'
+import type { DataItem, IController } from '../../types/types'
 import type { EventEmitter } from 'events'
 
-export class Controller {
-  private readonly winCondition: string
-  private readonly levelNumber: number
-  private readonly data: DataItem[]
+export class Controller implements IController {
+  private winCondition: string
+  private levelNumber: number
+  private data: DataItem[]
   emitter: EventEmitter
 
   constructor (levelNumber: number, data: DataItem[], emitter: EventEmitter) {
-    this.winCondition = data[levelNumber - 1].correctAnswers
-    this.levelNumber = levelNumber
     this.data = data
     this.emitter = emitter
+    this.winCondition = this.data[levelNumber - 1].correctAnswers
+    this.levelNumber = levelNumber
   }
 
-  public initialize (): void {
+  public initialize (level: number, dataNew: DataItem[], emitterNew: EventEmitter): void {
     this.addEventListeners()
+    this.levelNumber = level
+    this.data = dataNew
+    this.emitter = emitterNew
+    this.winCondition = this.data[this.levelNumber - 1].correctAnswers
   }
 
   private addEventListeners (): void {

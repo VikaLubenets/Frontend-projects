@@ -4,7 +4,7 @@
     height: 85vh;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 30px;
     justify-content: flex-start;
     align-items: center;
     font-size: 18px;
@@ -193,4 +193,22 @@
 
 .level-block__number.active {
     background-color: rgba(160, 160, 160, 0.5);
+}
+
+.reset-button{
+    width: 100px;
+    height: 50px;
+    border-radius: 15px;
+    color: white;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    text-align: center;
+}
+
+.reset-button:hover{
+    background-color: #FF3CAC;
+    cursor: pointer;
 }

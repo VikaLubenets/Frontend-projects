@@ -1,14 +1,14 @@
-import type { DataItem } from '../../types/types'
+import type { DataItem, IApp } from '../../types/types'
 import DataProvider from '../data/dataProvider'
 import { AppViewer } from '../view/appView'
-import { Controller } from './controller/controller'
+import { Controller } from '../controller/controller'
 import { EventEmitter } from 'events'
 import { ModalConstructor } from '../view/Game interface/modal constructor/modal'
 
-class App {
+class App implements IApp {
   private readonly view: AppViewer
   private levelNumber: number
-  private controller: Controller
+  private readonly controller: Controller
   private data: DataItem[]
   private readonly emitter: EventEmitter
   private readonly dataProvider: DataProvider
@@ -24,33 +24,32 @@ class App {
 
   public start (): void {
     this.view.drawLevel(this.levelNumber)
-    this.controller.initialize()
+    this.controller.initialize(this.levelNumber, this.data, this.emitter)
     this.emitter.on('levelCompleted', this.nextLevelAfterWin.bind(this))
     this.emitter.on('GameCompleted', this.showWinModal.bind(this))
     this.emitter.on('levelClicked', (clickedLevel) => {
       this.levelAfterClick(clickedLevel)
     })
+    this.emitter.on('resetClicked', this.dataProvider.reset.bind(this))
   }
 
   private readonly nextLevelAfterWin = (): void => {
     console.log('слушатель сработал')
     this.dataProvider.set(this.levelNumber, 'status', 'completed')
-    this.data = this.dataProvider.get()
+    this.data = DataProvider.getInstance().get()
     console.log(this.data)
+    this.view.updateLevelStatusView(this.data)
     if (this.levelNumber <= this.data.length) {
-      this.view.updateLevelStatusView(this.levelNumber)
       this.levelNumber++
       this.view.drawLevel(this.levelNumber)
-      this.controller = new Controller(this.levelNumber, this.data, this.emitter)
-      this.controller.initialize()
+      this.controller.initialize(this.levelNumber, this.data, this.emitter)
     }
   }
 
   private readonly levelAfterClick = (levelNumber: number): void => {
     this.levelNumber = levelNumber
     this.view.drawLevel(this.levelNumber)
-    this.controller = new Controller(this.levelNumber, this.data, this.emitter)
-    this.controller.initialize()
+    this.controller.initialize(this.levelNumber, this.data, this.emitter)
   }
 
   private showWinModal (): void {

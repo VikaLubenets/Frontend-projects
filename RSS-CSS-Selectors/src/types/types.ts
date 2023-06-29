@@ -1,3 +1,5 @@
+import type { EventEmitter } from 'events'
+
 export interface DataItem {
   levelNumber: string
   selector: string
@@ -60,4 +62,25 @@ export interface IGameSpace {
 
 export interface ICSSEditor {
   draw: (editorDescriptionContent: string) => void
+}
+
+export interface IController {
+  emitter: EventEmitter
+  initialize: (level: number, dataNew: DataItem[], emitterNew: EventEmitter) => void
+}
+
+export interface ILSFactory {
+  set: (name: string, value: SerializableValue) => void
+  get: <T extends SerializableValue>(name: string) => T | null
+  remove: (name: string) => void
+}
+
+export interface IDataProvider {
+  storedData: DataItem[]
+  get: () => DataItem[]
+  set: (level: number, key: keyof DataItem, value: string) => void
+}
+
+export interface IApp {
+  start: () => void
 }
