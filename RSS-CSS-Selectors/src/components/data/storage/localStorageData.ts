@@ -1,15 +1,15 @@
-import type { SerializableValue, ILSFactory } from '../../../types/types'
+import type { ILSFactory, DataItem } from '../../../types/types'
 
 export default function factory (): LocalStorageFactory {
   return new LocalStorageFactory()
 }
 
 export class LocalStorageFactory implements ILSFactory {
-  set (name: string, value: SerializableValue): void {
+  set (name: string, value: DataItem): void {
     localStorage.setItem(name, JSON.stringify(value))
   }
 
-  get<T extends SerializableValue>(name: string): T | null {
+  get<T extends DataItem >(name: string): T | null {
     const item = localStorage.getItem(name)
     return item !== null ? JSON.parse(item) : null
   }

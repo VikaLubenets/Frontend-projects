@@ -30,11 +30,10 @@ class App implements IApp {
     this.emitter.on('levelClicked', (clickedLevel) => {
       this.levelAfterClick(clickedLevel)
     })
-    this.emitter.on('resetClicked', this.dataProvider.reset.bind(this))
+    this.emitter.on('resetClicked', this.makeReset.bind(this))
   }
 
   private readonly nextLevelAfterWin = (): void => {
-    console.log('слушатель сработал')
     this.dataProvider.set(this.levelNumber, 'status', 'completed')
     this.data = DataProvider.getInstance().get()
     console.log(this.data)
@@ -50,6 +49,12 @@ class App implements IApp {
     this.levelNumber = levelNumber
     this.view.drawLevel(this.levelNumber)
     this.controller.initialize(this.levelNumber, this.data, this.emitter)
+  }
+
+  private makeReset (): void {
+    this.dataProvider.reset()
+    this.levelNumber = 1
+    this.start()
   }
 
   private showWinModal (): void {

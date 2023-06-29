@@ -13,26 +13,42 @@ export default class DataProvider {
   }
 
   private initialize (): void {
-    const defaultData: DataItem[] = data.map((item) => {
-      return {
-        levelNumber: item.levelNumber,
-        selector: item.selector,
-        taskDescription: item.taskDescription,
-        examples: item.examples,
-        htmlField: item.htmlField,
-        status: item.status,
-        correctAnswers: item.correctAnswers,
-        nameHelpButton: item.nameHelpButton,
-        adviceHelpButton: item.adviceHelpButton,
-        editorDescription: item.editorDescription,
-        gameHeader: item.gameHeader,
-        imgURL: item.imgURL
+    const savedLSData: DataItem[] = []
+    Object.keys(localStorage).forEach((key) => {
+      if (key.startsWith('Current level')) {
+        const item = this.lsFactory.get<DataItem>(key)
+        if (item !== null) {
+          savedLSData.push(item)
+        }
       }
     })
 
-    defaultData.forEach((item) => {
-      this.lsFactory.set(item.levelNumber, item)
-    })
+    if (savedLSData.length > 0) {
+      this.storedData = savedLSData
+    } else {
+      const defaultData: DataItem[] = data.map((item) => {
+        return {
+          levelNumber: item.levelNumber,
+          selector: item.selector,
+          taskDescription: item.taskDescription,
+          examples: item.examples,
+          htmlField: item.htmlField,
+          status: item.status,
+          correctAnswers: item.correctAnswers,
+          nameHelpButton: item.nameHelpButton,
+          adviceHelpButton: item.adviceHelpButton,
+          editorDescription: item.editorDescription,
+          gameHeader: item.gameHeader,
+          imgURL: item.imgURL
+        }
+      })
+
+      defaultData.forEach((item) => {
+        this.lsFactory.set(item.levelNumber, item)
+      })
+
+      this.storedData = defaultData
+    }
   }
 
   get (): DataItem[] {

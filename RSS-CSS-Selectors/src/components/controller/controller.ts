@@ -3,7 +3,7 @@ import type { DataItem, IController } from '../../types/types'
 import type { EventEmitter } from 'events'
 
 export class Controller implements IController {
-  private winCondition: string
+  private winCondition: string[]
   private levelNumber: number
   private data: DataItem[]
   emitter: EventEmitter
@@ -11,8 +11,8 @@ export class Controller implements IController {
   constructor (levelNumber: number, data: DataItem[], emitter: EventEmitter) {
     this.data = data
     this.emitter = emitter
-    this.winCondition = this.data[levelNumber - 1].correctAnswers
     this.levelNumber = levelNumber
+    this.winCondition = [...this.data[this.levelNumber - 1].correctAnswers]
   }
 
   public initialize (level: number, dataNew: DataItem[], emitterNew: EventEmitter): void {
@@ -20,7 +20,7 @@ export class Controller implements IController {
     this.levelNumber = level
     this.data = dataNew
     this.emitter = emitterNew
-    this.winCondition = this.data[this.levelNumber - 1].correctAnswers
+    this.winCondition = [...this.data[this.levelNumber - 1].correctAnswers]
   }
 
   private addEventListeners (): void {
@@ -43,7 +43,7 @@ export class Controller implements IController {
   }
 
   private checkCondition (input: string): void {
-    if (input.trim() === this.winCondition) {
+    if (this.winCondition.includes(input.trim())) {
       this.emitter.emit('levelCompleted', this.levelNumber)
     } else {
       console.log('wrong answer')

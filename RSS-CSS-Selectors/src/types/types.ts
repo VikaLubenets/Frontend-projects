@@ -7,13 +7,13 @@ export interface DataItem {
   examples: string
   htmlField: string
   status: string
-  correctAnswers: string
+  correctAnswers: string | string[]
   nameHelpButton: string
   adviceHelpButton: string
   editorDescription: string
   gameHeader: string
   imgURL: string
-  [key: string]: SerializablePrimitiveValue
+  [key: string]: SerializableValue | SerializableValue[]
 }
 
 export type SerializablePrimitiveValue =
@@ -70,8 +70,8 @@ export interface IController {
 }
 
 export interface ILSFactory {
-  set: (name: string, value: SerializableValue) => void
-  get: <T extends SerializableValue>(name: string) => T | null
+  set: (name: string, value: DataItem) => void
+  get: <T extends DataItem>(name: string) => T | null
   remove: (name: string) => void
 }
 
