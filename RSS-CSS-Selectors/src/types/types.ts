@@ -43,7 +43,7 @@ export interface ISubgect {
 export interface IAppViewer {
   currentLevel: number
   data: DataItem[]
-  drawLevel: (levelNumber: number) => void
+  drawLevel: (levelNumber: number, data: DataItem[]) => void
 }
 
 export interface ILevels {

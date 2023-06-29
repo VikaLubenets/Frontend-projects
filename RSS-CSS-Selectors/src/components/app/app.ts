@@ -23,7 +23,7 @@ class App implements IApp {
   }
 
   public start (): void {
-    this.view.drawLevel(this.levelNumber)
+    this.view.drawLevel(this.levelNumber, this.data)
     this.controller.initialize(this.levelNumber, this.data, this.emitter)
     this.emitter.on('levelCompleted', this.nextLevelAfterWin.bind(this))
     this.emitter.on('GameCompleted', this.showWinModal.bind(this))
@@ -36,18 +36,16 @@ class App implements IApp {
   private readonly nextLevelAfterWin = (): void => {
     this.dataProvider.set(this.levelNumber, 'status', 'completed')
     this.data = DataProvider.getInstance().get()
-    console.log(this.data)
-    this.view.updateLevelStatusView(this.data)
-    if (this.levelNumber <= this.data.length) {
+    if (this.levelNumber < this.data.length) {
       this.levelNumber++
-      this.view.drawLevel(this.levelNumber)
+      this.view.drawLevel(this.levelNumber, this.data)
       this.controller.initialize(this.levelNumber, this.data, this.emitter)
     }
   }
 
   private readonly levelAfterClick = (levelNumber: number): void => {
     this.levelNumber = levelNumber
-    this.view.drawLevel(this.levelNumber)
+    this.view.drawLevel(this.levelNumber, this.data)
     this.controller.initialize(this.levelNumber, this.data, this.emitter)
   }
 

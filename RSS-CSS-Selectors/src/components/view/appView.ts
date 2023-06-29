@@ -17,8 +17,8 @@ export class AppViewer implements IAppViewer {
     this.emitter = emitter
   }
 
-  private render (level: number): void {
-    const currentLevelData = this.data[level - 1]
+  private render (level: number, data: DataItem[]): void {
+    const currentLevelData = data[level - 1]
     const helpButton = new HelpButton()
     const editor = new CSSEditor()
     const htmlViewer = new HTMLViewer()
@@ -63,17 +63,18 @@ export class AppViewer implements IAppViewer {
     }
   }
 
-  public drawLevel (levelNumber: number): void {
+  public drawLevel (levelNumber: number, data: DataItem[]): void {
     if (levelNumber >= 1 && levelNumber <= this.data.length) {
       this.currentLevel = levelNumber
       this.clearGameContainer()
-      this.render(levelNumber)
+      this.render(levelNumber, data)
+      this.updateLevelStatusView(data)
     } else {
       console.error('There is no such level.')
     }
   }
 
-  public updateLevelStatusView (data: DataItem[]): void {
+  private updateLevelStatusView (data: DataItem[]): void {
     const completedLevels: number[] = []
     data.forEach(item => {
       if (item.status === 'completed') {

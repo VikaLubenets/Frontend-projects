@@ -46,7 +46,6 @@ export class Controller implements IController {
     if (this.winCondition.includes(input.trim())) {
       this.emitter.emit('levelCompleted', this.levelNumber)
     } else {
-      console.log('wrong answer')
       const editorWrapper: HTMLDivElement | null = document.querySelector('.editor')
       if (editorWrapper != null) {
         editorWrapper.classList.add('losing-animation')
@@ -85,4 +84,20 @@ export class Controller implements IController {
     editorWrapper.classList.remove('losing-animation')
     editorWrapper.removeEventListener('animationend', this.deleteAnimation)
   }
+
+  // private addWinAnimation (): void {
+  //   const elementsPlanets = document.querySelectorAll('planet')
+  //   const elementsComets = document.querySelectorAll('comet')
+  //   const elementsStars = document.querySelectorAll('star')
+
+  //   if (elementsPlanets !== null) {
+  //     elementsPlanets.forEach(item => { item.classList.add('roll-out') })
+  //   }
+  //   if (elementsComets !== null) {
+  //     elementsComets.forEach(item => { item.classList.add('roll-out') })
+  //   }
+  //   if (elementsStars !== null) {
+  //     elementsStars.forEach(item => { item.classList.add('roll-out') })
+  //   }
+  // }
 }
