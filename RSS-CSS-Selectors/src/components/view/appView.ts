@@ -80,16 +80,22 @@ export class AppViewer implements IAppViewer {
         completedLevels.push(parseInt(item.levelNumber.slice(13), 10))
       }
     })
-    console.log(completedLevels)
     if (completedLevels.length > 0) {
       const levelNumbers = document.querySelectorAll('.level-block__number')
-      console.log(levelNumbers)
       levelNumbers.forEach((levelNumber) => {
         const level = parseInt(levelNumber.textContent as string)
-        console.log(level)
         if (completedLevels.includes(level)) {
           levelNumber.classList.add('completed')
-          console.log('includes')
+        }
+      })
+    }
+
+    if (completedLevels.length === 0) {
+      const levelNumbers = document.querySelectorAll('.level-block__number')
+      levelNumbers.forEach((levelNumber) => {
+        const level = parseInt(levelNumber.textContent as string)
+        if (completedLevels.includes(level)) {
+          levelNumber.classList.remove('completed')
         }
       })
     }

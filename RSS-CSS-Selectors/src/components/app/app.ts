@@ -14,9 +14,9 @@ class App implements IApp {
   private readonly dataProvider: DataProvider
 
   constructor () {
-    this.emitter = new EventEmitter()
-    this.data = DataProvider.getInstance().get()
     this.dataProvider = DataProvider.getInstance()
+    this.data = DataProvider.getInstance().get()
+    this.emitter = new EventEmitter()
     this.view = new AppViewer(this.data, this.emitter)
     this.levelNumber = 1
     this.controller = new Controller(this.levelNumber, this.data, this.emitter)
@@ -53,8 +53,12 @@ class App implements IApp {
 
   private makeReset (): void {
     this.dataProvider.reset()
-    this.levelNumber = 1
-    this.start()
+    this.restartGame()
+  }
+
+  private restartGame (): void {
+    const newApp = new App()
+    newApp.start()
   }
 
   private showWinModal (): void {

@@ -105,6 +105,7 @@ export default class DataProvider {
         this.lsFactory.remove(item.levelNumber)
       })
       this.storedData = []
+      this.initialize()
     }
   }
 }
