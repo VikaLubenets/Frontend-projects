@@ -24,7 +24,7 @@ export class HTMLViewer implements IHTMLViewer {
         lineNumber.append(line)
       })
 
-      const htmlField = document.createElement('pre')
+      const htmlField = document.createElement('code')
       htmlField.classList.add('html-viewer__field')
       const encodedContent = htmlFieldContent.replace(/</g, '&lt;').replace(/>/g, '&gt;')
       htmlField.innerHTML = encodedContent

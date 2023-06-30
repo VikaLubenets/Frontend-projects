@@ -7,11 +7,11 @@ import { ModalConstructor } from '../view/Game interface/modal constructor/modal
 
 class App implements IApp {
   private readonly view: AppViewer
-  private levelNumber: number
   private readonly controller: Controller
-  private data: DataItem[]
   private readonly emitter: EventEmitter
   private readonly dataProvider: DataProvider
+  private levelNumber: number
+  private data: DataItem[]
 
   constructor () {
     this.dataProvider = DataProvider.getInstance()
@@ -31,14 +31,16 @@ class App implements IApp {
       this.levelAfterClick(clickedLevel)
     })
     this.emitter.on('resetClicked', this.makeReset.bind(this))
-    this.emitter.on('helpClicked', this.updateHelpClickStatus.bind(this))
+    this.emitter.on('helpClicked', () => {
+      this.dataProvider.set(this.levelNumber, 'helpClicked', 'true')
+    })
   }
 
   private readonly nextLevelAfterWin = (): void => {
     this.dataProvider.set(this.levelNumber, 'status', 'completed')
     this.data = DataProvider.getInstance().get()
     if (this.levelNumber < this.data.length) {
-      this.levelNumber++
+      this.levelNumber = this.levelNumber + 1
       this.view.drawLevel(this.levelNumber, this.data, this.emitter)
       this.controller.initialize(this.levelNumber, this.data, this.emitter)
     }
@@ -63,11 +65,6 @@ class App implements IApp {
   private showWinModal (): void {
     const modal = new ModalConstructor()
     modal.draw('Congratulations! You have completed all levels.')
-  }
-
-  private updateHelpClickStatus (): void {
-    console.log('emiiter works')
-    this.dataProvider.set(this.levelNumber, 'helpClicked', 'true')
   }
 }
 

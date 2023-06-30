@@ -44,7 +44,21 @@ export class Controller implements IController {
 
   private checkCondition (input: string): void {
     if (this.winCondition.includes(input.trim())) {
-      this.emitter.emit('levelCompleted', this.levelNumber)
+      const animatedElements = document.querySelectorAll<HTMLElement>('.add-animation')
+      let count = animatedElements.length
+
+      if (animatedElements !== null && count > 0) {
+        animatedElements.forEach((element) => {
+          element.classList.remove('add-animation')
+          element.classList.add('roll-out')
+          element.addEventListener('animationend', () => {
+            count--
+            if (count === 0) {
+              this.emitter.emit('levelCompleted')
+            }
+          }, { once: true })
+        })
+      }
     } else {
       const editorWrapper: HTMLDivElement | null = document.querySelector('.editor')
       if (editorWrapper != null) {
@@ -84,20 +98,4 @@ export class Controller implements IController {
     editorWrapper.classList.remove('losing-animation')
     editorWrapper.removeEventListener('animationend', this.deleteAnimation)
   }
-
-  // private addWinAnimation (): void {
-  //   const elementsPlanets = document.querySelectorAll('planet')
-  //   const elementsComets = document.querySelectorAll('comet')
-  //   const elementsStars = document.querySelectorAll('star')
-
-  //   if (elementsPlanets !== null) {
-  //     elementsPlanets.forEach(item => { item.classList.add('roll-out') })
-  //   }
-  //   if (elementsComets !== null) {
-  //     elementsComets.forEach(item => { item.classList.add('roll-out') })
-  //   }
-  //   if (elementsStars !== null) {
-  //     elementsStars.forEach(item => { item.classList.add('roll-out') })
-  //   }
-  // }
 }

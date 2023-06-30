@@ -18,6 +18,19 @@ export class AppViewer implements IAppViewer {
     this.emitter = emitter
   }
 
+  public drawLevel (levelNumber: number, data: DataItem[], emitter: EventEmitter): void {
+    if (levelNumber >= 1 && levelNumber <= this.data.length) {
+      this.currentLevel = levelNumber
+      this.clearGameContainer()
+      this.render(levelNumber, data, emitter)
+      this.updateLevelStatusView(data)
+      this.animateElements(levelNumber, data)
+      this.addTitleToElements()
+    } else {
+      console.error('There is no such level.')
+    }
+  }
+
   private render (level: number, data: DataItem[], emitter: EventEmitter): void {
     const currentLevelData = data[level - 1]
     const helpButton = new HelpButton(emitter, currentLevelData.status)
@@ -71,24 +84,35 @@ export class AppViewer implements IAppViewer {
     }
   }
 
-  public drawLevel (levelNumber: number, data: DataItem[], emitter: EventEmitter): void {
-    if (levelNumber >= 1 && levelNumber <= this.data.length) {
-      this.currentLevel = levelNumber
-      this.clearGameContainer()
-      this.render(levelNumber, data, emitter)
-      this.updateLevelStatusView(data)
-      this.animateElements(levelNumber, data)
-    } else {
-      console.error('There is no such level.')
-    }
-  }
-
   private animateElements (levelNumber: number, data: DataItem[]): void {
     const currentLevelData = data[levelNumber - 1]
     const applicableSelector = currentLevelData.selector
     const elements = document.querySelectorAll<HTMLElement>(`${applicableSelector}`)
     if (elements.length > 0) {
+      elements.forEach(element => { element.classList.remove('roll-out') })
       elements.forEach(element => { element.classList.add('add-animation') })
+    }
+  }
+
+  private addTitleToElements (): void {
+    const container: HTMLDivElement | null = document.querySelector('.container')
+    const HTMLField: HTMLElement | null = document.querySelector('.html-viewer__field')
+    if (
+      container !== null &&
+      HTMLField !== null
+    ) {
+      const childrenElements = Array.from(container.querySelectorAll<HTMLElement>('*'))
+      const htmlFieldElements = Array.from(HTMLField.querySelectorAll<HTMLElement>('*'))
+
+      childrenElements.push(...htmlFieldElements)
+      if (childrenElements.length > 0) {
+        childrenElements.forEach(element => {
+          const showTitile = (): void => {
+            element.setAttribute('title', element.outerHTML)
+          }
+          element.addEventListener('mouseover', showTitile)
+        })
+      }
     }
   }
 
@@ -99,6 +123,7 @@ export class AppViewer implements IAppViewer {
         completedLevels.push(parseInt(item.levelNumber.slice(13), 10))
       }
     })
+
     if (completedLevels.length > 0) {
       const levelNumbers = document.querySelectorAll('.level-block__number')
       levelNumbers.forEach((levelNumber) => {
@@ -107,9 +132,7 @@ export class AppViewer implements IAppViewer {
           levelNumber.classList.add('completed')
         }
       })
-    }
-
-    if (completedLevels.length === 0) {
+    } else if (completedLevels.length === 0) {
       const levelNumbers = document.querySelectorAll('.level-block__number')
       levelNumbers.forEach((levelNumber) => {
         const level = parseInt(levelNumber.textContent as string)
@@ -133,7 +156,6 @@ export class AppViewer implements IAppViewer {
           levelNumber.classList.add('helped')
         }
       })
-      console.log(helpedLevels)
     }
   }
 }

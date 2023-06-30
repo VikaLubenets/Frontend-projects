@@ -80,7 +80,7 @@ comet{
   }
 
 .roll-out {
-    animation: roll-out 2s ease infinite;
+    animation: roll-out 2s ease;
 }
 @keyframes roll-out {
     0% {
