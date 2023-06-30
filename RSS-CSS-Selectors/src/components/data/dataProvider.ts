@@ -39,7 +39,8 @@ export default class DataProvider {
           adviceHelpButton: item.adviceHelpButton,
           editorDescription: item.editorDescription,
           gameHeader: item.gameHeader,
-          imgURL: item.imgURL
+          imgURL: item.imgURL,
+          helpClicked: item.helpClicked
         }
       })
 

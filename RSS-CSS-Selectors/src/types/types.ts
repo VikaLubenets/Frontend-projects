@@ -61,7 +61,7 @@ export interface IGameSpace {
 }
 
 export interface ICSSEditor {
-  draw: (editorDescriptionContent: string) => void
+  draw: (editorDescriptionContent: string, levelStatus: string) => void
 }
 
 export interface IController {

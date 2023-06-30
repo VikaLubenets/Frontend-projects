@@ -146,9 +146,9 @@
 
 .level-block__number{
     color: white;
-    font-size: 15px;
+    font-size: 17px;
     cursor: pointer;
-    height: 17px;
+    height: 19px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -175,6 +175,27 @@
 #level-14.completed,
 #level-15.completed{
     background-image: url(./images/completed.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 40% 40%;
+}
+
+#level-1.completed.helped,
+#level-2.completed.helped,
+#level-3.completed.helped,
+#level-4.completed.helped,
+#level-5.completed.helped,
+#level-6.completed.helped,
+#level-7.completed.helped,
+#level-8.completed.helped,
+#level-9.completed.helped,
+#level-10.completed.helped,
+#level-11.completed.helped,
+#level-12.completed.helped,
+#level-13.completed.helped,
+#level-14.completed.helped,
+#level-15.completed.helped{
+    background-image: url(./images/helpcompleted.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: 40% 40%;

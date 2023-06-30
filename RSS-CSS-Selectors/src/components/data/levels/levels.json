@@ -11,7 +11,8 @@
         "adviceHelpButton": "planet",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game starts",
-        "imgURL": "space.jpg"
+        "imgURL": "space.jpg",
+        "helpClicked": "false"
     },
     {
         "levelNumber": "Current level 2",
@@ -25,7 +26,8 @@
         "adviceHelpButton": ".biggest-star",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg"
+        "imgURL": "space.jpg",
+        "helpClicked": "false"
     },
     {
         "levelNumber": "Current level 3",
@@ -39,7 +41,8 @@
         "adviceHelpButton": "[data-type]",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg"
+        "imgURL": "space.jpg",
+        "helpClicked": "false"
     },
     {
         "levelNumber": "Current level 4",
@@ -53,7 +56,8 @@
         "adviceHelpButton": ".container planet",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg"
+        "imgURL": "space.jpg",
+        "helpClicked": "false"
     },
     {
         "levelNumber": "Current level 5",
@@ -67,7 +71,8 @@
         "adviceHelpButton": "[data-speed='fast']",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg"
+        "imgURL": "space.jpg",
+        "helpClicked": "false"
     },
     {
         "levelNumber": "Current level 6",
@@ -81,7 +86,8 @@
         "adviceHelpButton": ".container :first-child",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg"
+        "imgURL": "space.jpg",
+        "helpClicked": "false"
     },
     {
         "levelNumber": "Current level 7",
@@ -95,7 +101,8 @@
         "adviceHelpButton": "header + star",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg"
+        "imgURL": "space.jpg",
+        "helpClicked": "false"
     },
     {
         "levelNumber": "Current level 8",
@@ -109,7 +116,8 @@
         "adviceHelpButton": ".stars > star:nth-child(2)",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg"
+        "imgURL": "space.jpg",
+        "helpClicked": "false"
     },
     {
         "levelNumber": "Current level 9",
@@ -123,7 +131,8 @@
         "adviceHelpButton": "planet:last-child",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg"
+        "imgURL": "space.jpg",
+        "helpClicked": "false"
     },
     {
         "levelNumber": "Current level 10",
@@ -137,7 +146,8 @@
         "adviceHelpButton": "comet + star",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg"
+        "imgURL": "space.jpg",
+        "helpClicked": "false"
     },
     {
         "levelNumber": "Current level 11",
@@ -151,7 +161,8 @@
         "adviceHelpButton": "planet ~ comet",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg"
+        "imgURL": "space.jpg",
+        "helpClicked": "false"
     },
     {
         "levelNumber": "Current level 12",
@@ -165,7 +176,8 @@
         "adviceHelpButton": "star, planet",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg"
+        "imgURL": "space.jpg",
+        "helpClicked": "false"
     },
     {
         "levelNumber": "Current level 13",
@@ -179,7 +191,8 @@
         "adviceHelpButton": "planet.giant",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg"
+        "imgURL": "space.jpg",
+        "helpClicked": "false"
     },
     {
         "levelNumber": "Current level 14",
@@ -193,7 +206,8 @@
         "adviceHelpButton": "*",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg"
+        "imgURL": "space.jpg",
+        "helpClicked": "false"
     }, 
     {
         "levelNumber": "Current level 15",
@@ -207,6 +221,7 @@
         "adviceHelpButton": "#first",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game ends",
-        "imgURL": "space.jpg"
+        "imgURL": "space.jpg",
+        "helpClicked": "false"
     }
 ]

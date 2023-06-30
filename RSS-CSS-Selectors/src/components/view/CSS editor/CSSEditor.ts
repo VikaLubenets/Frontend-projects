@@ -2,7 +2,7 @@ import './CSSEditor.css'
 import type { ICSSEditor } from '../../../types/types'
 
 export class CSSEditor implements ICSSEditor {
-  draw (editorDescriptionContent: string): void {
+  draw (editorDescriptionContent: string, levelStatus: string): void {
     const fragment: DocumentFragment = document.createDocumentFragment()
     const editorWrapper: HTMLDivElement | null = document.querySelector('.editor')
 
@@ -38,6 +38,9 @@ export class CSSEditor implements ICSSEditor {
       const submitButton = document.createElement('div')
       submitButton.classList.add('editor__button')
       submitButton.textContent = 'Enter'
+      if (levelStatus === 'completed') {
+        submitButton.style.pointerEvents = 'none'
+      }
       inputRow.append(submitButton)
 
       const editorDescription = document.createElement('div')

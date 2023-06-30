@@ -31,6 +31,7 @@ class App implements IApp {
       this.levelAfterClick(clickedLevel)
     })
     this.emitter.on('resetClicked', this.makeReset.bind(this))
+    this.emitter.on('helpClicked', this.updateHelpClickStatus.bind(this))
   }
 
   private readonly nextLevelAfterWin = (): void => {
@@ -62,6 +63,10 @@ class App implements IApp {
   private showWinModal (): void {
     const modal = new ModalConstructor()
     modal.draw('Congratulations! You have completed all levels.')
+  }
+
+  private updateHelpClickStatus (): void {
+    this.dataProvider.set(this.levelNumber, 'helpClicked', 'true')
   }
 }
 

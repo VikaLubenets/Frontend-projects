@@ -20,13 +20,13 @@ export class AppViewer implements IAppViewer {
 
   private render (level: number, data: DataItem[], emitter: EventEmitter): void {
     const currentLevelData = data[level - 1]
-    const helpButton = new HelpButton(emitter)
+    const helpButton = new HelpButton(emitter, currentLevelData.status)
     const editor = new CSSEditor()
     const helpPrint = new HelpPrint()
     const htmlViewer = new HTMLViewer()
     const gameSpace = new GameSpace()
 
-    editor.draw(currentLevelData.editorDescription)
+    editor.draw(currentLevelData.editorDescription, currentLevelData.status)
     htmlViewer.draw(currentLevelData.htmlField)
     gameSpace.draw(currentLevelData.htmlField)
     helpButton.draw(currentLevelData.nameHelpButton, currentLevelData.adviceHelpButton)
@@ -34,6 +34,7 @@ export class AppViewer implements IAppViewer {
     this.emitter.once('helpClicked', (helpAdvice) => {
       helpPrint.animateText(helpAdvice)
       editor.updateInputAfterHelp(helpAdvice)
+      helpButton.removeEventsListeners()
     })
 
     const levelField = new Levels(this.emitter, this.data)
@@ -104,6 +105,22 @@ export class AppViewer implements IAppViewer {
         const level = parseInt(levelNumber.textContent as string)
         if (completedLevels.includes(level)) {
           levelNumber.classList.remove('completed')
+        }
+      })
+    }
+
+    const helpedLevels: number[] = []
+    data.forEach(item => {
+      if (item.helpClicked === 'true') {
+        helpedLevels.push(parseInt(item.levelNumber.slice(13), 10))
+      }
+    })
+    if (helpedLevels.length > 0) {
+      const levelNumbers = document.querySelectorAll('.level-block__number')
+      levelNumbers.forEach((levelNumber) => {
+        const level = parseInt(levelNumber.textContent as string)
+        if (helpedLevels.includes(level)) {
+          levelNumber.classList.add('helped')
         }
       })
     }
