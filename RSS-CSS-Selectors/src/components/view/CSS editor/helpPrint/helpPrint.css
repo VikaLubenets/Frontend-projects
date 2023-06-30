@@ -1,0 +1,26 @@
+.help-print-container {
+    width: 85%;
+    height: 50%;
+    opacity: 0;
+    border: 1px solid black;
+    display: none;
+  }
+
+  @keyframes typingEffect {
+    from {
+      width: 0;
+    }
+  }
+  
+  .help-print-text {
+    animation: typingEffect 2s steps(40, end);
+    white-space: nowrap;
+    display: block;
+    padding: 5px;
+  }
+  
+  .help-print-container.clicked {
+    display: block;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
+  }

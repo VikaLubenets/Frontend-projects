@@ -5,6 +5,7 @@ import { HelpButton } from './Game interface/help button/helpButton'
 import { Levels } from './Levels/levels'
 import type { DataItem, IAppViewer } from '../../types/types'
 import type { EventEmitter } from 'events'
+import HelpPrint from './CSS editor/helpPrint/helpPrint'
 
 export class AppViewer implements IAppViewer {
   currentLevel: number
@@ -17,10 +18,11 @@ export class AppViewer implements IAppViewer {
     this.emitter = emitter
   }
 
-  private render (level: number, data: DataItem[]): void {
+  private render (level: number, data: DataItem[], emitter: EventEmitter): void {
     const currentLevelData = data[level - 1]
-    const helpButton = new HelpButton()
+    const helpButton = new HelpButton(emitter)
     const editor = new CSSEditor()
+    const helpPrint = new HelpPrint()
     const htmlViewer = new HTMLViewer()
     const gameSpace = new GameSpace()
 
@@ -28,6 +30,11 @@ export class AppViewer implements IAppViewer {
     htmlViewer.draw(currentLevelData.htmlField)
     gameSpace.draw(currentLevelData.htmlField)
     helpButton.draw(currentLevelData.nameHelpButton, currentLevelData.adviceHelpButton)
+    helpPrint.draw()
+    this.emitter.once('helpClicked', (helpAdvice) => {
+      helpPrint.animateText(helpAdvice)
+      editor.updateInputAfterHelp(helpAdvice)
+    })
 
     const levelField = new Levels(this.emitter, this.data)
     levelField.draw(
@@ -63,11 +70,11 @@ export class AppViewer implements IAppViewer {
     }
   }
 
-  public drawLevel (levelNumber: number, data: DataItem[]): void {
+  public drawLevel (levelNumber: number, data: DataItem[], emitter: EventEmitter): void {
     if (levelNumber >= 1 && levelNumber <= this.data.length) {
       this.currentLevel = levelNumber
       this.clearGameContainer()
-      this.render(levelNumber, data)
+      this.render(levelNumber, data, emitter)
       this.updateLevelStatusView(data)
     } else {
       console.error('There is no such level.')

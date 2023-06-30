@@ -53,4 +53,12 @@ export class CSSEditor implements ICSSEditor {
       htmlCSSContainer.append(fragment)
     }
   }
+
+  updateInputAfterHelp (content: string): void {
+    const inputEl: HTMLInputElement | null = document.querySelector('.editor__input')
+    if (inputEl !== null) {
+      inputEl.removeAttribute('placeholder')
+      inputEl.value = `${content}`
+    }
+  }
 }

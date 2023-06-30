@@ -8,7 +8,7 @@
         "status": "uncompleted",
         "correctAnswers": ["planet"],
         "nameHelpButton": "Help",
-        "adviceHelpButton": "Select all elements with tag <planet></planet>. Type refers to the type of tag, so <tag>div</tag>, <tag>p</tag> and <tag>planet</tag> are all different types of element selectors.",
+        "adviceHelpButton": "planet",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game starts",
         "imgURL": "space.jpg"
@@ -22,7 +22,7 @@
         "status": "uncompleted",
         "correctAnswers": [".biggest-star"],
         "nameHelpButton": "Click for help",
-        "adviceHelpButton": "'.medium-star' selects the star with class='medium-star'",
+        "adviceHelpButton": ".biggest-star",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
         "imgURL": "space.jpg"
@@ -36,7 +36,7 @@
         "status": "uncompleted",
         "correctAnswers": ["[data-type]"],
         "nameHelpButton": "If you need help, I'm here",
-        "adviceHelpButton": "[attribute]' selects all elements with the specified attribute. In this case, you need to select elements with the attribute 'data-type'.",
+        "adviceHelpButton": "[data-type]",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
         "imgURL": "space.jpg"
@@ -50,7 +50,7 @@
         "status": "uncompleted",
         "correctAnswers": [".container planet"],
         "nameHelpButton": "Ready to help!",
-        "adviceHelpButton": "'parent descendant' selects all descendants of the specified parent element",
+        "adviceHelpButton": ".container planet",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
         "imgURL": "space.jpg"
@@ -64,7 +64,7 @@
         "status": "uncompleted",
         "correctAnswers":[ "[data-speed='fast']"],
         "nameHelpButton": "Help button",
-        "adviceHelpButton": "'[data-speed='medium']' selects the comet with data-speed='medium'",
+        "adviceHelpButton": "[data-speed='fast']",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
         "imgURL": "space.jpg"
@@ -78,7 +78,7 @@
         "status": "uncompleted",
         "correctAnswers": [".container :first-child"],
         "nameHelpButton": "Do not want to help, but I can",
-        "adviceHelpButton": "':first-child' selects the first child of its parent element. Do not forget to use class for choosing parent element",
+        "adviceHelpButton": ".container :first-child",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
         "imgURL": "space.jpg"
@@ -92,7 +92,7 @@
         "status": "uncompleted",
         "correctAnswers": ["header + star"],
         "nameHelpButton": "No worries, click for help",
-        "adviceHelpButton": "'star + planet' selects the planet immediately following the last star",
+        "adviceHelpButton": "header + star",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
         "imgURL": "space.jpg"
@@ -106,7 +106,7 @@
         "status": "uncompleted",
         "correctAnswers": [".stars > star:nth-child(2)"],
         "nameHelpButton": "Need for help",
-        "adviceHelpButton": "':nth-child(n)' selects the nth child of its parent element",
+        "adviceHelpButton": ".stars > star:nth-child(2)",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
         "imgURL": "space.jpg"
@@ -120,7 +120,7 @@
         "status": "uncompleted",
         "correctAnswers":[ "planet:last-child"],
         "nameHelpButton": "Help",
-        "adviceHelpButton": "'selector:last-child' selects the last child element of its parent",
+        "adviceHelpButton": "planet:last-child",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
         "imgURL": "space.jpg"
@@ -134,7 +134,7 @@
         "status": "uncompleted",
         "correctAnswers": ["comet + star"],
         "nameHelpButton": "Need a piece of advice",
-        "adviceHelpButton": "'planet + star' selects the star that immediately follows planet",
+        "adviceHelpButton": "comet + star",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
         "imgURL": "space.jpg"
@@ -148,7 +148,7 @@
         "status": "uncompleted",
         "correctAnswers": ["planet ~ comet"],
         "nameHelpButton": "Ask for help",
-        "adviceHelpButton": "Pay attention to the symbol '\u007e', which indicates selecting an element that comes after the specified element.",
+        "adviceHelpButton": "planet ~ comet",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
         "imgURL": "space.jpg"
@@ -162,7 +162,7 @@
         "status": "uncompleted",
         "correctAnswers": ["star, planet"],
         "nameHelpButton": "Open advice",
-        "adviceHelpButton": "Use a comma to select multiple different elements and their tag names",
+        "adviceHelpButton": "star, planet",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
         "imgURL": "space.jpg"
@@ -176,7 +176,7 @@
         "status": "uncompleted",
         "correctAnswers": ["planet.giant"],
         "nameHelpButton": "Click for help",
-        "adviceHelpButton": "Pay attention to the dot before the tag name and the class name, indicating selecting elements with a specific class.",
+        "adviceHelpButton": "planet.giant",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
         "imgURL": "space.jpg"
@@ -190,7 +190,7 @@
         "status": "uncompleted",
         "correctAnswers": ["*"],
         "nameHelpButton": "Ready to help",
-        "adviceHelpButton": "Use the '*' symbol to select all elements on the page.",
+        "adviceHelpButton": "*",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
         "imgURL": "space.jpg"
@@ -204,7 +204,7 @@
         "status": "uncompleted",
         "correctAnswers": ["#first"],
         "nameHelpButton": "Do you need help?",
-        "adviceHelpButton": "You can use the '#second'to select an element with a specific ID = 'second'.",
+        "adviceHelpButton": "#first",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game ends",
         "imgURL": "space.jpg"

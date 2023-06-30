@@ -23,7 +23,7 @@ class App implements IApp {
   }
 
   public start (): void {
-    this.view.drawLevel(this.levelNumber, this.data)
+    this.view.drawLevel(this.levelNumber, this.data, this.emitter)
     this.controller.initialize(this.levelNumber, this.data, this.emitter)
     this.emitter.on('levelCompleted', this.nextLevelAfterWin.bind(this))
     this.emitter.on('GameCompleted', this.showWinModal.bind(this))
@@ -38,14 +38,14 @@ class App implements IApp {
     this.data = DataProvider.getInstance().get()
     if (this.levelNumber < this.data.length) {
       this.levelNumber++
-      this.view.drawLevel(this.levelNumber, this.data)
+      this.view.drawLevel(this.levelNumber, this.data, this.emitter)
       this.controller.initialize(this.levelNumber, this.data, this.emitter)
     }
   }
 
   private readonly levelAfterClick = (levelNumber: number): void => {
     this.levelNumber = levelNumber
-    this.view.drawLevel(this.levelNumber, this.data)
+    this.view.drawLevel(this.levelNumber, this.data, this.emitter)
     this.controller.initialize(this.levelNumber, this.data, this.emitter)
   }
 
