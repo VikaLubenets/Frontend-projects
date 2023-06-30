@@ -8,7 +8,9 @@ export class HelpButton {
 
   constructor (emitter: EventEmitter, status: string) {
     this.emitter = emitter
-    this.handleClick = () => { this.emitter.emit('helpClicked') }
+    this.handleClick = () => {
+      this.emitter.emit('helpClicked')
+    }
     this.status = status
   }
 
@@ -20,7 +22,7 @@ export class HelpButton {
     button.classList.add('help-button')
     button.textContent = name
     if (this.status === 'completed') {
-      button.style.pointerEvents = 'none'
+      this.removeEventsListeners()
     } else {
       button.addEventListener('click', this.handleClick)
     }

@@ -23,7 +23,6 @@ export default class HelpPrint {
       const text = content
       helpText.textContent = text[0]
       let index = 1
-
       const typing = setInterval(() => {
         if (index < text.length) {
           if (helpText.textContent !== null) {

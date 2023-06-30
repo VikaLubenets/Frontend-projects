@@ -32,9 +32,9 @@ export class AppViewer implements IAppViewer {
     helpButton.draw(currentLevelData.nameHelpButton, currentLevelData.adviceHelpButton)
     helpPrint.draw()
     this.emitter.once('helpClicked', (helpAdvice) => {
+      helpButton.removeEventsListeners()
       helpPrint.animateText(helpAdvice)
       editor.updateInputAfterHelp(helpAdvice)
-      helpButton.removeEventsListeners()
     })
 
     const levelField = new Levels(this.emitter, this.data)
@@ -77,8 +77,18 @@ export class AppViewer implements IAppViewer {
       this.clearGameContainer()
       this.render(levelNumber, data, emitter)
       this.updateLevelStatusView(data)
+      this.animateElements(levelNumber, data)
     } else {
       console.error('There is no such level.')
+    }
+  }
+
+  private animateElements (levelNumber: number, data: DataItem[]): void {
+    const currentLevelData = data[levelNumber - 1]
+    const applicableSelector = currentLevelData.selector
+    const elements = document.querySelectorAll<HTMLElement>(`${applicableSelector}`)
+    if (elements.length > 0) {
+      elements.forEach(element => { element.classList.add('add-animation') })
     }
   }
 
@@ -123,6 +133,7 @@ export class AppViewer implements IAppViewer {
           levelNumber.classList.add('helped')
         }
       })
+      console.log(helpedLevels)
     }
   }
 }

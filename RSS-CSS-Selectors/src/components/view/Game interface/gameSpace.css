@@ -42,7 +42,6 @@ planet{
     height: 10vh;
     width: 10vw;
     background-position: center;
-    animation: spin 15s linear infinite;
 }
 
 star{
@@ -54,7 +53,6 @@ star{
     height: 10vh;
     width: 10vw;
     background-position: center;
-    animation: spin 15s linear infinite;
 }
 
 comet{
@@ -66,7 +64,10 @@ comet{
     height: 10vh;
     width: 10vw;
     background-position: center;
-    animation: spin 15s linear infinite;
+}
+
+.add-animation{
+    animation: spin 5s infinite;
 }
 
 @keyframes spin {

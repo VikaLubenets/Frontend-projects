@@ -1,7 +1,7 @@
 [
     {
         "levelNumber": "Current level 1",
-        "selector": "tag",
+        "selector": "planet",
         "taskDescription": "Choose all planets using their element selectors",
         "examples": "For example all <p> selectors could be chosen by typing p",
         "htmlField": "<div class='container'>\n    <planet></planet>\n    <planet></planet>\n    <planet></planet>\n</div>",
@@ -16,7 +16,7 @@
     },
     {
         "levelNumber": "Current level 2",
-        "selector": "class",
+        "selector": ".biggest-star",
         "taskDescription": "You need to choose the biggest star using class selector",
         "examples": "'.class' selects all elements with class='class'",
         "htmlField": "<div class='container'>\n    <star class='biggest-star'></star>\n    <star class='medium-star'></star>\n    <star class='small-star'></star>\n</div>",
@@ -31,7 +31,7 @@
     },
     {
         "levelNumber": "Current level 3",
-        "selector": "attribute",
+        "selector": "[data-type]",
         "taskDescription": "Choose all planets with a specific attribute",
         "examples": "'[attribute]' selects all elements with the specified attribute",
         "htmlField": "<div class='container'>\n    <planet data-type='gas'></planet>\n    <planet data-type='rocky'></planet>\n    <planet></planet>\n</div>",
@@ -46,7 +46,7 @@
     },
     {
         "levelNumber": "Current level 4",
-        "selector": "descendant",
+        "selector": ".container planet",
         "taskDescription": "Choose all planets within the <div class='container'> as its descendants",
         "examples": "'parent child' selects all descendants of the parent element",
         "htmlField": "<div class='container'>\n    <planet></planet>\n    <planet></planet>\n    <planet></planet>\n    <div class='inner-container'>\n        <planet></planet>\n        <planet></planet>\n    </div>\n</div>",
@@ -61,7 +61,7 @@
     },
     {
         "levelNumber": "Current level 5",
-        "selector": "attribute",
+        "selector": "[data-speed='fast']",
         "taskDescription": "Select the comet with the attribute 'data-speed' set to 'fast'",
         "examples": "'[attribute=value]' selects all elements with attribute='value'",
         "htmlField": "<div class='container'>\n    <comet data-speed='fast'></comet>\n    <comet data-speed='medium'></comet>\n    <comet data-speed='slow'></comet>\n</div>",
@@ -76,7 +76,7 @@
     },
     {
         "levelNumber": "Current level 6",
-        "selector": "pseudo-class",
+        "selector": ".container :first-child",
         "taskDescription": "Select the first child of the 'container' element",
         "examples": "':pseudo-class' selects elements based on a specific state or position",
         "htmlField": "<div class='container'>\n    <planet></planet>\n    <planet></planet>\n</div>",
@@ -91,14 +91,14 @@
     },
     {
         "levelNumber": "Current level 7",
-        "selector": "adjacent-sibling",
+        "selector": "comet + star",
         "taskDescription": "Select the star immediately following the 'comet' element",
         "examples": "'element + element' selects an element immediately following another element",
         "htmlField": "<comet></comet>\n<star></star>\n<star></star>\n<planet></planet>\n<planet></planet>",
         "status": "uncompleted",
-        "correctAnswers": ["header + star"],
+        "correctAnswers": ["comet + star"],
         "nameHelpButton": "No worries, click for help",
-        "adviceHelpButton": "header + star",
+        "adviceHelpButton": "comet + star",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
         "imgURL": "space.jpg",
@@ -106,7 +106,7 @@
     },
     {
         "levelNumber": "Current level 8",
-        "selector": "child",
+        "selector": ".stars > star:nth-child(2)",
         "taskDescription": "Select the second direct child of the 'star' element",
         "examples": "'parent > child' selects a direct child of a parent element",
         "htmlField": "<ul class='stars'>\n    <star></star>\n    <star></star>\n    <star></star>\n</ul>",
@@ -121,7 +121,7 @@
     },
     {
         "levelNumber": "Current level 9",
-        "selector": "pseudo-class",
+        "selector": "planet:last-child",
         "taskDescription": "Select the last planet element of the 'galaxy' class",
         "examples": "'selector:pseudo-class' selects elements based on a certain state or condition",
         "htmlField":  "<div class='galaxy'>\n    <planet></planet>\n    <planet></planet>\n    <planet></planet>\n</div>",
@@ -136,7 +136,7 @@
     },
     {
         "levelNumber": "Current level 10",
-        "selector": "combination",
+        "selector": "comet + star",
         "taskDescription": "Select the 'star' element that is a direct sibling of the 'comet' element",
         "examples": "'selector1 + selector2' selects the element that is an immediate sibling of another element",
         "htmlField": "<planet></planet>\n<star></star>\n<planet></planet>\n<comet></comet>\n<star></star>",
@@ -151,7 +151,7 @@
     },
     {
         "levelNumber": "Current level 11",
-        "selector": "tilde",
+        "selector": "planet ~ comet",
         "taskDescription": "Select every <comet> element that is preceded by a <planet> element",
         "examples": "",
         "htmlField":  "<comet></comet>\n<planet></planet>\n<comet></comet>\n<comet></comet>\n<planet></planet>\n<star></star>\n<comet></comet>",
@@ -166,7 +166,7 @@
     },
     {
         "levelNumber": "Current level 12",
-        "selector": "tag",
+        "selector": "star, planet",
         "taskDescription": "Select all stars and planets",
         "examples": "'element1,element2' selects all <element1> elements and all <element2> elements.",
         "htmlField":  "<star></star>\n<planet></planet>\n<comet></comet>\n<star></star>\n<planet></planet>\n<star></star>\n<comet></comet>",
@@ -181,7 +181,7 @@
     },
     {
         "levelNumber": "Current level 13",
-        "selector": "tag",
+        "selector": "planet.giant",
         "taskDescription": "Select the planets with the class 'giant'",
         "examples": "'element.class' selects all <element> elements with the class 'class'",
         "htmlField": "<planet></planet>\n<planet class='giant'></planet>\n<planet></planet>\n<planet class='giant'></planet>\n<star class='giant'></star>",
@@ -196,7 +196,7 @@
     },
     {
         "levelNumber": "Current level 14",
-        "selector": "tag",
+        "selector": "star, planet, comet",
         "taskDescription": "Select all elements",
         "examples": "You can select all elements with the universal selector - *!",
         "htmlField": "<star></star>\n<planet></planet>\n<comet></comet>\n<star></star>\n<planet></planet>\n<comet></comet>",
@@ -211,7 +211,7 @@
     }, 
     {
         "levelNumber": "Current level 15",
-        "selector": "tag",
+        "selector": "#first",
         "taskDescription": "Select the star element with the ID 'first'.",
         "examples": "'#id' selects the element with the ID 'id'.",
         "htmlField":  "<planet></planet>\n<star id='second'></star>\n<comet></comet>\n<planet></planet>\n<comet></comet>\n<star id='first'></star>",

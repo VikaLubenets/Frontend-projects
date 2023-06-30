@@ -66,6 +66,7 @@ class App implements IApp {
   }
 
   private updateHelpClickStatus (): void {
+    console.log('emiiter works')
     this.dataProvider.set(this.levelNumber, 'helpClicked', 'true')
   }
 }
