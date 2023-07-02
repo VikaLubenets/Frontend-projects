@@ -85,24 +85,47 @@ export default class AppViewer implements IAppViewer {
   }
 
   private addTitleToElements (): void {
-    const container: HTMLDivElement | null = document.querySelector('.container')
+    const container: HTMLDivElement | null = document.querySelector('.game-image')
     const HTMLField: HTMLElement | null = document.querySelector('.html-viewer__field')
-    if (
-      container !== null &&
-      HTMLField !== null
-    ) {
+    if (container !== null && HTMLField !== null) {
       const childrenElements = Array.from(container.querySelectorAll<HTMLElement>('*'))
-      const htmlFieldElements = Array.from(HTMLField.querySelectorAll<HTMLElement>('*'))
+      const htmlFieldElements = Array.from(HTMLField.querySelectorAll<HTMLElement>('div, planet'))
 
-      childrenElements.push(...htmlFieldElements)
-      if (childrenElements.length > 0) {
-        childrenElements.forEach(element => {
-          const showTitile = (): void => {
-            element.setAttribute('title', element.outerHTML)
+      if (childrenElements.length > 0 && htmlFieldElements.length > 0) {
+        childrenElements.forEach((element, index) => {
+          const content = htmlFieldElements[index]
+
+          const showTitle = (): void => {
+            this.updateTitle(element, content, true)
+            toggleVisibility()
           }
-          element.addEventListener('mouseover', showTitile)
+
+          const removeTitle = (): void => {
+            this.updateTitle(element, content, false)
+            toggleVisibility()
+          }
+
+          const toggleVisibility = (): void => {
+            element.classList.toggle('visible')
+            content.classList.toggle('visible')
+          }
+
+          element.addEventListener('mouseover', showTitle)
+          element.addEventListener('mouseleave', removeTitle)
+          content.addEventListener('mouseover', showTitle)
+          content.addEventListener('mouseleave', removeTitle)
         })
       }
+    }
+  }
+
+  private updateTitle (element: HTMLElement, content: HTMLElement, show: boolean): void {
+    if (show && content.textContent !== null) {
+      element.setAttribute('data-title', content.textContent)
+      content.setAttribute('data-title', content.textContent)
+    } else {
+      element.removeAttribute('data-title')
+      content.removeAttribute('data-title')
     }
   }
 

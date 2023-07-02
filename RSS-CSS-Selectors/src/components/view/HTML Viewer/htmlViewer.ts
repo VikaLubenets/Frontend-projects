@@ -24,10 +24,19 @@ export class HTMLViewer implements IHTMLViewer {
         lineNumber.append(line)
       })
 
-      const htmlField = document.createElement('code')
+      const htmlField = document.createElement('pre')
       htmlField.classList.add('html-viewer__field')
-      const encodedContent = htmlFieldContent.replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      htmlField.innerHTML = encodedContent
+
+      const lines = htmlFieldContent.split('\n')
+      let lineCount = 1
+
+      lines.forEach(line => {
+        const lineElement = document.createElement('div')
+        lineElement.textContent = line
+        lineElement.setAttribute('id', `${lineCount}`)
+        htmlField.append(lineElement)
+        lineCount++
+      })
       htmlWrapper.append(htmlField)
 
       fragment.append(htmlWrapper)
