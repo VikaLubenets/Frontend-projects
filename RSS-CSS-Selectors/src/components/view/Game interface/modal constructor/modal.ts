@@ -1,6 +1,7 @@
+import type { IModalConstructor } from '../../../../types/types'
 import './modal.css'
 
-export class ModalConstructor {
+export default class ModalConstructor implements IModalConstructor {
   private modalCover: HTMLElement | null
   private closeButton: HTMLButtonElement | null
   private modalContent: HTMLElement | null
@@ -39,28 +40,40 @@ export class ModalConstructor {
   }
 
   private addEventsListeners (): void {
-    if (this.modalCover !== null && this.closeButton !== null) {
+    if (
+      this.modalCover !== null &&
+       this.closeButton !== null
+    ) {
       this.modalCover.addEventListener('click', this.handleCoverClick)
       this.closeButton.addEventListener('click', this.handleCloseButtonClick)
     }
   }
 
   private removeEventsListeners (): void {
-    if (this.modalCover !== null && this.closeButton !== null) {
+    if (
+      this.modalCover !== null &&
+      this.closeButton !== null
+    ) {
       this.modalCover.removeEventListener('click', this.handleCoverClick)
       this.closeButton.removeEventListener('click', this.handleCloseButtonClick)
     }
   }
 
   private readonly handleCoverClick = (event: MouseEvent): void => {
-    if (event.target === this.modalCover && event.target !== this.modalContent) {
+    if (
+      event.target === this.modalCover &&
+      event.target !== this.modalContent
+    ) {
       this.closeModal()
     }
   }
 
   private readonly handleCloseButtonClick = (event: MouseEvent): void => {
     const target = event.target as HTMLElement
-    if (target === this.closeButton || target.closest('.modal__button') === this.closeButton) {
+    if (
+      target === this.closeButton ||
+      target.closest('.modal__button') === this.closeButton
+    ) {
       this.closeModal()
     }
   }

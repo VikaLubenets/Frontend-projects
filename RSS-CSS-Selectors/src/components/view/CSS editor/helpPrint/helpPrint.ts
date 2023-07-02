@@ -1,6 +1,7 @@
 import './helpPrint.css'
+import type { IHelpPrint } from '../../../../types/types'
 
-export default class HelpPrint {
+export default class HelpPrint implements IHelpPrint {
   draw (): void {
     const helpPrintContainer = document.createElement('div')
     helpPrintContainer.classList.add('help-print-container')

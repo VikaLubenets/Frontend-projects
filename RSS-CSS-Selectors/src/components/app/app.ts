@@ -1,15 +1,15 @@
 import type { DataItem, IApp } from '../../types/types'
 import DataProvider from '../data/dataProvider'
-import { AppViewer } from '../view/appView'
-import { Controller } from '../controller/controller'
+import AppViewer from '../view/appView'
+import Controller from '../controller/controller'
 import { EventEmitter } from 'events'
-import { ModalConstructor } from '../view/Game interface/modal constructor/modal'
+import ModalConstructor from '../view/Game interface/modal constructor/modal'
 
 class App implements IApp {
   private readonly view: AppViewer
   private readonly controller: Controller
-  private readonly emitter: EventEmitter
   private readonly dataProvider: DataProvider
+  private readonly emitter: EventEmitter
   private levelNumber: number
   private data: DataItem[]
 
@@ -17,7 +17,7 @@ class App implements IApp {
     this.dataProvider = DataProvider.getInstance()
     this.data = DataProvider.getInstance().get()
     this.emitter = new EventEmitter()
-    this.view = new AppViewer(this.data, this.emitter)
+    this.view = new AppViewer()
     this.levelNumber = 1
     this.controller = new Controller(this.levelNumber, this.data, this.emitter)
   }

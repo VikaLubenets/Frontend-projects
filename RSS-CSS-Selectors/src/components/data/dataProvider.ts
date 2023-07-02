@@ -1,8 +1,8 @@
-import type { DataItem } from '../../types/types'
+import type { DataItem, IDataProvider } from '../../types/types'
 import data from './levels/levels.json'
 import lsFactory, { type LocalStorageFactory } from './storage/localStorageData'
 
-export default class DataProvider {
+export default class DataProvider implements IDataProvider {
   private readonly lsFactory: LocalStorageFactory
   private static instance: DataProvider | null = null
   storedData: DataItem[]
@@ -39,7 +39,6 @@ export default class DataProvider {
           adviceHelpButton: item.adviceHelpButton,
           editorDescription: item.editorDescription,
           gameHeader: item.gameHeader,
-          imgURL: item.imgURL,
           helpClicked: item.helpClicked
         }
       })
@@ -50,6 +49,14 @@ export default class DataProvider {
 
       this.storedData = defaultData
     }
+  }
+
+  static getInstance (): DataProvider {
+    if (this.instance == null) {
+      this.instance = new DataProvider()
+      this.instance.initialize()
+    }
+    return this.instance
   }
 
   get (): DataItem[] {
@@ -69,14 +76,6 @@ export default class DataProvider {
 
     this.storedData = arr
     return this.storedData
-  }
-
-  static getInstance (): DataProvider {
-    if (this.instance == null) {
-      this.instance = new DataProvider()
-      this.instance.initialize()
-    }
-    return this.instance
   }
 
   set (level: number, key: keyof DataItem, value: string): void {
@@ -101,7 +100,10 @@ export default class DataProvider {
   }
 
   reset (): void {
-    if (this.storedData !== undefined && this.storedData.length > 0) {
+    if (
+      this.storedData !== undefined &&
+      this.storedData.length > 0
+    ) {
       this.storedData.forEach(item => {
         this.lsFactory.remove(item.levelNumber)
       })

@@ -98,7 +98,7 @@ export class Levels implements ILevels {
     }
   }
 
-  addEventsListeners (): void {
+  burgerMenuAddEventsListeners (): void {
     const burgerMenu: HTMLDivElement | null = document.querySelector('.burger-menu')
     const body: HTMLBodyElement | null = document.querySelector('body')
     const cover: HTMLDivElement | null = document.querySelector('.cover')

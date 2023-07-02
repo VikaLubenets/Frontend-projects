@@ -12,8 +12,7 @@ export interface DataItem {
   adviceHelpButton: string
   editorDescription: string
   gameHeader: string
-  imgURL: string
-  [key: string]: SerializableValue | SerializableValue[]
+  [key: string]: DataItemValue
 }
 
 export type SerializablePrimitiveValue =
@@ -28,28 +27,18 @@ SerializablePrimitiveValue [] |
 Record<string, SerializablePrimitiveValue> |
 { toJSON: SerializableValue }
 
+type DataItemValue = SerializableValue | SerializableValue[]
+
 export type CallbackFn<T> = (data: T) => void
 
-export interface IObserver {
-  update: (value: string) => void
-}
-
-export interface ISubgect {
-  subscribe: (observer: IObserver) => void
-  unsubscribe: (observer: IObserver) => void
-  notify: () => void
-}
-
 export interface IAppViewer {
-  currentLevel: number
-  data: DataItem[]
   drawLevel: (levelNumber: number, data: DataItem[], emitter: EventEmitter) => void
 }
 
 export interface ILevels {
   draw: (level: string, status: string, taskDescription: string, examples: string) => void
-  addEventsListeners: () => void
-  levelNumberAddEventListeners: (method: (level: number) => void) => void
+  burgerMenuAddEventsListeners: () => void
+  levelNumberAddEventListeners: () => void
 }
 
 export interface IHTMLViewer {
@@ -60,13 +49,30 @@ export interface IGameSpace {
   draw: (htmlFieldContent: string) => void
 }
 
+export interface IModalConstructor {
+  draw: (modalContent: string) => void
+}
+
+export interface IHelpButton {
+  emitter: EventEmitter
+  status: string
+  handleClick: () => void
+  draw: (name: string, helpAdvice: string) => void
+  removeEventsListeners: () => void
+}
+
 export interface ICSSEditor {
   draw: (editorDescriptionContent: string, levelStatus: string) => void
 }
 
+export interface IHelpPrint {
+  draw: () => void
+  animateText: (content: string) => void
+}
+
 export interface IController {
   emitter: EventEmitter
-  initialize: (level: number, dataNew: DataItem[], emitterNew: EventEmitter) => void
+  initialize: (level: number, data: DataItem[], emitter: EventEmitter) => void
 }
 
 export interface ILSFactory {
@@ -79,6 +85,7 @@ export interface IDataProvider {
   storedData: DataItem[]
   get: () => DataItem[]
   set: (level: number, key: keyof DataItem, value: string) => void
+  reset: () => void
 }
 
 export interface IApp {

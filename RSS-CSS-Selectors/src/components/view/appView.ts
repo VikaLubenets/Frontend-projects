@@ -7,20 +7,9 @@ import type { DataItem, IAppViewer } from '../../types/types'
 import type { EventEmitter } from 'events'
 import HelpPrint from './CSS editor/helpPrint/helpPrint'
 
-export class AppViewer implements IAppViewer {
-  currentLevel: number
-  data: DataItem[]
-  emitter: EventEmitter
-
-  constructor (data: DataItem[], emitter: EventEmitter) {
-    this.currentLevel = 1
-    this.data = data
-    this.emitter = emitter
-  }
-
+export default class AppViewer implements IAppViewer {
   public drawLevel (levelNumber: number, data: DataItem[], emitter: EventEmitter): void {
-    if (levelNumber >= 1 && levelNumber <= this.data.length) {
-      this.currentLevel = levelNumber
+    if (levelNumber >= 1 && levelNumber <= data.length) {
       this.clearGameContainer()
       this.render(levelNumber, data, emitter)
       this.updateLevelStatusView(data)
@@ -44,20 +33,20 @@ export class AppViewer implements IAppViewer {
     gameSpace.draw(currentLevelData.htmlField)
     helpButton.draw(currentLevelData.nameHelpButton, currentLevelData.adviceHelpButton)
     helpPrint.draw()
-    this.emitter.once('helpClicked', (helpAdvice) => {
+    emitter.once('helpClicked', (helpAdvice) => {
       helpButton.removeEventsListeners()
       helpPrint.animateText(helpAdvice)
       editor.updateInputAfterHelp(helpAdvice)
     })
 
-    const levelField = new Levels(this.emitter, this.data)
+    const levelField = new Levels(emitter, data)
     levelField.draw(
       currentLevelData.levelNumber,
       currentLevelData.status,
       currentLevelData.taskDescription,
       currentLevelData.examples
     )
-    levelField.addEventsListeners()
+    levelField.burgerMenuAddEventsListeners()
     levelField.levelNumberAddEventListeners()
   }
 

@@ -1,8 +1,8 @@
-import { ModalConstructor } from '../view/Game interface/modal constructor/modal'
+import ModalConstructor from '../view/Game interface/modal constructor/modal'
 import type { DataItem, IController } from '../../types/types'
 import type { EventEmitter } from 'events'
 
-export class Controller implements IController {
+export default class Controller implements IController {
   private winCondition: string[]
   private levelNumber: number
   private data: DataItem[]

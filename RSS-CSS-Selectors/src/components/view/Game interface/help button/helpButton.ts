@@ -1,10 +1,11 @@
 import './helpButton.css'
 import type { EventEmitter } from 'events'
+import type { IHelpButton } from '../../../../types/types'
 
-export class HelpButton {
+export class HelpButton implements IHelpButton {
   emitter: EventEmitter
-  handleClick: () => void
   status: string
+  handleClick: () => void
 
   constructor (emitter: EventEmitter, status: string) {
     this.emitter = emitter
@@ -19,6 +20,7 @@ export class HelpButton {
     this.handleClick = (): void => {
       this.emitter.emit('helpClicked', helpAdvice)
     }
+
     if (this.status === 'completed') {
       this.removeEventsListeners()
     } else {

@@ -11,7 +11,6 @@
         "adviceHelpButton": "planet",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game starts",
-        "imgURL": "space.jpg",
         "helpClicked": "false"
     },
     {
@@ -26,7 +25,6 @@
         "adviceHelpButton": ".biggest-star",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg",
         "helpClicked": "false"
     },
     {
@@ -41,7 +39,6 @@
         "adviceHelpButton": "[data-type]",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg",
         "helpClicked": "false"
     },
     {
@@ -51,12 +48,11 @@
         "examples": "'parent child' selects all descendants of the parent element",
         "htmlField": "<div class='container'>\n    <planet></planet>\n    <planet></planet>\n    <planet></planet>\n    <div class='inner-container'>\n        <planet></planet>\n        <planet></planet>\n    </div>\n</div>",
         "status": "uncompleted",
-        "correctAnswers": [".container planet"],
+        "correctAnswers": [".container planet", "planet"],
         "nameHelpButton": "Ready to help!",
         "adviceHelpButton": ".container planet",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg",
         "helpClicked": "false"
     },
     {
@@ -71,7 +67,6 @@
         "adviceHelpButton": "[data-speed='fast']",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg",
         "helpClicked": "false"
     },
     {
@@ -86,7 +81,6 @@
         "adviceHelpButton": ".container :first-child",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg",
         "helpClicked": "false"
     },
     {
@@ -96,12 +90,11 @@
         "examples": "'element + element' selects an element immediately following another element",
         "htmlField": "<comet></comet>\n<star></star>\n<star></star>\n<planet></planet>\n<planet></planet>",
         "status": "uncompleted",
-        "correctAnswers": ["comet + star"],
+        "correctAnswers": ["comet + star", "comet+star"],
         "nameHelpButton": "No worries, click for help",
         "adviceHelpButton": "comet + star",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg",
         "helpClicked": "false"
     },
     {
@@ -116,7 +109,6 @@
         "adviceHelpButton": ".stars > star:nth-child(2)",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg",
         "helpClicked": "false"
     },
     {
@@ -131,7 +123,6 @@
         "adviceHelpButton": "planet:last-child",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg",
         "helpClicked": "false"
     },
     {
@@ -146,7 +137,6 @@
         "adviceHelpButton": "comet + star",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg",
         "helpClicked": "false"
     },
     {
@@ -161,7 +151,6 @@
         "adviceHelpButton": "planet ~ comet",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg",
         "helpClicked": "false"
     },
     {
@@ -176,7 +165,6 @@
         "adviceHelpButton": "star, planet",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg",
         "helpClicked": "false"
     },
     {
@@ -191,7 +179,6 @@
         "adviceHelpButton": "planet.giant",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg",
         "helpClicked": "false"
     },
     {
@@ -206,7 +193,6 @@
         "adviceHelpButton": "*",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game continues",
-        "imgURL": "space.jpg",
         "helpClicked": "false"
     }, 
     {
@@ -221,7 +207,6 @@
         "adviceHelpButton": "#first",
         "editorDescription": "{\n /* Styles will be added\n here */\n }",
         "gameHeader": "CSS Selectors Game ends",
-        "imgURL": "space.jpg",
         "helpClicked": "false"
     }
 ]
