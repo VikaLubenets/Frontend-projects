@@ -89,7 +89,7 @@ export default class AppViewer implements IAppViewer {
     const HTMLField: HTMLElement | null = document.querySelector('.html-viewer__field')
     if (container !== null && HTMLField !== null) {
       const childrenElements = Array.from(container.querySelectorAll<HTMLElement>('*'))
-      const htmlFieldElements = Array.from(HTMLField.querySelectorAll<HTMLElement>('div, planet'))
+      const htmlFieldElements = Array.from(HTMLField.querySelectorAll<HTMLElement>('*'))
 
       if (childrenElements.length > 0 && htmlFieldElements.length > 0) {
         childrenElements.forEach((element, index) => {
