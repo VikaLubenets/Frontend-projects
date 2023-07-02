@@ -31,7 +31,7 @@ class App implements IApp {
       this.levelAfterClick(clickedLevel)
     })
     this.emitter.on('resetClicked', this.makeReset.bind(this))
-    this.emitter.on('helpClicked', () => {
+    this.emitter.on('changeHelpStatus', () => {
       this.dataProvider.set(this.levelNumber, 'helpClicked', 'true')
     })
   }

@@ -33,6 +33,7 @@ export default class AppViewer implements IAppViewer {
     gameSpace.draw(currentLevelData.htmlField)
     helpButton.draw(currentLevelData.nameHelpButton, currentLevelData.adviceHelpButton)
     helpPrint.draw()
+    emitter.removeAllListeners('helpClicked')
     emitter.once('helpClicked', (helpAdvice) => {
       helpButton.removeEventsListeners()
       helpPrint.animateText(helpAdvice)

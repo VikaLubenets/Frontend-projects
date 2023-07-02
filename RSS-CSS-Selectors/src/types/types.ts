@@ -63,6 +63,7 @@ export interface IHelpButton {
 
 export interface ICSSEditor {
   draw: (editorDescriptionContent: string, levelStatus: string) => void
+  updateInputAfterHelp: (content: string) => void
 }
 
 export interface IHelpPrint {

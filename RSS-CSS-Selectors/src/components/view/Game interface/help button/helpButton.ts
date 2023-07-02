@@ -19,6 +19,7 @@ export class HelpButton implements IHelpButton {
     button.textContent = name
     this.handleClick = (): void => {
       this.emitter.emit('helpClicked', helpAdvice)
+      this.emitter.emit('changeHelpStatus', helpAdvice)
     }
 
     if (this.status === 'completed') {
