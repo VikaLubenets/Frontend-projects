@@ -1,7 +1,6 @@
 .editor {
     width: 35vw;
     height: 50vh;
-    background-color: gray;
     border: 2px solid black;
     display: grid;
     grid-template-rows: auto 1fr;
@@ -11,7 +10,8 @@
   
   .section-header {
     height: 25px;
-    background-color: rgb(181, 180, 180);
+    background-color: rgba(55, 86, 154, 0.60);
+    color: white;
     font-size: 16px;
     display: flex;
     align-items: center;
@@ -23,8 +23,8 @@
   }
   
   .editor__line-number {
-    background-color: white;
-    color: black;
+    background-color: rgba(31, 28, 28, 0.70);
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -36,7 +36,7 @@
   }
   
   .editor__field {
-    background: white;
+    background: rgba(31, 28, 28, 0.70);;
     display: flex;
     flex-direction: column;
     grid-row: 2;
@@ -71,18 +71,29 @@
     width: 50px;
     height: 30px;
     color: white;
-    background-color: gray;
+    border-radius: 16px;
+    background: #37569A;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     font-style: normal;
+    font-family: nasalization, sans-serif;
+}
+
+.editor__button:hover,
+.editor__button:focus{
+  background: #476EC2;
+}
+
+.editor__button:active{
+  background: #03042A;
 }
 
 .editor__description{
     height: 50%;
     width: 100%;
-    color: gray;
+    color: white;
 }
 
 @keyframes losing-animation {

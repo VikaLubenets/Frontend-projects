@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'nasalization';
+    src: url('./assets/font/nasalization-rg.otf') format('opentype');
+    font-style: normal;
+}
+  
+
 *{
     margin: 0;
     padding: 0;
@@ -9,8 +16,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #FF3CAC;
-    background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+    background-image: url('./assets/images/background.jpg');
 }
 
 .header {
@@ -76,7 +82,7 @@ footer {
 }
 footer .copyright {
     font-size: 14px;
-    color: #333;
+    color: white;
     text-align: center;
 }
 

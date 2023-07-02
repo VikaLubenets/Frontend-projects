@@ -1,5 +1,5 @@
 .levels-wrapper{
-    background-color: rgba(0,0,0,0.5);
+    background-color:rgba(31, 28, 28, 0.70);
     width: 27vw;
     height: 85vh;
     display: flex;
@@ -19,10 +19,10 @@
     align-items: center;
     width: 100%;
     height: 15%;
-    background-color: rgba(0,0,0,0.5);
     border-bottom: 2px solid black;
     color: white;
     padding: 10px;
+    font-family: nasalization, sans-serif;
 }
 
 .level-number{
@@ -129,13 +129,14 @@
     position: absolute;
     right: -27vw;
     top: 0;
-    background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+    background-image: url(../../../assets/images/background.jpg);
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
     visibility: hidden;
     transition: all 0.5s ease-out;
+    font-family: nasalization, sans-serif;
   }
   
   .level-header.open .level-block {
@@ -202,34 +203,40 @@
 }
 
 .level-block__number:hover{
-    color: blue;
     font-size: 17px;
-    background-color: rgba(160, 160, 160, 0.5);
+    background-color: rgba(31, 28, 28, 0.70);
 }
 
 .level-block__number:focus,
 .level-block__number:active{
-    background-color: rgba(160, 160, 160, 0.5);
+    background-color: rgba(31, 28, 28, 0.70);
 }
 
 .level-block__number.active {
-    background-color: rgba(160, 160, 160, 0.5);
+    background-color: rgba(31, 28, 28, 0.70);
 }
 
 .reset-button{
     width: 100px;
     height: 50px;
-    border-radius: 15px;
     color: white;
-    background-color: black;
+    border-radius: 16px;
+    background: #120F14;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 13px;
     text-align: center;
+    font-family: nasalization, sans-serif;
 }
 
-.reset-button:hover{
-    background-color: #FF3CAC;
+.reset-button:hover,
+.reset-button:focus{
+    background: #3F3447;
     cursor: pointer;
+}
+
+.reset-button:active{
+    color: black;
+    background: #FFF;
 }

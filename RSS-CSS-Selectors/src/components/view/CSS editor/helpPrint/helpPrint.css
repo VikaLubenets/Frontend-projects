@@ -4,6 +4,7 @@
     opacity: 0;
     border: 1px solid black;
     display: none;
+    background-color: white;
   }
 
   @keyframes typingEffect {
