@@ -28,7 +28,11 @@
    position: relative;
 }
 
-.game-image > *::after {
+.game-image > *::after,
+.inner-container > *::after,
+.common-container > *::after,
+.stars > *::after,
+.galaxy > *::after{
     content: attr(data-title); 
     background: rgba(255,255,230,0.9);
     position: absolute;
@@ -41,11 +45,19 @@
     visibility: hidden;
   }
   
-.game-image > *.visible::after {
+.game-image > *.visible::after,
+.inner-container > *.visible::after,
+.common-container > *.visible::after,
+.stars > *.visible::after,
+.galaxy > *.visible::after {
     visibility: visible;
  }
 
-.game-image > *.visible{
+.game-image > *.visible,
+.common-container > *.visible, 
+.inner-container > *.visible,
+.stars > *.visible,
+.galaxy > *.visible {
     box-shadow: 0px 0px 4px 6px rgba(255, 255, 255, 0.50);
 }
 

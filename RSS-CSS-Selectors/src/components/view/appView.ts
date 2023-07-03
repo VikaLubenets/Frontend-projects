@@ -88,7 +88,8 @@ export default class AppViewer implements IAppViewer {
     const container: HTMLDivElement | null = document.querySelector('.game-image')
     const HTMLField: HTMLElement | null = document.querySelector('.html-viewer__field')
     if (container !== null && HTMLField !== null) {
-      const childrenElements = Array.from(container.querySelectorAll<HTMLElement>('*'))
+      const childrenElements = this.getAllNestedElements(container)
+      console.log(childrenElements)
       const htmlFieldElements = Array.from(HTMLField.querySelectorAll<HTMLElement>('*'))
 
       if (childrenElements.length > 0 && htmlFieldElements.length > 0) {
@@ -117,6 +118,21 @@ export default class AppViewer implements IAppViewer {
         })
       }
     }
+  }
+
+  private getAllNestedElements (parent: HTMLElement): HTMLElement[] {
+    const elements: HTMLElement[] = []
+    const children = Array.from(parent.children) as HTMLElement[]
+
+    for (const el of children) {
+      elements.push(el)
+      if (el.children.length > 0) {
+        const nestedElements = this.getAllNestedElements(el)
+        elements.push(...nestedElements)
+      }
+    }
+
+    return elements
   }
 
   private updateTitle (element: HTMLElement, content: HTMLElement, show: boolean): void {
