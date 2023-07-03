@@ -41,9 +41,13 @@
     visibility: hidden;
   }
   
-  .game-image > *.visible::after {
+.game-image > *.visible::after {
     visibility: visible;
  }
+
+.game-image > *.visible{
+    box-shadow: 0px 0px 4px 6px rgba(255, 255, 255, 0.50);
+}
 
 .inner-container{
     display: flex;
