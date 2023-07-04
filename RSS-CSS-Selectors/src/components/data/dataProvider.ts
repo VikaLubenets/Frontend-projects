@@ -15,11 +15,13 @@ export default class DataProvider implements IDataProvider {
   private initialize (): void {
     const savedLSData: DataItem[] = []
     Object.keys(localStorage).forEach((key) => {
-      if (key.startsWith('Current level')) {
+      try {
         const item = this.lsFactory.get<DataItem>(key)
         if (item !== null) {
           savedLSData.push(item)
         }
+      } catch (error) {
+        console.log('error with parsing json', error)
       }
     })
 
