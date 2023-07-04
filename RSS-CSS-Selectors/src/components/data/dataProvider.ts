@@ -14,20 +14,7 @@ export default class DataProvider implements IDataProvider {
 
   private initialize (): void {
     const savedLSData: DataItem[] = []
-    Object.keys(localStorage).forEach((key) => {
-      try {
-        const item = this.lsFactory.get<DataItem>(key)
-        if (item !== null) {
-          savedLSData.push(item)
-        }
-      } catch (error) {
-        console.log('error with parsing json', error)
-      }
-    })
-
-    if (savedLSData.length > 0) {
-      this.storedData = savedLSData
-    } else {
+    if (localStorage.length === 0) {
       const defaultData: DataItem[] = data.map((item) => {
         return {
           levelNumber: item.levelNumber,
@@ -50,6 +37,13 @@ export default class DataProvider implements IDataProvider {
       })
 
       this.storedData = defaultData
+    } else {
+      Object.keys(localStorage).forEach((key) => {
+        const item = this.lsFactory.get<DataItem>(key)
+        if (item !== null) {
+          savedLSData.push(item)
+        }
+      })
     }
   }
 
