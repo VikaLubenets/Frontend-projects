@@ -13,7 +13,13 @@ export default class DataProvider implements IDataProvider {
   }
 
   private initialize (): void {
-    const savedLSData: DataItem[] = []
+    let firstInit = true
+
+    if (firstInit) {
+      localStorage.clear()
+      firstInit = false
+    }
+
     if (localStorage.length === 0) {
       const defaultData: DataItem[] = data.map((item) => {
         return {
@@ -38,12 +44,17 @@ export default class DataProvider implements IDataProvider {
 
       this.storedData = defaultData
     } else {
+      const savedLSData: DataItem[] = []
       Object.keys(localStorage).forEach((key) => {
-        const item = this.lsFactory.get<DataItem>(key)
-        if (item !== null) {
-          savedLSData.push(item)
+        if (key.startsWith('Current level')) {
+          const item = this.lsFactory.get<DataItem>(key)
+          if (item !== null) {
+            savedLSData.push(item)
+          }
         }
       })
+
+      this.storedData = savedLSData
     }
   }
 
