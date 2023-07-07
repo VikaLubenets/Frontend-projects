@@ -13,14 +13,19 @@ export default class DataProvider implements IDataProvider {
   }
 
   private initialize (): void {
-    let firstInit = true
+    const savedLSData: DataItem[] = []
+    Object.keys(localStorage).forEach((key) => {
+      if (key.startsWith('Current level')) {
+        const item = this.lsFactory.get<DataItem>(key)
+        if (item !== null) {
+          savedLSData.push(item)
+        }
+      }
+    })
 
-    if (firstInit) {
-      localStorage.clear()
-      firstInit = false
-    }
-
-    if (localStorage.length === 0) {
+    if (savedLSData.length > 0) {
+      this.storedData = savedLSData
+    } else {
       const defaultData: DataItem[] = data.map((item) => {
         return {
           levelNumber: item.levelNumber,
@@ -43,18 +48,6 @@ export default class DataProvider implements IDataProvider {
       })
 
       this.storedData = defaultData
-    } else {
-      const savedLSData: DataItem[] = []
-      Object.keys(localStorage).forEach((key) => {
-        if (key.startsWith('Current level')) {
-          const item = this.lsFactory.get<DataItem>(key)
-          if (item !== null) {
-            savedLSData.push(item)
-          }
-        }
-      })
-
-      this.storedData = savedLSData
     }
   }
 
