@@ -1,6 +1,7 @@
 import AppViewer from '../src/components/view/appView'
 import { EventEmitter } from 'events'
 import type { DataItem } from '../src/types/types'
+import 'ts-jest'
 
 describe('AppViewer', () => {
   let appViewer: AppViewer

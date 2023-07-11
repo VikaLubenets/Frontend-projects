@@ -1,5 +1,26 @@
 import { LocalStorageFactory } from '../src/components/data/storage/localStorageData'
 import { type DataItem } from '../src/types/types'
+import 'ts-jest'
+
+const localStorageMock = (function () {
+  let storage = {};
+
+  return {
+    getItem(key) {
+      return storage[key];
+    },
+
+    setItem(key, value) {
+      storage[key] = value;
+    },
+
+    removeItem(key) {
+      delete storage[key];
+    },
+  };
+})();
+
+Object.defineProperty(window, "localStorage", { value: localStorageMock });
 
 describe('LocalStorageFactory', () => {
   let lsStorage: LocalStorageFactory
@@ -24,22 +45,22 @@ describe('LocalStorageFactory', () => {
   })
 
   afterEach(() => {
-    localStorage.removeItem('test')
+    window.localStorage.removeItem('test')
   })
 
   it('sets data to local storage', () => {
     lsStorage.set('test', testObject)
-    expect(localStorage.getItem('test')).toEqual(JSON.stringify(testObject))
+    expect(window.localStorage.getItem('test')).toEqual(JSON.stringify(testObject))
   })
 
   it('gets data from local storage', () => {
-    localStorage.setItem('test', JSON.stringify(testObject))
+    window.localStorage.setItem('test', JSON.stringify(testObject))
     expect(lsStorage.get('test')).toEqual(testObject)
   })
 
   it('removes data from local storage', () => {
-    localStorage.setItem('test', JSON.stringify(testObject))
+    window.localStorage.setItem('test', JSON.stringify(testObject))
     lsStorage.remove('test')
-    expect(localStorage.getItem('test')).toBeNull()
+    expect(window.localStorage.getItem('test')).toBeNull()
   })
 })

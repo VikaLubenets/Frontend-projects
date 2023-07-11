@@ -24,5 +24,5 @@ module.exports = {
     '@typescript-eslint'
 
   ],
-  ignorePatterns: [".eslintrc.js", "jest.config.ts"],
+  ignorePatterns: [".eslintrc.js", "jest.config.ts", "test"],
 }

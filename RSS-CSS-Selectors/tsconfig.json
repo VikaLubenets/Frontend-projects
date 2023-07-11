@@ -8,11 +8,10 @@
     "noImplicitAny": true,
     "baseUrl": "./src",
     "module": "commonjs", 
-    "resolveJsonModule": true,                    
+    "resolveJsonModule": true                    
   },
 
   "include": [
-    "src/**/*.ts",
-    "test/**/*.test.ts"
+    "src/**/*.ts"
   ]
 }
