@@ -68,7 +68,7 @@ export default class Controller implements IController {
     }
   }
 
-  private isSpecialCase (): void {
+  isSpecialCase (): void {
     if (this.isGameCompleted()) {
       this.emitter.emit('GameCompleted')
     } else if (

@@ -1,13 +1,15 @@
-import type { JestConfigWithTsJest } from 'ts-jest'
+import type { Config } from '@jest/types';
 
-const jestConfig: JestConfigWithTsJest = {
-  // [...]
-  // Replace `ts-jest` with the preset you want to use
-  // from the above list
+const jestConfig: Config.InitialOptions = {
   preset: 'ts-jest',
-  testMatch: [
-    "**/test/**/*.test.ts"
-  ],
-}
+  testEnvironment: "node",
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
+  roots: ['<rootDir>/test'],
+  moduleDirectories: ['node_modules', 'src'],
+  testMatch: ['**/test/**/*.test.ts'],
+  moduleNameMapper: {
+    '\\.(css|less)$': 'jest-css-modules-transform',
+  },
+};
 
-export default jestConfig
+export default jestConfig;
