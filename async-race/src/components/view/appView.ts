@@ -1,25 +1,30 @@
-import GarageView from "./garagePage/garageView";
-import WinnersView from "./winnersPage/winnersView";
+import GarageView from './garagePage/garageView'
+import WinnersView from './winnersPage/winnersView'
 
 export default class AppViewer {
-  garageView: GarageView;
+  garageView: GarageView
   winnersView: WinnersView
 
-  constructor(){
-    this.garageView = new GarageView();
+  constructor () {
+    this.garageView = new GarageView()
     this.winnersView = new WinnersView()
   }
 
-  createView(): void {
-    const body = document.querySelector('body')
+  createView (): void {
+    const body: HTMLBodyElement | null = document.querySelector('body')
     const fragment: DocumentFragment = document.createDocumentFragment()
     if (body !== null) {
-      body.innerHTML = ''
-      const container = document.createElement('div')
-      container.classList.add('.winners-conteiner')
-      fragment.append(container)
+      const garageElement = this.garageView.getHTMLElement()
+      const winnersElement = this.winnersView.getHTMLElement()
+
+      if (garageElement !== null) {
+        fragment.append(garageElement)
+      }
+
+      if (winnersElement !== null) {
+        fragment.append(winnersElement)
+      }
       body.append(fragment)
     }
   }
 }
-  
