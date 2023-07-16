@@ -14,9 +14,7 @@ export interface Car {
   id: number
 }
 
-export interface Garage {
-  garage: Car[]
-}
+export interface Garage extends Array<Car> {}
 
 export enum Endpoint {
   Garage = '/garage',

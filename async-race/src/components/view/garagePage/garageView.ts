@@ -1,4 +1,4 @@
-import type { ElementParams } from '../../../types/types'
+import type { ElementParams, Garage, GarageResponse } from '../../../types/types'
 import MenuView from './menu/menu'
 import ViewTemplate from '../../util/view-template'
 import './garageView.css'
@@ -6,8 +6,10 @@ import CarView from './car/car'
 
 export default class GarageView extends ViewTemplate {
   menu: HTMLElement | null
+  data: GarageResponse
+  cars: Garage
 
-  constructor () {
+  constructor (dataGarage: GarageResponse) {
     const params: ElementParams = {
       tag: 'div',
       classes: ['garage-container'],
@@ -16,9 +18,11 @@ export default class GarageView extends ViewTemplate {
     }
     super(params)
     this.menu = new MenuView().getHTMLElement()
+    this.data = dataGarage
+    this.cars = this.data.garage.garage
   }
 
-  drawGarageContainer (): void {
+  drawGarageContainer (page = 1): void {
     const garageContainer: HTMLDivElement | null = document.querySelector('.garage-container')
     if (
       garageContainer !== null &&
@@ -28,21 +32,24 @@ export default class GarageView extends ViewTemplate {
 
       const garageHeader = document.createElement('header')
       garageHeader.classList.add('garage-header')
-      garageHeader.textContent = 'Garage (add cars amount)'
+      garageHeader.textContent = `Garage: ${this.data.totalCount}`
       garageContainer.append(garageHeader)
 
       const pageNum = document.createElement('h2')
       pageNum.classList.add('page-number')
-      pageNum.textContent = 'page (add num)'
+      pageNum.textContent = `Page: ${page}`
       garageContainer.append(pageNum)
 
       const carsContainer = document.createElement('div')
       carsContainer.classList.add('cars-container')
       garageContainer.append(carsContainer)
 
-      const car = new CarView().getHTMLElement()
-      if (car !== null) {
-        carsContainer.append(car)
+      for (const car of this.cars) {
+        const carView = new CarView(car)
+        const carElement = carView.getHTMLElement()
+        if (carElement !== null) {
+          carsContainer.append(carElement)
+        }
       }
     }
   }

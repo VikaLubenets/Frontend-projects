@@ -1,3 +1,4 @@
+import type { GarageResponse } from '../../types/types'
 import GarageView from './garagePage/garageView'
 import WinnersView from './winnersPage/winnersView'
 
@@ -6,9 +7,11 @@ export default class AppViewer {
   winnersView: WinnersView
   garageElement: HTMLElement | null
   winnersElement: HTMLElement | null
+  dataGarage: GarageResponse
 
-  constructor () {
-    this.garageView = new GarageView()
+  constructor (dataGarage: GarageResponse) {
+    this.dataGarage = dataGarage
+    this.garageView = new GarageView(this.dataGarage)
     this.winnersView = new WinnersView()
     this.garageElement = this.garageView.getHTMLElement()
     this.winnersElement = this.winnersView.getHTMLElement()

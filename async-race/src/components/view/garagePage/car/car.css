@@ -2,7 +2,8 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 2px;
+    margin-bottom: 10px;
 }
 
 .car-track{
@@ -13,27 +14,29 @@
 }
 
 .car-buttons{
-    width: 20vw;
+    width: 15vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 12px;
 }
 
 .select-button,
 .remove-button{
     background-color: rgb(239, 239, 199);
+    padding: 5px;
 }
 
 .car-model{
     color: yellow;
     background-color: transparent;
-    font-size: 14px;
 }
 
 .start-container{
     width: 40%;
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .btns-container{
@@ -46,13 +49,12 @@
     border: 1px solid white;
     cursor: pointer;
     text-align: center;
+    height: 3vh;
 }
 
 .car{
-    background-image: url('./assets/car.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 200px;
+    width: 50px;
+    height: 50px;
 }
 
 .flag{
