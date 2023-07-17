@@ -23,13 +23,6 @@
     width: 60%;
 }
 
-.color-car{
-    width: 10%;
-    background-color: white;
-    color: black;
-    font-size: 12px;
-}
-
 .button{
     width: 20%;
     background-color: white;
@@ -38,6 +31,13 @@
     cursor: pointer;
     text-align: center;
     padding: 3px;
+}
+
+.color-car{
+    width: 10%;
+    background-color: white;
+    color: black;
+    font-size: 12px;
 }
 
 .generate-button{

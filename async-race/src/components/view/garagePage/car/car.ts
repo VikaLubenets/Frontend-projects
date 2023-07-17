@@ -2,11 +2,13 @@ import ViewTemplate from '../../../util/view-template'
 import type { Car, ElementParams } from '../../../../types/types'
 import './car.css'
 import HTMLElementFactory from '../../../util/element-factory'
+import type EventEmitter from 'events'
 
 export default class CarView extends ViewTemplate {
   data: Car
+  emitter: EventEmitter
 
-  constructor (data: Car) {
+  constructor (data: Car, emitter: EventEmitter) {
     const params: ElementParams = {
       tag: 'div',
       classes: ['track-wrapper']
@@ -14,6 +16,7 @@ export default class CarView extends ViewTemplate {
     super(params)
     this.data = data
     this.drawCarTrack()
+    this.emitter = emitter
   }
 
   drawCarTrack (): void {
@@ -78,7 +81,8 @@ export default class CarView extends ViewTemplate {
     const removeBtnParams = {
       tag: 'div',
       classes: ['button', 'remove-button'],
-      textContent: 'remove'
+      textContent: 'remove',
+      callback: () => this.emitter.emit('removeCarClicked', this.data.id)
     }
     const removeBtn = new HTMLElementFactory(removeBtnParams).getElement()
 

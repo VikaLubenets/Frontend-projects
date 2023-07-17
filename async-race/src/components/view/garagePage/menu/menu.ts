@@ -2,15 +2,19 @@ import ViewTemplate from '../../../util/view-template'
 import type { ElementParams } from '../../../../types/types'
 import './menu.css'
 import HTMLElementFactory from '../../../util/element-factory'
+import type EventEmitter from 'events'
 
 export default class MenuView extends ViewTemplate {
-  constructor () {
+  emitter: EventEmitter
+
+  constructor (emitter: EventEmitter) {
     const params: ElementParams = {
       tag: 'div',
       classes: ['menu-container'],
       textContent: 'text'
     }
     super(params)
+    this.emitter = emitter
     this.createCarCreationView()
     this.createCarUpdateView()
     this.createButtonsView()
@@ -29,19 +33,23 @@ export default class MenuView extends ViewTemplate {
       classes: ['car-input'],
       parentSelector: '.input-container'
     }
-    const carInput = new HTMLElementFactory(inputParams).getElement()
+    const carInput = new HTMLElementFactory(inputParams).getElement() as HTMLInputElement
 
     const colorParams = {
-      tag: 'div',
+      tag: 'input',
       classes: ['color-car', 'button'],
       textContent: 'color'
     }
-    const colorSelection = new HTMLElementFactory(colorParams).getElement()
+    const colorSelection = new HTMLElementFactory(colorParams).getElement() as HTMLInputElement
+    if (colorSelection !== null) {
+      colorSelection.setAttribute('type', 'color')
+    }
 
     const createBtnParams = {
       tag: 'div',
       classes: ['button'],
-      textContent: 'create'
+      textContent: 'create',
+      callback: () => this.emitter.emit('createCarClicked', carInput.value, colorSelection.value)
     }
     const createBtn = new HTMLElementFactory(createBtnParams).getElement()
 
@@ -75,11 +83,14 @@ export default class MenuView extends ViewTemplate {
     const carInput = new HTMLElementFactory(inputParams).getElement()
 
     const colorParams = {
-      tag: 'div',
+      tag: 'input',
       classes: ['color-car', 'button'],
       textContent: 'color'
     }
     const colorSelection = new HTMLElementFactory(colorParams).getElement()
+    if (colorSelection !== null) {
+      colorSelection.setAttribute('type', 'color')
+    }
 
     const updateBtnParams = {
       tag: 'div',

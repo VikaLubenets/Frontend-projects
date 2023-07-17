@@ -51,4 +51,44 @@ export default class DataProvider {
         throw error
       })
   }
+
+  async createCar (name: string, color: string): Promise<Car> {
+    const url = `${this.baseUrl}${Endpoint.Garage}`
+    const data = {
+      name,
+      color
+    }
+
+    return await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(async response => {
+        return await response.json()
+      })
+      .catch(error => {
+        console.error(error)
+        throw error
+      })
+  }
+
+  async deleteCar (id: number): Promise<void> {
+    const url = `${this.baseUrl}${Endpoint.Garage}/${id}`
+
+    await fetch(url, {
+      method: 'DELETE'
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to delete car')
+        }
+      })
+      .catch(error => {
+        console.error(error)
+        throw error
+      })
+  }
 }

@@ -3,13 +3,15 @@ import MenuView from './menu/menu'
 import ViewTemplate from '../../util/view-template'
 import './garageView.css'
 import CarView from './car/car'
+import type EventEmitter from 'events'
 
 export default class GarageView extends ViewTemplate {
   menu: HTMLElement | null
   data: GarageResponse
   cars: Garage
+  emitter: EventEmitter
 
-  constructor (dataGarage: GarageResponse) {
+  constructor (dataGarage: GarageResponse, emitter: EventEmitter) {
     const params: ElementParams = {
       tag: 'div',
       classes: ['garage-container'],
@@ -17,7 +19,8 @@ export default class GarageView extends ViewTemplate {
       parentSelector: 'body'
     }
     super(params)
-    this.menu = new MenuView().getHTMLElement()
+    this.emitter = emitter
+    this.menu = new MenuView(this.emitter).getHTMLElement()
     this.data = dataGarage
     this.cars = this.data.garage.garage
   }
@@ -45,12 +48,17 @@ export default class GarageView extends ViewTemplate {
       garageContainer.append(carsContainer)
 
       for (const car of this.cars) {
-        const carView = new CarView(car)
+        const carView = new CarView(car, this.emitter)
         const carElement = carView.getHTMLElement()
         if (carElement !== null) {
           carsContainer.append(carElement)
         }
       }
     }
+  }
+
+  updateGarageData (dataGarage: GarageResponse): void {
+    this.data = dataGarage
+    this.cars = this.data.garage.garage
   }
 }
