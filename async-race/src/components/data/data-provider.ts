@@ -35,7 +35,7 @@ export default class DataProvider {
   }
 
   async getCar (id: number): Promise<Car> {
-    const url = `${this.baseUrl}${Endpoint.Garage}${id}`
+    const url = `${this.baseUrl}${Endpoint.Garage}/${id}`
     return await fetch(url)
       .then(async response => {
         if (response.status === 404) {
@@ -85,6 +85,36 @@ export default class DataProvider {
         if (!response.ok) {
           throw new Error('Failed to delete car')
         }
+      })
+      .catch(error => {
+        console.error(error)
+        throw error
+      })
+  }
+
+  async updateCar (id: number, name: string, color: string): Promise<Car> {
+    console.log('update car data provider is working')
+    const url = `${this.baseUrl}${Endpoint.Garage}/${id}`
+    const data = {
+      name,
+      color
+    }
+
+    return await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(async response => {
+        if (response.status === 404) {
+          throw new Error('There is no such car')
+        }
+        if (!response.ok) {
+          throw new Error('Failed to update car')
+        }
+        return await response.json()
       })
       .catch(error => {
         console.error(error)

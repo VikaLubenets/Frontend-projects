@@ -33,7 +33,8 @@
     padding: 3px;
 }
 
-.color-car{
+.color-car,
+.color-car-update{
     width: 10%;
     background-color: white;
     color: black;

@@ -80,14 +80,14 @@ export default class MenuView extends ViewTemplate {
       classes: ['update-input'],
       parentSelector: '.input-container'
     }
-    const carInput = new HTMLElementFactory(inputParams).getElement()
+    const carInput = new HTMLElementFactory(inputParams).getElement() as HTMLInputElement
 
     const colorParams = {
       tag: 'input',
-      classes: ['color-car', 'button'],
+      classes: ['color-car-update', 'button'],
       textContent: 'color'
     }
-    const colorSelection = new HTMLElementFactory(colorParams).getElement()
+    const colorSelection = new HTMLElementFactory(colorParams).getElement() as HTMLInputElement
     if (colorSelection !== null) {
       colorSelection.setAttribute('type', 'color')
     }
@@ -95,7 +95,8 @@ export default class MenuView extends ViewTemplate {
     const updateBtnParams = {
       tag: 'div',
       classes: ['button'],
-      textContent: 'update'
+      textContent: 'update',
+      callback: () => this.emitter.emit('updateCarClicked', carInput.value, colorSelection.value)
     }
     const updateBtn = new HTMLElementFactory(updateBtnParams).getElement()
 

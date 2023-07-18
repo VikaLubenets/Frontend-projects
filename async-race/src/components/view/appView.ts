@@ -64,16 +64,20 @@ export default class AppViewer {
   }
 
   private openGarageView (): void {
-    if (this.garageElement !== null && this.winnersElement !== null) {
-      this.garageElement.style.display = 'block'
-      this.winnersElement.style.display = 'none'
+    const garageContainer: HTMLElement | null = document.querySelector('.garage-container')
+    const winnersContainer: HTMLElement | null = document.querySelector('.winners-conteiner')
+    if (garageContainer !== null && winnersContainer !== null) {
+      garageContainer.style.display = 'block'
+      winnersContainer.style.display = 'none'
     }
   }
 
   private openWinnersView (): void {
-    if (this.garageElement !== null && this.winnersElement !== null) {
-      this.garageElement.style.display = 'none'
-      this.winnersElement.style.display = 'block'
+    const garageContainer: HTMLElement | null = document.querySelector('.garage-container')
+    const winnersContainer: HTMLElement | null = document.querySelector('.winners-conteiner')
+    if (garageContainer !== null && winnersContainer !== null) {
+      garageContainer.style.display = 'none'
+      winnersContainer.style.display = 'block'
     }
   }
 

@@ -74,7 +74,8 @@ export default class CarView extends ViewTemplate {
     const selectBtnParams = {
       tag: 'div',
       classes: ['button', 'select-button'],
-      textContent: 'select'
+      textContent: 'select',
+      callback: () => this.emitter.emit('selectCarClicked', this.data.id)
     }
     const selectBtn = new HTMLElementFactory(selectBtnParams).getElement()
 
