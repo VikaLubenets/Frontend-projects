@@ -14,6 +14,7 @@ export default class Controller {
     this.emitter.on('removeCarClicked', this.handleRemoveCar.bind(this))
     this.emitter.on('selectCarClicked', this.handleSelectCar.bind(this))
     this.emitter.on('updateCarClicked', this.handleUpdateCar.bind(this))
+    this.emitter.on('generateCarsButtonClicked', this.handleGenerateCars.bind(this))
   }
 
   handleCreateCar (name: string, color: string): void {
@@ -78,6 +79,41 @@ export default class Controller {
         })
     } else {
       console.error('No car selected')
+    }
+  }
+
+  handleGenerateCars (): void {
+    const firstPartOfName = ['Ford', 'Tesla', 'Mersedes', 'Nissan', 'Toyota', 'Kia', 'Mazda', 'BMW', 'Audi', 'Porch', 'Asten Martin', 'Ferrari', 'Hammer', 'Lexus', 'Subaru']
+    const secondPartOfName = ['911', 'modal Y', 'modal X', 'M3', 'Supra', 'R8', 'GT', 'RX-8', 'Eclipse', 'Viper', 'Mustang', 'Rio', 'GTO', 'X5', 'GT 500']
+
+    const generateRandomName = (): string => {
+      const randomNumFirst = Math.floor(Math.random() * firstPartOfName.length)
+      const randomNumSecond = Math.floor(Math.random() * secondPartOfName.length)
+
+      return `${firstPartOfName[randomNumFirst]} ${secondPartOfName[randomNumSecond]}`
+    }
+
+    const generateRandomColor = (): string => {
+      const letters = '0123456789ABCDEF'
+      let color = '#'
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)]
+      }
+      return color
+    }
+
+    const generateRandomCar = (): { name: string, color: string } => {
+      return {
+        name: generateRandomName(),
+        color: generateRandomColor()
+      }
+    }
+
+    let neededCarsNum = 100
+    while (neededCarsNum > 0) {
+      const generatedCar = generateRandomCar()
+      this.handleCreateCar(generatedCar.name, generatedCar.color)
+      neededCarsNum--
     }
   }
 }

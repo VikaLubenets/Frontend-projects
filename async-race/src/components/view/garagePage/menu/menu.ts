@@ -125,21 +125,24 @@ export default class MenuView extends ViewTemplate {
     const raceBtnParams = {
       tag: 'div',
       classes: ['button', 'race-button'],
-      textContent: 'race'
+      textContent: 'race',
+      callback: () => this.emitter.emit('raceButtonClicked')
     }
     const raceBtn = new HTMLElementFactory(raceBtnParams).getElement()
 
     const resetBtnParams = {
       tag: 'div',
       classes: ['button', 'race-button'],
-      textContent: 'reset'
+      textContent: 'reset',
+      callback: () => this.emitter.emit('resetButtonClicked')
     }
     const resetBtn = new HTMLElementFactory(resetBtnParams).getElement()
 
     const generateCarsBtnParams = {
       tag: 'div',
       classes: ['button', 'generate-button'],
-      textContent: 'generate cars'
+      textContent: 'generate cars',
+      callback: () => this.emitter.emit('generateCarsButtonClicked')
     }
     const generateCarsBtn = new HTMLElementFactory(generateCarsBtnParams).getElement()
 
