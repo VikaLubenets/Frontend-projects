@@ -63,6 +63,20 @@ export default class AppViewer {
     }
   }
 
+  updateView (carsData: GarageResponse, page: number): void {
+    this.dataGarage = carsData
+    this.garageView.updateGarageData(this.dataGarage)
+    if (this.garageElement !== null) {
+      const garageContainer = document.querySelector('.garage-container')
+      if (garageContainer !== null) {
+        while (garageContainer.firstChild !== null) {
+          garageContainer.removeChild(garageContainer.firstChild)
+        }
+      }
+    }
+    this.garageView.drawGarageContainer(page)
+  }
+
   private openGarageView (): void {
     const garageContainer: HTMLElement | null = document.querySelector('.garage-container')
     const winnersContainer: HTMLElement | null = document.querySelector('.winners-conteiner')
@@ -79,19 +93,5 @@ export default class AppViewer {
       garageContainer.style.display = 'none'
       winnersContainer.style.display = 'block'
     }
-  }
-
-  updateView (carsData: GarageResponse): void {
-    this.dataGarage = carsData
-    this.garageView.updateGarageData(this.dataGarage)
-    if (this.garageElement !== null) {
-      const garageContainer = document.querySelector('.garage-container')
-      if (garageContainer !== null) {
-        while (garageContainer.firstChild !== null) {
-          garageContainer.removeChild(garageContainer.firstChild)
-        }
-      }
-    }
-    this.garageView.drawGarageContainer()
   }
 }

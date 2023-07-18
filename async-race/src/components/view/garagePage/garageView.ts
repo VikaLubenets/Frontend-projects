@@ -54,6 +54,22 @@ export default class GarageView extends ViewTemplate {
           carsContainer.append(carElement)
         }
       }
+
+      const pageButtonsContainer = document.createElement('div')
+      pageButtonsContainer.classList.add('pageButtons-container')
+      garageContainer.append(pageButtonsContainer)
+
+      const prevBtn = document.createElement('div')
+      prevBtn.classList.add('prev-button')
+      prevBtn.textContent = 'prev'
+      prevBtn.addEventListener('click', () => this.emitter.emit('prevButtonClicked', page))
+      pageButtonsContainer.append(prevBtn)
+
+      const nextBtn = document.createElement('div')
+      nextBtn.classList.add('next-button')
+      nextBtn.textContent = 'next'
+      nextBtn.addEventListener('click', () => this.emitter.emit('nextButtonClicked', page))
+      pageButtonsContainer.append(nextBtn)
     }
   }
 

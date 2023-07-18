@@ -69,7 +69,7 @@ export default class Controller {
             updateInput.value = ''
           }
           if (colorInput !== null) {
-            colorInput.value = 'black'
+            colorInput.value = 'white'
           }
           this.emitter.emit('dataUpdated')
         })

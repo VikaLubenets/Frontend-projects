@@ -1,7 +1,8 @@
 .garage-container{
-    background-color: black;
+    background-color: rgb(25, 4, 67);
     color: white;
     overflow-x: hidden;
+    margin-bottom: 10px;
 }
 
 .garage-header{
@@ -21,4 +22,37 @@
 .cars-container{
     width: 100%;
     padding: 10px;
+}
+
+.pageButtons-container{
+    width: 100%;
+    height: 2vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
+.prev-button,
+.next-button {
+    width: 5vw;
+    height: 100%;
+    background-color: yellow;
+    color: black;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.prev-button:hover,
+.next-button:hover{
+    transform: translateY(2px);
+    background-color: gray;
+    color: white;
+    transition: all 0.2s ease;
 }
