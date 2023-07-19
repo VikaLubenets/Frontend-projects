@@ -51,6 +51,7 @@
 
 .icon {
     transform: translateY(10px);
+    transition: all ease;
 }
 
 .start-container{
@@ -83,4 +84,37 @@
     background-size: contain;
     background-repeat: no-repeat;
     width: 200px;
+}
+
+.animationDefault{
+    animation-direction: initial;
+}
+
+.animateCar{
+    animation-name: startMovement;
+    animation-timing-function: linear;
+    position: relative;
+    animation-fill-mode: forwards;
+}
+
+.animateCar.stop{
+    animation-play-state: paused
+}
+
+@keyframes startMovement {
+    0% {
+        left: 0;
+      }
+    25% {
+        left: 50%;
+    }
+    50% {
+        left: 100%;
+    }
+    75% {
+        left: 150%;
+    }
+    100% {
+        left: 200%;
+    }
 }

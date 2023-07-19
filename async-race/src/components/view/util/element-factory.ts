@@ -1,4 +1,4 @@
-import type { ElementParams, EventCallback } from '../../types/types'
+import type { ElementParams, EventCallback } from '../../../types/types'
 
 export default class HTMLElementFactory {
   element: HTMLElement | null

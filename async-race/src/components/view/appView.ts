@@ -1,6 +1,6 @@
 import type { GarageResponse } from '../../types/types'
 import GarageView from './garagePage/garageView'
-import WinnersView from './winnersPage/winnersView'
+import WinnersView from './pageWinners/winnersView'
 import type EventEmitter from 'events'
 
 export default class AppViewer {

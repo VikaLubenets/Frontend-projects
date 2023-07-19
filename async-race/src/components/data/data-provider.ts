@@ -1,4 +1,4 @@
-import { type Car, type Garage, Endpoint, type GarageResponse } from '../../types/types'
+import { type Car, type Garage, Endpoint, type GarageResponse, type EngineStatus, type startStopEngineResponse, type EngineDriveMode } from '../../types/types'
 
 export default class DataProvider {
   private readonly baseUrl: string
@@ -93,7 +93,6 @@ export default class DataProvider {
   }
 
   async updateCar (id: number, name: string, color: string): Promise<Car> {
-    console.log('update car data provider is working')
     const url = `${this.baseUrl}${Endpoint.Garage}/${id}`
     const data = {
       name,
@@ -117,6 +116,54 @@ export default class DataProvider {
         return await response.json()
       })
       .catch(error => {
+        console.error(error)
+        throw error
+      })
+  }
+
+  async startStopCarEngine (id: number, status: EngineStatus): Promise<startStopEngineResponse> {
+    const url = `${this.baseUrl}${Endpoint.Engine}?id=${id}&status=${status}`
+
+    return await fetch(url, {
+      method: 'PATCH'
+    })
+      .then(async (response) => {
+        if (response.status === 404) {
+          throw new Error('Car with such id was not found in the garage.')
+        }
+        if (response.status === 400) {
+          throw new Error('Wrong parameters: "id" should be any positive number, "status" should be "started", "stopped" or "drive"')
+        }
+        return await response.json()
+      })
+      .catch((error) => {
+        console.error(error)
+        throw error
+      })
+  }
+
+  async switchEngineToDriveMode (id: number, status = 'drive'): Promise<EngineDriveMode> {
+    const url = `${this.baseUrl}${Endpoint.Engine}?id=${id}&status=${status}`
+
+    return await fetch(url, {
+      method: 'PATCH'
+    })
+      .then(async (response) => {
+        if (response.status === 404) {
+          throw new Error('Car with such id was not found in the garage.')
+        }
+        if (response.status === 400) {
+          throw new Error('Wrong parameters: "id" should be any positive number, "status" should be "started", "stopped" or "drive"')
+        }
+        if (response.status === 429) {
+          throw new Error("Drive already in progress. You can't run drive for the same car twice while it's not stopped.")
+        }
+        if (response.status === 500) {
+          throw new Error("Car has been stopped suddenly. It's engine was broken down.")
+        }
+        return await response.json()
+      })
+      .catch((error) => {
         console.error(error)
         throw error
       })

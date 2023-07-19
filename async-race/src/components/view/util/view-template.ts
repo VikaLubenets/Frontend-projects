@@ -1,4 +1,4 @@
-import type { ElementParams } from '../../types/types'
+import type { ElementParams } from '../../../types/types'
 import HTMLElementFactory from './element-factory'
 
 export default abstract class ViewTemplate {

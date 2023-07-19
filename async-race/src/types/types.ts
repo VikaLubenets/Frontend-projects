@@ -29,3 +29,22 @@ export interface GarageResponse {
   totalCount: number
   totalPages: number
 }
+
+export type EngineStartStatus = 'started'
+
+export type EngineStopStatus = 'stopped'
+
+export type EngineStatus = EngineStartStatus | EngineStopStatus
+
+export interface EngineDriveMode {
+  'success': true
+}
+
+export interface startStopEngineResponse {
+  velocity: number
+  distance: number
+}
+
+export interface CarCoodinates {
+  left: number
+}

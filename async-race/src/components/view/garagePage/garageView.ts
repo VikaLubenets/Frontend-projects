@@ -1,6 +1,6 @@
 import type { ElementParams, Garage, GarageResponse } from '../../../types/types'
 import MenuView from './menu/menu'
-import ViewTemplate from '../../util/view-template'
+import ViewTemplate from '../util/view-template'
 import './garageView.css'
 import CarView from './car/car'
 import type EventEmitter from 'events'
@@ -29,7 +29,7 @@ export default class GarageView extends ViewTemplate {
     const garageContainer: HTMLDivElement | null = document.querySelector('.garage-container')
     if (
       garageContainer !== null &&
-       this.menu !== null
+      this.menu !== null
     ) {
       garageContainer.append(this.menu)
 

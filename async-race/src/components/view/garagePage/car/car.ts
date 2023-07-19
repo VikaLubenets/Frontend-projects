@@ -1,7 +1,7 @@
-import ViewTemplate from '../../../util/view-template'
+import ViewTemplate from '../../util/view-template'
 import type { Car, ElementParams } from '../../../../types/types'
 import './car.css'
-import HTMLElementFactory from '../../../util/element-factory'
+import HTMLElementFactory from '../../util/element-factory'
 import type EventEmitter from 'events'
 
 export default class CarView extends ViewTemplate {
@@ -22,7 +22,7 @@ export default class CarView extends ViewTemplate {
   drawCarTrack (): void {
     this.createButtonsLine(this.data.name)
     const startEndBtn = this.createStartEndBtns()
-    const car = this.createCarSvg(this.data.color)
+    const car = this.createCarSvg(this.data.color, this.data.id)
 
     const trackContainerParams = {
       tag: 'div',
@@ -96,9 +96,9 @@ export default class CarView extends ViewTemplate {
 
     if (
       buttonContainer !== null &&
-        selectBtn !== null &&
-        removeBtn !== null &&
-        carModalInfo !== null
+      selectBtn !== null &&
+      removeBtn !== null &&
+      carModalInfo !== null
     ) {
       buttonContainer.append(selectBtn, removeBtn, carModalInfo)
       const trackWrapper = this.getHTMLElement()
@@ -118,21 +118,23 @@ export default class CarView extends ViewTemplate {
     const BtnStartParams = {
       tag: 'div',
       classes: ['button-start'],
-      textContent: 'A'
+      textContent: 'A',
+      callback: () => this.emitter.emit('startEngineClicked', this.data.id, 'started')
     }
     const buttonStart = new HTMLElementFactory(BtnStartParams).getElement()
 
     const BtnEndParams = {
       tag: 'div',
       classes: ['button-end'],
-      textContent: 'B'
+      textContent: 'B',
+      callback: () => this.emitter.emit('stopEngineClicked', this.data.id, 'stopped')
     }
     const buttonEnd = new HTMLElementFactory(BtnEndParams).getElement()
 
     if (
       buttonContainer !== null &&
-        buttonStart !== null &&
-        buttonEnd !== null
+      buttonStart !== null &&
+      buttonEnd !== null
     ) {
       buttonContainer.append(buttonStart, buttonEnd)
       return buttonContainer
@@ -140,13 +142,14 @@ export default class CarView extends ViewTemplate {
     return null
   }
 
-  private createCarSvg (color: string): SVGElement {
+  private createCarSvg (color: string, id: number): SVGElement {
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
     svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
     svg.setAttribute('width', '50')
     svg.setAttribute('height', '50')
     svg.setAttribute('class', 'icon')
     svg.setAttribute('viewBox', '0 0 1024 1024')
+    svg.setAttribute('id', `car-${id}`)
 
     const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path')
     path1.setAttribute('fill', '#AEBCC3')
@@ -184,15 +187,7 @@ export default class CarView extends ViewTemplate {
     path9.setAttribute('fill', '#631536')
     path9.setAttribute('d', 'M405.568 335.616c-104.896 6.336-191.296 76.8-216.64 170.816h216.64V335.616zm40.128 170.816h216.64c-41.216-86.848-117.12-159.616-216.64-170.048v170.048z')
 
-    svg.appendChild(path1)
-    svg.appendChild(path2)
-    svg.appendChild(path3)
-    svg.appendChild(path4)
-    svg.appendChild(path5)
-    svg.appendChild(path6)
-    svg.appendChild(path7)
-    svg.appendChild(path8)
-    svg.appendChild(path9)
+    svg.append(path1, path2, path3, path4, path5, path6, path7, path8, path9)
 
     return svg
   }

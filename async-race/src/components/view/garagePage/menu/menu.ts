@@ -1,7 +1,7 @@
-import ViewTemplate from '../../../util/view-template'
+import ViewTemplate from '../../util/view-template'
 import type { ElementParams } from '../../../../types/types'
 import './menu.css'
-import HTMLElementFactory from '../../../util/element-factory'
+import HTMLElementFactory from '../../util/element-factory'
 import type EventEmitter from 'events'
 
 export default class MenuView extends ViewTemplate {
