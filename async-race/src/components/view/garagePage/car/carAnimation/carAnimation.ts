@@ -48,6 +48,7 @@ export default class CarAnimation {
     if (this.carElement !== null) {
       this.carElement.classList.add('animationDefault')
       this.carElement.classList.remove('animateCar')
+      this.carElement.classList.remove('stop')
     }
   }
 }
