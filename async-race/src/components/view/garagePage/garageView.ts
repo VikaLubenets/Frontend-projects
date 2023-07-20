@@ -62,13 +62,13 @@ export default class GarageView extends ViewTemplate {
       const prevBtn = document.createElement('div')
       prevBtn.classList.add('prev-button')
       prevBtn.textContent = 'prev'
-      prevBtn.addEventListener('click', () => this.emitter.emit('prevButtonClicked', page))
+      prevBtn.addEventListener('click', () => this.emitter.emit('prevButtonGarageClicked', page))
       pageButtonsContainer.append(prevBtn)
 
       const nextBtn = document.createElement('div')
       nextBtn.classList.add('next-button')
       nextBtn.textContent = 'next'
-      nextBtn.addEventListener('click', () => this.emitter.emit('nextButtonClicked', page))
+      nextBtn.addEventListener('click', () => this.emitter.emit('nextButtonGarageClicked', page))
       pageButtonsContainer.append(nextBtn)
     }
   }

@@ -1,4 +1,4 @@
-import type { GarageResponse } from '../../types/types'
+import type { GarageResponse, WinnersResponse } from '../../types/types'
 import DataProvider from '../data/data-provider'
 import AppViewer from '../view/appView'
 import EventEmitter from 'events'
@@ -11,25 +11,27 @@ export default class App {
   emitter: EventEmitter
   controller: Controller | null
   currentPage: number
+  winnersData: WinnersResponse | null
 
   constructor () {
     this.dataProvider = new DataProvider()
-    this.carsData = null
-    this.view = null
     this.emitter = new EventEmitter()
-    this.controller = null
     this.currentPage = 1
+    this.carsData = null
+    this.winnersData = null
+    this.view = null
+    this.controller = null
     this.emitter.on('dataUpdated', () => {
       this.updateApp().catch(error => {
         console.error('Error with update view', error)
       })
     })
-    this.emitter.on('prevButtonClicked', () => {
+    this.emitter.on('prevButtonGarageClicked', () => {
       this.prevPage().catch(error => {
         console.error('Error with prev page view', error)
       })
     })
-    this.emitter.on('nextButtonClicked', () => {
+    this.emitter.on('nextButtonGarageClicked', () => {
       this.nextPage().catch(error => {
         console.error('Error with next page view', error)
       })
@@ -38,7 +40,8 @@ export default class App {
 
   async start (): Promise<void> {
     this.carsData = await this.dataProvider.getCars(this.currentPage, 7)
-    this.view = new AppViewer(this.carsData, this.emitter)
+    this.winnersData = await this.dataProvider.getWinners(this.currentPage, 3)
+    this.view = new AppViewer(this.carsData, this.emitter, this.winnersData)
     this.view.createView()
     this.controller = new Controller(this.dataProvider, this.emitter)
   }

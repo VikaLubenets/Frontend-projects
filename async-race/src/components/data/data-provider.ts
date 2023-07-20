@@ -10,7 +10,8 @@ import {
   type SortWinnersOption,
   type OrderWinnersOption,
   type Winners,
-  type Winner
+  type Winner,
+  type UpdatedData
 } from '../../types/types'
 
 export default class DataProvider {
@@ -218,7 +219,7 @@ export default class DataProvider {
         const totalCount = Number(response.headers.get('X-Total-Count'))
         const winners: Winners = await response.json()
         return {
-          winners,
+          winnersData: winners,
           totalCount
         }
       })
@@ -234,6 +235,77 @@ export default class DataProvider {
       .then(async response => {
         if (response.status === 404) {
           throw new Error('There is no such winner')
+        }
+        return await response.json()
+      })
+      .catch(error => {
+        console.error(error)
+        throw error
+      })
+  }
+
+  async createWinner (data: Winner): Promise<Winner> {
+    const url = `${this.baseUrl}${Endpoint.Winners}`
+
+    return await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(async response => {
+        if (response.status === 500) {
+          throw new Error('Error: Insert failed, duplicate id')
+        }
+        return await response.json()
+      })
+      .catch(error => {
+        console.error(error)
+        throw error
+      })
+  }
+
+  async deleteWinner (id: number): Promise<void> {
+    const url = `${this.baseUrl}${Endpoint.Winners}/${id}`
+
+    await fetch(url, {
+      method: 'DELETE'
+    })
+      .then(response => {
+        if (response.status === 404) {
+          throw new Error('NOT FOUND')
+        }
+        if (!response.ok) {
+          throw new Error('Failed to delete winner')
+        }
+      })
+      .catch(error => {
+        console.error(error)
+        throw error
+      })
+  }
+
+  async updateWinner (id: number, winsNew: number, timeNew: number): Promise<Winner> {
+    const url = `${this.baseUrl}${Endpoint.Winners}/${id}`
+    const data: UpdatedData = {
+      wins: winsNew,
+      time: timeNew
+    }
+
+    return await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(async response => {
+        if (response.status === 404) {
+          throw new Error('There is no such winner')
+        }
+        if (!response.ok) {
+          throw new Error('Failed to update winner')
         }
         return await response.json()
       })

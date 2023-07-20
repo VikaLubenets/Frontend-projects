@@ -1,4 +1,4 @@
-import type { GarageResponse } from '../../types/types'
+import type { GarageResponse, WinnersResponse } from '../../types/types'
 import GarageView from './garagePage/garageView'
 import WinnersView from './pageWinners/winnersView'
 import type EventEmitter from 'events'
@@ -9,14 +9,16 @@ export default class AppViewer {
   garageElement: HTMLElement | null
   winnersElement: HTMLElement | null
   dataGarage: GarageResponse
+  dataWinners: WinnersResponse
   emitter: EventEmitter
   garageContainer: HTMLElement | null
 
-  constructor (dataGarage: GarageResponse, emitter: EventEmitter) {
+  constructor (dataGarage: GarageResponse, emitter: EventEmitter, dataWinners: WinnersResponse) {
     this.dataGarage = dataGarage
+    this.dataWinners = dataWinners
     this.emitter = emitter
     this.garageView = new GarageView(this.dataGarage, this.emitter)
-    this.winnersView = new WinnersView()
+    this.winnersView = new WinnersView(this.dataWinners, this.dataGarage, this.emitter)
     this.garageElement = this.garageView.getHTMLElement()
     this.winnersElement = this.winnersView.getHTMLElement()
     this.garageContainer = null
@@ -60,6 +62,7 @@ export default class AppViewer {
       }
       body.append(fragment)
       this.garageView.drawGarageContainer()
+      this.winnersView.drawWinnersContainer()
     }
   }
 

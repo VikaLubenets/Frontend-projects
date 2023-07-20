@@ -58,10 +58,31 @@ export interface Winner {
 export type Winners = Winner[]
 
 export interface WinnersResponse {
-  winners: Winners
+  winnersData: Winners
   totalCount: number
 }
 
 export type SortWinnersOption = 'id' | 'wins' | 'time'
 
 export type OrderWinnersOption = 'ASC' | 'DESC'
+
+export interface UpdatedData {
+  wins: number
+  time: number
+}
+
+export interface TableRow {
+  number: string
+  car: string
+  name: string
+  wins: string
+  bestTime: string
+}
+
+export enum TableColName {
+  number = 'Number',
+  car = 'Car',
+  name = 'Name',
+  wins = 'Wins',
+  bestTime = 'Best time (seconds)'
+}
