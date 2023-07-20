@@ -1,4 +1,17 @@
-import { type Car, type Garage, Endpoint, type GarageResponse, type EngineStatus, type startStopEngineResponse, type EngineDriveMode } from '../../types/types'
+import {
+  type Car,
+  type Garage,
+  Endpoint,
+  type GarageResponse,
+  type EngineStatus,
+  type startStopEngineResponse,
+  type EngineDriveMode,
+  type WinnersResponse,
+  type SortWinnersOption,
+  type OrderWinnersOption,
+  type Winners,
+  type Winner
+} from '../../types/types'
 
 export default class DataProvider {
   private readonly baseUrl: string
@@ -7,7 +20,7 @@ export default class DataProvider {
     this.baseUrl = 'http://localhost:3000'
   }
 
-  async getCars (page = 1, limit = 7): Promise<GarageResponse> {
+  async getCars (page?: number, limit?: number): Promise<GarageResponse> {
     let url = `${this.baseUrl}${Endpoint.Garage}`
     if (page !== undefined && limit !== undefined) {
       url += `?_page=${page}&_limit=${limit}`
@@ -19,7 +32,10 @@ export default class DataProvider {
         }
         const totalCount = Number(response.headers.get('X-Total-Count'))
         const cars: Garage = await response.json()
-        const totalPages = Math.ceil(totalCount / limit)
+        let totalPages
+        if (limit !== undefined) {
+          totalPages = Math.ceil(totalCount / limit)
+        }
         return {
           garage: {
             garage: cars
@@ -164,6 +180,64 @@ export default class DataProvider {
         return await response.json()
       })
       .catch((error) => {
+        console.error(error)
+        throw error
+      })
+  }
+
+  async getWinners (
+    page?: number,
+    limit?: number,
+    sort?: SortWinnersOption,
+    order?: OrderWinnersOption
+  ): Promise<WinnersResponse> {
+    let url = `${this.baseUrl}${Endpoint.Winners}`
+    const queryParams = []
+
+    if (page !== undefined && limit !== undefined) {
+      queryParams.push(`_page=${page}`)
+      queryParams.push(`_limit=${limit}`)
+    }
+
+    if (sort !== undefined) {
+      queryParams.push(`_sort=${sort}`)
+    }
+
+    if (order !== undefined) {
+      queryParams.push(`_order=${order}`)
+    }
+
+    if (queryParams.length > 0) {
+      url += `?${queryParams.join('&')}`
+    }
+    return await fetch(url)
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch winners')
+        }
+        const totalCount = Number(response.headers.get('X-Total-Count'))
+        const winners: Winners = await response.json()
+        return {
+          winners,
+          totalCount
+        }
+      })
+      .catch((error) => {
+        console.error(error)
+        throw error
+      })
+  }
+
+  async getWinner (id: number): Promise<Winner> {
+    const url = `${this.baseUrl}${Endpoint.Winners}/${id}`
+    return await fetch(url)
+      .then(async response => {
+        if (response.status === 404) {
+          throw new Error('There is no such winner')
+        }
+        return await response.json()
+      })
+      .catch(error => {
         console.error(error)
         throw error
       })

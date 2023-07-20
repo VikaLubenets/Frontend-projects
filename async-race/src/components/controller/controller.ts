@@ -21,6 +21,8 @@ export default class Controller {
     this.emitter.on('generateCarsButtonClicked', this.handleGenerateCars.bind(this))
     this.emitter.on('startEngineClicked', this.handleStartEngine.bind(this))
     this.emitter.on('stopEngineClicked', this.handleStopEngine.bind(this))
+    this.emitter.on('raceButtonClicked', this.handleRace.bind(this))
+    this.emitter.on('resetButtonClicked', this.handleReset.bind(this))
   }
 
   handleCreateCar (name: string, color: string): void {
@@ -164,6 +166,30 @@ export default class Controller {
       })
       .catch((error) => {
         console.error('Failed to stop car engine:', error)
+      })
+  }
+
+  handleRace (): void {
+    Promise.resolve(this.dataProvider.getCars())
+      .then((allCars) => {
+        for (const car of allCars.garage.garage) {
+          this.handleStartEngine(car.id, 'started')
+        }
+      })
+      .catch((error) => {
+        console.error('Failed to start race:', error)
+      })
+  }
+
+  handleReset (): void {
+    Promise.resolve(this.dataProvider.getCars())
+      .then((allCars) => {
+        for (const car of allCars.garage.garage) {
+          this.handleStopEngine(car.id, 'stopped')
+        }
+      })
+      .catch((error) => {
+        console.error('Failed to stop race:', error)
       })
   }
 }

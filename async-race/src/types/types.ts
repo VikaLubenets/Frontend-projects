@@ -27,7 +27,7 @@ export interface GarageResponse {
     garage: Garage
   }
   totalCount: number
-  totalPages: number
+  totalPages: number | undefined
 }
 
 export type EngineStartStatus = 'started'
@@ -48,3 +48,20 @@ export interface startStopEngineResponse {
 export interface CarCoodinates {
   left: number
 }
+
+export interface Winner {
+  id: number
+  wins: number
+  time: number
+}
+
+export type Winners = Winner[]
+
+export interface WinnersResponse {
+  winners: Winners
+  totalCount: number
+}
+
+export type SortWinnersOption = 'id' | 'wins' | 'time'
+
+export type OrderWinnersOption = 'ASC' | 'DESC'

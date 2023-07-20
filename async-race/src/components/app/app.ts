@@ -37,7 +37,7 @@ export default class App {
   }
 
   async start (): Promise<void> {
-    this.carsData = await this.dataProvider.getCars(this.currentPage)
+    this.carsData = await this.dataProvider.getCars(this.currentPage, 7)
     this.view = new AppViewer(this.carsData, this.emitter)
     this.view.createView()
     this.controller = new Controller(this.dataProvider, this.emitter)
@@ -45,7 +45,7 @@ export default class App {
 
   private async updateApp (): Promise<void> {
     try {
-      this.carsData = await this.dataProvider.getCars(this.currentPage)
+      this.carsData = await this.dataProvider.getCars(this.currentPage, 7)
       if (this.view !== null) {
         this.view.updateView(this.carsData, this.currentPage)
       }
@@ -62,7 +62,7 @@ export default class App {
       const totalPages = Math.ceil(this.carsData.totalCount / 7)
       if (this.currentPage < totalPages) {
         this.currentPage += 1
-        this.carsData = await this.dataProvider.getCars(this.currentPage)
+        this.carsData = await this.dataProvider.getCars(this.currentPage, 7)
         this.view.updateView(this.carsData, this.currentPage)
       }
     }
@@ -75,7 +75,7 @@ export default class App {
     ) {
       if (this.currentPage > 1) {
         this.currentPage -= 1
-        this.carsData = await this.dataProvider.getCars(this.currentPage)
+        this.carsData = await this.dataProvider.getCars(this.currentPage, 7)
         this.view.updateView(this.carsData, this.currentPage)
       }
     }
