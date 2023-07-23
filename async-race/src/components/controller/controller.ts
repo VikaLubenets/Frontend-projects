@@ -2,6 +2,7 @@ import type DataProvider from '../data/data-provider'
 import type EventEmitter from 'events'
 import type { EngineStartStatus, EngineStopStatus } from '../../types/types'
 import CarAnimation from '../view/garagePage/car/carAnimation/carAnimation'
+import WinModal from '../view/garagePage/winModal/winModal'
 
 export default class Controller {
   emitter: EventEmitter
@@ -37,7 +38,7 @@ export default class Controller {
         if (colorInput !== null) {
           colorInput.value = 'white'
         }
-        this.emitter.emit('dataUpdated')
+        this.emitter.emit('dataCarsUpdated')
       })
       .catch((error) => {
         console.error('Failed to create car:', error)
@@ -45,10 +46,18 @@ export default class Controller {
   }
 
   handleRemoveCar (id: number): void {
-    Promise.resolve(this.dataProvider.deleteCar(id))
-      .then(() => {
-        console.log('Car deleted successfully')
-        this.emitter.emit('dataUpdated')
+    Promise.resolve()
+      .then(async () => {
+        const winners = await this.dataProvider.getWinners()
+        const winner = winners.winnersData.find((winner) => winner.id === id)
+
+        if (winner != null) {
+          await this.dataProvider.deleteWinner(winner.id)
+        }
+
+        await this.dataProvider.deleteCar(id)
+        console.log('Car and its winners data deleted successfully')
+        this.emitter.emit('dataCarsUpdated')
       })
       .catch((error) => {
         console.error('Failed to delete car:', error)
@@ -87,7 +96,7 @@ export default class Controller {
           if (colorInput !== null) {
             colorInput.value = 'white'
           }
-          this.emitter.emit('dataUpdated')
+          this.emitter.emit('dataCarsUpdated')
         })
         .catch((error) => {
           console.error('Failed to update car:', error)
@@ -136,7 +145,7 @@ export default class Controller {
     Promise.resolve(this.dataProvider.startStopCarEngine(id, status))
       .then(async (response) => {
         try {
-          const animatedCar = new CarAnimation(id, response.velocity)
+          const animatedCar = new CarAnimation(id, this.emitter, response.velocity, response.distance)
           this.animatedCars[id] = animatedCar
           animatedCar.animateCar()
           await this.dataProvider.switchEngineToDriveMode(id)
@@ -172,6 +181,7 @@ export default class Controller {
   handleRace (): void {
     Promise.resolve(this.dataProvider.getCars())
       .then((allCars) => {
+        this.emitter.once('carAnimationEnds', this.handleWinRace.bind(this))
         for (const car of allCars.garage.garage) {
           this.handleStartEngine(car.id, 'started')
         }
@@ -190,6 +200,38 @@ export default class Controller {
       })
       .catch((error) => {
         console.error('Failed to stop race:', error)
+      })
+  }
+
+  handleWinRace (id: number, time: number): void {
+    let carName: string
+    Promise.resolve(this.dataProvider.getCar(id))
+      .then((car) => {
+        carName = car.name
+        const winModal = new WinModal()
+        winModal.draw(carName, time)
+      })
+      .then(async () => {
+        return await this.dataProvider.getWinners()
+      })
+      .then(async (winners) => {
+        const existingWinner = winners.winnersData.find((winner) => winner.id === id)
+
+        if (existingWinner !== undefined) {
+          const bestTime = (time <= existingWinner.time) ? existingWinner.time : time
+          await this.dataProvider.updateWinner(id, existingWinner.wins + 1, bestTime)
+        } else {
+          const winner = {
+            id,
+            wins: 1,
+            time
+          }
+          await this.dataProvider.createWinner(winner)
+          this.emitter.emit('dataWinnerUpdated')
+        }
+      })
+      .catch((error) => {
+        console.error('Failed to handle race win:', error)
       })
   }
 }

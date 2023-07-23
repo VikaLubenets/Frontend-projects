@@ -1,11 +1,11 @@
-.winners-conteiner{
+.winners-container{
     background-color: white;
     color: black;
     margin: 10px;
     height: 70vh;
 }
 
-.winners-conteiner .page-number{
+.winners-container .page-number{
     color: black;
 }
 

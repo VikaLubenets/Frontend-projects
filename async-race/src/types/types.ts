@@ -4,7 +4,10 @@ export interface ElementParams {
   textContent?: string
   callback?: EventCallback
   parentSelector?: string
+  attributes?: AttributesMap
 }
+
+export type AttributesMap = Record<string, string>
 
 export type EventCallback = (event: Event) => void
 
@@ -73,7 +76,7 @@ export interface UpdatedData {
 
 export interface TableRow {
   number: string
-  car: string
+  car: SVGElement | null
   name: string
   wins: string
   bestTime: string

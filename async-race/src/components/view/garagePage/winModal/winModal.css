@@ -1,0 +1,82 @@
+.modal__cover{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background-color: rgba(0,0,0,0.5);
+    left: 0;
+    top: 0;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .3s ease;
+}
+
+.modal__cover.open{
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal{
+    display: flex;
+    min-width: 300px;
+    min-height: 250px;
+    justify-content: center;
+    align-items: center;
+    max-width: 700px;
+    max-height: 90vh;
+    box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+    background: #FAFAFA;
+    border-radius: 9px;
+    gap: 29px;
+    position: fixed;
+    z-index: 2;
+    margin-top: 52px;
+    margin-right: 52px;
+    padding: 10px;
+    font-family: 'Georgia';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 17px;
+    letter-spacing: 0.06em;
+    color: #000000;
+    margin-bottom: 40px;
+}
+
+.modal__content{
+    width: 80%;
+    height:  80%;
+}
+
+.modal__button {
+    width: 52px;
+    height: 52px;
+    border: 2px solid #F1CDB3;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -52px;
+    right: -42px;
+    background: transparent;
+}
+
+.modal__button:hover{
+    background: rgba(0,0,0,0.5);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.modal__button:active{
+    background: #FF3CAC;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.modal__icon > svg{
+    color: white;
+}

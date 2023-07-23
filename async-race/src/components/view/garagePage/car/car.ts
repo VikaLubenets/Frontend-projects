@@ -119,15 +119,21 @@ export default class CarView extends ViewTemplate {
       tag: 'div',
       classes: ['button-start'],
       textContent: 'A',
-      callback: () => this.emitter.emit('startEngineClicked', this.data.id, 'started')
+      callback: (event: Event) => {
+        this.updateStartEndButtons(event)
+      },
+      attributes: { 'data-id': this.data.id.toString() }
     }
     const buttonStart = new HTMLElementFactory(BtnStartParams).getElement()
 
     const BtnEndParams = {
       tag: 'div',
-      classes: ['button-end'],
+      classes: ['button-end', 'disabled-button'],
       textContent: 'B',
-      callback: () => this.emitter.emit('stopEngineClicked', this.data.id, 'stopped')
+      callback: (event: Event) => {
+        this.updateStartEndButtons(event)
+      },
+      attributes: { 'data-id': this.data.id.toString() }
     }
     const buttonEnd = new HTMLElementFactory(BtnEndParams).getElement()
 
@@ -142,7 +148,7 @@ export default class CarView extends ViewTemplate {
     return null
   }
 
-  private createCarSvg (color: string, id: number): SVGElement {
+  createCarSvg (color: string, id: number): SVGElement {
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
     svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
     svg.setAttribute('width', '50')
@@ -190,5 +196,31 @@ export default class CarView extends ViewTemplate {
     svg.append(path1, path2, path3, path4, path5, path6, path7, path8, path9)
 
     return svg
+  }
+
+  private updateStartEndButtons (event: Event): void {
+    const clickedButton = event.target as HTMLElement | null
+    if (clickedButton == null) return
+
+    const container = clickedButton.closest('.track-wrapper')
+    if (container == null) return
+
+    const carId = clickedButton.dataset.id
+    if (carId != null) {
+      const startButton = container.querySelector(`[data-id="${carId}"].button-start`)
+      const endButton = container.querySelector(`[data-id="${carId}"].button-end`)
+
+      if (startButton != null && endButton != null) {
+        if (clickedButton.classList.contains('button-start')) {
+          startButton.classList.add('disabled-button')
+          endButton.classList.remove('disabled-button')
+          this.emitter.emit('startEngineClicked', this.data.id, 'started')
+        } else if (clickedButton.classList.contains('button-end')) {
+          endButton.classList.add('disabled-button')
+          startButton.classList.remove('disabled-button')
+          this.emitter.emit('stopEngineClicked', this.data.id, 'stopped')
+        }
+      }
+    }
   }
 }

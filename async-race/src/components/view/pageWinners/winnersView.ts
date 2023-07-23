@@ -13,7 +13,7 @@ export default class WinnersView extends ViewTemplate {
   constructor (dataWinners: WinnersResponse, garageData: GarageResponse, emitter: EventEmitter) {
     const params: ElementParams = {
       tag: 'div',
-      classes: ['winners-conteiner'],
+      classes: ['winners-container'],
       textContent: 'text',
       parentSelector: 'body'
     }
@@ -25,7 +25,7 @@ export default class WinnersView extends ViewTemplate {
   }
 
   drawWinnersContainer (page = 1): void {
-    const winnersContainer: HTMLDivElement | null = document.querySelector('.winners-conteiner')
+    const winnersContainer: HTMLDivElement | null = document.querySelector('.winners-container')
 
     if (winnersContainer !== null) {
       const winnersHeader = document.createElement('header')

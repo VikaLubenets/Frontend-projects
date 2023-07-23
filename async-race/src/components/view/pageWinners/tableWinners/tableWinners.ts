@@ -1,6 +1,7 @@
-import { type Garage, type TableRow, type Winners, TableColName } from '../../../../types/types'
+import { type Garage, type TableRow, type Winners, TableColName, type Car } from '../../../../types/types'
 import type EventEmitter from 'events'
 import './tableWinners.css'
+import CarView from '../../../view/garagePage/car/car'
 
 export default class TableWinner {
   carData: Garage
@@ -18,10 +19,7 @@ export default class TableWinner {
   drawTable (): HTMLElement {
     const table = document.createElement('table')
     table.classList.add('table-winners')
-    const dataTable: TableRow[] = [
-      { number: '1', car: 'tesla', name: 'tesla', wins: '1', bestTime: '2.5' },
-      { number: '2', car: 'Kia', name: 'tesla', wins: '1', bestTime: '3.5' }
-    ]
+    const dataTable: TableRow[] = this.getWinnersDataForTable()
 
     const headerRow = document.createElement('tr')
     for (const key of Object.keys(dataTable[0])) {
@@ -35,8 +33,11 @@ export default class TableWinner {
       const row = document.createElement('tr')
       for (const key of Object.keys(item) as Array<keyof TableRow>) {
         const td = document.createElement('td')
-
-        td.textContent = item[key]
+        if (key === 'car') {
+          td.appendChild(item[key] as SVGElement)
+        } else {
+          td.textContent = item[key]
+        }
         row.append(td)
       }
       table.append(row)
@@ -49,5 +50,41 @@ export default class TableWinner {
     if (this.element !== null) {
       return this.element
     }
+  }
+
+  private getCarNameById (id: number): string {
+    const car = this.carData.find((car) => car.id === id)
+    return (car != null) ? car.name : ''
+  }
+
+  private getCarforSVG (id: number): Car | undefined {
+    const car = this.carData.find((car) => car.id === id)
+    return (car != null) ? car : undefined
+  }
+
+  private getWinnersDataForTable (): TableRow[] {
+    const carElements: SVGElement[] = []
+
+    this.winnersData.forEach((winner) => {
+      const car = this.getCarforSVG(winner.id)
+      if (car !== null && car !== undefined) {
+        const carView = new CarView(car, this.emitter)
+        const carElement = carView.createCarSvg(car.color, car.id)
+        if (carElement !== null) {
+          carElements.push(carElement)
+        }
+      }
+    })
+
+    return this.winnersData.map((winner, index) => {
+      const carElement = carElements[index] ?? null
+      return {
+        number: (index + 1).toString(),
+        car: carElement ?? '',
+        name: this.getCarNameById(winner.id),
+        wins: winner.wins.toString(),
+        bestTime: winner.time.toString()
+      }
+    })
   }
 }

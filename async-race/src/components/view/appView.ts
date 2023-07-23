@@ -66,7 +66,7 @@ export default class AppViewer {
     }
   }
 
-  updateView (carsData: GarageResponse, page: number): void {
+  updateView (carsData: GarageResponse, pageGarage: number): void {
     this.dataGarage = carsData
     this.garageView.updateGarageData(this.dataGarage)
     if (this.garageElement !== null) {
@@ -77,12 +77,26 @@ export default class AppViewer {
         }
       }
     }
-    this.garageView.drawGarageContainer(page)
+    this.garageView.drawGarageContainer(pageGarage)
+  }
+
+  updateWinnersView (winnersData: WinnersResponse, pageWinners: number): void {
+    this.dataWinners = winnersData
+    this.winnersView.updateWinnersData(this.dataGarage, this.dataWinners)
+    if (this.winnersElement !== null) {
+      const winnersContainer = document.querySelector('.winners-container')
+      if (winnersContainer !== null) {
+        while (winnersContainer.firstChild !== null) {
+          winnersContainer.removeChild(winnersContainer.firstChild)
+        }
+      }
+    }
+    this.winnersView.drawWinnersContainer(pageWinners)
   }
 
   private openGarageView (): void {
     const garageContainer: HTMLElement | null = document.querySelector('.garage-container')
-    const winnersContainer: HTMLElement | null = document.querySelector('.winners-conteiner')
+    const winnersContainer: HTMLElement | null = document.querySelector('.winners-container')
     if (garageContainer !== null && winnersContainer !== null) {
       garageContainer.style.display = 'block'
       winnersContainer.style.display = 'none'
@@ -91,7 +105,7 @@ export default class AppViewer {
 
   private openWinnersView (): void {
     const garageContainer: HTMLElement | null = document.querySelector('.garage-container')
-    const winnersContainer: HTMLElement | null = document.querySelector('.winners-conteiner')
+    const winnersContainer: HTMLElement | null = document.querySelector('.winners-container')
     if (garageContainer !== null && winnersContainer !== null) {
       garageContainer.style.display = 'none'
       winnersContainer.style.display = 'block'

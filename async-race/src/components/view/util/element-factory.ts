@@ -26,6 +26,9 @@ export default class HTMLElementFactory {
     if (params.parentSelector !== null && params.parentSelector !== undefined) {
       this.addParentNode(params.parentSelector)
     }
+    if (params.attributes != null) {
+      this.setAttributes(params.attributes)
+    }
   }
 
   private setCSSClass (classes: string[]): void {
@@ -53,6 +56,16 @@ export default class HTMLElementFactory {
 
     if (this.element !== null && parentElement !== null) {
       parentElement.appendChild(this.element)
+    }
+  }
+
+  private setAttributes (attributes: Record<string, string>): void {
+    if (this.element !== null) {
+      for (const attr in attributes) {
+        if (Object.prototype.hasOwnProperty.call(attributes, attr)) {
+          this.element.setAttribute(attr, attributes[attr])
+        }
+      }
     }
   }
 }

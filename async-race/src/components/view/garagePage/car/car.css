@@ -101,6 +101,12 @@
     animation-play-state: paused
 }
 
+.disabled-button{
+    cursor:none;
+    background-color: rgb(81, 81, 81);
+    color: black;
+}
+
 @keyframes startMovement {
     0% {
         left: 0;
