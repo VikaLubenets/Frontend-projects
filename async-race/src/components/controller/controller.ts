@@ -1,6 +1,6 @@
 import type DataProvider from '../data/data-provider'
 import type EventEmitter from 'events'
-import type { EngineStartStatus, EngineStopStatus } from '../../types/types'
+import type { EngineStartStatus, EngineStopStatus, Winner } from '../../types/types'
 import CarAnimation from '../view/garagePage/car/carAnimation/carAnimation'
 import WinModal from '../view/garagePage/winModal/winModal'
 
@@ -58,6 +58,7 @@ export default class Controller {
         await this.dataProvider.deleteCar(id)
         console.log('Car and its winners data deleted successfully')
         this.emitter.emit('dataCarsUpdated')
+        this.emitter.emit('dataWinnerUpdated')
       })
       .catch((error) => {
         console.error('Failed to delete car:', error)
@@ -218,13 +219,13 @@ export default class Controller {
         const existingWinner = winners.winnersData.find((winner) => winner.id === id)
 
         if (existingWinner !== undefined) {
-          const bestTime = (time <= existingWinner.time) ? existingWinner.time : time
+          const bestTime = (time >= existingWinner.time) ? existingWinner.time : time
           await this.dataProvider.updateWinner(id, existingWinner.wins + 1, bestTime)
         } else {
-          const winner = {
-            id,
+          const winner: Winner = {
             wins: 1,
-            time
+            time,
+            id
           }
           await this.dataProvider.createWinner(winner)
           this.emitter.emit('dataWinnerUpdated')

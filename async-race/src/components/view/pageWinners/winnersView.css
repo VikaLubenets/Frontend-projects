@@ -1,8 +1,10 @@
 .winners-container{
     background-color: white;
     color: black;
-    margin: 10px;
     height: 70vh;
+    position: absolute;
+    left: 0;
+    top: 50px;
 }
 
 .winners-container .page-number{

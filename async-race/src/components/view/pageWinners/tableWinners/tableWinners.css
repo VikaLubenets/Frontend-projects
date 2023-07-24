@@ -4,4 +4,43 @@
 
 th{
     background-color: yellow;
+    padding: 5px;
+}
+
+tr:first-child th:nth-child(4),
+tr:first-child th:nth-child(5){
+    cursor: pointer;
+    min-width: 7vw;
+}
+
+tr:first-child th:nth-child(5){
+    width: 12vw;
+}
+
+.up-arrow {
+    position: relative;
+}
+  
+.up-arrow::before {
+    content: '';
+    position: absolute;
+    top: 30%;
+    right: 5px;
+    border-width: 0 6px 10px 6px;
+    border-style: solid;
+    border-color: #000 transparent;
+}
+  
+.down-arrow {
+    position: relative;
+}
+  
+.down-arrow::before {
+    content: '';
+    position: absolute;
+    top: 30%;
+    right: 5px;
+    border-width: 10px 6px 0 6px;
+    border-style: solid;
+    border-color: #000 transparent;
 }

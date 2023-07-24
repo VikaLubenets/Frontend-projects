@@ -1,4 +1,4 @@
-import type { GarageResponse, WinnersResponse } from '../../types/types'
+import type { GarageResponse, OrderWinnersOption, SortWinnersOption, WinnersResponse } from '../../types/types'
 import DataProvider from '../data/data-provider'
 import AppViewer from '../view/appView'
 import EventEmitter from 'events'
@@ -53,6 +53,11 @@ export default class App {
         console.error('Error with next page view', error)
       })
     })
+    this.emitter.on('handleSortTableClicked', (sort: SortWinnersOption, order: OrderWinnersOption) => {
+      this.handleSortWinnersTable(sort, order).catch(error => {
+        console.error('Error with sort winners', error)
+      })
+    })
   }
 
   async start (): Promise<void> {
@@ -68,7 +73,7 @@ export default class App {
       this.carsData = await this.dataProvider.getCars(this.currentPageGarage, 7)
       this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, 10)
       if (this.view !== null) {
-        this.view.updateView(this.carsData, this.currentPageGarage)
+        this.view.updateGarageView(this.carsData, this.currentPageGarage)
       }
     } catch (error) {
       console.error('Error with update view', error)
@@ -77,10 +82,9 @@ export default class App {
 
   private async updateAppWinners (): Promise<void> {
     try {
-      this.carsData = await this.dataProvider.getCars(this.currentPageGarage, 7)
       this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, 10)
       if (this.view !== null) {
-        this.view.updateWinnersView(this.winnersData, this.currentPageGarage)
+        this.view.updateWinnersView(this.winnersData, this.currentPageWinners)
       }
     } catch (error) {
       console.error('Error with update view', error)
@@ -97,7 +101,7 @@ export default class App {
       if (this.currentPageGarage < totalPages) {
         this.currentPageGarage += 1
         this.carsData = await this.dataProvider.getCars(this.currentPageGarage, 7)
-        this.view.updateView(this.carsData, this.currentPageGarage)
+        this.view.updateGarageView(this.carsData, this.currentPageGarage)
       }
     }
   }
@@ -111,7 +115,7 @@ export default class App {
       if (this.currentPageGarage > 1) {
         this.currentPageGarage -= 1
         this.carsData = await this.dataProvider.getCars(this.currentPageGarage, 7)
-        this.view.updateView(this.carsData, this.currentPageGarage)
+        this.view.updateGarageView(this.carsData, this.currentPageGarage)
       }
     }
   }
@@ -140,6 +144,16 @@ export default class App {
         this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, 10)
         this.view.updateWinnersView(this.winnersData, this.currentPageWinners)
       }
+    }
+  }
+
+  private async handleSortWinnersTable (sort: SortWinnersOption, order: OrderWinnersOption): Promise<void> {
+    if (
+      this.view !== null &&
+      this.winnersData !== null
+    ) {
+      this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, 10, sort, order)
+      this.view.updateWinnersView(this.winnersData, this.currentPageWinners)
     }
   }
 }

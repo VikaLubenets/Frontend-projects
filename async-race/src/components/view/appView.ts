@@ -58,7 +58,7 @@ export default class AppViewer {
 
       if (this.winnersElement !== null) {
         fragment.append(this.winnersElement)
-        this.winnersElement.style.display = 'none'
+        this.winnersElement.style.visibility = 'hidden'
       }
       body.append(fragment)
       this.garageView.drawGarageContainer()
@@ -66,7 +66,7 @@ export default class AppViewer {
     }
   }
 
-  updateView (carsData: GarageResponse, pageGarage: number): void {
+  updateGarageView (carsData: GarageResponse, pageGarage: number): void {
     this.dataGarage = carsData
     this.garageView.updateGarageData(this.dataGarage)
     if (this.garageElement !== null) {
@@ -83,23 +83,15 @@ export default class AppViewer {
   updateWinnersView (winnersData: WinnersResponse, pageWinners: number): void {
     this.dataWinners = winnersData
     this.winnersView.updateWinnersData(this.dataGarage, this.dataWinners)
-    if (this.winnersElement !== null) {
-      const winnersContainer = document.querySelector('.winners-container')
-      if (winnersContainer !== null) {
-        while (winnersContainer.firstChild !== null) {
-          winnersContainer.removeChild(winnersContainer.firstChild)
-        }
-      }
-    }
-    this.winnersView.drawWinnersContainer(pageWinners)
+    this.winnersView.updateWinnersView(pageWinners)
   }
 
   private openGarageView (): void {
     const garageContainer: HTMLElement | null = document.querySelector('.garage-container')
     const winnersContainer: HTMLElement | null = document.querySelector('.winners-container')
     if (garageContainer !== null && winnersContainer !== null) {
-      garageContainer.style.display = 'block'
-      winnersContainer.style.display = 'none'
+      garageContainer.style.visibility = 'visible'
+      winnersContainer.style.visibility = 'hidden'
     }
   }
 
@@ -107,8 +99,8 @@ export default class AppViewer {
     const garageContainer: HTMLElement | null = document.querySelector('.garage-container')
     const winnersContainer: HTMLElement | null = document.querySelector('.winners-container')
     if (garageContainer !== null && winnersContainer !== null) {
-      garageContainer.style.display = 'none'
-      winnersContainer.style.display = 'block'
+      garageContainer.style.visibility = 'hidden'
+      winnersContainer.style.visibility = 'visible'
     }
   }
 }

@@ -9,6 +9,7 @@ export default class WinnersView extends ViewTemplate {
   emitter: EventEmitter
   winners: Winners
   cars: Garage
+  table: TableWinner
 
   constructor (dataWinners: WinnersResponse, garageData: GarageResponse, emitter: EventEmitter) {
     const params: ElementParams = {
@@ -22,47 +23,37 @@ export default class WinnersView extends ViewTemplate {
     this.data = dataWinners
     this.winners = this.data.winnersData
     this.cars = garageData.garage.garage
+    this.table = new TableWinner(this.cars, this.winners, this.emitter)
   }
 
   drawWinnersContainer (page = 1): void {
     const winnersContainer: HTMLDivElement | null = document.querySelector('.winners-container')
 
     if (winnersContainer !== null) {
-      const winnersHeader = document.createElement('header')
-      winnersHeader.classList.add('winners-header')
-      winnersHeader.textContent = `Winners: ${this.data.totalCount}`
-      winnersContainer.append(winnersHeader)
+      this.drawWinnersHeader(winnersContainer)
+      this.drawPageNumber(winnersContainer, page)
+      this.drawTable(winnersContainer)
+      this.drawPageButtons(winnersContainer, page)
+    }
+  }
 
-      const pageNum = document.createElement('h2')
-      pageNum.classList.add('page-number')
-      pageNum.textContent = `Page: ${page}`
-      winnersContainer.append(pageNum)
+  updateWinnersView (page = 1): void {
+    const winnersContainer: HTMLDivElement | null = document.querySelector('.winners-container')
+    if (winnersContainer !== null) {
+      const winnersHeader: HTMLHeadElement | null = winnersContainer.querySelector('.winners-header')
+      const pageNum: HTMLDivElement | null = winnersContainer.querySelector('.page-number')
+      const tableContainer: HTMLTableElement | null = winnersContainer.querySelector('.table-container')
 
-      const winnersTableContainer = document.createElement('div')
-      winnersTableContainer.classList.add('table-container')
-      winnersContainer.append(winnersTableContainer)
-
-      const table = new TableWinner(this.cars, this.winners, this.emitter)
-      const tableHTML = table.getElement()
-      if (tableHTML !== undefined) {
-        winnersTableContainer.append(tableHTML)
+      if (winnersHeader !== null) {
+        winnersHeader.textContent = `Winners: ${this.data.totalCount}`
       }
 
-      const pageButtonsContainer = document.createElement('div')
-      pageButtonsContainer.classList.add('pageButtons-container')
-      winnersContainer.append(pageButtonsContainer)
-
-      const prevBtn = document.createElement('div')
-      prevBtn.classList.add('prev-button')
-      prevBtn.textContent = 'prev'
-      prevBtn.addEventListener('click', () => this.emitter.emit('prevButtonWinnersClicked', page))
-      pageButtonsContainer.append(prevBtn)
-
-      const nextBtn = document.createElement('div')
-      nextBtn.classList.add('next-button')
-      nextBtn.textContent = 'next'
-      nextBtn.addEventListener('click', () => this.emitter.emit('nextButtonWinnersClicked', page))
-      pageButtonsContainer.append(nextBtn)
+      if (pageNum !== null) {
+        pageNum.textContent = `Page: ${page}`
+      }
+      if (tableContainer !== null) {
+        this.table.updateTable()
+      }
     }
   }
 
@@ -70,5 +61,49 @@ export default class WinnersView extends ViewTemplate {
     this.data = dataWinners
     this.winners = this.data.winnersData
     this.cars = dataGarage.garage.garage
+    this.table.updateDataTable(this.cars, this.winners)
+  }
+
+  private drawWinnersHeader (container: HTMLDivElement): void {
+    const winnersHeader = document.createElement('header')
+    winnersHeader.classList.add('winners-header')
+    winnersHeader.textContent = `Winners: ${this.data.totalCount}`
+    container.append(winnersHeader)
+  }
+
+  private drawPageNumber (container: HTMLDivElement, page: number): void {
+    const pageNum = document.createElement('h2')
+    pageNum.classList.add('page-number')
+    pageNum.textContent = `Page: ${page}`
+    container.append(pageNum)
+  }
+
+  private drawTable (container: HTMLDivElement): void {
+    const winnersTableContainer = document.createElement('div')
+    winnersTableContainer.classList.add('table-container')
+    container.append(winnersTableContainer)
+
+    const tableHTML = this.table.getElement()
+    if (tableHTML !== undefined) {
+      winnersTableContainer.append(tableHTML)
+    }
+  }
+
+  private drawPageButtons (container: HTMLDivElement, page: number): void {
+    const pageButtonsContainer = document.createElement('div')
+    pageButtonsContainer.classList.add('pageButtons-container')
+    container.append(pageButtonsContainer)
+
+    const prevBtn = document.createElement('div')
+    prevBtn.classList.add('prev-button')
+    prevBtn.textContent = 'prev'
+    prevBtn.addEventListener('click', () => this.emitter.emit('prevButtonWinnersClicked', page))
+    pageButtonsContainer.append(prevBtn)
+
+    const nextBtn = document.createElement('div')
+    nextBtn.classList.add('next-button')
+    nextBtn.textContent = 'next'
+    nextBtn.addEventListener('click', () => this.emitter.emit('nextButtonWinnersClicked', page))
+    pageButtonsContainer.append(nextBtn)
   }
 }

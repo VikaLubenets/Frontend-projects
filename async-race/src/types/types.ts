@@ -83,7 +83,7 @@ export interface TableRow {
 }
 
 export enum TableColName {
-  number = 'Number',
+  number = 'No',
   car = 'Car',
   name = 'Name',
   wins = 'Wins',

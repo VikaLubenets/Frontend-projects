@@ -200,16 +200,14 @@ export default class DataProvider {
       queryParams.push(`_limit=${limit}`)
     }
 
-    if (sort !== undefined) {
+    if (sort !== undefined && order !== undefined) {
       queryParams.push(`_sort=${sort}`)
-    }
-
-    if (order !== undefined) {
       queryParams.push(`_order=${order}`)
     }
 
     if (queryParams.length > 0) {
       url += `?${queryParams.join('&')}`
+      console.log(url)
     }
     return await fetch(url)
       .then(async (response) => {
