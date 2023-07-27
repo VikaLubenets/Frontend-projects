@@ -7,5 +7,5 @@ async function startApp (): Promise<void> {
 }
 
 startApp().catch(error => {
-  console.error('An error occurred during starting the app:', error)
+  console.log('An error occurred during starting the app:', error)
 })

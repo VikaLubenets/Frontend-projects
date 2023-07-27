@@ -61,11 +61,19 @@ export default class App {
   }
 
   async start (): Promise<void> {
-    this.carsData = await this.dataProvider.getCars(this.currentPageGarage, 7)
-    this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, 10)
-    this.view = new AppViewer(this.carsData, this.emitter, this.winnersData)
-    this.view.createView()
-    this.controller = new Controller(this.dataProvider, this.emitter)
+    try {
+      this.carsData = await this.dataProvider.getCars(this.currentPageGarage, 7)
+      this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, 10)
+      if (this.carsData != null && this.winnersData != null) {
+        this.view = new AppViewer(this.carsData, this.emitter, this.winnersData)
+        this.view.createView()
+        this.controller = new Controller(this.dataProvider, this.emitter)
+      } else {
+        console.log('Failed to fetch cars or winners data.')
+      }
+    } catch (error) {
+      console.log('An error occurred during starting the app:', error)
+    }
   }
 
   private async updateApp (): Promise<void> {
