@@ -23,40 +23,34 @@ export default class CarView extends ViewTemplate {
 
   drawCarTrack(): void {
     this.createButtonsLine(this.data.name);
-    const startEndBtn = this.createStartEndBtns();
-    const car = renderCarIcon(this.data.color, this.data.id);
+    const startEndBtn = this.createStartEndBtns() as HTMLElement;
+    const car = renderCarIcon(this.data.color, this.data.id) as SVGElement;
 
     const trackContainerParams = {
       tag: 'div',
       classes: ['car-track'],
     };
-    const trackContainer = new HTMLElementFactory(trackContainerParams).getElement();
+    const trackContainer = new HTMLElementFactory(trackContainerParams).getElement() as HTMLElement;
 
     const startContainerParams = {
       tag: 'div',
       classes: ['start-container'],
     };
-    const startContainer = new HTMLElementFactory(startContainerParams).getElement();
+    const startContainer = new HTMLElementFactory(startContainerParams).getElement() as HTMLElement;
 
-    if (startContainer !== null && startEndBtn !== null && car !== null) {
-      startContainer.append(startEndBtn, car);
-    }
+    startContainer.append(startEndBtn, car);
 
     const flagParams = {
       tag: 'div',
       classes: ['flag'],
       textContent: '',
     };
-    const flag = new HTMLElementFactory(flagParams).getElement();
+    const flag = new HTMLElementFactory(flagParams).getElement() as HTMLElement;
 
-    if (trackContainer !== null && startContainer !== null && flag !== null) {
-      trackContainer.append(startContainer, flag);
-      const trackWrapper = this.getHTMLElement();
+    trackContainer.append(startContainer, flag);
+    const trackWrapper = this.getHTMLElement() as HTMLElement;
 
-      if (trackWrapper !== null) {
-        trackWrapper.append(trackContainer);
-      }
-    }
+    trackWrapper.append(trackContainer);
   }
 
   private createButtonsLine(model: string): void {
@@ -64,7 +58,7 @@ export default class CarView extends ViewTemplate {
       tag: 'div',
       classes: ['car-buttons'],
     };
-    const buttonContainer = new HTMLElementFactory(BtnParams).getElement();
+    const buttonContainer = new HTMLElementFactory(BtnParams).getElement() as HTMLElement;
 
     const selectBtnParams = {
       tag: 'div',
@@ -72,7 +66,7 @@ export default class CarView extends ViewTemplate {
       textContent: 'select',
       callback: () => this.emitter.emit('selectCarClicked', this.data.id),
     };
-    const selectBtn = new HTMLElementFactory(selectBtnParams).getElement();
+    const selectBtn = new HTMLElementFactory(selectBtnParams).getElement() as HTMLElement;
 
     const removeBtnParams = {
       tag: 'div',
@@ -80,23 +74,19 @@ export default class CarView extends ViewTemplate {
       textContent: 'remove',
       callback: () => this.emitter.emit('removeCarClicked', this.data.id),
     };
-    const removeBtn = new HTMLElementFactory(removeBtnParams).getElement();
+    const removeBtn = new HTMLElementFactory(removeBtnParams).getElement() as HTMLElement;
 
     const carModelParams = {
       tag: 'div',
       classes: ['car-model'],
       textContent: `${model}`,
     };
-    const carModalInfo = new HTMLElementFactory(carModelParams).getElement();
+    const carModalInfo = new HTMLElementFactory(carModelParams).getElement() as HTMLElement;
 
-    if (buttonContainer !== null && selectBtn !== null && removeBtn !== null && carModalInfo !== null) {
-      buttonContainer.append(selectBtn, removeBtn, carModalInfo);
-      const trackWrapper = this.getHTMLElement();
+    buttonContainer.append(selectBtn, removeBtn, carModalInfo);
+    const trackWrapper = this.getHTMLElement() as HTMLElement;
 
-      if (trackWrapper !== null) {
-        trackWrapper.append(buttonContainer);
-      }
-    }
+    trackWrapper.append(buttonContainer);
   }
 
   private createStartEndBtns(): HTMLElement | null {
@@ -104,7 +94,7 @@ export default class CarView extends ViewTemplate {
       tag: 'div',
       classes: ['btns-container'],
     };
-    const buttonContainer = new HTMLElementFactory(BtnContainerParams).getElement();
+    const buttonContainer = new HTMLElementFactory(BtnContainerParams).getElement() as HTMLElement;
 
     const BtnStartParams = {
       tag: 'div',
@@ -115,7 +105,7 @@ export default class CarView extends ViewTemplate {
       },
       attributes: { 'data-id': this.data.id.toString() },
     };
-    const buttonStart = new HTMLElementFactory(BtnStartParams).getElement();
+    const buttonStart = new HTMLElementFactory(BtnStartParams).getElement() as HTMLElement;
 
     const BtnEndParams = {
       tag: 'div',
@@ -126,14 +116,10 @@ export default class CarView extends ViewTemplate {
       },
       attributes: { 'data-id': this.data.id.toString() },
     };
-    const buttonEnd = new HTMLElementFactory(BtnEndParams).getElement();
+    const buttonEnd = new HTMLElementFactory(BtnEndParams).getElement() as HTMLElement;
 
-    if (buttonContainer !== null && buttonStart !== null && buttonEnd !== null) {
-      buttonContainer.append(buttonStart, buttonEnd);
-      return buttonContainer;
-    }
-
-    return null;
+    buttonContainer.append(buttonStart, buttonEnd);
+    return buttonContainer;
   }
 
   private updateStartEndButtons(event: Event): void {
@@ -145,21 +131,17 @@ export default class CarView extends ViewTemplate {
 
     const carId = clickedButton.dataset.id;
 
-    if (carId != null) {
-      const startButton = container.querySelector(`[data-id="${carId}"].button-start`);
-      const endButton = container.querySelector(`[data-id="${carId}"].button-end`);
+    const startButton = container.querySelector(`[data-id="${carId}"].button-start`) as HTMLElement;
+    const endButton = container.querySelector(`[data-id="${carId}"].button-end`) as HTMLElement;
 
-      if (startButton != null && endButton != null) {
-        if (clickedButton.classList.contains('button-start')) {
-          startButton.classList.add('disabled-button');
-          endButton.classList.remove('disabled-button');
-          this.emitter.emit('startEngineClicked', this.data.id, 'started');
-        } else if (clickedButton.classList.contains('button-end')) {
-          endButton.classList.add('disabled-button');
-          startButton.classList.remove('disabled-button');
-          this.emitter.emit('stopEngineClicked', this.data.id, 'stopped');
-        }
-      }
+    if (clickedButton.classList.contains('button-start')) {
+      startButton.classList.add('disabled-button');
+      endButton.classList.remove('disabled-button');
+      this.emitter.emit('startEngineClicked', this.data.id, 'started');
+    } else if (clickedButton.classList.contains('button-end')) {
+      endButton.classList.add('disabled-button');
+      startButton.classList.remove('disabled-button');
+      this.emitter.emit('stopEngineClicked', this.data.id, 'stopped');
     }
   }
 }
