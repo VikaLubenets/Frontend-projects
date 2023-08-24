@@ -60,95 +60,62 @@ export default class App {
   }
 
   private async updateApp(): Promise<void> {
-    try {
-      this.carsData = await this.dataProvider.getCars(this.currentPageGarage, this.maxCarsOnPage);
-      this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, this.maxWinnersOnPage);
-      this.view?.updateGarageView(this.carsData, this.currentPageGarage);
-    } catch (error) {
-      console.log('Error with update view', error);
-    }
+    this.carsData = await this.dataProvider.getCars(this.currentPageGarage, this.maxCarsOnPage);
+    this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, this.maxWinnersOnPage);
+    this.view?.updateGarageView(this.carsData, this.currentPageGarage);
   }
 
   private async updateAppWinners(): Promise<void> {
-    try {
-      this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, this.maxWinnersOnPage);
-      this.view?.updateWinnersView(this.winnersData, this.currentPageWinners);
-    } catch (error) {
-      console.log('Error with update view', error);
-    }
+    this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, this.maxWinnersOnPage);
+    this.view?.updateWinnersView(this.winnersData, this.currentPageWinners);
   }
 
   private async nextPageGarage(): Promise<void> {
-    try {
-      if (!this.carsData) {
-        return;
-      }
-      const totalPages = Math.ceil(this.carsData.totalCount / this.maxCarsOnPage);
-      if (this.currentPageGarage >= totalPages) {
-        return;
-      }
-      this.currentPageGarage += 1;
-      this.carsData = await this.dataProvider.getCars(this.currentPageGarage, this.maxCarsOnPage);
-      this.view?.updateGarageView(this.carsData, this.currentPageGarage);
-    } catch (error) {
-      console.log('Error in nextPageGarage:', error);
+    if (!this.carsData) {
+      return;
     }
+    const totalPages = Math.ceil(this.carsData.totalCount / this.maxCarsOnPage);
+    if (this.currentPageGarage >= totalPages) {
+      return;
+    }
+    this.currentPageGarage += 1;
+    this.carsData = await this.dataProvider.getCars(this.currentPageGarage, this.maxCarsOnPage);
+    this.view?.updateGarageView(this.carsData, this.currentPageGarage);
   }
 
   private async prevPageGarage(): Promise<void> {
-    try {
-      if (this.currentPageGarage <= 1) {
-        return;
-      }
-      this.currentPageGarage -= 1;
-      this.carsData = await this.dataProvider.getCars(this.currentPageGarage, this.maxCarsOnPage);
-      this.view?.updateGarageView(this.carsData, this.currentPageGarage);
-    } catch (error) {
-      console.log('Error in prevPageGarage:', error);
+    if (this.currentPageGarage <= 1) {
+      return;
     }
+    this.currentPageGarage -= 1;
+    this.carsData = await this.dataProvider.getCars(this.currentPageGarage, this.maxCarsOnPage);
+    this.view?.updateGarageView(this.carsData, this.currentPageGarage);
   }
 
   private async nextPageWinners(): Promise<void> {
-    try {
-      if (!this.winnersData) {
-        return;
-      }
-      const totalPages = Math.ceil(this.winnersData.totalCount / this.maxWinnersOnPage);
-      if (this.currentPageWinners >= totalPages) {
-        return;
-      }
-      this.currentPageWinners += 1;
-      this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, this.maxWinnersOnPage);
-      this.view?.updateWinnersView(this.winnersData, this.currentPageWinners);
-    } catch (error) {
-      console.log('Error in nextPageWinners:', error);
+    if (!this.winnersData) {
+      return;
     }
+    const totalPages = Math.ceil(this.winnersData.totalCount / this.maxWinnersOnPage);
+    if (this.currentPageWinners >= totalPages) {
+      return;
+    }
+    this.currentPageWinners += 1;
+    this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, this.maxWinnersOnPage);
+    this.view?.updateWinnersView(this.winnersData, this.currentPageWinners);
   }
 
   private async prevPageWinners(): Promise<void> {
-    try {
-      if (this.currentPageWinners <= 1) {
-        return;
-      }
-      this.currentPageWinners -= 1;
-      this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, this.maxWinnersOnPage);
-      this.view?.updateWinnersView(this.winnersData, this.currentPageWinners);
-    } catch (error) {
-      console.log('Error in prevPageWinners:', error);
+    if (this.currentPageWinners <= 1) {
+      return;
     }
+    this.currentPageWinners -= 1;
+    this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, this.maxWinnersOnPage);
+    this.view?.updateWinnersView(this.winnersData, this.currentPageWinners);
   }
 
   private async handleSortWinnersTable(sort: SortWinnersOption, order: OrderWinnersOption): Promise<void> {
-    try {
-      this.winnersData = await this.dataProvider.getWinners(
-        this.currentPageWinners,
-        this.maxWinnersOnPage,
-        sort,
-        order
-      );
-      this.view?.updateWinnersView(this.winnersData, this.currentPageWinners);
-    } catch (error) {
-      console.log('Error in handleSortWinnersTable:', error);
-    }
+    this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, this.maxWinnersOnPage, sort, order);
+    this.view?.updateWinnersView(this.winnersData, this.currentPageWinners);
   }
 }
