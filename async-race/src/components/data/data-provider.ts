@@ -227,21 +227,22 @@ export default class DataProvider {
     order?: OrderWinnersOption
   ): Promise<WinnersResponse> {
     let url = `${this.baseUrl}${Endpoint.Winners}`;
-    const queryParams = [];
+    const queryParams = new URLSearchParams();
 
-    if (page && limit) {
-      queryParams.push(`_page=${page}`);
-      queryParams.push(`_limit=${limit}`);
+    if (page) {
+      queryParams.set('_page', `${page}`);
+    }
+    if (limit) {
+      queryParams.set('_limit', `${limit}`);
+    }
+    if (sort) {
+      queryParams.set('_sort', `${sort}`);
+    }
+    if (order) {
+      queryParams.set('_order', `${order}`);
     }
 
-    if (sort && order) {
-      queryParams.push(`_sort=${sort}`);
-      queryParams.push(`_order=${order}`);
-    }
-
-    if (queryParams.length > 0) {
-      url += `?${queryParams.join('&')}`;
-    }
+    url += `?${queryParams.toString()}`;
 
     try {
       const response = await fetch(url);

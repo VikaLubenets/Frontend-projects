@@ -3,6 +3,7 @@ import WinModal from 'components/view/garagePage/winModal/winModal';
 import type EventEmitter from 'events';
 import type { EngineStartStatus, EngineStopStatus, Winner } from 'types';
 import type DataProvider from 'components/data/data-provider';
+import { firstPartOfGeneratedCarName, secondPartOfGeneratedCarName } from 'components/data/constants';
 
 export default class Controller {
   emitter: EventEmitter;
@@ -88,71 +89,37 @@ export default class Controller {
   }
 
   async handleUpdateCar(name: string, color: string): Promise<void> {
-    if (this.selectedCarId) {
-      try {
-        await this.dataProvider.updateCar(this.selectedCarId, name, color);
-        const updateInput: HTMLInputElement | null = document.querySelector('.update-input');
-        const colorInput: HTMLInputElement | null = document.querySelector('.color-car-update');
-
-        if (updateInput) {
-          updateInput.value = '';
-        }
-
-        if (colorInput) {
-          colorInput.value = 'white';
-        }
-
-        this.emitter.emit('dataCarsUpdated');
-        this.emitter.emit('dataWinnerUpdated');
-      } catch (error) {
-        console.error('Failed to update car:', error);
-      }
-    } else {
+    if (!this.selectedCarId) {
       console.error('No car selected');
+      return;
+    }
+
+    try {
+      await this.dataProvider.updateCar(this.selectedCarId, name, color);
+      const updateInput: HTMLInputElement | null = document.querySelector('.update-input');
+      const colorInput: HTMLInputElement | null = document.querySelector('.color-car-update');
+
+      if (updateInput) {
+        updateInput.value = '';
+      }
+
+      if (colorInput) {
+        colorInput.value = 'white';
+      }
+
+      this.emitter.emit('dataCarsUpdated');
+      this.emitter.emit('dataWinnerUpdated');
+    } catch (error) {
+      console.error('Failed to update car:', error);
     }
   }
 
   handleGenerateCars(): void {
-    const firstPartOfName = [
-      'Ford',
-      'Tesla',
-      'Mersedes',
-      'Nissan',
-      'Toyota',
-      'Kia',
-      'Mazda',
-      'BMW',
-      'Audi',
-      'Porche',
-      'Asten Martin',
-      'Ferrari',
-      'Hammer',
-      'Lexus',
-      'Subaru',
-    ];
-    const secondPartOfName = [
-      '911',
-      'modal Y',
-      'modal X',
-      'M3',
-      'Supra',
-      'R8',
-      'GT',
-      'RX-8',
-      'Eclipse',
-      'Viper',
-      'Mustang',
-      'Rio',
-      'GTO',
-      'X5',
-      'GT 500',
-    ];
-
     const generateRandomName = (): string => {
-      const randomNumFirst = Math.floor(Math.random() * firstPartOfName.length);
-      const randomNumSecond = Math.floor(Math.random() * secondPartOfName.length);
+      const randomNumFirst = Math.floor(Math.random() * firstPartOfGeneratedCarName.length);
+      const randomNumSecond = Math.floor(Math.random() * secondPartOfGeneratedCarName.length);
 
-      return `${firstPartOfName[randomNumFirst]} ${secondPartOfName[randomNumSecond]}`;
+      return `${firstPartOfGeneratedCarName[randomNumFirst]} ${secondPartOfGeneratedCarName[randomNumSecond]}`;
     };
 
     const generateRandomColor = (): string => {
@@ -196,10 +163,7 @@ export default class Controller {
 
       if (error instanceof Error && error.message === "Car has been stopped suddenly. It's engine was broken down.") {
         const animatedCar = this.animatedCars[id];
-
-        if (animatedCar) {
-          animatedCar.stopCarAfterEngineBroken();
-        }
+        animatedCar?.stopCarAfterEngineBroken();
       }
     }
   }
@@ -207,12 +171,8 @@ export default class Controller {
   async handleStopEngine(id: number, status: EngineStopStatus): Promise<void> {
     try {
       await this.dataProvider.startStopCarEngine(id, status);
-
       const animatedCar = this.animatedCars[id];
-
-      if (animatedCar) {
-        animatedCar.resetCarPosition();
-      }
+      animatedCar?.resetCarPosition();
     } catch (error) {
       console.error('Failed to stop car engine:', error);
     }

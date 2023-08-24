@@ -1,7 +1,7 @@
+import GarageView from 'components/view/garagePage/garageView';
+import WinnersView from 'components/view/pageWinners/winnersView';
 import type EventEmitter from 'events';
-import type { GarageResponse, WinnersResponse } from '../../types/types';
-import GarageView from './garagePage/garageView';
-import WinnersView from './pageWinners/winnersView';
+import type { GarageResponse, WinnersResponse } from 'types';
 
 export default class AppViewer {
   garageView: GarageView;
@@ -35,55 +35,52 @@ export default class AppViewer {
     const body: HTMLBodyElement | null = document.querySelector('body');
     const fragment: DocumentFragment = document.createDocumentFragment();
 
-    if (body !== null) {
-      const garageButton = document.createElement('button');
-      garageButton.textContent = 'Garage';
-      garageButton.classList.add('garage-button');
-      garageButton.addEventListener('click', () => {
-        this.openGarageView();
-      });
-      fragment.appendChild(garageButton);
-
-      const winnersButton = document.createElement('button');
-      winnersButton.textContent = 'Winners';
-      winnersButton.classList.add('winners-button');
-      winnersButton.addEventListener('click', () => {
-        this.openWinnersView();
-      });
-      fragment.appendChild(winnersButton);
-
-      if (this.garageContainer === null) {
-        this.garageContainer = document.createElement('div');
-        this.garageContainer.classList.add('garage-container');
-        fragment.append(this.garageContainer);
-      } else {
-        this.garageContainer.innerHTML = '';
-      }
-
-      if (this.garageElement !== null) {
-        this.garageContainer.append(this.garageElement);
-      }
-
-      if (this.winnersElement !== null) {
-        fragment.append(this.winnersElement);
-        this.winnersElement.style.visibility = 'hidden';
-      }
-
-      body.append(fragment);
-      this.garageView.drawGarageContainer();
-      this.winnersView.drawWinnersContainer();
+    if (body === null) {
+      return;
     }
+    const garageButton = document.createElement('button');
+    garageButton.textContent = 'Garage';
+    garageButton.classList.add('garage-button');
+    garageButton.addEventListener('click', this.openGarageView);
+    fragment.appendChild(garageButton);
+
+    const winnersButton = document.createElement('button');
+    winnersButton.textContent = 'Winners';
+    winnersButton.classList.add('winners-button');
+    winnersButton.addEventListener('click', this.openWinnersView);
+    fragment.appendChild(winnersButton);
+
+    if (this.garageContainer === null) {
+      this.garageContainer = document.createElement('div');
+      this.garageContainer.classList.add('garage-container');
+      fragment.append(this.garageContainer);
+    } else {
+      this.garageContainer.innerHTML = '';
+    }
+
+    if (this.garageElement) {
+      this.garageContainer.append(this.garageElement);
+    }
+
+    if (this.winnersElement) {
+      fragment.append(this.winnersElement);
+      this.winnersElement.style.visibility = 'hidden';
+    }
+
+    body.append(fragment);
+    this.garageView.drawGarageContainer();
+    this.winnersView.drawWinnersContainer();
   }
 
   updateGarageView(carsData: GarageResponse, pageGarage: number): void {
     this.dataGarage = carsData;
     this.garageView.updateGarageData(this.dataGarage);
 
-    if (this.garageElement !== null) {
+    if (this.garageElement) {
       const garageContainer = document.querySelector('.garage-container');
 
-      if (garageContainer !== null) {
-        while (garageContainer.firstChild !== null) {
+      if (garageContainer) {
+        while (garageContainer.firstChild) {
           garageContainer.removeChild(garageContainer.firstChild);
         }
       }
@@ -102,7 +99,7 @@ export default class AppViewer {
     const garageContainer: HTMLElement | null = document.querySelector('.garage-container');
     const winnersContainer: HTMLElement | null = document.querySelector('.winners-container');
 
-    if (garageContainer !== null && winnersContainer !== null) {
+    if (garageContainer && winnersContainer) {
       garageContainer.style.visibility = 'visible';
       winnersContainer.style.visibility = 'hidden';
     }
@@ -112,7 +109,7 @@ export default class AppViewer {
     const garageContainer: HTMLElement | null = document.querySelector('.garage-container');
     const winnersContainer: HTMLElement | null = document.querySelector('.winners-container');
 
-    if (garageContainer !== null && winnersContainer !== null) {
+    if (garageContainer && winnersContainer) {
       garageContainer.style.visibility = 'hidden';
       winnersContainer.style.visibility = 'visible';
     }
