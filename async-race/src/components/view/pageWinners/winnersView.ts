@@ -1,109 +1,116 @@
-import type { WinnersResponse, ElementParams, Winners, GarageResponse, Garage } from '../../../types/types'
-import ViewTemplate from '../util/view-template'
-import './winnersView.css'
-import type EventEmitter from 'events'
-import TableWinner from './tableWinners/tableWinners'
+import type EventEmitter from 'events';
+import type { WinnersResponse, ElementParams, Winners, GarageResponse, Garage } from 'types';
+import ViewTemplate from 'components/view/util/view-template';
+import TableWinner from './tableWinners/tableWinners';
+import './winnersView.css';
 
 export default class WinnersView extends ViewTemplate {
-  data: WinnersResponse
-  emitter: EventEmitter
-  winners: Winners
-  cars: Garage
-  table: TableWinner
+  data: WinnersResponse;
 
-  constructor (dataWinners: WinnersResponse, garageData: GarageResponse, emitter: EventEmitter) {
+  emitter: EventEmitter;
+
+  winners: Winners;
+
+  cars: Garage;
+
+  table: TableWinner;
+
+  constructor(dataWinners: WinnersResponse, garageData: GarageResponse, emitter: EventEmitter) {
     const params: ElementParams = {
       tag: 'div',
       classes: ['winners-container'],
       textContent: 'text',
-      parentSelector: 'body'
-    }
-    super(params)
-    this.emitter = emitter
-    this.data = dataWinners
-    this.winners = this.data.winnersData
-    this.cars = garageData.garage.garage
-    this.table = new TableWinner(this.cars, this.winners, this.emitter)
+      parentSelector: 'body',
+    };
+    super(params);
+    this.emitter = emitter;
+    this.data = dataWinners;
+    this.winners = this.data.winnersData;
+    this.cars = garageData.garage.garage;
+    this.table = new TableWinner(this.cars, this.winners, this.emitter);
   }
 
-  drawWinnersContainer (page = 1): void {
-    const winnersContainer: HTMLDivElement | null = document.querySelector('.winners-container')
+  drawWinnersContainer(page = 1): void {
+    const winnersContainer: HTMLDivElement | null = document.querySelector('.winners-container');
 
     if (winnersContainer !== null) {
-      this.drawWinnersHeader(winnersContainer)
-      this.drawPageNumber(winnersContainer, page)
-      this.drawTable(winnersContainer)
-      this.drawPageButtons(winnersContainer, page)
+      this.drawWinnersHeader(winnersContainer);
+      this.drawPageNumber(winnersContainer, page);
+      this.drawTable(winnersContainer);
+      this.drawPageButtons(winnersContainer, page);
     }
   }
 
-  updateWinnersView (page = 1): void {
-    const winnersContainer: HTMLDivElement | null = document.querySelector('.winners-container')
+  updateWinnersView(page = 1): void {
+    const winnersContainer: HTMLDivElement | null = document.querySelector('.winners-container');
+
     if (winnersContainer !== null) {
-      const winnersHeader: HTMLHeadElement | null = winnersContainer.querySelector('.winners-header')
-      const pageNum: HTMLDivElement | null = winnersContainer.querySelector('.page-number')
-      const tableContainer: HTMLTableElement | null = winnersContainer.querySelector('.table-container')
+      const winnersHeader: HTMLHeadElement | null = winnersContainer.querySelector('.winners-header');
+      const pageNum: HTMLDivElement | null = winnersContainer.querySelector('.page-number');
+      const tableContainer: HTMLTableElement | null = winnersContainer.querySelector('.table-container');
 
       if (winnersHeader !== null) {
-        winnersHeader.textContent = `Winners: ${this.data.totalCount}`
+        winnersHeader.textContent = `Winners: ${this.data.totalCount}`;
       }
 
       if (pageNum !== null) {
-        pageNum.textContent = `Page: ${page}`
+        pageNum.textContent = `Page: ${page}`;
       }
+
       if (tableContainer !== null) {
-        this.table.updateTable()
+        this.table.updateTable();
       }
     }
   }
 
-  updateWinnersData (dataGarage: GarageResponse, dataWinners: WinnersResponse): void {
-    this.data = dataWinners
-    this.winners = this.data.winnersData
-    this.cars = dataGarage.garage.garage
-    this.table.updateDataTable(this.cars, this.winners)
+  updateWinnersData(dataGarage: GarageResponse, dataWinners: WinnersResponse): void {
+    this.data = dataWinners;
+    this.winners = this.data.winnersData;
+    this.cars = dataGarage.garage.garage;
+    this.table.updateDataTable(this.cars, this.winners);
   }
 
-  private drawWinnersHeader (container: HTMLDivElement): void {
-    const winnersHeader = document.createElement('header')
-    winnersHeader.classList.add('winners-header')
-    winnersHeader.textContent = `Winners: ${this.data.totalCount}`
-    container.append(winnersHeader)
+  private drawWinnersHeader(container: HTMLDivElement): void {
+    const winnersHeader = document.createElement('header');
+    winnersHeader.classList.add('winners-header');
+    winnersHeader.textContent = `Winners: ${this.data.totalCount}`;
+    container.append(winnersHeader);
   }
 
-  private drawPageNumber (container: HTMLDivElement, page: number): void {
-    const pageNum = document.createElement('h2')
-    pageNum.classList.add('page-number')
-    pageNum.textContent = `Page: ${page}`
-    container.append(pageNum)
+  private drawPageNumber(container: HTMLDivElement, page: number): void {
+    const pageNum = document.createElement('h2');
+    pageNum.classList.add('page-number');
+    pageNum.textContent = `Page: ${page}`;
+    container.append(pageNum);
   }
 
-  private drawTable (container: HTMLDivElement): void {
-    const winnersTableContainer = document.createElement('div')
-    winnersTableContainer.classList.add('table-container')
-    container.append(winnersTableContainer)
+  private drawTable(container: HTMLDivElement): void {
+    const winnersTableContainer = document.createElement('div');
+    winnersTableContainer.classList.add('table-container');
+    container.append(winnersTableContainer);
 
-    const tableHTML = this.table.getElement()
+    const tableHTML = this.table.getElement();
+
     if (tableHTML !== undefined) {
-      winnersTableContainer.append(tableHTML)
+      winnersTableContainer.append(tableHTML);
     }
   }
 
-  private drawPageButtons (container: HTMLDivElement, page: number): void {
-    const pageButtonsContainer = document.createElement('div')
-    pageButtonsContainer.classList.add('pageButtons-container')
-    container.append(pageButtonsContainer)
+  private drawPageButtons(container: HTMLDivElement, page: number): void {
+    const pageButtonsContainer = document.createElement('div');
+    pageButtonsContainer.classList.add('pageButtons-container');
+    container.append(pageButtonsContainer);
 
-    const prevBtn = document.createElement('div')
-    prevBtn.classList.add('prev-button')
-    prevBtn.textContent = 'prev'
-    prevBtn.addEventListener('click', () => this.emitter.emit('prevButtonWinnersClicked', page))
-    pageButtonsContainer.append(prevBtn)
+    const prevBtn = document.createElement('div');
+    prevBtn.classList.add('prev-button');
+    prevBtn.textContent = 'prev';
+    prevBtn.addEventListener('click', () => this.emitter.emit('prevButtonWinnersClicked', page));
+    pageButtonsContainer.append(prevBtn);
 
-    const nextBtn = document.createElement('div')
-    nextBtn.classList.add('next-button')
-    nextBtn.textContent = 'next'
-    nextBtn.addEventListener('click', () => this.emitter.emit('nextButtonWinnersClicked', page))
-    pageButtonsContainer.append(nextBtn)
+    const nextBtn = document.createElement('div');
+    nextBtn.classList.add('next-button');
+    nextBtn.textContent = 'next';
+    nextBtn.addEventListener('click', () => this.emitter.emit('nextButtonWinnersClicked', page));
+    pageButtonsContainer.append(nextBtn);
   }
 }

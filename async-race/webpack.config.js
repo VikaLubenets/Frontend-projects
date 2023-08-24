@@ -12,7 +12,11 @@ module.exports = {
         path: path.join(__dirname, "dist")
     },
     resolve: {
-        extensions: ['.ts', '.js']
+        extensions: ['.ts', '.js'],
+        alias: {
+          'components': path.resolve(__dirname, './src/components'),
+          'types': path.resolve(__dirname, './src/types'),
+        }
       },
     module: {
         rules: [
