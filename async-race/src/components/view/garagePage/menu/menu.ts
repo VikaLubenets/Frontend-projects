@@ -26,7 +26,7 @@ export default class MenuView extends ViewTemplate {
       classes: ['input-container'],
       parentSelector: '.menu-container',
     };
-    const carInputContainer = new HTMLElementFactory(inputContainerParams).getElement();
+    const carInputContainer = new HTMLElementFactory(inputContainerParams).getElement() as HTMLElement;
 
     const inputParams = {
       tag: 'input',
@@ -41,10 +41,7 @@ export default class MenuView extends ViewTemplate {
       textContent: 'color',
     };
     const colorSelection = new HTMLElementFactory(colorParams).getElement() as HTMLInputElement;
-
-    if (colorSelection !== null) {
-      colorSelection.setAttribute('type', 'color');
-    }
+    colorSelection.setAttribute('type', 'color');
 
     const createBtnParams = {
       tag: 'div',
@@ -52,16 +49,12 @@ export default class MenuView extends ViewTemplate {
       textContent: 'create',
       callback: () => this.emitter.emit('createCarClicked', carInput.value, colorSelection.value),
     };
-    const createBtn = new HTMLElementFactory(createBtnParams).getElement();
+    const createBtn = new HTMLElementFactory(createBtnParams).getElement() as HTMLElement;
 
-    if (carInputContainer !== null && carInput !== null && colorSelection !== null && createBtn !== null) {
-      carInputContainer.append(carInput, colorSelection, createBtn);
-      const menuContainer = this.getHTMLElement();
+    carInputContainer.append(carInput, colorSelection, createBtn);
+    const menuContainer = this.getHTMLElement() as HTMLElement;
 
-      if (menuContainer !== null) {
-        menuContainer.append(carInputContainer);
-      }
-    }
+    menuContainer.append(carInputContainer);
   }
 
   createCarUpdateView(): void {
@@ -70,7 +63,7 @@ export default class MenuView extends ViewTemplate {
       classes: ['input-container'],
       parentSelector: '.menu-container',
     };
-    const carUpdateContainer = new HTMLElementFactory(inputContainerParams).getElement();
+    const carUpdateContainer = new HTMLElementFactory(inputContainerParams).getElement() as HTMLElement;
 
     const inputParams = {
       tag: 'input',
@@ -85,10 +78,7 @@ export default class MenuView extends ViewTemplate {
       textContent: 'color',
     };
     const colorSelection = new HTMLElementFactory(colorParams).getElement() as HTMLInputElement;
-
-    if (colorSelection !== null) {
-      colorSelection.setAttribute('type', 'color');
-    }
+    colorSelection.setAttribute('type', 'color');
 
     const updateBtnParams = {
       tag: 'div',
@@ -96,16 +86,12 @@ export default class MenuView extends ViewTemplate {
       textContent: 'update',
       callback: () => this.emitter.emit('updateCarClicked', carInput.value, colorSelection.value),
     };
-    const updateBtn = new HTMLElementFactory(updateBtnParams).getElement();
+    const updateBtn = new HTMLElementFactory(updateBtnParams).getElement() as HTMLElement;
 
-    if (carUpdateContainer !== null && carInput !== null && colorSelection !== null && updateBtn !== null) {
-      carUpdateContainer.append(carInput, colorSelection, updateBtn);
-      const menuContainer = this.getHTMLElement();
+    carUpdateContainer.append(carInput, colorSelection, updateBtn);
+    const menuContainer = this.getHTMLElement() as HTMLElement;
 
-      if (menuContainer !== null) {
-        menuContainer.append(carUpdateContainer);
-      }
-    }
+    menuContainer.append(carUpdateContainer);
   }
 
   createButtonsView(): void {
@@ -114,7 +100,7 @@ export default class MenuView extends ViewTemplate {
       classes: ['button-container'],
       parentSelector: '.menu-container',
     };
-    const buttonContainer = new HTMLElementFactory(BtnParams).getElement();
+    const buttonContainer = new HTMLElementFactory(BtnParams).getElement() as HTMLElement;
 
     const raceBtnParams = {
       tag: 'div',
@@ -122,7 +108,7 @@ export default class MenuView extends ViewTemplate {
       textContent: 'race',
       callback: () => this.emitter.emit('raceButtonClicked'),
     };
-    const raceBtn = new HTMLElementFactory(raceBtnParams).getElement();
+    const raceBtn = new HTMLElementFactory(raceBtnParams).getElement() as HTMLElement;
 
     const resetBtnParams = {
       tag: 'div',
@@ -130,7 +116,7 @@ export default class MenuView extends ViewTemplate {
       textContent: 'reset',
       callback: () => this.emitter.emit('resetButtonClicked'),
     };
-    const resetBtn = new HTMLElementFactory(resetBtnParams).getElement();
+    const resetBtn = new HTMLElementFactory(resetBtnParams).getElement() as HTMLElement;
 
     const generateCarsBtnParams = {
       tag: 'div',
@@ -138,15 +124,11 @@ export default class MenuView extends ViewTemplate {
       textContent: 'generate cars',
       callback: () => this.emitter.emit('generateCarsButtonClicked'),
     };
-    const generateCarsBtn = new HTMLElementFactory(generateCarsBtnParams).getElement();
+    const generateCarsBtn = new HTMLElementFactory(generateCarsBtnParams).getElement() as HTMLElement;
 
-    if (buttonContainer !== null && raceBtn !== null && resetBtn !== null && generateCarsBtn !== null) {
-      buttonContainer.append(raceBtn, resetBtn, generateCarsBtn);
-      const menuContainer = this.getHTMLElement();
+    buttonContainer.append(raceBtn, resetBtn, generateCarsBtn);
+    const menuContainer = this.getHTMLElement() as HTMLElement;
 
-      if (menuContainer !== null) {
-        menuContainer.append(buttonContainer);
-      }
-    }
+    menuContainer.append(buttonContainer);
   }
 }

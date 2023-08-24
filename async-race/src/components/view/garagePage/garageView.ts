@@ -6,7 +6,7 @@ import CarView from './car/car';
 import './garageView.css';
 
 export default class GarageView extends ViewTemplate {
-  menu: HTMLElement | null;
+  menu: HTMLElement;
 
   data: GarageResponse;
 
@@ -23,56 +23,54 @@ export default class GarageView extends ViewTemplate {
     };
     super(params);
     this.emitter = emitter;
-    this.menu = new MenuView(this.emitter).getHTMLElement();
+    this.menu = new MenuView(this.emitter).getHTMLElement() as HTMLElement;
     this.data = dataGarage;
     this.cars = this.data.garage.garage;
   }
 
   drawGarageContainer(page = 1): void {
-    const garageContainer: HTMLDivElement | null = document.querySelector('.garage-container');
+    const garageContainer = document.querySelector('.garage-container') as HTMLElement;
 
-    if (garageContainer !== null && this.menu !== null) {
-      garageContainer.append(this.menu);
+    garageContainer.append(this.menu);
 
-      const garageHeader = document.createElement('header');
-      garageHeader.classList.add('garage-header');
-      garageHeader.textContent = `Garage: ${this.data.totalCount}`;
-      garageContainer.append(garageHeader);
+    const garageHeader = document.createElement('header');
+    garageHeader.classList.add('garage-header');
+    garageHeader.textContent = `Garage: ${this.data.totalCount}`;
+    garageContainer.append(garageHeader);
 
-      const pageNum = document.createElement('h2');
-      pageNum.classList.add('page-number');
-      pageNum.textContent = `Page: ${page}`;
-      garageContainer.append(pageNum);
+    const pageNum = document.createElement('h2');
+    pageNum.classList.add('page-number');
+    pageNum.textContent = `Page: ${page}`;
+    garageContainer.append(pageNum);
 
-      const carsContainer = document.createElement('div');
-      carsContainer.classList.add('cars-container');
-      garageContainer.append(carsContainer);
+    const carsContainer = document.createElement('div');
+    carsContainer.classList.add('cars-container');
+    garageContainer.append(carsContainer);
 
-      this.cars.forEach((car) => {
-        const carView = new CarView(car, this.emitter);
-        const carElement = carView.getHTMLElement();
+    this.cars.forEach((car) => {
+      const carView = new CarView(car, this.emitter);
+      const carElement = carView.getHTMLElement();
 
-        if (carElement !== null) {
-          carsContainer.append(carElement);
-        }
-      });
+      if (carElement !== null) {
+        carsContainer.append(carElement);
+      }
+    });
 
-      const pageButtonsContainer = document.createElement('div');
-      pageButtonsContainer.classList.add('pageButtons-container');
-      garageContainer.append(pageButtonsContainer);
+    const pageButtonsContainer = document.createElement('div');
+    pageButtonsContainer.classList.add('pageButtons-container');
+    garageContainer.append(pageButtonsContainer);
 
-      const prevBtn = document.createElement('div');
-      prevBtn.classList.add('prev-button');
-      prevBtn.textContent = 'prev';
-      prevBtn.addEventListener('click', () => this.emitter.emit('prevButtonGarageClicked', page));
-      pageButtonsContainer.append(prevBtn);
+    const prevBtn = document.createElement('div');
+    prevBtn.classList.add('prev-button');
+    prevBtn.textContent = 'prev';
+    prevBtn.addEventListener('click', () => this.emitter.emit('prevButtonGarageClicked', page));
+    pageButtonsContainer.append(prevBtn);
 
-      const nextBtn = document.createElement('div');
-      nextBtn.classList.add('next-button');
-      nextBtn.textContent = 'next';
-      nextBtn.addEventListener('click', () => this.emitter.emit('nextButtonGarageClicked', page));
-      pageButtonsContainer.append(nextBtn);
-    }
+    const nextBtn = document.createElement('div');
+    nextBtn.classList.add('next-button');
+    nextBtn.textContent = 'next';
+    nextBtn.addEventListener('click', () => this.emitter.emit('nextButtonGarageClicked', page));
+    pageButtonsContainer.append(nextBtn);
   }
 
   updateGarageData(dataGarage: GarageResponse): void {

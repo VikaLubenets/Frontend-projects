@@ -31,36 +31,23 @@ export default class WinnersView extends ViewTemplate {
   }
 
   drawWinnersContainer(page = 1): void {
-    const winnersContainer: HTMLDivElement | null = document.querySelector('.winners-container');
+    const winnersContainer = document.querySelector('.winners-container') as HTMLDivElement;
 
-    if (winnersContainer !== null) {
-      this.drawWinnersHeader(winnersContainer);
-      this.drawPageNumber(winnersContainer, page);
-      this.drawTable(winnersContainer);
-      this.drawPageButtons(winnersContainer, page);
-    }
+    this.drawWinnersHeader(winnersContainer);
+    this.drawPageNumber(winnersContainer, page);
+    this.drawTable(winnersContainer);
+    this.drawPageButtons(winnersContainer, page);
   }
 
   updateWinnersView(page = 1): void {
-    const winnersContainer: HTMLDivElement | null = document.querySelector('.winners-container');
+    const winnersContainer = document.querySelector('.winners-container') as HTMLDivElement;
 
-    if (winnersContainer !== null) {
-      const winnersHeader: HTMLHeadElement | null = winnersContainer.querySelector('.winners-header');
-      const pageNum: HTMLDivElement | null = winnersContainer.querySelector('.page-number');
-      const tableContainer: HTMLTableElement | null = winnersContainer.querySelector('.table-container');
+    const winnersHeader = winnersContainer.querySelector('.winners-header') as HTMLHeadElement;
+    const pageNum = winnersContainer.querySelector('.page-number') as HTMLDivElement;
 
-      if (winnersHeader !== null) {
-        winnersHeader.textContent = `Winners: ${this.data.totalCount}`;
-      }
-
-      if (pageNum !== null) {
-        pageNum.textContent = `Page: ${page}`;
-      }
-
-      if (tableContainer !== null) {
-        this.table.updateTable();
-      }
-    }
+    winnersHeader.textContent = `Winners: ${this.data.totalCount}`;
+    pageNum.textContent = `Page: ${page}`;
+    this.table.updateTable();
   }
 
   updateWinnersData(dataGarage: GarageResponse, dataWinners: WinnersResponse): void {
@@ -89,11 +76,8 @@ export default class WinnersView extends ViewTemplate {
     winnersTableContainer.classList.add('table-container');
     container.append(winnersTableContainer);
 
-    const tableHTML = this.table.getElement();
-
-    if (tableHTML !== undefined) {
-      winnersTableContainer.append(tableHTML);
-    }
+    const tableHTML = this.table.getElement() as HTMLElement;
+    winnersTableContainer.append(tableHTML);
   }
 
   private drawPageButtons(container: HTMLDivElement, page: number): void {

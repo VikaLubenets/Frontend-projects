@@ -41,14 +41,14 @@ export default class WinModal {
   }
 
   private addEventsListeners(): void {
-    if (this.modalCover !== null && this.closeButton !== null) {
+    if (this.modalCover && this.closeButton) {
       this.modalCover.addEventListener('click', this.handleCoverClick);
       this.closeButton.addEventListener('click', this.handleCloseButtonClick);
     }
   }
 
   private removeEventsListeners(): void {
-    if (this.modalCover !== null && this.closeButton !== null) {
+    if (this.modalCover && this.closeButton) {
       this.modalCover.removeEventListener('click', this.handleCoverClick);
       this.closeButton.removeEventListener('click', this.handleCloseButtonClick);
     }
@@ -69,7 +69,7 @@ export default class WinModal {
   };
 
   private closeModal(): void {
-    if (this.modalCover !== null) {
+    if (this.modalCover) {
       this.modalCover.classList.remove('open');
       this.removeEventsListeners();
     }

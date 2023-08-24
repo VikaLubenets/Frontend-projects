@@ -11,7 +11,7 @@ export default class TableWinner {
 
   emitter: EventEmitter;
 
-  element: HTMLElement | null;
+  element: HTMLElement;
 
   sortColumn: SortWinnersOption;
 
@@ -21,7 +21,7 @@ export default class TableWinner {
     this.carData = garageData;
     this.winnersData = winners;
     this.emitter = emitter;
-    this.element = this.drawTable();
+    this.element = this.drawTable() as HTMLElement;
     this.sortDirection = 'ASC';
     this.sortColumn = 'wins';
   }
@@ -43,20 +43,18 @@ export default class TableWinner {
   }
 
   updateTable(): void {
-    const table = document.querySelector('table');
+    const table = document.querySelector('table') as HTMLTableElement;
 
-    if (table !== null) {
-      const dataTable: TableRow[] = this.getWinnersDataForTable();
+    const dataTable: TableRow[] = this.getWinnersDataForTable();
 
-      while (table.rows.length > 1) {
-        table.deleteRow(1);
-      }
-
-      dataTable.forEach((item) => {
-        const row = this.drawTableContent(item);
-        table.append(row);
-      });
+    while (table.rows.length > 1) {
+      table.deleteRow(1);
     }
+
+    dataTable.forEach((item) => {
+      const row = this.drawTableContent(item);
+      table.append(row);
+    });
   }
 
   updateDataTable(carsData: Garage, winners: Winners): void {
@@ -65,10 +63,7 @@ export default class TableWinner {
   }
 
   getElement(): HTMLElement | undefined {
-    if (this.element !== null) {
-      return this.element;
-    }
-    return undefined;
+    return this.element;
   }
 
   handleSortClick(colName: TableColName, colHeader: HTMLTableCellElement): void {
@@ -104,7 +99,6 @@ export default class TableWinner {
       ) {
         th.addEventListener('click', () => {
           this.handleSortClick(TableColName[key as keyof TableRow], th);
-          console.log('sort is clicked');
         });
       }
 
