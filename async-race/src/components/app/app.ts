@@ -60,14 +60,22 @@ export default class App {
   }
 
   private async updateApp(): Promise<void> {
-    this.carsData = await this.dataProvider.getCars(this.currentPageGarage, this.maxCarsOnPage);
-    this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, this.maxWinnersOnPage);
-    this.view?.updateGarageView(this.carsData, this.currentPageGarage);
+    try {
+      this.carsData = await this.dataProvider.getCars(this.currentPageGarage, this.maxCarsOnPage);
+      this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, this.maxWinnersOnPage);
+      this.view?.updateGarageView(this.carsData, this.currentPageGarage);
+    } catch (error) {
+      console.log('An error occurred during update the app:', error);
+    }
   }
 
   private async updateAppWinners(): Promise<void> {
-    this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, this.maxWinnersOnPage);
-    this.view?.updateWinnersView(this.winnersData, this.currentPageWinners);
+    try {
+      this.winnersData = await this.dataProvider.getWinners(this.currentPageWinners, this.maxWinnersOnPage);
+      this.view?.updateWinnersView(this.winnersData, this.currentPageWinners);
+    } catch (error) {
+      console.log('An error occurred during update the winners table:', error);
+    }
   }
 
   private async nextPageGarage(): Promise<void> {
