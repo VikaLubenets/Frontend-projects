@@ -35,7 +35,7 @@ The project involved creating a responsive and interactive website for an animal
 
 **Project Details:**
 
-- **Deployment:** [Link to Deployment](https://rolling-scopes-school.github.io/vikalubenets-JSFE2023Q1/minesweeper/src/index.html)
+- **Deployment:** [Link to Deployment](https://vikalubenets.github.io/frontend-projects/minesweeper/src/index.html)
 
 - **Code Repository:** [Link to Code](https://github.com/VikaLubenets/frontend-projects/tree/minesweeper)
 
@@ -82,7 +82,7 @@ In the "RS Selectors" project, we have created a CSS selectors trainer. This tra
 
 **Project Details:**
 
-- **Deployment:** [Link to Deployment](https://rolling-scopes-school.github.io/vikalubenets-JSFE2023Q1/RSS-CSS-Selectors/)
+- **Deployment:** [Link to Deployment](https://vikalubenets.github.io/frontend-projects/RSS-CSS-Selectors/)
 
 - **Code Repository:** [Link to Code](https://github.com/VikaLubenets/frontend-projects/tree/RSS-CSS-Selectors)
 
