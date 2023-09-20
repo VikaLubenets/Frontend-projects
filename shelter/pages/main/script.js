@@ -41,52 +41,54 @@ let cards = []; // массив со всеми доступными карто�
 let pastCards = []; // массив для прошлых карточек
 let currCards = []; // массив для активных карточек (текущих)
 let nextCards = []; // массив для следующего слайда
+const modal__cover = document.querySelector('.modal__cover');
 
-fetch('../../assets/pets.json')
-  .then(response => response.json())
-  .then(data => { data.forEach(pet => cards.push(pet))
-    
-    init();
-    forward();
-    backward();
-    changeToBackward();
-    changeToForward();
+function generateModal(id) {
+  const pet = cards.find(pet => pet.id === id);
+  modal__cover.classList.add('open');
+  document.querySelector('.modal__image').setAttribute('src', pet.img);
+  document.querySelector('.modal__name').textContent = pet.name;
+  document.querySelector('.modal__type-breed').textContent = `${pet.type} ${pet.breed}`;
+  document.querySelector('.modal__description').textContent = pet.description;
+  document.querySelector('.modal__text.age').textContent = pet.age;
+  document.querySelector('.modal__text.innoculations').textContent = pet.inoculations;
+  document.querySelector('.modal__text.diseases').textContent = pet.diseases;
+  document.querySelector('.modal__text.parasites').textContent = pet.parasites;
+}
 
-    const modal__cover = document.querySelector('.modal__cover');
-    const openButton = document.querySelectorAll('.card');
-    const body = document.querySelector('body');
-    
-    function generateModal (id) {
-      const pet = cards.find(pet => pet.id === id);
-      modal__cover.classList.add('open');
-      document.querySelector('.modal__image').setAttribute('src', pet.img);
-      document.querySelector('.modal__name').textContent = pet.name;
-      document.querySelector('.modal__type-breed').textContent = `${pet.type} ${pet.breed}`;
-      document.querySelector('.modal__description').textContent = pet.description;
-      document.querySelector('.modal__text.age').textContent = pet.age;
-      document.querySelector('.modal__text.innoculations').textContent = pet.inoculations;
-      document.querySelector('.modal__text.diseases').textContent = pet.diseases;
-      document.querySelector('.modal__text.parasites').textContent = pet.parasites;
-    }
-    
-    openButton.forEach(button => {
-      button.addEventListener('click', (e) => {
-        const id = e.target.closest(".card").id;
-        generateModal(id);
-        body.style.overflow = 'hidden' 
+function closeModal (e) {
+  if (e.target === modal__cover || e.target.closest('.modal__button')) {
+    modal__cover.classList.remove('open');
+    body.style.overflow = 'initial'; 
+  }
+};
+
+modal__cover.addEventListener('click', closeModal);
+
+document.addEventListener("DOMContentLoaded", function () {
+  fetch('../../assets/pets.json')
+    .then(response => response.json())
+    .then(data => { data.forEach(pet => cards.push(pet))
+      
+      init();
+      forward();
+      backward();
+      changeToBackward();
+      changeToForward();
+
+      const openButton = document.querySelectorAll('.card');
+      const body = document.querySelector('body');
+      
+      openButton.forEach(button => {
+        button.addEventListener('click', (e) => {
+          const id = e.target.closest(".card").id;
+          generateModal(id);
+          body.style.overflow = 'hidden' 
+        });
       });
+      
     });
-    
-    const closeModal = (e) => {
-      if (e.target === modal__cover || e.target.classList.contains('modal__button')) {
-        modal__cover.classList.remove('open');
-        body.style.overflow = 'initial'; 
-      }
-    };
-    
-    modal__cover.addEventListener('click', closeModal);
-    
-  });
+});
 
 /* modal ends */
 
