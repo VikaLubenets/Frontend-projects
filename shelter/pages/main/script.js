@@ -42,7 +42,7 @@ let pastCards = []; // массив для прошлых карточек
 let currCards = []; // массив для активных карточек (текущих)
 let nextCards = []; // массив для следующего слайда
 
-fetch('../../assets/pets.json') // добавила данные из pets.json
+fetch('../../assets/pets.json')
   .then(response => response.json())
   .then(data => { data.forEach(pet => cards.push(pet))
     
