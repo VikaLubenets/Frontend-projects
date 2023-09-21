@@ -2,11 +2,10 @@
 
 Welcome to my repository, where you can find various frontend projects I've created. Each project resides in its own branch, and here you'll find brief descriptions and links to project deployments.
 
-## Self-introduction video - [link](https://www.youtube.com/watch?v=ORIHxrbUlT0)
 
 ## Getting Started
 
-To view the code of a specific project, navigate to the corresponding branch using the links above. To explore the functionality of a project, follow the deployment link.
+To view the code of a specific project, navigate to the corresponding branch using the corresponding links. To explore the functionality of a project, follow the deployment link.
 
 
 ## Project 3: 'CSS Selectors Game'
