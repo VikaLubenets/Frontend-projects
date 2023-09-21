@@ -42,18 +42,12 @@ minesInputContainer.appendChild(minesValue);
 inputContainer.appendChild(minesInputContainer);
 GAME_CONTAINER.insertBefore(inputContainer, GAME_MENU);
 
-minesInput.addEventListener('input', function() {
-    minesValue.textContent = this.value;
-    mines_number = parseInt(this.value);
-    firstClick = false;
-    generateField();
-});
-
 const levelInputContainer = document.createElement('div');
 levelInputContainer.classList.add('level-input-container');
 
 const levelInputLabel = document.createElement('label');
 levelInputLabel.classList.add('label');
+levelInputLabel.classList.add('label-dificulty');
 levelInputLabel.textContent = 'Difficulty:';
 
 const levelInput = document.createElement('input');
@@ -74,15 +68,19 @@ levelInputContainer.appendChild(levelValue);
 
 inputContainer.appendChild(levelInputContainer);
 
-levelInput.addEventListener('input', function() {
-    levelValue.textContent = this.value;
-    cells_number = parseInt(this.value);
-    firstClick = false;
-    generateField();
-});
-
 let cells_number = parseInt(levelInput.value);
 let mines_number = parseInt(minesInput.value);
+let field;
+let firstClick = false;
+
+let flagged_right = 0;
+let flags_used = 0;
+let remaining_flags = 0;
+let game_clicks = 0;
+let time = 0;
+let minutes = 0;
+let seconds = 0;
+let gameInterval;
 // create cells in the game-field
 
 function createFieldArr(cells) {
@@ -110,8 +108,6 @@ function createFieldArr(cells) {
     return field;
 }
 
-let field;
-
 // generate mines positions 
 
 const getRandomPosition = (num) => Math.floor(Math.random() * num);
@@ -134,17 +130,6 @@ function createMinesPosition(cells, mines, firstClickItem){
 }
 
 // add mines after first click in the field and open cell
-
-let firstClick = false;
-
-let flagged_right = 0;
-let flags_used = 0;
-let remaining_flags = 0;
-let game_clicks = 0;
-let time = 0;
-let minutes = 0;
-let seconds = 0;
-let gameInterval;
 
 let updateGameTime = () => {
     time++;
@@ -244,6 +229,10 @@ const gameOver = () => {
           item.cell.removeEventListener('click', item.clickHandler);
         });
       });
+    clearInterval(gameInterval);
+    setTimeout(() => {
+        text.style.display = 'none';
+    }, 3000);
 };
 
 let gameWin = () => {
@@ -252,6 +241,10 @@ let gameWin = () => {
     textWin.classList.add('text-win');
     BODY.appendChild(textWin);
     playWinSound();
+    clearInterval(gameInterval);
+    setTimeout(() => {
+        textWin.style.display = 'none';
+    }, 3000);
 };
 
 let checkWinCondition = () => {
@@ -349,8 +342,6 @@ let generateField = () => {
     return field;
 };
 
-generateField();
-
 // create game menu
 //clicks
 const ITEM_MENU_1 = document.createElement('div');
@@ -412,13 +403,50 @@ USED_FLAGS.textContent = flags_used;
 
 // // new game
 
-// const RESTART_BUTTON = document.createElement('div');
-// RESTART_BUTTON.classList.add('button');
-// GAME_CONTAINER.appendChild(RESTART_BUTTON);
-// RESTART_BUTTON.textContent = 'New Game';
+const RESTART_BUTTON = document.createElement('div');
+RESTART_BUTTON.classList.add('button');
+GAME_MENU.appendChild(RESTART_BUTTON);
+RESTART_BUTTON.textContent = 'Restart';
 
-// // game reload 
+RESTART_BUTTON.addEventListener('click', init);
 
+// game reload 
+
+function init(){
+    levelInput.addEventListener('input', function() {
+        levelValue.textContent = this.value;
+        cells_number = parseInt(this.value);
+        firstClick = false;
+        generateField();
+    });
+
+    minesInput.addEventListener('input', function() {
+        minesValue.textContent = this.value;
+        mines_number = parseInt(this.value);
+        firstClick = false;
+        generateField();
+    });
+    field;
+    firstClick = false;
+    
+    flagged_right = 0;
+    flags_used = 0;
+    remaining_flags = 0;
+    game_clicks = 0;
+    time = 0;
+    minutes = 0;
+    seconds = 0;
+    gameInterval;
+
+    GAME_CLICKS.textContent = game_clicks;
+    TIMER.innerHTML = "00:00";
+    FLAGS.textContent = remaining_flags;
+    USED_FLAGS.textContent = flags_used;
+    
+    generateField();
+}
+
+init();
 // const saveGame = () => {
    
 //     let gameStatus = {
@@ -431,27 +459,9 @@ USED_FLAGS.textContent = flags_used;
 //     localStorage.setItem('gameStatus', JSON.stringify(gameStatus));
 // }
 
-// const restartGame = () => {
-//     const savedGame = localStorage.getItem('gameStatus');
-//     if (savedGame) {
-//       const gameStatus = JSON.parse(savedGame);
-//       field = gameStatus.field;
-//       flags_used = gameStatus.flagsUsed;
-//       remaining_flags = gameStatus.remainingMines;
-//       game_clicks = gameStatus.gameClicks;
-//       game_time = gameStatus.gameTime;
-     
-//       TIMER.textContent = game_time + "\n seconds";
-//       FLAGS.textContent = remaining_flags + "\n mines remain";
-//       USED_FLAGS.textContent = flags_used + "\n flags used";
-//     }
-// }
-
 // window.addEventListener('beforeunload', saveGame);
 
 // window.addEventListener('DOMContentLoaded', restartGame);
-
-// RESTART_BUTTON.addEventListener('click', init);
 
 // sound accompaniment (on/off) when clicking on cell and at the end of the game
 
