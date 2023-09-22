@@ -102,6 +102,21 @@ This is my implementation of the classic game Minesweeper. In this game, players
 **Work Summary:**
 The project involved creating a responsive and interactive website for an animal shelter. This included valid and semantic web development, importing styles and graphics from Figma, and adding interactivity using JavaScript. The website consists of a main page and a pets page, providing information about animals and ensuring a user-friendly experience on various devices.
 
+## Project 0: 'Little lemon lending'
+
+**Overview:**
+"Little lemon lending" is a desctop lending page for Meta's frontend course.
+
+**Key Skills:**
+1. HTML, CSS
+2. Creation my own design in Figma and its implementation.
+
+**Project Details:**
+
+- **Deployment:** [Link to Deployment](https://vikalubenets.github.io/frontend-projects/little-lemon/)
+
+- **Code Repository:** [Link to Code](https://github.com/VikaLubenets/frontend-projects/tree/little-lemon)
+
 ## Contact
 
 If you have any questions or comments about the projects or potential collaborations, please feel free to [get in touch](your email address or other contact information).
