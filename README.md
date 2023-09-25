@@ -7,7 +7,7 @@ Welcome to my repository, where you can find various frontend projects I've crea
 
 To view the code of a specific project, navigate to the corresponding branch using the corresponding links. To explore the functionality of a project, follow the deployment link.
 
-## Project 4: 'E'commerce application'
+## Project 4: 'E-commerce application'
 
 **Overview:**
 “SneakPeak” is a single-page application powered by Commercetools, featuring the following functionalities developed by a team of three developers:
