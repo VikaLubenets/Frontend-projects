@@ -7,6 +7,40 @@ Welcome to my repository, where you can find various frontend projects I've crea
 
 To view the code of a specific project, navigate to the corresponding branch using the corresponding links. To explore the functionality of a project, follow the deployment link.
 
+## Project 4: 'E'commerce application'
+
+**Overview:**
+“SneakPeak” is a single-page application powered by Commercetools, featuring the following functionalities developed by a team of three developers:
+* user registration and login
+* product search
+* product categorization, filters and sorting
+* opportunity to choose the size
+* add, remove and change products in shopping cart
+* use promocode
+
+The application includes pages such as:
+* Login and Registration pages
+* Main page
+* Catalog Product page
+* Detailed Product page
+* User Profile page
+* Basket page
+* About Us page.
+
+**Key Skills:**
+1. TypeScript
+2. Webpack
+3. ESLint, Prettier, Husky
+4. Jest
+5. Swiper
+6. Group development
+
+**Project Details:**
+
+- **Deployment:** [Link to Deployment](https://sneakpeak-store.netlify.app/)
+
+- **Code Repository:** [Link to Code](https://github.com/mnmsvlw/eCommerce-Application)
+
 
 ## Project 3: 'CSS Selectors Game'
 
